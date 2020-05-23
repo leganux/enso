@@ -1,0 +1,58 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        include template/seo
+        include template/styles
+
+    body.hold-transition.login-page.bg-dark
+        .login-box.bg-light
+            .login-logo.bg-pink
+                a(href=root_path)
+                    img.brand-image.img-fluid(src=img_folder + 'logo.png', alt='Ensō Logo', style='opacity: .8')
+
+            .card
+                .card-body.login-card-body
+                    p.login-box-msg Sign in to start your session
+                    form(action='../../index3.html', method='post')
+                        .input-group.mb-3
+                            input.form-control(type='email', placeholder='Email')
+                            .input-group-append
+                                .input-group-text
+                                    span.fas.fa-envelope
+                        .input-group.mb-3
+                            input.form-control(type='password', placeholder='Password')
+                            .input-group-append
+                                .input-group-text
+                                    span.fas.fa-lock
+                        .row
+                            .col-8
+                                //.icheck-primary
+                                    input#remember(type='checkbox')
+                                    label(for='remember')
+                                        | Remember Me
+                            // /.col
+                            .col-4
+                                button.btn.btn-primary.btn-block(type='submit') Sign In
+                            // /.col
+                    //.social-auth-links.text-center.mb-3
+                        p - OR -
+                        a.btn.btn-block.btn-primary(href='#')
+                            i.fab.fa-facebook.mr-2
+                            |  Sign in using Facebook
+                        a.btn.btn-block.btn-danger(href='#')
+                            i.fab.fa-google-plus.mr-2
+                            |  Sign in using Google+
+
+                    //p.mb-1
+                        a(href='forgot-password.html') I forgot my password
+                    //p.mb-0
+                        a.text-center(href='register.html') Register a new membership
+
+
+
+
+
+        include template/params
+        include template/scripts

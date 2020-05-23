@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "hot_reload": "nodemon index.js",
-    "start": "node index.js"
+    "enso_dev": "nodemon index.js",
+    "start": "node index.js",
+    "enso": "node index.js"
   },
   "keywords": [
     "baas",

@@ -1,0 +1,46 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        include template/seo
+        include template/styles
+    body.hold-transition.sidebar-mini
+        .wrapper
+            include template/nav
+            include template/aside
+            .content-wrapper
+                section.content-header
+                    .container-fluid
+                        .row.mb-2
+                            .col-sm-6
+                                h1 Blank Page
+                            |
+                            .col-sm-6
+                                ol.breadcrumb.float-sm-right
+                                    li.breadcrumb-item
+                                        a(href='#') Home
+                                    |
+                                    li.breadcrumb-item.active Blank Page
+                section.content
+                    .card
+                        .card-header
+                            h3.card-title Title
+                            |
+                            .card-tools
+                                button.btn.btn-tool(type='button', data-card-widget='collapse', data-toggle='tooltip', title='Collapse')
+                                    i.fas.fa-minus
+                                |
+                                button.btn.btn-tool(type='button', data-card-widget='remove', data-toggle='tooltip', title='Remove')
+                                    i.fas.fa-times
+                        |
+                        .card-body
+                            | Start creating your amazing application!
+
+                        .card-footer
+                            | Footer
+
+            include template/footer
+            include template/control_bar
+        include template/params
+        include template/scripts

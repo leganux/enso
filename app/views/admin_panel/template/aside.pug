@@ -1,0 +1,161 @@
+aside.main-sidebar.sidebar-dark-pink.elevation-4
+    // Brand Logo
+    a.brand-link.navbar-pink(href=root_path)
+        img.brand-image(src=img_folder + 'logo.png', alt='Ensō Logo', style='opacity: .8')
+        |
+        span.brand-text.font-weight-light ControlPanel
+    .sidebar
+        .user-panel.mt-3.pb-3.mb-3.d-flex
+            .image
+                img.img-circle.elevation-2(src='https://source.unsplash.com/800x800/?face', alt='User Image')
+            |
+            .info
+                a.d-block(href='#') Admin
+        nav.mt-2
+            ul.nav.nav-pills.nav-sidebar.flex-column(data-widget='treeview', role='menu', data-accordion='false')
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'dashboard')
+                        i.nav-icon.fas.fa-tachometer-alt
+                        |
+                        p Dashboard
+                |
+                li.nav-item.has-treeview
+                    a.nav-link(href='#')
+                        i.nav-icon.fas.fa-table
+                        |
+                        p
+                            | Catalogs
+                            i.right.fas.fa-angle-left
+                    |
+                    ul.nav.nav-treeview
+                        li.nav-item
+                            a.nav-link(href=base_admin_path + 'catalog/places')
+                                i.far.fa-circle.nav-icon
+                                |
+                                p Places
+                        |
+                        li.nav-item
+                            a.nav-link(href=base_admin_path + 'catalog/languages')
+                                i.far.fa-circle.nav-icon
+                                |
+                                p Languages
+                        |
+                        li.nav-item
+                            a.nav-link(href=base_admin_path + 'catalog/dynamic_content')
+                                i.far.fa-circle.nav-icon
+                                |
+                                p Dynamic content
+                |
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'cdn')
+                        i.nav-icon.fas.fa-tachometer-alt
+                        |
+                        p cdn
+                |
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'admin')
+                        i.nav-icon.fas.fa-tachometer-alt
+                        |
+                        p Admins
+                |
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'admin_roles')
+                        i.nav-icon.fas.fa-tachometer-alt
+                        |
+                        p Admin roles
+                |
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'admin_permission')
+                        i.nav-icon.fas.fa-tachometer-alt
+                        |
+                        p Admin permission
+                |
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'admin_permission')
+                        i.nav-icon.fas.fa-tachometer-alt
+                        |
+                        p Console log
+                |
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'apps')
+                        i.nav-icon.fas.fa-tachometer-alt
+                        |
+                        p Apps
+                |
+
+
+                li.nav-header ········ APP ······
+                |
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'config')
+                        i.nav-icon.fas.fa-tachometer-alt
+                        |
+                        p Config
+                |
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'user_roles')
+                        i.nav-icon.fas.fa-tachometer-alt
+                        |
+                        p User roles
+                |
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'users')
+                        i.nav-icon.fas.fa-tachometer-alt
+                        |
+                        p Users
+                |
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'user_permission')
+                        i.nav-icon.fas.fa-tachometer-alt
+                        |
+                        p User permission
+                |
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'baas')
+                        i.nav-icon.fas.fa-tachometer-alt
+                        |
+                        p BaaS - Dynamic DB
+                |
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'cloud_functions')
+                        i.nav-icon.fas.fa-tachometer-alt
+                        |
+                        p Cloud functions
+                |
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'files')
+                        i.nav-icon.fas.fa-tachometer-alt
+                        |
+                        p Files
+                |
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'cron')
+                        i.nav-icon.fas.fa-tachometer-alt
+                        |
+                        p Cron functions
+                |
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'mailing')
+                        i.nav-icon.fas.fa-envelope
+                        |
+                        p Mailing
+                |
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'sms_gateway')
+                        i.nav-icon.fas.fa-tachometer-alt
+                        |
+                        p SMS gateway
+                |
+
+                li.nav-header MISCELLANEOUS
+                |
+                li.nav-item
+                    a.nav-link(href='https://adminlte.io/docs/3.0')
+                        i.nav-icon.fas.fa-file
+                        |
+                        p Documentation
+                |
+                li.nav-header &nbsp;
+                |
+                li.nav-header &nbsp;
+                |
