@@ -82,6 +82,18 @@ var RC = {
         "success": false,
         "data": [],
     },
+    "code_433": {
+        "code": 433,
+        "message": "Can not be created",
+        "success": false,
+        "data": [],
+    },
+    "code_434": {
+        "code": 434,
+        "message": "Can not be updated",
+        "success": false,
+        "data": [],
+    },
     "code_500": {
         "code": 500,
         "message": "Internal server error",

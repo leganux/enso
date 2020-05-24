@@ -1,0 +1,21 @@
+#modal_new_edit.modal.fade( aria-hidden='true', data-backdrop="static", data-keyboard="false")
+    .modal-dialog.modal-lg
+        .modal-content
+            .modal-header.bg-dark
+                h4.modal-title New/Edit
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                br
+                label Username
+                input(type='text').form-control#in_username
+                label Email
+                input(type='text').form-control#in_email
+                label Password
+                input(type='password').form-control#in_password
+                label Role
+                select.form-control#in_role
+
+            .modal-footer.justify-content-end
+                button.btn.btn-default(type='button', data-dismiss='modal') Close
+                button.btn.bg-pink(type='button')#save_changes Save

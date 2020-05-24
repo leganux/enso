@@ -14,14 +14,14 @@ html
                     .container-fluid
                         .row.mb-2
                             .col-sm-6
-                                h1 Blank Page
+                                h1 Dashboard
                             |
                             .col-sm-6
                                 ol.breadcrumb.float-sm-right
                                     li.breadcrumb-item
-                                        a(href='#') Home
+                                        a(href=base_admin_path + 'dashboard') Home
                                     |
-                                    li.breadcrumb-item.active Blank Page
+                                    li.breadcrumb-item.active Dashboard
                 section.content
                     .card
                         .card-header
@@ -44,3 +44,8 @@ html
             include template/control_bar
         include template/params
         include template/scripts
+        script.
+            $(document).ready(function () {
+                $('#menu_dashboard').addClass('active');
+            });
+

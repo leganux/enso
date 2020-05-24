@@ -1,0 +1,16 @@
+#modal_new_edit.modal.fade( aria-hidden='true', data-backdrop="static", data-keyboard="false")
+    .modal-dialog.modal-lg
+        .modal-content
+            .modal-header.bg-dark
+                h4.modal-title New/Edit
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                br
+                label Name
+                input(type='text').form-control#in_name
+                label Description
+                textarea(rows=5).form-control#in_description
+            .modal-footer.justify-content-end
+                button.btn.btn-default(type='button', data-dismiss='modal') Close
+                button.btn.bg-pink(type='button')#save_changes Save

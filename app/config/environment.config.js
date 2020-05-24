@@ -161,6 +161,12 @@ var environment = {
      *  => String : can chage to hide
      * */
     control_panel_url: (process.env.ADMIN_SUB_URL_PATH),
+
+    /******
+     *  bcrypt salt
+     *  => Number : Salt
+     * */
+    bcryp_salt_rounds: Number(process.env.BCRYPT_SALT_ROUNDS),
 }
 
 

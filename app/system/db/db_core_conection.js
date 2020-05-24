@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const path = require('path');
 
-var dir_sqlite = path.join(__dirname, '/db/core.sqlite');
+var dir_sqlite = path.join(__dirname, '/core.sqlite');
 
 var SQLDB = new Sequelize({
     storage: dir_sqlite,
@@ -11,7 +11,7 @@ var SQLDB = new Sequelize({
 
 SQLDB.authenticate()
     .then(() => {
-        console.log('Connection has been established successfully.');
+        console.log('Connection has been established successfully to core database.');
     })
     .catch(err => {
         console.error('Unable to connect to the database:', err);

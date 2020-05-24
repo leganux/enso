@@ -1,0 +1,63 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        include template/seo
+        include template/styles
+    body.hold-transition.sidebar-mini.accent-pink
+        .wrapper
+            include template/nav
+            include template/aside
+            .content-wrapper
+                section.content-header
+                    .container-fluid
+                        .row.mb-2
+                            .col-sm-6
+                                h1 Admin
+                            |
+                            .col-sm-6
+                                ol.breadcrumb.float-sm-right
+                                    li.breadcrumb-item
+                                        a(href=base_admin_path + 'dashboard') Home
+                                    |
+                                    li.breadcrumb-item.active Admin
+                section.content
+                    .card
+                        .card-header.bg-dark
+                            .row
+                                .col-12.col-md-10
+                                    h3.card-title List of admins
+                                .col-12.col-md-2
+                                    button.bg-pink.btn.btn-block#btn_new_element New
+
+                        .card-body
+                            table.table.table-bordered.table-striped.display.table-hover#datatable
+                                thead
+                                    tr
+                                        th ID
+                                        th Username
+                                        th Email
+                                        th Password
+                                        th Role
+                                        th Active
+                                        th Date register
+                                        th Date last update
+                                        th Actions
+
+                        .card-footer
+                            | Create, Modify, or Delete
+
+            include template/footer
+            include template/control_bar
+
+        include modals/admin
+        include template/params
+        include template/scripts
+        script.
+            $(document).ready(function () {
+                $('#menu_admin').addClass('active');
+            });
+        script(src=core_files_path + 'js/common.js')
+        script(src=core_files_path + 'js/admin.js')
+

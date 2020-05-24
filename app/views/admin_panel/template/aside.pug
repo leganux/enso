@@ -1,7 +1,7 @@
 aside.main-sidebar.sidebar-dark-pink.elevation-4
     // Brand Logo
     a.brand-link.navbar-pink(href=root_path)
-        img.brand-image(src=img_folder + 'logo.png', alt='Ensō Logo', style='opacity: .8')
+        img.brand-image.animated.pulse.infinite(src=img_folder + 'logo.png', alt='Ensō Logo')
         |
         span.brand-text.font-weight-light ControlPanel
     .sidebar
@@ -14,13 +14,19 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
         nav.mt-2
             ul.nav.nav-pills.nav-sidebar.flex-column(data-widget='treeview', role='menu', data-accordion='false')
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'dashboard')
+                    a.nav-link(href=base_admin_path + 'dashboard')#menu_dashboard
                         i.nav-icon.fas.fa-tachometer-alt
                         |
                         p Dashboard
                 |
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'configuration')#menu_configutation_
+                        i.nav-icon.fas.fa-cog
+                        |
+                        p General config
+                |
                 li.nav-item.has-treeview
-                    a.nav-link(href='#')
+                    a.nav-link(href='#')#menu_catalogs
                         i.nav-icon.fas.fa-table
                         |
                         p
@@ -29,120 +35,121 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
                     |
                     ul.nav.nav-treeview
                         li.nav-item
-                            a.nav-link(href=base_admin_path + 'catalog/places')
-                                i.far.fa-circle.nav-icon
+                            a.nav-link(href=base_admin_path + 'catalog/places')#menu_places
+                                i.fas.fa-globe-americas.nav-icon
                                 |
                                 p Places
                         |
                         li.nav-item
-                            a.nav-link(href=base_admin_path + 'catalog/languages')
-                                i.far.fa-circle.nav-icon
+                            a.nav-link(href=base_admin_path + 'catalog/languages')#menu_languajes
+                                i.fas.fa-language.nav-icon
                                 |
                                 p Languages
                         |
                         li.nav-item
-                            a.nav-link(href=base_admin_path + 'catalog/dynamic_content')
-                                i.far.fa-circle.nav-icon
+                            a.nav-link(href=base_admin_path + 'catalog/dynamic_content')#menu_dynamic_content
+                                i.fas.fa-align-justify.nav-icon
                                 |
                                 p Dynamic content
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'cdn')
-                        i.nav-icon.fas.fa-tachometer-alt
+                    a.nav-link(href=base_admin_path + 'cdn')#menu_cdn
+                        i.nav-icon.fas.fa-compact-disc
                         |
-                        p cdn
+                        p CDN
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'admin')
-                        i.nav-icon.fas.fa-tachometer-alt
-                        |
-                        p Admins
-                |
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'admin_roles')
-                        i.nav-icon.fas.fa-tachometer-alt
+                    a.nav-link(href=base_admin_path + 'admin_roles')#menu_admin_roles
+                        i.nav-icon.fas.fa-user-tag
                         |
                         p Admin roles
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'admin_permission')
-                        i.nav-icon.fas.fa-tachometer-alt
+                    a.nav-link(href=base_admin_path + 'admin')#menu_admin
+                        i.nav-icon.fas.fa-user-shield
+                        |
+                        p Admins
+                |
+
+                li.nav-item
+                    a.nav-link(href=base_admin_path + 'admin_permission')#menu_admin_permission
+                        i.nav-icon.fas.fa-key
                         |
                         p Admin permission
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'admin_permission')
-                        i.nav-icon.fas.fa-tachometer-alt
+                    a.nav-link(href=base_admin_path + 'console_log')#menu_console_log
+                        i.nav-icon.fas.fa-terminal
                         |
                         p Console log
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'apps')
-                        i.nav-icon.fas.fa-tachometer-alt
+                    a.nav-link(href=base_admin_path + 'apps')#menu_apps
+                        i.nav-icon.fas.fa-rocket
                         |
                         p Apps
                 |
 
 
-                li.nav-header ········ APP ······
+                li.nav-header#menu_app_ ········ APP ······
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'config')
-                        i.nav-icon.fas.fa-tachometer-alt
+                    a.nav-link(href=base_admin_path + 'config')#menu_config
+                        i.nav-icon.fas.fa-cogs
                         |
                         p Config
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'user_roles')
-                        i.nav-icon.fas.fa-tachometer-alt
+                    a.nav-link(href=base_admin_path + 'user_roles')#menu_user_roles
+                        i.nav-icon.fas.fa-user-check
                         |
                         p User roles
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'users')
-                        i.nav-icon.fas.fa-tachometer-alt
+                    a.nav-link(href=base_admin_path + 'users')#menu_users
+                        i.nav-icon.fas.fa-user-plus
                         |
                         p Users
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'user_permission')
-                        i.nav-icon.fas.fa-tachometer-alt
+                    a.nav-link(href=base_admin_path + 'user_permission')#menu_user_permission
+                        i.nav-icon.fas.fa-user-lock
                         |
                         p User permission
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'baas')
-                        i.nav-icon.fas.fa-tachometer-alt
+                    a.nav-link(href=base_admin_path + 'dynamic_db')#menu_dynamyc_db
+                        i.nav-icon.fas.fa-database
                         |
-                        p BaaS - Dynamic DB
+                        p  Dynamic DB
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'cloud_functions')
-                        i.nav-icon.fas.fa-tachometer-alt
+                    a.nav-link(href=base_admin_path + 'cloud_functions')#menu_cloud_funtions
+                        i.nav-icon.fas.fa-server
                         |
                         p Cloud functions
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'files')
-                        i.nav-icon.fas.fa-tachometer-alt
+                    a.nav-link(href=base_admin_path + 'files')#menu_files
+                        i.nav-icon.fas.fa-folder-open
                         |
                         p Files
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'cron')
-                        i.nav-icon.fas.fa-tachometer-alt
+                    a.nav-link(href=base_admin_path + 'cron')#menu_cron
+                        i.nav-icon.fas.fa-clock
                         |
                         p Cron functions
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'mailing')
+                    a.nav-link(href=base_admin_path + 'mailing')#menu_mailing
                         i.nav-icon.fas.fa-envelope
                         |
                         p Mailing
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'sms_gateway')
-                        i.nav-icon.fas.fa-tachometer-alt
+                    a.nav-link(href=base_admin_path + 'sms_gateway')#menu_sms_gateway
+                        i.nav-icon.fas.fa-sms
                         |
                         p SMS gateway
                 |
@@ -150,10 +157,12 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
                 li.nav-header MISCELLANEOUS
                 |
                 li.nav-item
-                    a.nav-link(href='https://adminlte.io/docs/3.0')
+                    a.nav-link(href='https://leganux.net/')
                         i.nav-icon.fas.fa-file
                         |
                         p Documentation
+                |
+                li.nav-header &nbsp;
                 |
                 li.nav-header &nbsp;
                 |

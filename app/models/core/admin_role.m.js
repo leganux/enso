@@ -1,12 +1,13 @@
 const Sequelize = require('sequelize');
-const db = require('./db_core_conection');
+const db = require('../../system/db/db_core_conection').SQLDB;
+const admin = require('./admin.m')
 
 
-const admin = db.define('api_scrips', {
+const admin_role = db.define('admin_role', {
     id: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DataTypes.UUID,
         primaryKey: true,
-        autoIncrement: true,
+        defaultValue: Sequelize.DataTypes.UUIDV4,
     },
     name: {
         type: Sequelize.STRING,
@@ -19,7 +20,7 @@ const admin = db.define('api_scrips', {
     active: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        default: true
+        defaultValue: true
     },
     createdAt: Sequelize.DATE,
     updatedAt: Sequelize.DATE,
@@ -27,8 +28,11 @@ const admin = db.define('api_scrips', {
     // options
 });
 
-admin.sync().then(() => {
+admin_role.sync().then(() => {
 
 });
 
-module.exports = admin;
+//admin_role.belongsTo(admin,{foreignKey:'role_id'});
+
+
+module.exports = admin_role;
