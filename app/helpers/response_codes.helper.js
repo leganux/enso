@@ -94,6 +94,12 @@ var RC = {
         "success": false,
         "data": [],
     },
+    "code_435": {
+        "code": 435,
+        "message": "Insuficient data in body",
+        "success": false,
+        "data": [],
+    },
     "code_500": {
         "code": 500,
         "message": "Internal server error",

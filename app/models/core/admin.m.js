@@ -1,46 +1,58 @@
-const Sequelize = require('sequelize');
-const db = require('../../system/db/db_core_conection').SQLDB;
+const mongoose = require('mongoose');
+const {Schema} = mongoose;
 const admin_role = require('./admin_role.m')
+const moment = require('moment')
+const dataTables = require('mongoose-datatables')
 
-
-const admin = db.define('admin', {
-    id: {
-        type: Sequelize.DataTypes.UUID,
-        primaryKey: true,
-        defaultValue: Sequelize.DataTypes.UUIDV4,
-    },
+const admin = new Schema({
     username: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: String,
+        required: true
     },
     email: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: String,
+        required: true
     },
     password: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: String,
+        required: true
     },
-    role_id: {
-        type: Sequelize.DataTypes.UUID,
-        allowNull: false
+    role: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: admin_role
     },
     active: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        defaultValue: true
+        type: Boolean,
+        required: true,
+        default: true
     },
-    createdAt: Sequelize.DATE,
-    updatedAt: Sequelize.DATE,
-}, {
-    // options
+    createdAt: {
+        type: Date,
+        required: true,
+        default: moment().format()
+    },
+    updatedAt: {
+        type: Date,
+        required: true,
+        default: moment().format()
+    },
 });
 
-admin.sync().then(() => {
-
-});
-
-//admin.hasOne(admin_role, {foreignKey: 'role_id'});
+admin.plugin(dataTables);
+module.exports = mongoose.model('admin', admin);
 
 
-module.exports = admin;
+
+
+
+
+
+
+
+
+
+
+
+
+

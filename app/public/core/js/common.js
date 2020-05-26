@@ -1,3 +1,7 @@
+const draw_datatable_rs = function (datatable) {
+    datatable.clear().draw();
+}
+
 const draw_datatable = function (url, datatable) {
     if (!url || !datatable) {
         return 0;
@@ -17,6 +21,7 @@ const draw_datatable = function (url, datatable) {
         console.error(err);
     });
 }
+
 
 const save_data_api = function (url, body, update, f_) {
     if (!url || !body) {

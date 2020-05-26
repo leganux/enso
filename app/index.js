@@ -20,6 +20,8 @@ app.use(env.root_path + 'content/', express.static(path.join(__dirname, 'public'
 app.set("views", path.join(__dirname, "views"));
 app.locals.pretty = true;
 
+const mongoose = require('./system/db/db_core_conection')
+
 app.use(function (req, res) {
     res.status('404').json(
         {

@@ -167,6 +167,18 @@ var environment = {
      *  => Number : Salt
      * */
     bcryp_salt_rounds: Number(process.env.BCRYPT_SALT_ROUNDS),
+
+    /******
+     *  Host  MongoDB
+     *  => String : Where is located mongDBServer
+     * */
+    mongo_host: process.env.MONGO_HOST,
+
+    /******
+     *  Mongo collection  name
+     *  => String : The name of core collection
+     * */
+    mongo_collection_name: process.env.MONGO_COLLECTION_NAME,
 }
 
 

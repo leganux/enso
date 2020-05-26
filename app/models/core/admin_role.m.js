@@ -1,38 +1,57 @@
-const Sequelize = require('sequelize');
-const db = require('../../system/db/db_core_conection').SQLDB;
-const admin = require('./admin.m')
+const mongoose = require('mongoose');
+const {Schema} = mongoose;
+const moment = require('moment')
+const dataTables = require('mongoose-datatables')
 
-
-const admin_role = db.define('admin_role', {
-    id: {
-        type: Sequelize.DataTypes.UUID,
-        primaryKey: true,
-        defaultValue: Sequelize.DataTypes.UUIDV4,
-    },
+const admin_role = new Schema({
     name: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: String,
+        required: true
     },
     description: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: String,
+        required: false
     },
+
     active: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        defaultValue: true
+        type: Boolean,
+        required: true,
+        default: true
     },
-    createdAt: Sequelize.DATE,
-    updatedAt: Sequelize.DATE,
-}, {
-    // options
+    createdAt: {
+        type: Date,
+        required: true,
+        default: moment().format()
+    },
+    updatedAt: {
+        type: Date,
+        required: true,
+        default: moment().format()
+    },
 });
 
-admin_role.sync().then(() => {
-
-});
-
-//admin_role.belongsTo(admin,{foreignKey:'role_id'});
+admin_role.plugin(dataTables);
+module.exports = mongoose.model('admin_role', admin_role);
 
 
-module.exports = admin_role;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

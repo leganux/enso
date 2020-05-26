@@ -6,7 +6,7 @@ $(document).ready(function () {
         "data": {},
         "columns": [
             {
-                "data": "id"
+                "data": "_id"
             },
             {
                 "data": "username"
@@ -21,10 +21,10 @@ $(document).ready(function () {
                 }
             },
             {
-                "data": "role_id",
+                "data": "role",
                 render: function (data, v, row) {
-                    if (row.admin_role) {
-                        return row.admin_role.name
+                    if (data._id) {
+                        return data.name
                     }
                     return data;
                 }
@@ -33,9 +33,9 @@ $(document).ready(function () {
                 "data": "active",
                 render: function (data, v, row) {
                     if (data) {
-                        return '<cente><input value="' + row.id + '" type="checkbox" class="actived_element" checked></cente>'
+                        return '<cente><input value="' + row._id + '" type="checkbox" class="actived_element" checked></cente>'
                     } else {
-                        return '<cente><input value="' + row.id + '" type="checkbox" class="actived_element" ></cente>'
+                        return '<cente><input value="' + row._id + '" type="checkbox" class="actived_element" ></cente>'
                     }
                 }
             },
@@ -54,7 +54,7 @@ $(document).ready(function () {
                 }
             },
             {
-                data: "id",
+                data: "_id",
                 render: function (data, v, row) {
                     return '<button value="' + data + '" class="btn btn-dark btn-block update_element"> <i class="fas fa-edit"></i></button>' +
                         '<button value="' + data + '" class="btn btn-danger btn-block delete_element"> <i class="fas fa-trash"></i></button>';
@@ -63,9 +63,15 @@ $(document).ready(function () {
                 }
             }
 
-        ]
+        ],
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: root_path + 'api/core/admin/datatable',
+            type: "POST"
+        },
     });
-    draw_datatable(root_path + 'api/core/admin', DT);
+    draw_datatable_rs(DT);
 
     $('#btn_new_element').click(function () {
         $('#modal_new_edit').modal('show');
@@ -80,9 +86,9 @@ $(document).ready(function () {
         body.username = $('#in_username').val().trim()
         body.email = $('#in_email').val().trim()
         body.password = $('#in_password').val().trim()
-        body.role_id = $('#in_role').val().trim()
+        body.role = $('#in_role').val().trim()
 
-        if (body.useranme === '' || body.email === '' || body.password === '' || body.role_id === '-1') {
+        if (body.useranme === '' || body.email === '' || body.password === '' || body.role === '-1') {
             notify_warning('Fill all fields to continue')
             return false;
         }
@@ -96,7 +102,7 @@ $(document).ready(function () {
         }
 
         save_data_api(root_path + 'api/core/admin', body, UPDATE, function () {
-            draw_datatable(root_path + 'api/core/admin', DT);
+            draw_datatable_rs(DT);
             UPDATE = '';
             $('#modal_new_edit').modal('hide');
         });
@@ -106,7 +112,7 @@ $(document).ready(function () {
         UPDATE = $(this).val();
         var isChecked = $(this).prop('checked');
         save_data_api(root_path + 'api/core/admin', {active: isChecked}, UPDATE, function () {
-            draw_datatable(root_path + 'api/core/admin', DT);
+            draw_datatable_rs(DT);
             UPDATE = '';
             $('#modal_new_edit').modal('hide');
         });
@@ -119,7 +125,7 @@ $(document).ready(function () {
             $('#in_username').val(data.data.username);
             $('#in_email').val(data.data.email);
             $('#in_password').val('');
-            $('#in_role').val(data.data.role_id);
+            $('#in_role').val(data.data.role);
             HoldOn.close();
             notify_success(data.message);
         }).fail(function (err) {
@@ -138,7 +144,7 @@ $(document).ready(function () {
             }).done(function (data) {
                 HoldOn.close();
                 notify_success('The element has been deleted!')
-                draw_datatable(root_path + 'api/core/admin', DT);
+                draw_datatable_rs(DT);
                 DELETE = '';
             }).fail(function (err) {
                 HoldOn.close();
@@ -150,6 +156,6 @@ $(document).ready(function () {
 
     });
 
-    charge_select('#in_role', {actived: true}, root_path + 'api/core/admin_roles', 'id', 'name');
-    snakeThis('#in_username')
+    charge_select('#in_role', {where: {active: true}}, root_path + 'api/core/admin_roles', '_id', 'name');
+    snakeThis('#in_username');
 });

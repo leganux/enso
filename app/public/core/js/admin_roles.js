@@ -6,7 +6,7 @@ $(document).ready(function () {
         "data": {},
         "columns": [
             {
-                "data": "id"
+                "data": "_id"
             },
             {
                 "data": "name"
@@ -18,9 +18,9 @@ $(document).ready(function () {
                 "data": "active",
                 render: function (data, v, row) {
                     if (data) {
-                        return '<cente><input value="' + row.id + '" type="checkbox" class="actived_element" checked></cente>'
+                        return '<cente><input value="' + row._id + '" type="checkbox" class="actived_element" checked></cente>'
                     } else {
-                        return '<cente><input value="' + row.id + '" type="checkbox" class="actived_element" ></cente>'
+                        return '<cente><input value="' + row._id + '" type="checkbox" class="actived_element" ></cente>'
                     }
                 }
             },
@@ -39,7 +39,7 @@ $(document).ready(function () {
                 }
             },
             {
-                data: "id",
+                data: "_id",
                 render: function (data, v, row) {
                     return '<button value="' + data + '" class="btn btn-dark btn-block update_element"> <i class="fas fa-edit"></i></button>' +
                         '<button value="' + data + '" class="btn btn-danger btn-block delete_element"> <i class="fas fa-trash"></i></button>';
@@ -49,9 +49,17 @@ $(document).ready(function () {
             }
 
 
-        ]
+        ],
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: root_path + 'api/core/admin_roles/datatable',
+            type: "POST"
+        },
     });
-    draw_datatable(root_path + 'api/core/admin_roles', DT);
+
+
+    draw_datatable_rs(DT);
 
     $('#btn_new_element').click(function () {
         $('#modal_new_edit').modal('show');
@@ -70,7 +78,7 @@ $(document).ready(function () {
             return false;
         }
         save_data_api(root_path + 'api/core/admin_roles', body, UPDATE, function () {
-            draw_datatable(root_path + 'api/core/admin_roles', DT);
+            draw_datatable_rs(DT);
             UPDATE = '';
             $('#modal_new_edit').modal('hide');
         });
@@ -80,7 +88,7 @@ $(document).ready(function () {
         UPDATE = $(this).val();
         var isChecked = $(this).prop('checked');
         save_data_api(root_path + 'api/core/admin_roles', {active: isChecked}, UPDATE, function () {
-            draw_datatable(root_path + 'api/core/admin_roles', DT);
+            draw_datatable_rs(DT);
             UPDATE = '';
             $('#modal_new_edit').modal('hide');
         });
@@ -110,7 +118,7 @@ $(document).ready(function () {
             }).done(function (data) {
                 HoldOn.close();
                 notify_success('The element has been deleted!')
-                draw_datatable(root_path + 'api/core/admin_roles', DT);
+                draw_datatable_rs(DT);
                 DELETE = '';
             }).fail(function (err) {
                 HoldOn.close();

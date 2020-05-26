@@ -1,20 +1,15 @@
-const Sequelize = require('sequelize');
-const path = require('path');
+const mongoose = require('mongoose');
+const env = require('./../../config/environment.config').environment
+const URI = 'mongodb://' + env.mongo_host + '/' + env.mongo_collection_name;
+const autoIncrement = require('mongoose-auto-increment');
 
-var dir_sqlite = path.join(__dirname, '/core.sqlite');
+mongoose.connect(URI, {useNewUrlParser: true})
+    .then(db => console.log('DB is connected'))
+    .catch(error => console.error(error));
+autoIncrement.initialize(mongoose);
 
-var SQLDB = new Sequelize({
-    storage: dir_sqlite,
-    dialect: 'sqlite',
-    logging: false
-});
+mongoose.set('useNewUrlParser', true);
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 
-SQLDB.authenticate()
-    .then(() => {
-        console.log('Connection has been established successfully to core database.');
-    })
-    .catch(err => {
-        console.error('Unable to connect to the database:', err);
-    });
-
-module.exports = {SQLDB};
+module.exports = mongoose;
