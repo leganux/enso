@@ -5,7 +5,7 @@ const app = server.app;
 //const auth = require('./auth/routing').router;
 
 require('./system/socket_server.system').io;
-require('./system/logs/log_controller');
+//require('./system/logs/log_controller');
 
 const api_routes = require('./routes/_api.routes')
 const view_engine = require('./views/view_engine')
