@@ -30,30 +30,30 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
                         i.nav-icon.fas.fa-table
                         |
                         p
-                            | Catalogs
+                            | Catalogues
                             i.right.fas.fa-angle-left
                     |
                     ul.nav.nav-treeview
                         li.nav-item
-                            a.nav-link(href=base_admin_path + 'catalog/places')#menu_places
+                            a.nav-link(href=base_admin_path + 'catalogue/places')#menu_places
                                 i.fas.fa-globe-americas.nav-icon
                                 |
                                 p Places
                         |
                         li.nav-item
-                            a.nav-link(href=base_admin_path + 'catalog/languages')#menu_languajes
+                            a.nav-link(href=base_admin_path + 'catalogue/languages')#menu_languajes
                                 i.fas.fa-language.nav-icon
                                 |
                                 p Languages
                         |
                         li.nav-item
-                            a.nav-link(href=base_admin_path + 'catalog/dynamic_content')#menu_dynamic_content
+                            a.nav-link(href=base_admin_path + 'catalogue/dynamic_content')#menu_dynamic_content
                                 i.fas.fa-align-justify.nav-icon
                                 |
                                 p Dynamic content
                         |
                         li.nav-item
-                            a.nav-link(href=base_admin_path + 'catalog/routes')#menu_routes
+                            a.nav-link(href=base_admin_path + 'catalogue/routes')#menu_routes
                                 i.fas.fa-route.nav-icon
                                 |
                                 p Routes
@@ -97,64 +97,65 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
                 |
 
 
-                li.nav-header#menu_app_ ········ APP ······
+
+                li.nav-header#menu_app_ ················ APP ················
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'config')#menu_config
+                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/config')#menu_config
                         i.nav-icon.fas.fa-cogs
                         |
                         p Config
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'user_roles')#menu_user_roles
+                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/user_roles')#menu_user_roles
                         i.nav-icon.fas.fa-user-check
                         |
                         p User roles
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'users')#menu_users
+                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/users')#menu_users
                         i.nav-icon.fas.fa-user-plus
                         |
                         p Users
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'user_permission')#menu_user_permission
+                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/user_permission')#menu_user_permission
                         i.nav-icon.fas.fa-user-lock
                         |
                         p User permission
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'dynamic_db')#menu_dynamyc_db
+                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/dynamic_db')#menu_dynamyc_db
                         i.nav-icon.fas.fa-database
                         |
                         p  Dynamic DB
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'cloud_functions')#menu_cloud_funtions
+                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/cloud_functions')#menu_cloud_funtions
                         i.nav-icon.fas.fa-server
                         |
                         p Cloud functions
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'files')#menu_files
+                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/files')#menu_files
                         i.nav-icon.fas.fa-folder-open
                         |
                         p Files
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'cron')#menu_cron
+                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/cron')#menu_cron
                         i.nav-icon.fas.fa-clock
                         |
                         p Cron functions
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'mailing')#menu_mailing
+                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/mailing')#menu_mailing
                         i.nav-icon.fas.fa-envelope
                         |
                         p Mailing
                 |
                 li.nav-item
-                    a.nav-link(href=base_admin_path + 'sms_gateway')#menu_sms_gateway
+                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/sms_gateway')#menu_sms_gateway
                         i.nav-icon.fas.fa-sms
                         |
                         p SMS gateway

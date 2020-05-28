@@ -1,0 +1,23 @@
+#modal_new_edit.modal.fade( aria-hidden='true', data-backdrop="static", data-keyboard="false")
+    .modal-dialog.modal-lg
+        .modal-content
+            .modal-header.bg-dark
+                h4.modal-title New/Edit
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                br
+                label URL
+                input(type='text').form-control#in_url
+                label Description
+                input(type='text').form-control#in_description
+                label Type
+                select.form-control#in_type
+                    option(value=-1) Choose one...
+                    option(value='admin_panel') Admin panel
+                    option(value='other') Other
+
+
+            .modal-footer.justify-content-end
+                button.btn.btn-default(type='button', data-dismiss='modal') Close
+                button.btn.bg-pink(type='button')#save_changes Save

@@ -8,7 +8,7 @@ const country = new Schema({
         type: Number,
         required: false
     },
-    shortname: {
+    sortname: {
         type: String,
         required: false
     },
@@ -16,7 +16,7 @@ const country = new Schema({
         type: String,
         required: false
     },
-    phonecode: {
+    phoneCode: {
         type: Number,
         required: false,
 
@@ -39,7 +39,7 @@ const country = new Schema({
 });
 
 country.plugin(dataTables);
-module.exports = mongoose.model('country', country);
+module.exports = mongoose.model('country', country, 'countries');
 
 
 

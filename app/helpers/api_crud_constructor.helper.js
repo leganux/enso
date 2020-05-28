@@ -488,7 +488,14 @@ api_functions.delete = function (router, model, middleware) {
 
 };
 
-api_functions.datatable = function (router, model, middleware, populate) {
+api_functions.datatable = function (router, model, middleware, populate, search_fields) {
+    if (!search_fields) {
+        search_fields = []
+    } else {
+        if (typeof search_fields === 'string') {
+            search_fields = search_fields.split(',')
+        }
+    }
 
     router.post('/datatable', middleware ? middleware : no_middleware, async (req, res) => {
         var order = {};
@@ -504,7 +511,7 @@ api_functions.datatable = function (router, model, middleware, populate) {
             skip: req.body.start,
             search: {
                 value: req.body.search.value,
-                fields: ['name', 'state_id']
+                fields: search_fields
             },
             sort: order,
             populate: populate
@@ -513,9 +520,6 @@ api_functions.datatable = function (router, model, middleware, populate) {
             table.message = 'OK';
             table.recordsTotal = table.total
             table.recordsFiltered = table.total
-
-
-
 
 
             res.status(200).json(table); // table.total, table.data
@@ -527,7 +531,7 @@ api_functions.datatable = function (router, model, middleware, populate) {
     });
 };
 
-api_functions.all = function (router, model, middelware, populate) {
+api_functions.all = function (router, model, middelware, populate, search_fields) {
     api_functions.create(router, model, middelware);
     api_functions.update(router, model, middelware);
     api_functions.updateWhere(router, model, middelware);
@@ -535,7 +539,7 @@ api_functions.all = function (router, model, middelware, populate) {
     api_functions.readById(router, model, middelware, populate);
     api_functions.read(router, model, middelware, populate);
     api_functions.delete(router, model, middelware);
-    api_functions.datatable(router, model, middelware, populate);
+    api_functions.datatable(router, model, middelware, populate, search_fields);
 };
 
 module.exports = api_functions;

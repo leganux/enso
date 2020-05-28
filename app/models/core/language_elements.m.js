@@ -14,7 +14,7 @@ const languages_elements = new Schema({
         type: String,
         required: false
     },
-    element_code: {
+    element_text: {
         type: String,
         required: false
     },

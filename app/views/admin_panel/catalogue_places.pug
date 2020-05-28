@@ -1,0 +1,114 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        include template/seo
+        include template/styles
+    body.hold-transition.sidebar-mini.accent-pink
+        .wrapper
+            include template/nav
+            include template/aside
+            .content-wrapper
+                section.content-header
+                    .container-fluid
+                        .row.mb-2
+                            .col-sm-6
+                                h1 Catalogue of places
+                            |
+                            .col-sm-6
+                                ol.breadcrumb.float-sm-right
+                                    li.breadcrumb-item
+                                        a(href=base_admin_path + 'dashboard') Home
+                                    |
+                                    li.breadcrumb-item.active Catalogue of places
+                section.content
+                    .card
+                        .card-header.bg-dark
+                            .row
+                                .col-12.col-md-10
+                                    h3.card-title List of countries
+                                .col-12.col-md-2
+
+
+                        .card-body
+                            table.table.table-bordered.table-striped.display.table-hover#datatable
+                                thead
+                                    tr
+                                        th MID
+                                        th ID
+                                        th Shortname
+                                        th Name
+                                        th Phonecode
+                                        th Active
+                                        th Date register
+                                        th Date last update
+
+
+                        .card-footer
+                            | Create, Modify, or Delete
+
+                    br
+                    .card
+                        .card-header.bg-dark
+                            .row
+                                .col-12.col-md-10
+                                    h3.card-title List of states
+                                .col-12.col-md-2
+
+
+                        .card-body
+                            table.table.table-bordered.table-striped.display.table-hover#datatable1
+                                thead
+                                    tr
+                                        th MID
+                                        th ID
+                                        th Name
+                                        th Country_id
+                                        th Active
+                                        th Date register
+                                        th Date last update
+
+
+                        .card-footer
+                            | Create, Modify, or Delete
+
+                    br
+                    .card
+                        .card-header.bg-dark
+                            .row
+                                .col-12.col-md-10
+                                    h3.card-title List of cities
+                                .col-12.col-md-2
+
+
+                        .card-body
+                            table.table.table-bordered.table-striped.display.table-hover#datatable2
+                                thead
+                                    tr
+                                        th MID
+                                        th ID
+                                        th Name
+                                        th State id
+                                        th Active
+                                        th Date register
+                                        th Date last update
+
+
+                        .card-footer
+                            | Create, Modify, or Delete
+
+            include template/footer
+            include template/control_bar
+
+
+        include template/params
+        include template/scripts
+        script.
+            $(document).ready(function () {
+                $('#menu_places').addClass('active');
+                $('#menu_catalogs').parent().addClass('menu-open');
+            });
+        script(src=core_files_path + 'js/common.js')
+        script(src=core_files_path + 'js/catalogue_places.js')
+

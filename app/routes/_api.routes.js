@@ -5,8 +5,8 @@ router.use('/core/admin_roles', require('./core/admin_roles.routes'));
 router.use('/core/admin', require('./core/admin.routes'));
 router.use('/core/app', require('./core/app.routes'));
 router.use('/core/cdn', require('./core/cdn.routes'));
-router.use('/core/permises/admin', require('./core/permises_by_admin.routes'));
-router.use('/core/permises/role', require('./core/permises_by_rol.routes'));
+router.use('/core/permission/admin', require('./core/permission_by_admin.routes'));
+router.use('/core/permission/role', require('./core/permission_by_rol.routes'));
 router.use('/core/routes/', require('./core/routes_admin.routes'));
 
 router.use('/places/city', require('./core/city.routes'));

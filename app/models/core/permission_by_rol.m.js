@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const {Schema} = mongoose;
 const moment = require('moment');
 const dataTables = require('mongoose-datatables');
-const admin = require('./admin.m')
+const admin_role = require('./admin_role.m')
 
 
-const permises_by_admin = new Schema({
+const permission_by_rol = new Schema({
     name: {
         type: String,
         required: false
@@ -21,7 +21,7 @@ const permises_by_admin = new Schema({
     role: {
         type: Schema.Types.ObjectId,
         required: true,
-        ref: admin
+        ref: admin_role
     },
     active: {
         type: Boolean,
@@ -40,8 +40,8 @@ const permises_by_admin = new Schema({
     },
 });
 
-permises_by_admin.plugin(dataTables);
-module.exports = mongoose.model('permises_by_admin', permises_by_admin);
+permission_by_rol.plugin(dataTables);
+module.exports = mongoose.model('permission_by_rol', permission_by_rol);
 
 
 

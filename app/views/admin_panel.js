@@ -37,7 +37,6 @@ router.get('/', function (req, res) {
 });
 
 router.get('/dashboard/', function (req, res) {
-    console.log('********req', req.user)
     seo.title = 'Dashboard :: ' + seo.title;
     res.status(200).render('admin_panel/dashboard', {
         seo: seo,
@@ -93,5 +92,63 @@ router.get('/admin/', function (req, res) {
         })
     });
 });
+
+router.get('/catalogue/routes/', function (req, res) {
+    seo.title = 'Catalogue of routes :: ' + seo.title;
+    res.status(200).render('admin_panel/catalogue_routes', {
+        seo: seo,
+        resources: resources.dashboard,
+        root_path: env.root_path,
+        img_folder: site_files_path + 'img/',
+        base_admin_path,
+        core_files_path,
+        params: param_converter({
+            root_path: env.root_path,
+            site_files_path,
+            img_folder: site_files_path + 'img/',
+            base_admin_path,
+            core_files_path
+        })
+    });
+});
+
+router.get('/catalogue/places/', function (req, res) {
+    seo.title = 'Catalogue of places :: ' + seo.title;
+    res.status(200).render('admin_panel/catalogue_places', {
+        seo: seo,
+        resources: resources.dashboard,
+        root_path: env.root_path,
+        img_folder: site_files_path + 'img/',
+        base_admin_path,
+        core_files_path,
+        params: param_converter({
+            root_path: env.root_path,
+            site_files_path,
+            img_folder: site_files_path + 'img/',
+            base_admin_path,
+            core_files_path
+        })
+    });
+});
+
+router.get('/catalogue/languages/', function (req, res) {
+    seo.title = 'Catalogue of places :: ' + seo.title;
+    res.status(200).render('admin_panel/catalogue_languages', {
+        seo: seo,
+        resources: resources.dashboard,
+        root_path: env.root_path,
+        img_folder: site_files_path + 'img/',
+        base_admin_path,
+        core_files_path,
+        params: param_converter({
+            root_path: env.root_path,
+            site_files_path,
+            img_folder: site_files_path + 'img/',
+            base_admin_path,
+            core_files_path
+        })
+    });
+});
+
 
 module.exports = router;

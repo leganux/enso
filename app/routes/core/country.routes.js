@@ -5,6 +5,6 @@ const response_codes = require('./../../helpers/response_codes.helper').codes;
 const env = require('./../../config/environment.config').environment;
 const country = require('./../../models/core/country.m');
 
-api_crud.all(router, country, false);
+api_crud.all(router, country, false, false, 'name,sortname,phonecode');
 
 module.exports = router;
