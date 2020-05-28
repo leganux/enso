@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const {Schema} = mongoose;
 const moment = require('moment');
 const dataTables = require('mongoose-datatables');
-const admin = require('admin.m')
+const admin = require('./admin.m')
 
 
 const permises_by_admin = new Schema({
