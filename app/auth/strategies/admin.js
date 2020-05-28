@@ -2,48 +2,49 @@ const express = require('express');
 const router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-const Admin = require('../models/NOSQL/admin');
+const admin = require('./../../models/core/admin.m');
 const bcrypt = require('bcryptjs');
-const env = require('./../config/environment.config');
-
+const env = require('./../../config/environment.config').environment;
 
 
 passport.use('admin-login', new LocalStrategy({
-        usernameField: 'user',
+        usernameField: 'email',
         passwordField: 'password',
     },
-    function (username, password, done) {
-        Admin.findOne({ username: username }, function (err, admin) {
-            if (err) { return done(err); }
-            if (!admin) { return done(null, false); }
-            bcrypt.compare(password, admin.password, function (err, res) {
-                if (err) {
-                    return done(null, false);
-                }
-                if (!res) {
-                    return done(null, false);
-                }
-                admin.isAdmin = true;
-                done(null, {
-                    session: admin,
-                    prop: {
-                        kind: 'admin',
-                        role: admin.role
-                    }
-                });
-            });
-        });
-    }
-));
+    async function (username, password, done) {
+        console.log('|||||||||| llega', username, password)
+        try {
+            let data = await admin.findOne({email: username});
+
+            if (!data) {
+                return done(null, false);
+            }
+            let res = await bcrypt.compare(password, data.password);
+            if (!res) {
+                return done(null, false);
+            }
+            let session = {
+                session: data,
+                kind: 'admin',
+                role: data.role
+            }
+            console.log('|||||||||| SES', session)
+            done(null, session);
+        } catch (e) {
+            return done(e);
+        }
+
+    })
+)
 
 
-router.post('/', passport.authenticate('admin-login', { failureRedirect: env.root + '/lx_admin', failWithError: true }),
+router.post('/', passport.authenticate('admin-login', {
+        failureRedirect: env.root_path + env.control_panel_url,
+        failWithError: true
+    }),
     function (req, res) {
-
-        res.redirect(env.root + '/lx_admin/dashboard');
+        res.redirect(env.root_path + env.control_panel_url + 'dashboard');
     });
-
-
 
 
 module.exports = router;

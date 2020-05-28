@@ -54,12 +54,14 @@ let cdn = {
                 rp + 'icheck-bootstrap/icheck-bootstrap.min.css',
                 rp + 'adminlte3/css/adminlte.min.css',
                 rp + 'animate/animate.css',
+                rp + 'sweetalert2-theme-bootstrap-4/bootstrap-4.min.css',
 
             ],
             scripts: [
                 rp + 'jquery/jquery.min.js',
                 rp + 'bootstrap/js/bootstrap.bundle.min.js',
                 rp + 'adminlte3/js/adminlte.min.js',
+                rp + 'sweetalert2/sweetalert2.min.js',
             ]
         }
     }

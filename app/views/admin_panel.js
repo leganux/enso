@@ -17,6 +17,7 @@ const api_path = env.root_path + 'api/core/';
 const base_admin_path = env.root_path + env.control_panel_url;
 
 router.get('/', function (req, res) {
+
     seo.title = 'Login :: ' + seo.title;
     res.status(200).render('admin_panel/login', {
         seo: seo,
@@ -36,6 +37,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/dashboard/', function (req, res) {
+    console.log('********req', req.user)
     seo.title = 'Dashboard :: ' + seo.title;
     res.status(200).render('admin_panel/dashboard', {
         seo: seo,

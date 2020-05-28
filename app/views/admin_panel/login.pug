@@ -15,14 +15,14 @@ html
             .card
                 .card-body.login-card-body
                     p.login-box-msg Sign in to start your session
-                    form(action='../../index3.html', method='post')
+                    form(action=root_path + 'auth/admin', method='post')#login_form
                         .input-group.mb-3
-                            input.form-control(type='email', placeholder='Email')
+                            input.form-control(type='email', placeholder='Email', name='email')
                             .input-group-append
                                 .input-group-text
                                     span.fas.fa-envelope
                         .input-group.mb-3
-                            input.form-control(type='password', placeholder='Password')
+                            input.form-control(type='password', placeholder='Password', name='password')
                             .input-group-append
                                 .input-group-text
                                     span.fas.fa-lock
