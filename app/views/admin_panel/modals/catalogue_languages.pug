@@ -2,47 +2,47 @@
     .modal-dialog.modal-lg
         .modal-content
             .modal-header.bg-dark
-                h4.modal-title New/Edit
+                h4.modal-title !{i18n.new_edit}
                 button.close(type='button', data-dismiss='modal', aria-label='Close')
                     span(aria-hidden='true') &times;
             .modal-body
                 br
-                label Name
+                label !{i18n.name}
                 input(type='text').form-control#in_name
-                label Lang Code
+                label !{i18n.lang_code}
                 input(type='text').form-control#in_lang_code
-                label Flag unicode
+                label !{i18n.flag_unicode}
                 input(type='text').form-control#in_flag_uc
-                label Flag image
+                label !{i18n.flag_image}
                 input(type='file').form-control#in_flag_img
                 input(type='text', style="display:none;").form-control#in_flag_img_save
 
 
 
             .modal-footer.justify-content-end
-                button.btn.btn-default(type='button', data-dismiss='modal') Close
-                button.btn.bg-pink(type='button')#save_changes Save
+                button.btn.btn-default(type='button', data-dismiss='modal') !{i18n.cancel}
+                button.btn.bg-pink(type='button')#save_changes !{i18n.save}
 
 #modal_new_edit1.modal.fade( aria-hidden='true', data-backdrop="static", data-keyboard="false")
     .modal-dialog.modal-lg
         .modal-content
             .modal-header.bg-dark
-                h4.modal-title New/Edit
+                h4.modal-title !{i18n.new_edit}
                 button.close(type='button', data-dismiss='modal', aria-label='Close')
                     span(aria-hidden='true') &times;
             .modal-body
                 br
-                label Language
+                label !{i18n.language}
                 select.form-control#in1_language
-                    option(value=-1) Choose one...
-                label Element reference
+                    option(value=-1) !{i18n.choose_one}
+                label !{i18n.element_reference}
                 input(type='text').form-control#in1_element_reference
-                label Element text
+                label !{i18n.element_text}
                 input(type='text').form-control#in1_element_text
 
 
 
 
             .modal-footer.justify-content-end
-                button.btn.btn-default(type='button', data-dismiss='modal') Close
-                button.btn.bg-pink(type='button')#save_changes1 Save
+                button.btn.btn-default(type='button', data-dismiss='modal') !{i18n.cancel}
+                button.btn.bg-pink(type='button')#save_changes1 !{i18n.save}

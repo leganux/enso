@@ -74,7 +74,7 @@ $(document).ready(function () {
                 "data": "_id"
             },
             {
-                "data": "language"
+                "data": "language.name"
             },
             {
                 "data": "element_ref"
@@ -153,7 +153,7 @@ $(document).ready(function () {
 
 
         if (body.name === '' || body.lang_code === '') {
-            notify_warning('Fill all fields to continue')
+            notify_warning(i18n.fill_all_fields)
             return false;
         }
 
@@ -175,7 +175,7 @@ $(document).ready(function () {
 
 
         if (body.url === '' || body.description === '' || body.type === '-1') {
-            notify_warning('Fill all fields to continue')
+            notify_warning(i18n.fill_all_fields)
             return false;
         }
 
@@ -248,7 +248,7 @@ $(document).ready(function () {
                 method: 'DELETE',
             }).done(function (data) {
                 HoldOn.close();
-                notify_success('The element has been deleted!')
+                notify_success(i18n.element_deleted)
                 draw_datatable_rs(DT);
                 charge_select('#in1_language', {where: {active: true}}, root_path + 'api/i18n/language_list', '_id', 'name');
 
@@ -271,7 +271,7 @@ $(document).ready(function () {
                 method: 'DELETE',
             }).done(function (data) {
                 HoldOn.close();
-                notify_success('The element has been deleted!')
+                notify_success(i18n.element_deleted)
                 draw_datatable_rs(DT1);
                 DELETE = '';
             }).fail(function (err) {

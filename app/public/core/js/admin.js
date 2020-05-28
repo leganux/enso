@@ -89,15 +89,15 @@ $(document).ready(function () {
         body.role = $('#in_role').val().trim()
 
         if (body.useranme === '' || body.email === '' || body.password === '' || body.role === '-1') {
-            notify_warning('Fill all fields to continue')
+            notify_warning(i18n.fill_all_fields)
             return false;
         }
         if (!body.email.includes('@') || !body.email.includes('.')) {
-            notify_warning('Inavlid email')
+            notify_warning(i18n.invalid_email)
             return false;
         }
         if (body.password.length < 8) {
-            notify_warning('Password too short')
+            notify_warning(i18n.password_too_short)
             return false;
         }
 
@@ -143,7 +143,7 @@ $(document).ready(function () {
                 method: 'DELETE',
             }).done(function (data) {
                 HoldOn.close();
-                notify_success('The element has been deleted!')
+                notify_success(i18n.element_deleted)
                 draw_datatable_rs(DT);
                 DELETE = '';
             }).fail(function (err) {

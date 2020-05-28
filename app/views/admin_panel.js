@@ -17,8 +17,9 @@ const api_path = env.root_path + 'api/core/';
 const base_admin_path = env.root_path + env.control_panel_url;
 const i18n_constructor = require('./../helpers/i18n_json_constructor.helper')
 
-router.get('/', function (req, res) {
+router.get('/', async function (req, res) {
 
+    var i18n = await i18n_constructor.i18n_json(req);
     seo.title = 'Login :: ' + seo.title;
     res.status(200).render('admin_panel/login', {
         seo: seo,
@@ -27,17 +28,20 @@ router.get('/', function (req, res) {
         img_folder: site_files_path + 'img/',
         base_admin_path,
         core_files_path,
+        i18n,
         params: param_converter({
             root_path: env.root_path,
             img_folder: site_files_path + 'img/',
             site_files_path,
             base_admin_path,
-            core_files_path
+            core_files_path,
+            i18n
         })
     });
 });
 
-router.get('/dashboard/', function (req, res) {
+router.get('/dashboard/', async function (req, res) {
+    var i18n = await i18n_constructor.i18n_json(req);
     seo.title = 'Dashboard :: ' + seo.title;
     res.status(200).render('admin_panel/dashboard', {
         seo: seo,
@@ -46,17 +50,20 @@ router.get('/dashboard/', function (req, res) {
         img_folder: site_files_path + 'img/',
         base_admin_path,
         core_files_path,
+        i18n,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
             img_folder: site_files_path + 'img/',
             base_admin_path,
-            core_files_path
+            core_files_path,
+            i18n
         })
     });
 });
 
-router.get('/admin_roles/', function (req, res) {
+router.get('/admin_roles/', async function (req, res) {
+    var i18n = await i18n_constructor.i18n_json(req);
     seo.title = 'Admin roles :: ' + seo.title;
     res.status(200).render('admin_panel/admin_roles', {
         seo: seo,
@@ -65,17 +72,20 @@ router.get('/admin_roles/', function (req, res) {
         img_folder: site_files_path + 'img/',
         base_admin_path,
         core_files_path,
+        i18n,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
             img_folder: site_files_path + 'img/',
             base_admin_path,
-            core_files_path
+            core_files_path,
+            i18n
         })
     });
 });
 
-router.get('/admin/', function (req, res) {
+router.get('/admin/', async function (req, res) {
+    var i18n = await i18n_constructor.i18n_json(req);
     seo.title = 'Admin roles :: ' + seo.title;
     res.status(200).render('admin_panel/admin', {
         seo: seo,
@@ -84,17 +94,20 @@ router.get('/admin/', function (req, res) {
         img_folder: site_files_path + 'img/',
         base_admin_path,
         core_files_path,
+        i18n,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
             img_folder: site_files_path + 'img/',
             base_admin_path,
-            core_files_path
+            core_files_path,
+            i18n
         })
     });
 });
 
-router.get('/catalogue/routes/', function (req, res) {
+router.get('/catalogue/routes/', async function (req, res) {
+    var i18n = await i18n_constructor.i18n_json(req);
     seo.title = 'Catalogue of routes :: ' + seo.title;
     res.status(200).render('admin_panel/catalogue_routes', {
         seo: seo,
@@ -103,17 +116,20 @@ router.get('/catalogue/routes/', function (req, res) {
         img_folder: site_files_path + 'img/',
         base_admin_path,
         core_files_path,
+        i18n,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
             img_folder: site_files_path + 'img/',
             base_admin_path,
-            core_files_path
+            core_files_path,
+            i18n
         })
     });
 });
 
-router.get('/catalogue/places/', function (req, res) {
+router.get('/catalogue/places/', async function (req, res) {
+    var i18n = await i18n_constructor.i18n_json(req);
     seo.title = 'Catalogue of places :: ' + seo.title;
     res.status(200).render('admin_panel/catalogue_places', {
         seo: seo,
@@ -122,12 +138,14 @@ router.get('/catalogue/places/', function (req, res) {
         img_folder: site_files_path + 'img/',
         base_admin_path,
         core_files_path,
+        i18n,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
             img_folder: site_files_path + 'img/',
             base_admin_path,
-            core_files_path
+            core_files_path,
+            i18n
         })
     });
 });

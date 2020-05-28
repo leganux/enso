@@ -14,15 +14,15 @@ html
 
             .card
                 .card-body.login-card-body
-                    p.login-box-msg Sign in to start your session
+                    p.login-box-msg !{i18n.sign_in_instruction}
                     form(action=root_path + 'auth/admin', method='post')#login_form
                         .input-group.mb-3
-                            input.form-control(type='email', placeholder='Email', name='email')
+                            input.form-control(type='email', placeholder=i18n.email, name='email')
                             .input-group-append
                                 .input-group-text
                                     span.fas.fa-envelope
                         .input-group.mb-3
-                            input.form-control(type='password', placeholder='Password', name='password')
+                            input.form-control(type='password', placeholder=i18n.password, name='password')
                             .input-group-append
                                 .input-group-text
                                     span.fas.fa-lock
@@ -34,7 +34,7 @@ html
                                         | Remember Me
                             // /.col
                             .col-4
-                                button.btn.btn-primary.btn-block(type='submit') Sign In
+                                button.btn.btn-primary.btn-block(type='submit') !{i18n.sign_in}
                             // /.col
                     //.social-auth-links.text-center.mb-3
                         p - OR -

@@ -14,37 +14,37 @@ html
                     .container-fluid
                         .row.mb-2
                             .col-sm-6
-                                h1 Admin Roles
+                                h1 !{i18n.admin} !{i18n.roles}
                             |
                             .col-sm-6
                                 ol.breadcrumb.float-sm-right
                                     li.breadcrumb-item
-                                        a(href=base_admin_path + 'dashboard') Home
+                                        a(href=base_admin_path + 'dashboard') !{i18n.home}
                                     |
-                                    li.breadcrumb-item.active Admin Roles
+                                    li.breadcrumb-item.active !{i18n.admin} !{i18n.roles}
                 section.content
                     .card
                         .card-header.bg-dark
                             .row
                                 .col-12.col-md-10
-                                    h3.card-title List of admin roles
+                                    h3.card-title !{i18n.list_of} !{i18n.admin} !{i18n.roles}
                                 .col-12.col-md-2
-                                    button.bg-pink.btn.btn-block#btn_new_element New
+                                    button.bg-pink.btn.btn-block#btn_new_element !{i18n.admin}
 
                         .card-body
                             table.table.table-bordered.table-striped.display.table-hover#datatable
                                 thead
                                     tr
-                                        th ID
-                                        th Name
-                                        th Description
-                                        th Active
-                                        th Date register
-                                        th Date last update
-                                        th Actions
+                                        th !{i18n.id}
+                                        th !{i18n.name}
+                                        th !{i18n.description}
+                                        th !{i18n.active}
+                                        th !{i18n.date_register}
+                                        th !{i18n.date_last_update}
+                                        th !{i18n.actions}
 
                         .card-footer
-                            | Create, Modify, or Delete
+                            | !{i18n.create_modify_delete}
 
             include template/footer
             include template/control_bar

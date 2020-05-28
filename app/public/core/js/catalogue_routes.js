@@ -77,7 +77,7 @@ $(document).ready(function () {
 
 
         if (body.url === '' || body.description === '' || body.type === '-1') {
-            notify_warning('Fill all fields to continue')
+            notify_warning(i18n.fill_all_fields)
             return false;
         }
 
@@ -123,7 +123,7 @@ $(document).ready(function () {
                 method: 'DELETE',
             }).done(function (data) {
                 HoldOn.close();
-                notify_success('The element has been deleted!')
+                notify_success(i18n.element_deleted)
                 draw_datatable_rs(DT);
                 DELETE = '';
             }).fail(function (err) {

@@ -14,20 +14,20 @@ html
                     .container-fluid
                         .row.mb-2
                             .col-sm-6
-                                h1 Catalogue of places
+                                h1 !{i18n.catalogue_of} !{i18n.places}
                             |
                             .col-sm-6
                                 ol.breadcrumb.float-sm-right
                                     li.breadcrumb-item
-                                        a(href=base_admin_path + 'dashboard') Home
+                                        a(href=base_admin_path + 'dashboard') !{i18n.home}
                                     |
-                                    li.breadcrumb-item.active Catalogue of places
+                                    li.breadcrumb-item.active !{i18n.catalogue_of} !{i18n.places}
                 section.content
                     .card
                         .card-header.bg-dark
                             .row
                                 .col-12.col-md-10
-                                    h3.card-title List of countries
+                                    h3.card-title !{i18n.list_of} !{i18n.countries}
                                 .col-12.col-md-2
 
 
@@ -36,24 +36,24 @@ html
                                 thead
                                     tr
                                         th MID
-                                        th ID
-                                        th Shortname
-                                        th Name
-                                        th Phonecode
-                                        th Active
-                                        th Date register
-                                        th Date last update
+                                        th !{i18n.id}
+                                        th !{i18n.sortname}
+                                        th !{i18n.name}
+                                        th !{i18n.phonecode}
+                                        th !{i18n.active}
+                                        th !{i18n.date_register}
+                                        th !{i18n.date_last_update}
 
 
                         .card-footer
-                            | Create, Modify, or Delete
+                            | !{i18n.create_modify_delete}
 
                     br
                     .card
                         .card-header.bg-dark
                             .row
                                 .col-12.col-md-10
-                                    h3.card-title List of states
+                                    h3.card-title !{i18n.list_of} !{i18n.states}
                                 .col-12.col-md-2
 
 
@@ -62,23 +62,23 @@ html
                                 thead
                                     tr
                                         th MID
-                                        th ID
-                                        th Name
-                                        th Country_id
-                                        th Active
-                                        th Date register
-                                        th Date last update
+                                        th !{i18n.id}
+                                        th !{i18n.name}
+                                        th !{i18n.country_id}
+                                        th !{i18n.active}
+                                        th !{i18n.date_register}
+                                        th !{i18n.date_last_update}
 
 
                         .card-footer
-                            | Create, Modify, or Delete
+                            | !{i18n.create_modify_delete}
 
                     br
                     .card
                         .card-header.bg-dark
                             .row
                                 .col-12.col-md-10
-                                    h3.card-title List of cities
+                                    h3.card-title !{i18n.list_of} !{i18n.cities}
                                 .col-12.col-md-2
 
 
@@ -87,16 +87,16 @@ html
                                 thead
                                     tr
                                         th MID
-                                        th ID
-                                        th Name
-                                        th State id
-                                        th Active
-                                        th Date register
-                                        th Date last update
+                                        th !{i18n.id}
+                                        th !{i18n.name}
+                                        th !{i18n.state_id}
+                                        th !{i18n.active}
+                                        th !{i18n.date_register}
+                                        th !{i18n.date_last_update}
 
 
                         .card-footer
-                            | Create, Modify, or Delete
+                            | !{i18n.create_modify_delete}
 
             include template/footer
             include template/control_bar
