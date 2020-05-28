@@ -15,6 +15,7 @@ const site_files_path = env.root_path + 'content/files/site/';
 const core_files_path = env.root_path + 'content/core/';
 const api_path = env.root_path + 'api/core/';
 const base_admin_path = env.root_path + env.control_panel_url;
+const i18n_constructor = require('./../helpers/i18n_json_constructor.helper')
 
 router.get('/', function (req, res) {
 
@@ -131,7 +132,8 @@ router.get('/catalogue/places/', function (req, res) {
     });
 });
 
-router.get('/catalogue/languages/', function (req, res) {
+router.get('/catalogue/languages/', async function (req, res) {
+    var i18n = await i18n_constructor.i18n_json(req);
     seo.title = 'Catalogue of places :: ' + seo.title;
     res.status(200).render('admin_panel/catalogue_languages', {
         seo: seo,
@@ -140,12 +142,14 @@ router.get('/catalogue/languages/', function (req, res) {
         img_folder: site_files_path + 'img/',
         base_admin_path,
         core_files_path,
+        i18n,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
             img_folder: site_files_path + 'img/',
             base_admin_path,
-            core_files_path
+            core_files_path,
+            i18n
         })
     });
 });

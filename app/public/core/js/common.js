@@ -125,6 +125,44 @@ const snakeThis = function (elem) {
     $(elem).change(function () {
         let value = $(elem).val();
         value = v.snakeCase(value);
-        $(elem).val(value);
+        $(elem).val(value.toLowerCase());
     });
+}
+
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+
+function setCookie(cname, cvalue, exdays) {
+    if (!exdays) {
+        exdays = 15;
+    }
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+
+var language = 'en_US';
+
+if (getCookie('_LANGUAGE_')) {
+    language = getCookie('_LANGUAGE_');
+} else {
+    language = 'en_US';
+    setCookie('_LANGUAGE_', language);
 }

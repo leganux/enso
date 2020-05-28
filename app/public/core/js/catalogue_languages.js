@@ -66,7 +66,7 @@ $(document).ready(function () {
         },
     });
     draw_datatable_rs(DT);
-    var DT1 = $("#datatable").DataTable({
+    var DT1 = $("#datatable1").DataTable({
         "responsive": true,
         "data": {},
         "columns": [
@@ -169,9 +169,9 @@ $(document).ready(function () {
 
     $('#save_changes1').click(function () {
         let body = {};
-        body.language = $('#in_url').val().trim();
-        body.element_ref = $('#in_description').val().trim();
-        body.element_text = $('#in_description').val().trim();
+        body.language = $('#in1_language').val().trim();
+        body.element_ref = $('#in1_element_reference').val().trim();
+        body.element_text = $('#in1_element_text').val().trim();
 
 
         if (body.url === '' || body.description === '' || body.type === '-1') {
@@ -244,7 +244,7 @@ $(document).ready(function () {
         let DELETE = $(this).val();
         confirm_delete(function () {
             $.ajax({
-                url: root_path + 'api/i18n/language_elements/' + DELETE,
+                url: root_path + 'api/i18n/language_list/' + DELETE,
                 method: 'DELETE',
             }).done(function (data) {
                 HoldOn.close();
@@ -267,7 +267,7 @@ $(document).ready(function () {
         let DELETE = $(this).val();
         confirm_delete(function () {
             $.ajax({
-                url: root_path + 'api/i18n/language_elements' + DELETE,
+                url: root_path + 'api/i18n/language_elements/' + DELETE,
                 method: 'DELETE',
             }).done(function (data) {
                 HoldOn.close();
@@ -285,6 +285,6 @@ $(document).ready(function () {
     });
 
     charge_select('#in1_language', {where: {active: true}}, root_path + 'api/i18n/language_list', '_id', 'name');
-
+    snakeThis('#in1_element_reference')
 
 });
