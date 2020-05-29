@@ -9,12 +9,12 @@ var i18n_json = async function (req) {
 
     try {
         let lang = req.cookies._LANGUAGE_;
-        let lang_ = await language_list.findOne({lang_code: lang});
+        let lang_ = await language_list.findOne({lang_code: lang, active: true});
         if (!lang_) {
-            lang_ = await language_list.findOne({lang_code: 'en_US'});
+            lang_ = await language_list.findOne({lang_code: 'en_US', active: true});
         }
 
-        let elements = await language_elements.find({language: lang_});
+        let elements = await language_elements.find({language: lang_, active: true});
 
         let i18n = {}
         elements.map((item, i) => {

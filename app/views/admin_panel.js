@@ -172,5 +172,27 @@ router.get('/catalogue/languages/', async function (req, res) {
     });
 });
 
+router.get('/admin_permission/', async function (req, res) {
+    var i18n = await i18n_constructor.i18n_json(req);
+    seo.title = 'Admin permisions :: ' + seo.title;
+    res.status(200).render('admin_panel/admin_permission', {
+        seo: seo,
+        resources: resources.dashboard,
+        root_path: env.root_path,
+        img_folder: site_files_path + 'img/',
+        base_admin_path,
+        core_files_path,
+        i18n,
+        params: param_converter({
+            root_path: env.root_path,
+            site_files_path,
+            img_folder: site_files_path + 'img/',
+            base_admin_path,
+            core_files_path,
+            i18n
+        })
+    });
+});
+
 
 module.exports = router;

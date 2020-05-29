@@ -3,27 +3,56 @@ const {Schema} = mongoose;
 const moment = require('moment');
 const dataTables = require('mongoose-datatables');
 const admin_role = require('./admin_role.m')
+const route = require('./routes.m')
 
 
 const permission_by_rol = new Schema({
-    name: {
-        type: String,
-        required: false
-    },
-    crud: {
-        type: String,
-        required: false
-    },
-    type: {
-        type: String,
-        required: false
+    route: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: route
     },
     role: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: admin_role
     },
-    active: {
+    see: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    create: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    read_me: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    read_all: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    update_me: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    update_all: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    delete_me: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    delete_all: {
         type: Boolean,
         required: true,
         default: true

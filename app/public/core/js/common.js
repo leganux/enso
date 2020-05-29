@@ -104,7 +104,7 @@ const charge_select = function (elem, filter, url, valuename, textname) {
     if (!filter) {
         filter = {}
     }
-    $(elem).html('<option value="-1"> Choose... </option>')
+    $(elem).html('<option value="-1"> ' + i18n.choose_one + ' </option>')
     $.getJSON(url, filter, function (data) {
         HoldOn.close();
         notify_success(data.message);
