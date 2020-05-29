@@ -287,4 +287,9 @@ $(document).ready(function () {
     charge_select('#in1_language', {where: {active: true}}, root_path + 'api/i18n/language_list', '_id', 'name');
     snakeThis('#in1_element_reference')
 
+    $('#in1_element_text').change(function () {
+        let text = $('#in1_element_text').val();
+        $('#in1_element_reference').val(v.snakeCase(text).toLowerCase());
+    })
+
 });

@@ -3,34 +3,34 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
     a.brand-link.navbar-pink(href=root_path)
         img.brand-image.animated.pulse.infinite(src=img_folder + 'logo.png', alt='Ensō Logo')
         |
-        span.brand-text.font-weight-light ControlPanel
+        span.brand-text.font-weight-light !{i18n.admin_panel}
     .sidebar
         .user-panel.mt-3.pb-3.mb-3.d-flex
             .image
                 img.img-circle.elevation-2(src='https://source.unsplash.com/800x800/?face', alt='User Image')
             |
             .info
-                a.d-block(href='#') Admin
+                a.d-block(href='#') !{i18n.admin}
         nav.mt-2
             ul.nav.nav-pills.nav-sidebar.flex-column(data-widget='treeview', role='menu', data-accordion='false')
                 li.nav-item
                     a.nav-link(href=base_admin_path + 'dashboard')#menu_dashboard
                         i.nav-icon.fas.fa-tachometer-alt
                         |
-                        p Dashboard
+                        p !{i18n.dashboard}
                 |
                 li.nav-item
                     a.nav-link(href=base_admin_path + 'configuration')#menu_configutation_
                         i.nav-icon.fas.fa-cog
                         |
-                        p General config
+                        p !{i18n.general_config}
                 |
                 li.nav-item.has-treeview
                     a.nav-link(href='#')#menu_catalogs
                         i.nav-icon.fas.fa-table
                         |
                         p
-                            | Catalogues
+                            | !{i18n.catalogues}
                             i.right.fas.fa-angle-left
                     |
                     ul.nav.nav-treeview
@@ -38,62 +38,62 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
                             a.nav-link(href=base_admin_path + 'catalogue/places')#menu_places
                                 i.fas.fa-globe-americas.nav-icon
                                 |
-                                p Places
+                                p !{i18n.places}
                         |
                         li.nav-item
                             a.nav-link(href=base_admin_path + 'catalogue/languages')#menu_languajes
                                 i.fas.fa-language.nav-icon
                                 |
-                                p Languages
+                                p !{i18n.languages}
                         |
                         li.nav-item
                             a.nav-link(href=base_admin_path + 'catalogue/dynamic_content')#menu_dynamic_content
                                 i.fas.fa-align-justify.nav-icon
                                 |
-                                p Dynamic content
+                                p !{i18n.dynamic_content}
                         |
                         li.nav-item
                             a.nav-link(href=base_admin_path + 'catalogue/routes')#menu_routes
                                 i.fas.fa-route.nav-icon
                                 |
-                                p Routes
+                                p !{i18n.routes}
                 |
                 li.nav-item
                     a.nav-link(href=base_admin_path + 'cdn')#menu_cdn
                         i.nav-icon.fas.fa-compact-disc
                         |
-                        p CDN
+                        p !{i18n.cdn}
                 |
                 li.nav-item
                     a.nav-link(href=base_admin_path + 'admin_roles')#menu_admin_roles
                         i.nav-icon.fas.fa-user-tag
                         |
-                        p Admin roles
+                        p !{i18n.admin_roles}
                 |
                 li.nav-item
                     a.nav-link(href=base_admin_path + 'admin')#menu_admin
                         i.nav-icon.fas.fa-user-shield
                         |
-                        p Admins
+                        p !{i18n.admins}
                 |
 
                 li.nav-item
                     a.nav-link(href=base_admin_path + 'admin_permission')#menu_admin_permission
                         i.nav-icon.fas.fa-key
                         |
-                        p Admin permission
+                        p !{i18n.admin_permission}
                 |
                 li.nav-item
                     a.nav-link(href=base_admin_path + 'console_log')#menu_console_log
                         i.nav-icon.fas.fa-terminal
                         |
-                        p Console log
+                        p !{i18n.console_log}
                 |
                 li.nav-item
                     a.nav-link(href=base_admin_path + 'apps')#menu_apps
                         i.nav-icon.fas.fa-rocket
                         |
-                        p Apps
+                        p !{i18n.apps}
                 |
 
 
@@ -104,70 +104,70 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
                     a.nav-link(href=base_admin_path + 'app/' + app_id + '/config')#menu_config
                         i.nav-icon.fas.fa-cogs
                         |
-                        p Config
+                        p !{i18n.config}
                 |
                 li.nav-item
                     a.nav-link(href=base_admin_path + 'app/' + app_id + '/user_roles')#menu_user_roles
                         i.nav-icon.fas.fa-user-check
                         |
-                        p User roles
+                        p !{i18n.user_roles}
                 |
                 li.nav-item
                     a.nav-link(href=base_admin_path + 'app/' + app_id + '/users')#menu_users
                         i.nav-icon.fas.fa-user-plus
                         |
-                        p Users
+                        p !{i18n.users}
                 |
                 li.nav-item
                     a.nav-link(href=base_admin_path + 'app/' + app_id + '/user_permission')#menu_user_permission
                         i.nav-icon.fas.fa-user-lock
                         |
-                        p User permission
+                        p !{i18n.user_permission}
                 |
                 li.nav-item
                     a.nav-link(href=base_admin_path + 'app/' + app_id + '/dynamic_db')#menu_dynamyc_db
                         i.nav-icon.fas.fa-database
                         |
-                        p  Dynamic DB
+                        p  !{i18n.dynamic_db}
                 |
                 li.nav-item
                     a.nav-link(href=base_admin_path + 'app/' + app_id + '/cloud_functions')#menu_cloud_funtions
                         i.nav-icon.fas.fa-server
                         |
-                        p Cloud functions
+                        p !{i18n.cloud_functions}
                 |
                 li.nav-item
                     a.nav-link(href=base_admin_path + 'app/' + app_id + '/files')#menu_files
                         i.nav-icon.fas.fa-folder-open
                         |
-                        p Files
+                        p !{i18n.files}
                 |
                 li.nav-item
                     a.nav-link(href=base_admin_path + 'app/' + app_id + '/cron')#menu_cron
                         i.nav-icon.fas.fa-clock
                         |
-                        p Cron functions
+                        p !{i18n.cron_functions}
                 |
                 li.nav-item
                     a.nav-link(href=base_admin_path + 'app/' + app_id + '/mailing')#menu_mailing
                         i.nav-icon.fas.fa-envelope
                         |
-                        p Mailing
+                        p !{i18n.mailing}
                 |
                 li.nav-item
                     a.nav-link(href=base_admin_path + 'app/' + app_id + '/sms_gateway')#menu_sms_gateway
                         i.nav-icon.fas.fa-sms
                         |
-                        p SMS gateway
+                        p !{i18n.sms_gateway}
                 |
 
-                li.nav-header MISCELLANEOUS
+                li.nav-header !{i18n.misc}
                 |
                 li.nav-item
                     a.nav-link(href='https://leganux.net/' target='_blank')
                         i.nav-icon.fas.fa-file
                         |
-                        p Documentation
+                        p !{i18n.documentation}
                 |
                 li.nav-header &nbsp;
                 |
