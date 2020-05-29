@@ -14,7 +14,7 @@ $(document).ready(function () {
                     '<div class="col-4 col-md-4">' + item.url + '</div>' +
                     '<div class="col-8 col-md-8">' +
                     '<label>' + i18n.see +
-                    '&nbsp; <input id="_see_' + item._id + '" class="el_see" type="checkbox" checked value="' + item._id + '">' +
+                    '&nbsp; <input id="_see_' + item._id + '" class="el_see" type="checkbox"  value="' + item._id + '">' +
                     '</label>' +
                     '</div>' +
                     '</div><hr>';
@@ -30,28 +30,28 @@ $(document).ready(function () {
 
                     '<div class="col-6 col-md-2">' +
                     '<label>' + i18n.create +
-                    '&nbsp; <input  id="_create_' + item._id + '" class="el_create" type="checkbox" checked value="' + item._id + '">' +
+                    '&nbsp; <input  id="_create_' + item._id + '" class="el_create" type="checkbox"  value="' + item._id + '">' +
                     '</label>' +
                     '</div>' +
 
                     '<div class="col-6 col-md-2">' +
 
                     '<label>' + i18n.read_all +
-                    '&nbsp; <input id="_read_all_' + item._id + '" class="el_read_all" type="checkbox" checked value="' + item._id + '">' +
+                    '&nbsp; <input id="_read_all_' + item._id + '" class="el_read_all" type="checkbox"  value="' + item._id + '">' +
                     '</label>' +
                     '</div>' +
 
                     '<div class="col-6 col-md-2">' +
 
                     '<label>' + i18n.update_all +
-                    '&nbsp; <input id="_update_all_' + item._id + '" class="el_update_all" type="checkbox" checked value="' + item._id + '">' +
+                    '&nbsp; <input id="_update_all_' + item._id + '" class="el_update_all" type="checkbox"  value="' + item._id + '">' +
                     '</label>' +
                     '</div>' +
 
                     '<div class="col-6 col-md-2">' +
 
                     '<label>' + i18n.delete_all +
-                    '&nbsp; <input id="_delete_all_' + item._id + '" class="el_delete_all" type="checkbox" checked value="' + item._id + '">' +
+                    '&nbsp; <input id="_delete_all_' + item._id + '" class="el_delete_all" type="checkbox"  value="' + item._id + '">' +
                     '</label>' +
                     '</div>' +
                     '</div>' +
@@ -76,34 +76,34 @@ $(document).ready(function () {
 
                     '<div class="col-6 col-md-2">' +
                     '<label>' + i18n.create +
-                    '&nbsp; <input  id="_create_' + item._id + '" class="el_create" type="checkbox" checked value="' + item._id + '">' +
+                    '&nbsp; <input  id="_create_' + item._id + '" class="el_create" type="checkbox"  value="' + item._id + '">' +
                     '</label>' +
                     '</div>' +
 
                     '<div class="col-6 col-md-2">' +
                     '<label>' + i18n.read_mine +
-                    '&nbsp; <input id="_read_mine_' + item._id + '" class="el_read_mine" type="checkbox" checked value="' + item._id + '">' +
+                    '&nbsp; <input id="_read_mine_' + item._id + '" class="el_read_mine" type="checkbox"  value="' + item._id + '">' +
                     '</label>' +
                     '<label>' + i18n.read_all +
-                    '&nbsp; <input id="_read_all_' + item._id + '" class="el_read_all" type="checkbox" checked value="' + item._id + '">' +
+                    '&nbsp; <input id="_read_all_' + item._id + '" class="el_read_all" type="checkbox"  value="' + item._id + '">' +
                     '</label>' +
                     '</div>' +
 
                     '<div class="col-6 col-md-2">' +
                     '<label>' + i18n.update_mine +
-                    '&nbsp; <input id="_update_mine_' + item._id + '" class="el_update_mine" type="checkbox" checked value="' + item._id + '">' +
+                    '&nbsp; <input id="_update_mine_' + item._id + '" class="el_update_mine" type="checkbox"  value="' + item._id + '">' +
                     '</label>' +
                     '<label>' + i18n.update_all +
-                    '&nbsp; <input id="_update_all_' + item._id + '" class="el_update_all" type="checkbox" checked value="' + item._id + '">' +
+                    '&nbsp; <input id="_update_all_' + item._id + '" class="el_update_all" type="checkbox"  value="' + item._id + '">' +
                     '</label>' +
                     '</div>' +
 
                     '<div class="col-6 col-md-2">' +
                     '<label>' + i18n.delete_mine +
-                    '&nbsp; <input id="_delete_mine_' + item._id + '" class="el_delete_mine" type="checkbox" checked value="' + item._id + '">' +
+                    '&nbsp; <input id="_delete_mine_' + item._id + '" class="el_delete_mine" type="checkbox"  value="' + item._id + '">' +
                     '</label>' +
                     '<label>' + i18n.delete_all +
-                    '&nbsp; <input id="_delete_all_' + item._id + '" class="el_delete_all" type="checkbox" checked value="' + item._id + '">' +
+                    '&nbsp; <input id="_delete_all_' + item._id + '" class="el_delete_all" type="checkbox"  value="' + item._id + '">' +
                     '</label>' +
                     '</div>' +
 
