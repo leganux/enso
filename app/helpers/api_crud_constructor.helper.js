@@ -187,7 +187,7 @@ api_functions.updateWhere = function (router, model, middleware) {
 
 api_functions.readOne = function (router, model, middleware, populate) {
 
-    router.get('/one/', middleware ? middleware : no_middleware, async function (req, res) {
+    router.get('/one', middleware ? middleware : no_middleware, async function (req, res) {
         let body = req.query.data;
         let where = req.query.where;
         let or = req.query.or;
@@ -462,6 +462,57 @@ api_functions.readById = function (router, model, middleware, populate) {
 
 };
 
+api_functions.updateOrCreate = function (router, model, middleware) {
+
+    router.post('/updateOrCreate', middleware ? middleware : no_middleware, async function (req, res) {
+        var find = {};
+        let body = req.body.data;
+        let where = req.body.where;
+
+
+        if (where) {
+            for (const [key, val] of Object.entries(where)) {
+                find[key] = val;
+            }
+        }
+
+        try {
+            var query = await model.findOne(where);
+            if (!query) {
+                query = new model(where);
+            }
+
+            if (body) {
+                for (const [key, val] of Object.entries(body)) {
+                    query[key] = val;
+                }
+            }
+
+            query.updatedAt = moment().format();
+            var response = await query.save();
+
+            if (!response) {
+                res.status(436).json(response_codes.code_436);
+                return 0;
+            }
+
+            let ret = response_codes.code_200;
+            ret.data = response;
+            res.status(200).json(ret);
+            return 0;
+
+        } catch (e) {
+            console.error('*** Error on updateOrCreate ' + model.collection.collectionName, e);
+            res.status(500).json(response_codes.code_500);
+            return 0;
+        }
+
+
+    });
+
+
+};
+
 api_functions.delete = function (router, model, middleware) {
     router.delete('/:id', middleware ? middleware : no_middleware, async function (req, res) {
         var id = req.params.id;
@@ -539,6 +590,7 @@ api_functions.all = function (router, model, middelware, populate, search_fields
     api_functions.readById(router, model, middelware, populate);
     api_functions.read(router, model, middelware, populate);
     api_functions.delete(router, model, middelware);
+    api_functions.updateOrCreate(router, model, middelware);
     api_functions.datatable(router, model, middelware, populate, search_fields);
 };
 

@@ -20,42 +20,42 @@ const permission_by_admin = new Schema({
     see: {
         type: Boolean,
         required: true,
-        default: true
+        default: false
     },
     create: {
         type: Boolean,
         required: true,
-        default: true
+        default: false
     },
     read_me: {
         type: Boolean,
         required: true,
-        default: true
+        default: false
     },
     read_all: {
         type: Boolean,
         required: true,
-        default: true
+        default: false
     },
     update_me: {
         type: Boolean,
         required: true,
-        default: true
+        default: false
     },
     update_all: {
         type: Boolean,
         required: true,
-        default: true
+        default: false
     },
     delete_me: {
         type: Boolean,
         required: true,
-        default: true
+        default: false
     },
     delete_all: {
         type: Boolean,
         required: true,
-        default: true
+        default: false
     },
     createdAt: {
         type: Date,

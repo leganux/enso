@@ -13,18 +13,21 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
                 a.d-block(href='#') !{i18n.admin}
         nav.mt-2
             ul.nav.nav-pills.nav-sidebar.flex-column(data-widget='treeview', role='menu', data-accordion='false')
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'dashboard')#menu_dashboard
-                        i.nav-icon.fas.fa-tachometer-alt
-                        |
-                        p !{i18n.dashboard}
+                if scr_access && scr_access.includes('dashboard')
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'dashboard')#menu_dashboard
+                            i.nav-icon.fas.fa-tachometer-alt
+                            |
+                            p !{i18n.dashboard}
                 |
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'configuration')#menu_configutation_
-                        i.nav-icon.fas.fa-cog
-                        |
-                        p !{i18n.general_config}
+                if scr_access && scr_access.includes('configuration')
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'configuration')#menu_configutation_
+                            i.nav-icon.fas.fa-cog
+                            |
+                            p !{i18n.general_config}
                 |
+
                 li.nav-item.has-treeview
                     a.nav-link(href='#')#menu_catalogs
                         i.nav-icon.fas.fa-table
@@ -34,131 +37,151 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
                             i.right.fas.fa-angle-left
                     |
                     ul.nav.nav-treeview
-                        li.nav-item
-                            a.nav-link(href=base_admin_path + 'catalogue/places')#menu_places
-                                i.fas.fa-globe-americas.nav-icon
-                                |
-                                p !{i18n.places}
+                        if scr_access && scr_access.includes('catalogue/places')
+                            li.nav-item
+                                a.nav-link(href=base_admin_path + 'catalogue/places')#menu_places
+                                    i.fas.fa-globe-americas.nav-icon
+                                    |
+                                    p !{i18n.places}
                         |
-                        li.nav-item
-                            a.nav-link(href=base_admin_path + 'catalogue/languages')#menu_languajes
-                                i.fas.fa-language.nav-icon
-                                |
-                                p !{i18n.languages}
+                        if scr_access && scr_access.includes('catalogue/languages')
+                            li.nav-item
+                                a.nav-link(href=base_admin_path + 'catalogue/languages')#menu_languajes
+                                    i.fas.fa-language.nav-icon
+                                    |
+                                    p !{i18n.languages}
                         |
-                        li.nav-item
-                            a.nav-link(href=base_admin_path + 'catalogue/dynamic_content')#menu_dynamic_content
-                                i.fas.fa-align-justify.nav-icon
-                                |
-                                p !{i18n.dynamic_content}
+                        if scr_access && scr_access.includes('catalogue/dynamic_content')
+                            li.nav-item
+                                a.nav-link(href=base_admin_path + 'catalogue/dynamic_content')#menu_dynamic_content
+                                    i.fas.fa-align-justify.nav-icon
+                                    |
+                                    p !{i18n.dynamic_content}
                         |
-                        li.nav-item
-                            a.nav-link(href=base_admin_path + 'catalogue/routes')#menu_routes
-                                i.fas.fa-route.nav-icon
-                                |
-                                p !{i18n.routes}
+                        if scr_access && scr_access.includes('catalogue/routes')
+                            li.nav-item
+                                a.nav-link(href=base_admin_path + 'catalogue/routes')#menu_routes
+                                    i.fas.fa-route.nav-icon
+                                    |
+                                    p !{i18n.routes}
                 |
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'cdn')#menu_cdn
-                        i.nav-icon.fas.fa-compact-disc
-                        |
-                        p !{i18n.cdn}
+                if scr_access && scr_access.includes('cdn')
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'cdn')#menu_cdn
+                            i.nav-icon.fas.fa-compact-disc
+                            |
+                            p !{i18n.cdn}
                 |
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'admin_roles')#menu_admin_roles
-                        i.nav-icon.fas.fa-user-tag
-                        |
-                        p !{i18n.admin_roles}
+                if scr_access && scr_access.includes('admin_roles')
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'admin_roles')#menu_admin_roles
+                            i.nav-icon.fas.fa-user-tag
+                            |
+                            p !{i18n.admin_roles}
                 |
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'admin')#menu_admin
-                        i.nav-icon.fas.fa-user-shield
-                        |
-                        p !{i18n.admins}
+                if scr_access && scr_access.includes('admin')
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'admin')#menu_admin
+                            i.nav-icon.fas.fa-user-shield
+                            |
+                            p !{i18n.admins}
                 |
+                if scr_access && scr_access.includes('admin_permission')
 
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'admin_permission')#menu_admin_permission
-                        i.nav-icon.fas.fa-key
-                        |
-                        p !{i18n.admin_permission}
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'admin_permission')#menu_admin_permission
+                            i.nav-icon.fas.fa-key
+                            |
+                            p !{i18n.admin_permission}
                 |
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'console_log')#menu_console_log
-                        i.nav-icon.fas.fa-terminal
-                        |
-                        p !{i18n.console_log}
+                if scr_access && scr_access.includes('console_log')
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'console_log')#menu_console_log
+                            i.nav-icon.fas.fa-terminal
+                            |
+                            p !{i18n.console_log}
                 |
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'apps')#menu_apps
-                        i.nav-icon.fas.fa-rocket
-                        |
-                        p !{i18n.apps}
+                if scr_access && scr_access.includes('apps')
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'apps')#menu_apps
+                            i.nav-icon.fas.fa-rocket
+                            |
+                            p !{i18n.apps}
                 |
 
 
 
                 li.nav-header#menu_app_ ················ APP ················
                 |
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/config')#menu_config
-                        i.nav-icon.fas.fa-cogs
-                        |
-                        p !{i18n.config}
+                if scr_access && scr_access.includes('app/{_app_id_}/config')
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/config')#menu_config
+                            i.nav-icon.fas.fa-cogs
+                            |
+                            p !{i18n.config}
                 |
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/user_roles')#menu_user_roles
-                        i.nav-icon.fas.fa-user-check
-                        |
-                        p !{i18n.user_roles}
+                if scr_access && scr_access.includes('app/{_app_id_}/user_roles')
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/user_roles')#menu_user_roles
+                            i.nav-icon.fas.fa-user-check
+                            |
+                            p !{i18n.user_roles}
                 |
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/users')#menu_users
-                        i.nav-icon.fas.fa-user-plus
-                        |
-                        p !{i18n.users}
+                if scr_access && scr_access.includes('app/{_app_id_}/users')
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/users')#menu_users
+                            i.nav-icon.fas.fa-user-plus
+                            |
+                            p !{i18n.users}
                 |
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/user_permission')#menu_user_permission
-                        i.nav-icon.fas.fa-user-lock
-                        |
-                        p !{i18n.user_permission}
+                if scr_access && scr_access.includes('app/{_app_id_}/user_permission')
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/user_permission')#menu_user_permission
+                            i.nav-icon.fas.fa-user-lock
+                            |
+                            p !{i18n.user_permission}
                 |
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/dynamic_db')#menu_dynamyc_db
-                        i.nav-icon.fas.fa-database
-                        |
-                        p  !{i18n.dynamic_db}
+                if scr_access && scr_access.includes('app/{_app_id_}/dynamic_db')
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/dynamic_db')#menu_dynamyc_db
+                            i.nav-icon.fas.fa-database
+                            |
+                            p  !{i18n.dynamic_db}
                 |
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/cloud_functions')#menu_cloud_funtions
-                        i.nav-icon.fas.fa-server
-                        |
-                        p !{i18n.cloud_functions}
+                if scr_access && scr_access.includes('app/{_app_id_}/cloud_functions')
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/cloud_functions')#menu_cloud_funtions
+                            i.nav-icon.fas.fa-server
+                            |
+                            p !{i18n.cloud_functions}
                 |
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/files')#menu_files
-                        i.nav-icon.fas.fa-folder-open
-                        |
-                        p !{i18n.files}
+                if scr_access && scr_access.includes('app/{_app_id_}/files')
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/files')#menu_files
+                            i.nav-icon.fas.fa-folder-open
+                            |
+                            p !{i18n.files}
                 |
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/cron')#menu_cron
-                        i.nav-icon.fas.fa-clock
-                        |
-                        p !{i18n.cron_functions}
+                if scr_access && scr_access.includes('app/{_app_id_}/cron')
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/cron')#menu_cron
+                            i.nav-icon.fas.fa-clock
+                            |
+                            p !{i18n.cron_functions}
                 |
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/mailing')#menu_mailing
-                        i.nav-icon.fas.fa-envelope
-                        |
-                        p !{i18n.mailing}
+                if scr_access && scr_access.includes('app/{_app_id_}/mailing')
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/mailing')#menu_mailing
+                            i.nav-icon.fas.fa-envelope
+                            |
+                            p !{i18n.mailing}
                 |
-                li.nav-item
-                    a.nav-link(href=base_admin_path + 'app/' + app_id + '/sms_gateway')#menu_sms_gateway
-                        i.nav-icon.fas.fa-sms
-                        |
-                        p !{i18n.sms_gateway}
+                if scr_access && scr_access.includes('app/{_app_id_}/sms_gateway')
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/sms_gateway')#menu_sms_gateway
+                            i.nav-icon.fas.fa-sms
+                            |
+                            p !{i18n.sms_gateway}
                 |
 
                 li.nav-header !{i18n.misc}

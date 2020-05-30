@@ -16,6 +16,7 @@ const core_files_path = env.root_path + 'content/core/';
 const api_path = env.root_path + 'api/core/';
 const base_admin_path = env.root_path + env.control_panel_url;
 const i18n_constructor = require('./../helpers/i18n_json_constructor.helper')
+const access_middleware = require('./../auth/auth.middleware').auth
 
 router.get('/', async function (req, res) {
 
@@ -40,10 +41,14 @@ router.get('/', async function (req, res) {
     });
 });
 
-router.get('/dashboard/', async function (req, res) {
+router.get('/dashboard/', access_middleware, async function (req, res) {
+    let who = req.who;
+    let scr_access = req.access;
+
     var i18n = await i18n_constructor.i18n_json(req);
     seo.title = 'Dashboard :: ' + seo.title;
     res.status(200).render('admin_panel/dashboard', {
+        scr_access,
         seo: seo,
         resources: resources.dashboard,
         root_path: env.root_path,
@@ -57,15 +62,18 @@ router.get('/dashboard/', async function (req, res) {
             img_folder: site_files_path + 'img/',
             base_admin_path,
             core_files_path,
-            i18n
+            i18n,
+
         })
     });
 });
 
-router.get('/admin_roles/', async function (req, res) {
+router.get('/admin_roles/', access_middleware, async function (req, res) {
+    let scr_access = req.access;
     var i18n = await i18n_constructor.i18n_json(req);
     seo.title = 'Admin roles :: ' + seo.title;
     res.status(200).render('admin_panel/admin_roles', {
+        scr_access,
         seo: seo,
         resources: resources.dashboard,
         root_path: env.root_path,
@@ -84,10 +92,12 @@ router.get('/admin_roles/', async function (req, res) {
     });
 });
 
-router.get('/admin/', async function (req, res) {
+router.get('/admin/', access_middleware, async function (req, res) {
+    let scr_access = req.access;
     var i18n = await i18n_constructor.i18n_json(req);
     seo.title = 'Admin roles :: ' + seo.title;
     res.status(200).render('admin_panel/admin', {
+        scr_access,
         seo: seo,
         resources: resources.dashboard,
         root_path: env.root_path,
@@ -106,10 +116,12 @@ router.get('/admin/', async function (req, res) {
     });
 });
 
-router.get('/catalogue/routes/', async function (req, res) {
+router.get('/catalogue/routes/', access_middleware, async function (req, res) {
+    let scr_access = req.access;
     var i18n = await i18n_constructor.i18n_json(req);
     seo.title = 'Catalogue of routes :: ' + seo.title;
     res.status(200).render('admin_panel/catalogue_routes', {
+        scr_access,
         seo: seo,
         resources: resources.dashboard,
         root_path: env.root_path,
@@ -128,10 +140,12 @@ router.get('/catalogue/routes/', async function (req, res) {
     });
 });
 
-router.get('/catalogue/places/', async function (req, res) {
+router.get('/catalogue/places/', access_middleware, async function (req, res) {
+    let scr_access = req.access;
     var i18n = await i18n_constructor.i18n_json(req);
     seo.title = 'Catalogue of places :: ' + seo.title;
     res.status(200).render('admin_panel/catalogue_places', {
+        scr_access,
         seo: seo,
         resources: resources.dashboard,
         root_path: env.root_path,
@@ -150,10 +164,12 @@ router.get('/catalogue/places/', async function (req, res) {
     });
 });
 
-router.get('/catalogue/languages/', async function (req, res) {
+router.get('/catalogue/languages/', access_middleware, async function (req, res) {
+    let scr_access = req.access;
     var i18n = await i18n_constructor.i18n_json(req);
     seo.title = 'Catalogue of places :: ' + seo.title;
     res.status(200).render('admin_panel/catalogue_languages', {
+        scr_access,
         seo: seo,
         resources: resources.dashboard,
         root_path: env.root_path,
@@ -172,10 +188,12 @@ router.get('/catalogue/languages/', async function (req, res) {
     });
 });
 
-router.get('/admin_permission/', async function (req, res) {
+router.get('/admin_permission/', access_middleware, async function (req, res) {
+    let scr_access = req.access;
     var i18n = await i18n_constructor.i18n_json(req);
     seo.title = 'Admin permisions :: ' + seo.title;
     res.status(200).render('admin_panel/admin_permission', {
+        scr_access,
         seo: seo,
         resources: resources.dashboard,
         root_path: env.root_path,
