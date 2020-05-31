@@ -13,7 +13,7 @@ passport.use('admin-login', new LocalStrategy({
         passwordField: 'password',
     },
     async function (username, password, done) {
-        console.log('|||||||||| llega', username, password)
+
         try {
             let data = await admin.findOne({email: username})
                 .populate({

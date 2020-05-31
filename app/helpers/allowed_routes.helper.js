@@ -168,7 +168,7 @@ var admin_allowed_routes = async function (req) {
                         case 'other' :
                             if (item.see) {
                                 list.push({
-                                    original_url: item_url,
+                                    original_url: root_path + item_url,
                                     method: 'GET',
                                     who: '*',
                                     isApi: true
@@ -176,7 +176,7 @@ var admin_allowed_routes = async function (req) {
                             }
                             if (item.create) {
                                 list.push({
-                                    original_url: item_url,
+                                    original_url: root_path + item_url,
                                     method: 'POST',
                                     who: '*',
                                     isApi: true
@@ -184,7 +184,7 @@ var admin_allowed_routes = async function (req) {
                             }
                             if (item.read_me) {
                                 list.push({
-                                    original_url: item_url,
+                                    original_url: root_path + item_url,
                                     method: 'GET',
                                     who: my_admin,
                                     isApi: true
@@ -192,7 +192,7 @@ var admin_allowed_routes = async function (req) {
                             }
                             if (item.read_all) {
                                 list.push({
-                                    original_url: item_url,
+                                    original_url: root_path + item_url,
                                     method: 'GET',
                                     who: '*',
                                     isApi: true
@@ -200,7 +200,7 @@ var admin_allowed_routes = async function (req) {
                             }
                             if (item.update_me) {
                                 list.push({
-                                    original_url: item_url,
+                                    original_url: root_path + item_url,
                                     method: 'PUT',
                                     who: my_admin,
                                     isApi: true
@@ -208,7 +208,7 @@ var admin_allowed_routes = async function (req) {
                             }
                             if (item.update_all) {
                                 list.push({
-                                    original_url: item_url,
+                                    original_url: root_path + item_url,
                                     method: 'PUT',
                                     who: '*',
                                     isApi: true
@@ -216,7 +216,7 @@ var admin_allowed_routes = async function (req) {
                             }
                             if (item.delete_me) {
                                 list.push({
-                                    original_url: item_url,
+                                    original_url: root_path + item_url,
                                     method: 'DELETE',
                                     who: my_admin,
                                     isApi: true
@@ -224,7 +224,7 @@ var admin_allowed_routes = async function (req) {
                             }
                             if (item.delete_all) {
                                 list.push({
-                                    original_url: item_url,
+                                    original_url: root_path + item_url,
                                     method: 'DELETE',
                                     who: '*',
                                     isApi: true
@@ -452,14 +452,14 @@ var admin_allowed_routes = async function (req) {
                         case 'other' :
                             if (item.see) {
                                 list.push({
-                                    original_url: item_url,
+                                    original_url: root_path + item_url,
                                     method: 'GET',
                                     who: '*',
                                     isApi: true
                                 })
                             } else {
                                 list = list.filter((obj) => {
-                                    if (obj.original_url === (item_url) && obj.method === 'GET' && obj.who === '*') {
+                                    if (obj.original_url === (root_path + item_url) && obj.method === 'GET' && obj.who === '*') {
                                     } else {
                                         return obj
                                     }
@@ -467,14 +467,14 @@ var admin_allowed_routes = async function (req) {
                             }
                             if (item.create) {
                                 list.push({
-                                    original_url: item_url,
+                                    original_url: root_path + item_url,
                                     method: 'POST',
                                     who: '*',
                                     isApi: true
                                 })
                             } else {
                                 list = list.filter((obj) => {
-                                    if (obj.original_url === (item_url) && obj.method === 'POST' && obj.who === '*') {
+                                    if (obj.original_url === (root_path + item_url) && obj.method === 'POST' && obj.who === '*') {
                                     } else {
                                         return obj
                                     }
@@ -482,14 +482,14 @@ var admin_allowed_routes = async function (req) {
                             }
                             if (item.read_me) {
                                 list.push({
-                                    original_url: item_url,
+                                    original_url: root_path + item_url,
                                     method: 'GET',
                                     who: my_admin,
                                     isApi: true
                                 })
                             } else {
                                 list = list.filter((obj) => {
-                                    if (obj.original_url === (item_url) && obj.method === 'GET' && obj.who === my_admin) {
+                                    if (obj.original_url === (root_path + item_url) && obj.method === 'GET' && obj.who === my_admin) {
                                     } else {
                                         return obj
                                     }
@@ -497,14 +497,14 @@ var admin_allowed_routes = async function (req) {
                             }
                             if (item.read_all) {
                                 list.push({
-                                    original_url: item_url,
+                                    original_url: root_path + item_url,
                                     method: 'GET',
                                     who: '*',
                                     isApi: true
                                 })
                             } else {
                                 list = list.filter((obj) => {
-                                    if (obj.original_url === (item_url) && obj.method === 'GET' && obj.who === '*') {
+                                    if (obj.original_url === (root_path + item_url) && obj.method === 'GET' && obj.who === '*') {
                                     } else {
                                         return obj
                                     }
@@ -512,14 +512,14 @@ var admin_allowed_routes = async function (req) {
                             }
                             if (item.update_me) {
                                 list.push({
-                                    original_url: item_url,
+                                    original_url: root_path + item_url,
                                     method: 'PUT',
                                     who: my_admin,
                                     isApi: true
                                 })
                             } else {
                                 list = list.filter((obj) => {
-                                    if (obj.original_url === (item_url) && obj.method === 'PUT' && obj.who === my_admin) {
+                                    if (obj.original_url === (root_path + item_url) && obj.method === 'PUT' && obj.who === my_admin) {
                                     } else {
                                         return obj
                                     }
@@ -527,14 +527,14 @@ var admin_allowed_routes = async function (req) {
                             }
                             if (item.update_all) {
                                 list.push({
-                                    original_url: item_url,
+                                    original_url: root_path + item_url,
                                     method: 'PUT',
                                     who: '*',
                                     isApi: true
                                 })
                             } else {
                                 list = list.filter((obj) => {
-                                    if (obj.original_url === (item_url) && obj.method === 'PUT' && obj.who === '*') {
+                                    if (obj.original_url === (root_path + item_url) && obj.method === 'PUT' && obj.who === '*') {
                                     } else {
                                         return obj
                                     }
@@ -542,14 +542,14 @@ var admin_allowed_routes = async function (req) {
                             }
                             if (item.delete_me) {
                                 list.push({
-                                    original_url: item_url,
+                                    original_url: root_path + item_url,
                                     method: 'DELETE',
                                     who: my_admin,
                                     isApi: true
                                 })
                             } else {
                                 list = list.filter((obj) => {
-                                    if (obj.original_url === (item_url) && obj.method === 'DELETE' && obj.who === my_admin) {
+                                    if (obj.original_url === (root_path + item_url) && obj.method === 'DELETE' && obj.who === my_admin) {
                                     } else {
                                         return obj
                                     }
@@ -557,14 +557,14 @@ var admin_allowed_routes = async function (req) {
                             }
                             if (item.delete_all) {
                                 list.push({
-                                    original_url: item_url,
+                                    original_url: root_path + item_url,
                                     method: 'DELETE',
                                     who: '*',
                                     isApi: true
                                 })
                             } else {
                                 list = list.filter((obj) => {
-                                    if (obj.original_url === (item_url) && obj.method === 'DELETE' && obj.who === '*') {
+                                    if (obj.original_url === (root_path + item_url) && obj.method === 'DELETE' && obj.who === '*') {
                                     } else {
                                         return obj
                                     }

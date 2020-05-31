@@ -9,22 +9,13 @@ const cdn = new Schema({
         type: String,
         required: false
     },
-    name: {
-        type: String,
-        required: false
-    },
-    description: {
+    path: {
         type: String,
         required: false
     },
     type: {
         type: String,
         required: false
-    },
-    active: {
-        type: Boolean,
-        required: true,
-        default: true
     },
     createdAt: {
         type: Date,

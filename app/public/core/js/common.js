@@ -17,7 +17,7 @@ const draw_datatable = function (url, datatable) {
         datatable.clear().rows.add(data.data).draw();
     }).fail(function (err) {
         HoldOn.close();
-        notify_error(err.message);
+        notify_error(err.responseJSON.message);
         console.error(err);
     });
 }
@@ -44,7 +44,7 @@ const save_data_api = function (url, body, update, f_) {
         }
     }).fail(function (err) {
         HoldOn.close();
-        notify_error(err.message);
+        notify_error(err.responseJSON.message);
         console.error(err);
     });
 }
@@ -116,7 +116,7 @@ const charge_select = function (elem, filter, url, valuename, textname) {
         });
     }).fail(function () {
         HoldOn.close();
-        notify_error(err.message);
+        notify_error(err.responseJSON.message);
         console.error(err);
     });
 }
@@ -165,4 +165,14 @@ if (getCookie('_LANGUAGE_')) {
 } else {
     language = 'en_US';
     setCookie('_LANGUAGE_', language);
+}
+
+
+function stripHtml(html){
+    // Create a new div element
+    var temporalDivElement = document.createElement("div");
+    // Set the HTML content with the providen
+    temporalDivElement.innerHTML = html;
+    // Retrieve the text property of the element (cross-browser support)
+    return temporalDivElement.textContent || temporalDivElement.innerText || "";
 }

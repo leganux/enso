@@ -402,7 +402,7 @@ api_functions.readById = function (router, model, middleware, populate) {
         let sort = req.query.sort;
 
 
-        let query = model.findById(id);
+        let query = model.findById(id)
 
         if (select) {
             if (typeof select == 'string') {
@@ -432,6 +432,7 @@ api_functions.readById = function (router, model, middleware, populate) {
         }
 
         if (populate) {
+
             if (populate && populate.length > 0) {
                 populate.map(function (item, i, arr) {
                     query.populate(item)

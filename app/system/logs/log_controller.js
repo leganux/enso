@@ -51,11 +51,11 @@ console.debug = function (message) {
 };
 
 var consoleOnScreen = io.of('/console').on('connection', function (socket) {
-    sendToWebConsole('table-default', '', '<h4>******** CONSOLA CONECTADA ******</h4>')
+    sendToWebConsole('table-default', '', '<h4>******** Connection established ******</h4>')
 });
 
 function sendToWebConsole(classe, message, data) {
-    if (env.allow_console_on_screen && env.active_socket) {
+    if (env.active_socket) {
         if (typeof data === "object") {
             let cad = '';
             for (var i in data) {
@@ -169,9 +169,8 @@ app.use(morgan(function (tokens, req, res) {
     }
 
 
-    if (env.allow_console_on_screen) {
-        sendToWebConsole('table-ligth', 'morgan', cadenamorganWEB)
-    }
+    sendToWebConsole('table-ligth', 'morgan', cadenamorganWEB)
+
 
     let streamLogFile = fs.createWriteStream(path.join(__dirname, '/logs/' + env.log_name), {flags: 'a'});
     streamLogFile.end(cadenamorgan + '\r\n');

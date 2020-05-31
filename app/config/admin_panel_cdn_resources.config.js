@@ -22,6 +22,7 @@ let cdn = {
                 rp + 'datatables-responsive/css/responsive.bootstrap4.min.css',
                 rp + 'holdon/holdOn.css',
                 rp + 'animate/animate.css',
+                rp + 'jquery_upload/jquery_upload.css',
             ],
             scripts: [
                 rp + 'jquery/jquery.min.js',
@@ -45,6 +46,8 @@ let cdn = {
                 rp + 'voca/voca.js',
                 rp + 'holdon/holdOn.js',
                 rp + 'client/client.js',
+                rp + 'jquery_upload/jquery_upload.js',
+                rp + 'socket/socket.io.js',
 
             ]
         },

@@ -31,7 +31,7 @@ let auth = async function (req, res, next) {
 
     url = stripTrailingSlash(url);
 
-    console.log('')
+
 
     for (let i = 0; i < routes.rules.length; i++) {
         let item = routes.rules[i];
@@ -63,6 +63,7 @@ let auth = async function (req, res, next) {
             item_url = item_url.replace(':name', id)
         }
 
+        //console.log('********* ', item_url, item_method)
 
         if (item_url === url && method === item_method) {
             req.who = item.who;

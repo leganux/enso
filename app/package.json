@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "enso_dev": "nodemon index.js",
+    "enso_dev": "nodemon index.js --ignore 'public/*' ",
     "start": "node index.js",
     "enso": "node index.js"
   },
@@ -29,6 +29,7 @@
   "author": "Angel Erick Cruz Olivera :: Leganux.net",
   "license": "MIT",
   "dependencies": {
+    "adm-zip": "^0.4.14",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "check-disk-space": "^2.1.0",

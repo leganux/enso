@@ -1,0 +1,63 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        include template/seo
+        include template/styles
+    body.hold-transition.sidebar-mini.accent-pink
+        .wrapper
+            include template/nav
+            include template/aside
+            .content-wrapper
+                section.content-header
+                    .container-fluid
+                        .row.mb-2
+                            .col-sm-6
+                                h1 !{i18n.dynamic_content}
+                            |
+                            .col-sm-6
+                                ol.breadcrumb.float-sm-right
+                                    li.breadcrumb-item
+                                        a(href=base_admin_path + 'dashboard') !{i18n.home}
+                                    |
+                                    li.breadcrumb-item.active !{i18n.dynamic_content}
+                section.content
+                    .card
+                        .card-header.bg-dark
+                            .row
+                                .col-12.col-md-10
+                                    h3.card-title !{i18n.list_of} !{i18n.dynamic_content}
+                                .col-12.col-md-2
+                                    button.bg-pink.btn.btn-block#btn_new_element !{i18n.new}
+
+                        .card-body
+                            table.table.table-bordered.table-striped.display.table-hover#datatable
+                                thead
+                                    tr
+                                        th !{i18n.id}
+                                        th !{i18n.language}
+                                        th !{i18n.reference}
+                                        th !{i18n.content}
+                                        th !{i18n.active}
+                                        th !{i18n.date_register}
+                                        th !{i18n.date_last_update}
+                                        th !{i18n.actions}
+
+                        .card-footer
+                            | !{i18n.create_modify_delete}
+
+            include template/footer
+            include template/control_bar
+
+        include modals/dynamic_content
+        include template/params
+        include template/scripts
+        script.
+            $(document).ready(function () {
+                $('#menu_dynamic_content').addClass('active');
+                $('#menu_catalogs').parent().addClass('menu-open');
+            });
+        script(src=core_files_path + 'js/common.js')
+        script(src=core_files_path + 'js/dynamic_content.js')
+

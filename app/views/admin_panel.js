@@ -188,6 +188,30 @@ router.get('/catalogue/languages/', access_middleware, async function (req, res)
     });
 });
 
+router.get('/catalogue/dynamic_content/', access_middleware, async function (req, res) {
+    let scr_access = req.access;
+    var i18n = await i18n_constructor.i18n_json(req);
+    seo.title = 'Dynamic content :: ' + seo.title;
+    res.status(200).render('admin_panel/dynamic_content', {
+        scr_access,
+        seo: seo,
+        resources: resources.dashboard,
+        root_path: env.root_path,
+        img_folder: site_files_path + 'img/',
+        base_admin_path,
+        core_files_path,
+        i18n,
+        params: param_converter({
+            root_path: env.root_path,
+            site_files_path,
+            img_folder: site_files_path + 'img/',
+            base_admin_path,
+            core_files_path,
+            i18n
+        })
+    });
+});
+
 router.get('/admin_permission/', access_middleware, async function (req, res) {
     let scr_access = req.access;
     var i18n = await i18n_constructor.i18n_json(req);
@@ -212,5 +236,54 @@ router.get('/admin_permission/', access_middleware, async function (req, res) {
     });
 });
 
+
+router.get('/cdn/', access_middleware, async function (req, res) {
+    let scr_access = req.access;
+    var i18n = await i18n_constructor.i18n_json(req);
+    seo.title = 'CDN manger :: ' + seo.title;
+    res.status(200).render('admin_panel/cdn', {
+        scr_access,
+        seo: seo,
+        resources: resources.dashboard,
+        root_path: env.root_path,
+        img_folder: site_files_path + 'img/',
+        base_admin_path,
+        core_files_path,
+        i18n,
+        params: param_converter({
+            root_path: env.root_path,
+            site_files_path,
+            img_folder: site_files_path + 'img/',
+            base_admin_path,
+            core_files_path,
+            i18n
+        })
+    });
+});
+
+router.get('/console_log/', access_middleware, async function (req, res) {
+    let scr_access = req.access;
+    var i18n = await i18n_constructor.i18n_json(req);
+    seo.title = 'Console Log :: ' + seo.title;
+    res.status(200).render('admin_panel/console_log', {
+        scr_access,
+        seo: seo,
+        resources: resources.dashboard,
+        root_path: env.root_path,
+        img_folder: site_files_path + 'img/',
+        base_admin_path,
+        core_files_path,
+        i18n,
+        params: param_converter({
+            root_path: env.root_path,
+            site_files_path,
+            img_folder: site_files_path + 'img/',
+            base_admin_path,
+            core_files_path,
+            i18n,
+            general_socket_path:env.root_path + env.socket_path,
+        })
+    });
+});
 
 module.exports = router;

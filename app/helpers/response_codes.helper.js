@@ -106,6 +106,12 @@ var RC = {
         "success": false,
         "data": [],
     },
+    "code_437": {
+        "code": 437,
+        "message": "Can not be Uploaded",
+        "success": false,
+        "data": [],
+    },
     "code_500": {
         "code": 500,
         "message": "Internal server error",

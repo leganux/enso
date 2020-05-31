@@ -104,7 +104,7 @@ $(document).ready(function () {
             notify_success(data.message);
         }).fail(function (err) {
             HoldOn.close();
-            notify_error(err.message);
+            notify_error(err.responseJSON.message);
             console.error(err);
         });
     });
@@ -122,7 +122,7 @@ $(document).ready(function () {
                 DELETE = '';
             }).fail(function (err) {
                 HoldOn.close();
-                notify_error(err.message);
+                notify_error(err.responseJSON.message);
                 console.error(err);
                 DELETE = '';
             });

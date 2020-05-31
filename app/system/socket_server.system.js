@@ -3,7 +3,7 @@ const env = require('../config/environment.config').environment;
 
 var io = {}
 
-console.log('******', env.active_socket);
+
 if (env.active_socket) {
     io = require('socket.io').listen(http_server,
         {

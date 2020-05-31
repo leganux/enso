@@ -1,0 +1,59 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        include template/seo
+        include template/styles
+    body.hold-transition.sidebar-mini.accent-pink
+        .wrapper
+            include template/nav
+            include template/aside
+            .content-wrapper
+                section.content-header
+                    .container-fluid
+                        .row.mb-2
+                            .col-sm-6
+                                h1 !{i18n.console_log}
+                            |
+                            .col-sm-6
+                                ol.breadcrumb.float-sm-right
+                                    li.breadcrumb-item
+                                        a(href=base_admin_path + 'dashboard') !{i18n.home}
+                                    |
+                                    li.breadcrumb-item.active !{i18n.console_log}
+                section.content
+                    .card
+                        .card-header.bg-dark
+                            .row
+                                .col-12.col-md-8
+                                    h3.card-title  !{i18n.console_log}
+                                .col-12.col-md-2
+
+                                .col-12.col-md-2
+                                    button.bg-pink.btn.btn-block#btn_clear !{i18n.clear}
+
+                        .card-body
+                            #sp(style='height:800px; max-height:800px !important; overflow-y:scroll !important;; ')
+                                table(style="width:100%;" ).table.table-hover.table-striped
+                                    tbody#sp4console_
+
+
+
+
+                        .card-footer
+                            | !{i18n.create_modify_delete}
+
+            include template/footer
+            include template/control_bar
+
+        include modals/cdn
+        include template/params
+        include template/scripts
+        script.
+            $(document).ready(function () {
+                $('#menu_console_log').addClass('active');
+            });
+        script(src=core_files_path + 'js/common.js')
+        script(src=core_files_path + 'js/console_log.js')
+

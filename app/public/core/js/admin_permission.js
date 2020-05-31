@@ -72,7 +72,7 @@ $(document).ready(function () {
                 $('#sp_url_admin').append(see_cad)
             }
 
-            if (item.type === 'api_full') {
+            if (item.type === 'api_full' || item.type === 'other') {
                 let see_cad = '<div class="row">' +
                     '<div class="col-6 col-md-4">' + item.url + '</div>' +
 
@@ -143,7 +143,7 @@ $(document).ready(function () {
 
     }).fail(function (err) {
         HoldOn.close();
-        notify_error(err.message);
+        notify_error(err.responseJSON.message);
         console.error(err);
     });
 
@@ -175,7 +175,7 @@ $(document).ready(function () {
                 }, function (data) {
                     notify_success(data.message);
                 }).fail(function (err) {
-                    notify_error(err.message);
+                    notify_error(err.responseJSON.message);
                     console.error(err);
                 });
 
@@ -217,7 +217,7 @@ $(document).ready(function () {
                 }, function (data) {
                     notify_success(data.message);
                 }).fail(function (err) {
-                    notify_error(err.message);
+                    notify_error(err.responseJSON.message);
                     console.error(err);
                 });
 
@@ -259,7 +259,7 @@ $(document).ready(function () {
                 }, function (data) {
                     notify_success(data.message);
                 }).fail(function (err) {
-                    notify_error(err.message);
+                    notify_error(err.responseJSON.message);
                     console.error(err);
                 });
 
@@ -301,7 +301,7 @@ $(document).ready(function () {
                 }, function (data) {
                     notify_success(data.message);
                 }).fail(function (err) {
-                    notify_error(err.message);
+                    notify_error(err.responseJSON.message);
                     console.error(err);
                 });
 
@@ -338,7 +338,7 @@ $(document).ready(function () {
         }).fail(function (err) {
             jqueryOb.prop('checked', !isChecked);
             HoldOn.close();
-            notify_error(err.message);
+            notify_error(err.responseJSON.message);
             console.error(err);
         });
     }
@@ -364,7 +364,7 @@ $(document).ready(function () {
         }).fail(function (err) {
             jqueryOb.prop('checked', !isChecked);
             HoldOn.close();
-            notify_error(err.message);
+            notify_error(err.responseJSON.message);
             console.error(err);
         });
     }
@@ -515,7 +515,7 @@ $(document).ready(function () {
             });
         }).fail(function (err) {
             HoldOn.close();
-            notify_error(err.message);
+            notify_error(err.responseJSON.message);
             console.error(err);
         });
 
@@ -563,7 +563,7 @@ $(document).ready(function () {
             });
         }).fail(function (err) {
             HoldOn.close();
-            notify_error(err.message);
+            notify_error(err.responseJSON.message);
             console.error(err);
         });
 
