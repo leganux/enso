@@ -20,6 +20,10 @@ api_functions.create = function (router, model, middleware) {
             body.password = await bcrypt.hash(body.password, saltRounds);
         }
 
+        if (req.user && req.user.user && req.user.kind == 'admin') {
+            body.owner = req.user.user;
+        }
+
         try {
             var response = await new model(body).save();
             if (!response) {

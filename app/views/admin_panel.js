@@ -21,7 +21,6 @@ const access_middleware = require('./../auth/auth.middleware').auth
 router.get('/', async function (req, res) {
 
     var i18n = await i18n_constructor.i18n_json(req);
-    seo.title = 'Login :: ' + seo.title;
     res.status(200).render('admin_panel/login', {
         seo: seo,
         resources: resources.login,
@@ -46,7 +45,7 @@ router.get('/dashboard/', access_middleware, async function (req, res) {
     let scr_access = req.access;
 
     var i18n = await i18n_constructor.i18n_json(req);
-    seo.title = 'Dashboard :: ' + seo.title;
+
     res.status(200).render('admin_panel/dashboard', {
         scr_access,
         seo: seo,
@@ -56,6 +55,7 @@ router.get('/dashboard/', access_middleware, async function (req, res) {
         base_admin_path,
         core_files_path,
         i18n,
+        user: req.user ? req.user : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
@@ -64,6 +64,7 @@ router.get('/dashboard/', access_middleware, async function (req, res) {
             core_files_path,
             i18n,
 
+
         })
     });
 });
@@ -71,7 +72,7 @@ router.get('/dashboard/', access_middleware, async function (req, res) {
 router.get('/admin_roles/', access_middleware, async function (req, res) {
     let scr_access = req.access;
     var i18n = await i18n_constructor.i18n_json(req);
-    seo.title = 'Admin roles :: ' + seo.title;
+
     res.status(200).render('admin_panel/admin_roles', {
         scr_access,
         seo: seo,
@@ -81,6 +82,7 @@ router.get('/admin_roles/', access_middleware, async function (req, res) {
         base_admin_path,
         core_files_path,
         i18n,
+        user: req.user ? req.user : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
@@ -95,7 +97,7 @@ router.get('/admin_roles/', access_middleware, async function (req, res) {
 router.get('/admin/', access_middleware, async function (req, res) {
     let scr_access = req.access;
     var i18n = await i18n_constructor.i18n_json(req);
-    seo.title = 'Admin roles :: ' + seo.title;
+
     res.status(200).render('admin_panel/admin', {
         scr_access,
         seo: seo,
@@ -105,6 +107,7 @@ router.get('/admin/', access_middleware, async function (req, res) {
         base_admin_path,
         core_files_path,
         i18n,
+        user: req.user ? req.user : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
@@ -119,7 +122,7 @@ router.get('/admin/', access_middleware, async function (req, res) {
 router.get('/catalogue/routes/', access_middleware, async function (req, res) {
     let scr_access = req.access;
     var i18n = await i18n_constructor.i18n_json(req);
-    seo.title = 'Catalogue of routes :: ' + seo.title;
+
     res.status(200).render('admin_panel/catalogue_routes', {
         scr_access,
         seo: seo,
@@ -129,6 +132,7 @@ router.get('/catalogue/routes/', access_middleware, async function (req, res) {
         base_admin_path,
         core_files_path,
         i18n,
+        user: req.user ? req.user : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
@@ -143,7 +147,7 @@ router.get('/catalogue/routes/', access_middleware, async function (req, res) {
 router.get('/catalogue/places/', access_middleware, async function (req, res) {
     let scr_access = req.access;
     var i18n = await i18n_constructor.i18n_json(req);
-    seo.title = 'Catalogue of places :: ' + seo.title;
+
     res.status(200).render('admin_panel/catalogue_places', {
         scr_access,
         seo: seo,
@@ -153,6 +157,7 @@ router.get('/catalogue/places/', access_middleware, async function (req, res) {
         base_admin_path,
         core_files_path,
         i18n,
+        user: req.user ? req.user : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
@@ -167,7 +172,7 @@ router.get('/catalogue/places/', access_middleware, async function (req, res) {
 router.get('/catalogue/languages/', access_middleware, async function (req, res) {
     let scr_access = req.access;
     var i18n = await i18n_constructor.i18n_json(req);
-    seo.title = 'Catalogue of places :: ' + seo.title;
+
     res.status(200).render('admin_panel/catalogue_languages', {
         scr_access,
         seo: seo,
@@ -177,6 +182,7 @@ router.get('/catalogue/languages/', access_middleware, async function (req, res)
         base_admin_path,
         core_files_path,
         i18n,
+        user: req.user ? req.user : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
@@ -191,7 +197,7 @@ router.get('/catalogue/languages/', access_middleware, async function (req, res)
 router.get('/catalogue/dynamic_content/', access_middleware, async function (req, res) {
     let scr_access = req.access;
     var i18n = await i18n_constructor.i18n_json(req);
-    seo.title = 'Dynamic content :: ' + seo.title;
+
     res.status(200).render('admin_panel/dynamic_content', {
         scr_access,
         seo: seo,
@@ -201,6 +207,7 @@ router.get('/catalogue/dynamic_content/', access_middleware, async function (req
         base_admin_path,
         core_files_path,
         i18n,
+        user: req.user ? req.user : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
@@ -215,7 +222,7 @@ router.get('/catalogue/dynamic_content/', access_middleware, async function (req
 router.get('/admin_permission/', access_middleware, async function (req, res) {
     let scr_access = req.access;
     var i18n = await i18n_constructor.i18n_json(req);
-    seo.title = 'Admin permisions :: ' + seo.title;
+
     res.status(200).render('admin_panel/admin_permission', {
         scr_access,
         seo: seo,
@@ -225,6 +232,7 @@ router.get('/admin_permission/', access_middleware, async function (req, res) {
         base_admin_path,
         core_files_path,
         i18n,
+        user: req.user ? req.user : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
@@ -240,7 +248,7 @@ router.get('/admin_permission/', access_middleware, async function (req, res) {
 router.get('/cdn/', access_middleware, async function (req, res) {
     let scr_access = req.access;
     var i18n = await i18n_constructor.i18n_json(req);
-    seo.title = 'CDN manger :: ' + seo.title;
+
     res.status(200).render('admin_panel/cdn', {
         scr_access,
         seo: seo,
@@ -250,6 +258,7 @@ router.get('/cdn/', access_middleware, async function (req, res) {
         base_admin_path,
         core_files_path,
         i18n,
+        user: req.user ? req.user : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
@@ -264,7 +273,7 @@ router.get('/cdn/', access_middleware, async function (req, res) {
 router.get('/console_log/', access_middleware, async function (req, res) {
     let scr_access = req.access;
     var i18n = await i18n_constructor.i18n_json(req);
-    seo.title = 'Console Log :: ' + seo.title;
+
     res.status(200).render('admin_panel/console_log', {
         scr_access,
         seo: seo,
@@ -274,6 +283,7 @@ router.get('/console_log/', access_middleware, async function (req, res) {
         base_admin_path,
         core_files_path,
         i18n,
+        user: req.user ? req.user : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
@@ -281,7 +291,33 @@ router.get('/console_log/', access_middleware, async function (req, res) {
             base_admin_path,
             core_files_path,
             i18n,
-            general_socket_path:env.root_path + env.socket_path,
+            general_socket_path: env.root_path + env.socket_path,
+        })
+    });
+});
+
+router.get('/apps/', access_middleware, async function (req, res) {
+    let scr_access = req.access;
+    var i18n = await i18n_constructor.i18n_json(req);
+
+    console.info(req.user)
+    res.status(200).render('admin_panel/apps', {
+        scr_access,
+        seo: seo,
+        resources: resources.dashboard,
+        root_path: env.root_path,
+        img_folder: site_files_path + 'img/',
+        base_admin_path,
+        core_files_path,
+        i18n,
+        user: req.user ? req.user : false,
+        params: param_converter({
+            root_path: env.root_path,
+            site_files_path,
+            img_folder: site_files_path + 'img/',
+            base_admin_path,
+            core_files_path,
+            i18n,
         })
     });
 });

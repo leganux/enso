@@ -7,10 +7,17 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
     .sidebar
         .user-panel.mt-3.pb-3.mb-3.d-flex
             .image
-                img.img-circle.elevation-2(src='https://source.unsplash.com/800x800/?face', alt='User Image')
+                if user && user.image
+                    img.img-circle.elevation-2(src='https://source.unsplash.com/800x800/?face', alt='User Image')
+                else
+                    img.img-circle.elevation-2(src=user.image, alt=user.username)
             |
             .info
-                a.d-block(href='#') !{i18n.admin}
+                if user && user.username
+                    a.d-block(href='#') !{user.username}
+                    a(href='mailto:' + user.email) !{user.email}
+                else
+                    a.d-block(href='#') !{i18n.admin}
         nav.mt-2
             ul.nav.nav-pills.nav-sidebar.flex-column(data-widget='treeview', role='menu', data-accordion='false')
                 if scr_access && scr_access.includes('dashboard')
@@ -191,6 +198,11 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
                         i.nav-icon.fas.fa-file
                         |
                         p !{i18n.documentation}
+                li.nav-item
+                    a.nav-link(href=root_path + 'logout' )
+                        i.nav-icon.fas.fa-times-circle
+                        |
+                        p !{i18n.logout}
                 |
                 li.nav-header &nbsp;
                 |

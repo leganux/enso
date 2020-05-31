@@ -41,10 +41,11 @@ passport.use('admin-login', new LocalStrategy({
             let session = {
                 username: data.username,
                 email: data.email,
+                image: data.image,
                 user: data._id,
                 kind: 'admin',
                 role: data.role._id,
-                role_name: data.role._id,
+                role_name: data.role.name,
                 role_permission: [],
                 user_permission: [],
                 app_list: []

@@ -17,6 +17,11 @@ const admin = new Schema({
         type: String,
         required: true
     },
+    image: {
+        type: String,
+        required: true,
+        default: 'https://source.unsplash.com/800x800/?face'
+    },
     role: {
         type: Schema.Types.ObjectId,
         required: true,

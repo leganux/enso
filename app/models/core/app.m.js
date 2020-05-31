@@ -8,7 +8,9 @@ const admin = require('./admin.m')
 const app = new Schema({
     name: {
         type: String,
-        required: false
+        required: false,
+        unique: true
+
     },
     description: {
         type: String,
