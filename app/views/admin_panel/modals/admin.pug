@@ -13,6 +13,9 @@
                 input(type='text').form-control#in_email
                 label !{i18n.password}
                 input(type='password').form-control#in_password
+                label !{i18n.profile_image}
+                input(type='file', accept='*/image').form-control#in_profile_image
+                input(type='text').form-control#in_profile_image_save(style='display:none;')
                 label !{i18n.role}
                 select.form-control#in_role
 

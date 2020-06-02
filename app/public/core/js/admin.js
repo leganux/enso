@@ -21,6 +21,12 @@ $(document).ready(function () {
                 }
             },
             {
+                data: 'image',
+                render: function (data, v, row) {
+                    return '<img src="' + data + '" class="img-fluid img-thumbnail">'
+                }
+            },
+            {
                 "data": "role",
                 render: function (data, v, row) {
                     if (data._id) {
@@ -78,6 +84,8 @@ $(document).ready(function () {
         $('#in_username').val('');
         $('#in_email').val('');
         $('#in_password').val('');
+        $('#in_profile_image').val('');
+        $('#in_profile_image_save').val('');
         $('#in_role').val('-1');
     });
 
@@ -87,6 +95,7 @@ $(document).ready(function () {
         body.email = $('#in_email').val().trim()
         body.password = $('#in_password').val().trim()
         body.role = $('#in_role').val().trim()
+        body.image = $('#in_profile_image_save').val().trim()
 
         if (body.useranme === '' || body.email === '' || body.password === '' || body.role === '-1') {
             notify_warning(i18n.fill_all_fields)
@@ -126,6 +135,7 @@ $(document).ready(function () {
             $('#in_email').val(data.data.email);
             $('#in_password').val('');
             $('#in_role').val(data.data.role);
+            $('#in_profile_image_save').val(data.data.image);
             HoldOn.close();
             notify_success(data.message);
         }).fail(function (err) {
@@ -158,4 +168,5 @@ $(document).ready(function () {
 
     charge_select('#in_role', {where: {active: true}}, root_path + 'api/core/admin_roles', '_id', 'name');
     snakeThis('#in_username');
+    upload_function('in_profile_image');
 });

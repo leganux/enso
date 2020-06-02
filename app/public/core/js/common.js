@@ -168,11 +168,76 @@ if (getCookie('_LANGUAGE_')) {
 }
 
 
-function stripHtml(html){
+function stripHtml(html) {
     // Create a new div element
     var temporalDivElement = document.createElement("div");
     // Set the HTML content with the providen
     temporalDivElement.innerHTML = html;
     // Retrieve the text property of the element (cross-browser support)
     return temporalDivElement.textContent || temporalDivElement.innerText || "";
+}
+
+
+const make_token = function (length) {
+    if (!length) {
+        length = 11;
+    }
+    var a = '';
+    var b = '';
+    var c = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        a += characters.charAt(Math.floor(Math.random() * charactersLength));
+        b += characters.charAt(Math.floor(Math.random() * charactersLength));
+        c += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return a + '_X2Vuc28uYXBwLmxlZ2FudXguY29tXw_' + b + '_' + v.camelCase(window.btoa(moment().format())) + '_' + c;
+}
+const make_id = function (length) {
+    if (!length) {
+        length = 11;
+    }
+    var a = '';
+
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+        a += characters.charAt(Math.floor(Math.random() * charactersLength));
+
+    }
+    return a;
+}
+
+
+const upload_function = function (element) {
+
+    $('#' + element).change(function () {
+        if ($('#' + element).val() == '') {
+            return 0;
+        }
+        HoldOn.open();
+        var data = new FormData();
+        data.append('file', $('#' + element)[0].files[0]);
+        $.ajax({
+            url: root_path + 'api/core/files/upload',
+            data: data,
+            contentType: false,
+            processData: false,
+            method: 'POST',
+            success: function (data) {
+                HoldOn.close();
+                if (data.success) {
+                    $('#' + element + '_save').val(data.file)
+                }
+            },
+            error: function (err) {
+                HoldOn.close();
+                notify_error(err.responseJSON.message);
+                console.error(err);
+            }
+        });
+
+    })
+
 }

@@ -322,4 +322,30 @@ router.get('/apps/', access_middleware, async function (req, res) {
     });
 });
 
+router.get('/g_file_manager/', access_middleware, async function (req, res) {
+    let scr_access = req.access;
+    var i18n = await i18n_constructor.i18n_json(req);
+
+    console.info(req.user)
+    res.status(200).render('admin_panel/g_file_manager', {
+        scr_access,
+        seo: seo,
+        resources: resources.dashboard,
+        root_path: env.root_path,
+        img_folder: site_files_path + 'img/',
+        base_admin_path,
+        core_files_path,
+        i18n,
+        user: req.user ? req.user : false,
+        params: param_converter({
+            root_path: env.root_path,
+            site_files_path,
+            img_folder: site_files_path + 'img/',
+            base_admin_path,
+            core_files_path,
+            i18n,
+        })
+    });
+});
+
 module.exports = router;

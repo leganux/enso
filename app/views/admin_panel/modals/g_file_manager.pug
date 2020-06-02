@@ -1,0 +1,13 @@
+#modal_new_edit.modal.fade( aria-hidden='true', data-backdrop="static", data-keyboard="false")
+    .modal-dialog.modal-lg
+        .modal-content
+            .modal-header.bg-dark
+                h4.modal-title !{i18n.upload}
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                br
+                #fileuploader !{i18n.upload}
+            .modal-footer.justify-content-end
+                button.btn.btn-default(type='button', data-dismiss='modal') !{i18n.cancel}
+                button.btn.bg-pink(type='button')#save_changes !{i18n.save}

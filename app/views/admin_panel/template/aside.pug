@@ -8,9 +8,10 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
         .user-panel.mt-3.pb-3.mb-3.d-flex
             .image
                 if user && user.image
-                    img.img-circle.elevation-2(src='https://source.unsplash.com/800x800/?face', alt='User Image')
-                else
                     img.img-circle.elevation-2(src=user.image, alt=user.username)
+
+                else
+                    img.img-circle.elevation-2(src='https://source.unsplash.com/800x800/?face', alt='User Image')
             |
             .info
                 if user && user.username
@@ -108,6 +109,13 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
                             |
                             p !{i18n.console_log}
                 |
+                if scr_access && scr_access.includes('g_file_manager')
+                    li.nav-item
+                        a.nav-link(href=base_admin_path + 'g_file_manager')#menu_g_file_manager
+                            i.nav-icon.fas.fa-folder-plus
+                            |
+                            p !{i18n.general_file_manager}
+                |
                 if scr_access && scr_access.includes('apps')
                     li.nav-item
                         a.nav-link(href=base_admin_path + 'apps')#menu_apps
@@ -115,6 +123,7 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
                             |
                             p !{i18n.apps}
                 |
+
 
 
 

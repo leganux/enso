@@ -21,7 +21,7 @@ passport.use('admin-login', new LocalStrategy({
                     model: admin_role,
                     select: {_id: 1, name: 1, active: 1}
                 })
-                .select({email: 1, password: 1, username: 1, role: 1})
+                .select({email: 1, password: 1, username: 1, role: 1, image: 1})
                 .exec();
 
             if (!data) {
