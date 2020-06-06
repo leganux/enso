@@ -18,7 +18,9 @@ const base_admin_path = env.root_path + env.control_panel_url;
 const i18n_constructor = require('./../helpers/i18n_json_constructor.helper')
 const access_middleware = require('./../auth/auth.middleware').auth
 
+
 router.get('/', async function (req, res) {
+
 
     var i18n = await i18n_constructor.i18n_json(req);
     res.status(200).render('admin_panel/login', {
@@ -29,13 +31,16 @@ router.get('/', async function (req, res) {
         base_admin_path,
         core_files_path,
         i18n,
+        _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         params: param_converter({
             root_path: env.root_path,
             img_folder: site_files_path + 'img/',
             site_files_path,
             base_admin_path,
             core_files_path,
-            i18n
+            i18n,
+            user: req.user && req.user.user ? req.user.user : false,
+            _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         })
     });
 });
@@ -56,6 +61,7 @@ router.get('/dashboard/', access_middleware, async function (req, res) {
         core_files_path,
         i18n,
         user: req.user ? req.user : false,
+        _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
@@ -63,7 +69,8 @@ router.get('/dashboard/', access_middleware, async function (req, res) {
             base_admin_path,
             core_files_path,
             i18n,
-
+            user: req.user && req.user.user ? req.user.user : false,
+            _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
 
         })
     });
@@ -83,13 +90,16 @@ router.get('/admin_roles/', access_middleware, async function (req, res) {
         core_files_path,
         i18n,
         user: req.user ? req.user : false,
+        _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
             img_folder: site_files_path + 'img/',
             base_admin_path,
             core_files_path,
-            i18n
+            i18n,
+            user: req.user && req.user.user ? req.user.user : false,
+            _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         })
     });
 });
@@ -108,13 +118,16 @@ router.get('/admin/', access_middleware, async function (req, res) {
         core_files_path,
         i18n,
         user: req.user ? req.user : false,
+        _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
             img_folder: site_files_path + 'img/',
             base_admin_path,
             core_files_path,
-            i18n
+            i18n,
+            user: req.user && req.user.user ? req.user.user : false,
+            _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         })
     });
 });
@@ -133,13 +146,16 @@ router.get('/catalogue/routes/', access_middleware, async function (req, res) {
         core_files_path,
         i18n,
         user: req.user ? req.user : false,
+        _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
             img_folder: site_files_path + 'img/',
             base_admin_path,
             core_files_path,
-            i18n
+            i18n,
+            user: req.user && req.user.user ? req.user.user : false,
+            _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         })
     });
 });
@@ -158,13 +174,16 @@ router.get('/catalogue/places/', access_middleware, async function (req, res) {
         core_files_path,
         i18n,
         user: req.user ? req.user : false,
+        _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
             img_folder: site_files_path + 'img/',
             base_admin_path,
             core_files_path,
-            i18n
+            i18n,
+            user: req.user && req.user.user ? req.user.user : false,
+            _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         })
     });
 });
@@ -183,13 +202,16 @@ router.get('/catalogue/languages/', access_middleware, async function (req, res)
         core_files_path,
         i18n,
         user: req.user ? req.user : false,
+        _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
             img_folder: site_files_path + 'img/',
             base_admin_path,
             core_files_path,
-            i18n
+            i18n,
+            user: req.user && req.user.user ? req.user.user : false,
+            _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         })
     });
 });
@@ -208,13 +230,16 @@ router.get('/catalogue/dynamic_content/', access_middleware, async function (req
         core_files_path,
         i18n,
         user: req.user ? req.user : false,
+        _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
             img_folder: site_files_path + 'img/',
             base_admin_path,
             core_files_path,
-            i18n
+            i18n,
+            user: req.user && req.user.user ? req.user.user : false,
+            _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         })
     });
 });
@@ -233,17 +258,19 @@ router.get('/admin_permission/', access_middleware, async function (req, res) {
         core_files_path,
         i18n,
         user: req.user ? req.user : false,
+        _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
             img_folder: site_files_path + 'img/',
             base_admin_path,
             core_files_path,
-            i18n
+            i18n,
+            user: req.user && req.user.user ? req.user.user : false,
+            _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         })
     });
 });
-
 
 router.get('/cdn/', access_middleware, async function (req, res) {
     let scr_access = req.access;
@@ -259,13 +286,16 @@ router.get('/cdn/', access_middleware, async function (req, res) {
         core_files_path,
         i18n,
         user: req.user ? req.user : false,
+        _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
             img_folder: site_files_path + 'img/',
             base_admin_path,
             core_files_path,
-            i18n
+            i18n,
+            user: req.user && req.user.user ? req.user.user : false,
+            _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         })
     });
 });
@@ -284,6 +314,7 @@ router.get('/console_log/', access_middleware, async function (req, res) {
         core_files_path,
         i18n,
         user: req.user ? req.user : false,
+        _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
@@ -292,6 +323,8 @@ router.get('/console_log/', access_middleware, async function (req, res) {
             core_files_path,
             i18n,
             general_socket_path: env.root_path + env.socket_path,
+            user: req.user && req.user.user ? req.user.user : false,
+            _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         })
     });
 });
@@ -311,6 +344,7 @@ router.get('/apps/', access_middleware, async function (req, res) {
         core_files_path,
         i18n,
         user: req.user ? req.user : false,
+        _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
@@ -318,6 +352,8 @@ router.get('/apps/', access_middleware, async function (req, res) {
             base_admin_path,
             core_files_path,
             i18n,
+            user: req.user && req.user.user ? req.user.user : false,
+            _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         })
     });
 });
@@ -337,6 +373,7 @@ router.get('/g_file_manager/', access_middleware, async function (req, res) {
         core_files_path,
         i18n,
         user: req.user ? req.user : false,
+        _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         params: param_converter({
             root_path: env.root_path,
             site_files_path,
@@ -344,6 +381,39 @@ router.get('/g_file_manager/', access_middleware, async function (req, res) {
             base_admin_path,
             core_files_path,
             i18n,
+            user: req.user && req.user.user ? req.user.user : false,
+            _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
+        })
+    });
+});
+
+router.get('/app/:id/config', access_middleware, async function (req, res) {
+    let scr_access = req.access;
+    var i18n = await i18n_constructor.i18n_json(req);
+    let id = req.params.id;
+
+
+    console.info(req.user)
+    res.status(200).render('admin_panel/app_config', {
+        scr_access,
+        seo: seo,
+        resources: resources.dashboard,
+        root_path: env.root_path,
+        img_folder: site_files_path + 'img/',
+        base_admin_path,
+        core_files_path,
+        i18n,
+        user: req.user ? req.user : false,
+        _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
+        params: param_converter({
+            root_path: env.root_path,
+            site_files_path,
+            img_folder: site_files_path + 'img/',
+            base_admin_path,
+            core_files_path,
+            i18n,
+            user: req.user && req.user.user ? req.user.user : false,
+            _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
         })
     });
 });

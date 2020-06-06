@@ -123,81 +123,83 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
                             |
                             p !{i18n.apps}
                 |
-
-
-
-
                 li.nav-header#menu_app_ ················ APP ················
+                li.nav-header
+                    select.form-control#app_select_
+                        option(value=-1) !{i18n.choose_one}
                 |
-                if scr_access && scr_access.includes('app/{_app_id_}/config')
-                    li.nav-item
-                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/config')#menu_config
-                            i.nav-icon.fas.fa-cogs
-                            |
-                            p !{i18n.config}
-                |
-                if scr_access && scr_access.includes('app/{_app_id_}/user_roles')
-                    li.nav-item
-                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/user_roles')#menu_user_roles
-                            i.nav-icon.fas.fa-user-check
-                            |
-                            p !{i18n.user_roles}
-                |
-                if scr_access && scr_access.includes('app/{_app_id_}/users')
-                    li.nav-item
-                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/users')#menu_users
-                            i.nav-icon.fas.fa-user-plus
-                            |
-                            p !{i18n.users}
-                |
-                if scr_access && scr_access.includes('app/{_app_id_}/user_permission')
-                    li.nav-item
-                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/user_permission')#menu_user_permission
-                            i.nav-icon.fas.fa-user-lock
-                            |
-                            p !{i18n.user_permission}
-                |
-                if scr_access && scr_access.includes('app/{_app_id_}/dynamic_db')
-                    li.nav-item
-                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/dynamic_db')#menu_dynamyc_db
-                            i.nav-icon.fas.fa-database
-                            |
-                            p  !{i18n.dynamic_db}
-                |
-                if scr_access && scr_access.includes('app/{_app_id_}/cloud_functions')
-                    li.nav-item
-                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/cloud_functions')#menu_cloud_funtions
-                            i.nav-icon.fas.fa-server
-                            |
-                            p !{i18n.cloud_functions}
-                |
-                if scr_access && scr_access.includes('app/{_app_id_}/files')
-                    li.nav-item
-                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/files')#menu_files
-                            i.nav-icon.fas.fa-folder-open
-                            |
-                            p !{i18n.files}
-                |
-                if scr_access && scr_access.includes('app/{_app_id_}/cron')
-                    li.nav-item
-                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/cron')#menu_cron
-                            i.nav-icon.fas.fa-clock
-                            |
-                            p !{i18n.cron_functions}
-                |
-                if scr_access && scr_access.includes('app/{_app_id_}/mailing')
-                    li.nav-item
-                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/mailing')#menu_mailing
-                            i.nav-icon.fas.fa-envelope
-                            |
-                            p !{i18n.mailing}
-                |
-                if scr_access && scr_access.includes('app/{_app_id_}/sms_gateway')
-                    li.nav-item
-                        a.nav-link(href=base_admin_path + 'app/' + app_id + '/sms_gateway')#menu_sms_gateway
-                            i.nav-icon.fas.fa-sms
-                            |
-                            p !{i18n.sms_gateway}
+
+                li.nav-header
+                #sp_4_app(style="display:none;")
+                    if scr_access && scr_access.includes('app/:name/config')
+                        li.nav-item
+                            a.nav-link(href=base_admin_path + 'app/' + _app_id_ + '/config')#menu_config
+                                i.nav-icon.fas.fa-cogs
+                                |
+                                p !{i18n.config}
+                    |
+                    if scr_access && scr_access.includes('app/:name/user_roles')
+                        li.nav-item
+                            a.nav-link(href=base_admin_path + 'app/' + _app_id_ + '/user_roles')#menu_user_roles
+                                i.nav-icon.fas.fa-user-check
+                                |
+                                p !{i18n.user_roles}
+                    |
+                    if scr_access && scr_access.includes('app/:name/users')
+                        li.nav-item
+                            a.nav-link(href=base_admin_path + 'app/' + _app_id_ + '/users')#menu_users
+                                i.nav-icon.fas.fa-user-plus
+                                |
+                                p !{i18n.users}
+                    |
+                    if scr_access && scr_access.includes('app/:name/user_permission')
+                        li.nav-item
+                            a.nav-link(href=base_admin_path + 'app/' + _app_id_ + '/user_permission')#menu_user_permission
+                                i.nav-icon.fas.fa-user-lock
+                                |
+                                p !{i18n.user_permission}
+                    |
+                    if scr_access && scr_access.includes('app/:name/dynamic_db')
+                        li.nav-item
+                            a.nav-link(href=base_admin_path + 'app/' + _app_id_ + '/dynamic_db')#menu_dynamyc_db
+                                i.nav-icon.fas.fa-database
+                                |
+                                p  !{i18n.dynamic_db}
+                    |
+                    if scr_access && scr_access.includes('app/:name/cloud_functions')
+                        li.nav-item
+                            a.nav-link(href=base_admin_path + 'app/' + _app_id_ + '/cloud_functions')#menu_cloud_funtions
+                                i.nav-icon.fas.fa-server
+                                |
+                                p !{i18n.cloud_functions}
+                    |
+                    if scr_access && scr_access.includes('app/:name/files')
+                        li.nav-item
+                            a.nav-link(href=base_admin_path + 'app/' + _app_id_ + '/files')#menu_files
+                                i.nav-icon.fas.fa-folder-open
+                                |
+                                p !{i18n.files}
+                    |
+                    if scr_access && scr_access.includes('app/:name/cron')
+                        li.nav-item
+                            a.nav-link(href=base_admin_path + 'app/' + _app_id_ + '/cron')#menu_cron
+                                i.nav-icon.fas.fa-clock
+                                |
+                                p !{i18n.cron_functions}
+                    |
+                    if scr_access && scr_access.includes('app/:name/mailing')
+                        li.nav-item
+                            a.nav-link(href=base_admin_path + 'app/' + _app_id_ + '/mailing')#menu_mailing
+                                i.nav-icon.fas.fa-envelope
+                                |
+                                p !{i18n.mailing}
+                    |
+                    if scr_access && scr_access.includes('app/:name/sms_gateway')
+                        li.nav-item
+                            a.nav-link(href=base_admin_path + 'app/' + _app_id_ + '/sms_gateway')#menu_sms_gateway
+                                i.nav-icon.fas.fa-sms
+                                |
+                                p !{i18n.sms_gateway}
                 |
 
                 li.nav-header !{i18n.misc}
@@ -219,3 +221,7 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
                 |
                 li.nav-header &nbsp;
                 |
+
+script(src=core_files_path + 'js/common.js')
+script(src=core_files_path + 'js/menu.js')
+

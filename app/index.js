@@ -22,6 +22,15 @@ app.locals.pretty = true;
 
 const mongoose = require('./system/db/db_core_conection')
 app.get(env.root_path + 'logout', function (req, res) {
+    let options = {
+        maxAge: 1000 * 60 * 60 * 24 * 10, // would expire after 15 minutes
+        httpOnly: false, // The cookie only accessible by the web server
+        signed: false // Indicates if the cookie should be signed
+    }
+
+
+    res.cookie('_APP_', false, options)
+
     req.session.destroy();
     req.logout();
     req.user = false;

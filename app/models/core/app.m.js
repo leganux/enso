@@ -10,7 +10,6 @@ const app = new Schema({
         type: String,
         required: false,
         unique: true
-
     },
     description: {
         type: String,
@@ -24,6 +23,42 @@ const app = new Schema({
         type: Schema.Types.ObjectId,
         required: true,
         ref: admin
+    },
+    deployed: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    db_host: {
+        type: String,
+        required: true,
+        default: '127.0.0.1'
+    },
+    db_port: {
+        type: String,
+        required: true,
+        default: '27017'
+    },
+    mail_service: {
+        type: String,
+        required: true,
+        default: 'smtp'
+    },
+    mail_host: {
+        type: String,
+        required: false,
+    },
+    mail_port: {
+        type: String,
+        required: false,
+    },
+    mail_user: {
+        type: String,
+        required: false,
+    },
+    mail_pass: {
+        type: String,
+        required: false,
     },
     active: {
         type: Boolean,

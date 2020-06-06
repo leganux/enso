@@ -16,9 +16,18 @@
                     option(value=-1) !{i18n.choose_one}
                     option(value='admin_panel') !{i18n.admin_panel}
                     option(value='api') !{i18n.api}
-                    option(value='api_full') !{i18n.api_full}
-                    option(value='app_api') !{i18n.app_api}
-                    option(value='other') !{i18n.other}
+
+
+                #sp_methods
+                    br
+                    label !{i18n.choose_methods}
+                    select.form-control#in_method(multiple='true')
+
+                        option(value='POST') POST
+                        option(value='GET') GET
+                        option(value='PUT') PUT
+                        option(value='DELETE') DELETE
+
 
 
             .modal-footer.justify-content-end

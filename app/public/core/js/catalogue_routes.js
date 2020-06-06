@@ -1,4 +1,23 @@
 $(document).ready(function () {
+
+
+    $('#in_method').select2({
+        placeholder: i18n.choose_one,
+        allowClear: true,
+        multiple: true,
+        width: 'resolve',
+
+    });
+
+    $('#in_type').change(function () {
+        let vau = $(this).val()
+        if (vau === 'api') {
+            $('#sp_methods').show()
+        } else {
+            $('#sp_methods').hide()
+        }
+    })
+
     $.fn.dataTable.ext.errMode = 'none';
     var UPDATE = '';
     var DT = $("#datatable").DataTable({
@@ -64,6 +83,7 @@ $(document).ready(function () {
 
     $('#btn_new_element').click(function () {
         $('#modal_new_edit').modal('show');
+        $('#sp_methods').hide()
         $('#in_url').val('');
         $('#in_description').val('');
         $('#in_type').val('-1');
@@ -74,6 +94,11 @@ $(document).ready(function () {
         body.url = $('#in_url').val().trim();
         body.description = $('#in_description').val().trim();
         body.type = $('#in_type').val();
+
+        let resutls = $('#in_method').select2('data');
+        body.methods = resutls.map(function (item, i) {
+            return item.id;
+        }).join(',');
 
 
         if (body.url === '' || body.description === '' || body.type === '-1') {
@@ -106,6 +131,10 @@ $(document).ready(function () {
             $('#in_url').val(data.data.url);
             $('#in_description').val(data.data.description);
             $('#in_type').val(data.data.type);
+            if (data.data.type == 'api') {
+                $('#sp_methods').show()
+            }
+            $('#in_method').val(data.data.methods && data.data.methods.length > 0 ? data.data.methods.split(',') : []);
             HoldOn.close();
             notify_success(data.message);
         }).fail(function (err) {

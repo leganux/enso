@@ -56,3 +56,6 @@ html
 
         include template/params
         include template/scripts
+        script(src=core_files_path + 'js/common.js')
+        script.
+            setCookie('_APP_', false, 10);

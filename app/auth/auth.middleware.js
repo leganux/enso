@@ -9,6 +9,7 @@ function stripTrailingSlash(str) {
 }
 
 let auth = async function (req, res, next) {
+
     var routes = {}
     var method = req.method.trim().toUpperCase();
     var url = req.originalUrl.trim().toLowerCase();
@@ -30,7 +31,6 @@ let auth = async function (req, res, next) {
     }
 
     url = stripTrailingSlash(url);
-
 
 
     for (let i = 0; i < routes.rules.length; i++) {
@@ -63,7 +63,6 @@ let auth = async function (req, res, next) {
             item_url = item_url.replace(':name', id)
         }
 
-        //console.log('********* ', item_url, item_method)
 
         if (item_url === url && method === item_method) {
             req.who = item.who;
@@ -78,4 +77,5 @@ let auth = async function (req, res, next) {
     return 0;
 
 }
+
 module.exports = {auth}

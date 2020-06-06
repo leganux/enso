@@ -17,6 +17,10 @@ const routes = new Schema({
         type: String,
         required: false
     },
+    methods: {
+        type: String,
+        required: false
+    },
     active: {
         type: Boolean,
         required: true,

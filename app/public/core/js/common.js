@@ -1,8 +1,8 @@
-const draw_datatable_rs = function (datatable) {
+var draw_datatable_rs = function (datatable) {
     datatable.clear().draw();
 }
 
-const draw_datatable = function (url, datatable) {
+var draw_datatable = function (url, datatable) {
     if (!url || !datatable) {
         return 0;
     }
@@ -23,7 +23,7 @@ const draw_datatable = function (url, datatable) {
 }
 
 
-const save_data_api = function (url, body, update, f_) {
+var save_data_api = function (url, body, update, f_) {
     if (!url || !body) {
         return 0;
     }
@@ -49,38 +49,38 @@ const save_data_api = function (url, body, update, f_) {
     });
 }
 
-const notify_error = function (message) {
+var notify_error = function (message) {
     Toast.fire({
         icon: 'error',
         title: message
     })
 }
-const notify_warning = function (message) {
+var notify_warning = function (message) {
     Toast.fire({
         icon: 'warning',
         title: message
     })
 }
-const notify_success = function (message) {
+var notify_success = function (message) {
     Toast.fire({
         icon: 'success',
         title: message
     })
 }
-const notify_info = function (message) {
+var notify_info = function (message) {
     Toast.fire({
         icon: 'info',
         title: message
     })
 }
-const notify_question = function (message) {
+var notify_question = function (message) {
     Toast.fire({
         icon: 'question',
         title: message
     })
 }
 
-const confirm_delete = function (f_) {
+var confirm_delete = function (f_) {
     Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -99,7 +99,7 @@ const confirm_delete = function (f_) {
 }
 
 
-const charge_select = function (elem, filter, url, valuename, textname) {
+var charge_select = function (elem, filter, url, valuename, textname) {
     HoldOn.open();
     if (!filter) {
         filter = {}
@@ -121,7 +121,7 @@ const charge_select = function (elem, filter, url, valuename, textname) {
     });
 }
 
-const snakeThis = function (elem) {
+var snakeThis = function (elem) {
     $(elem).change(function () {
         let value = $(elem).val();
         value = v.snakeCase(value);
@@ -178,7 +178,7 @@ function stripHtml(html) {
 }
 
 
-const make_token = function (length) {
+var make_token = function (length) {
     if (!length) {
         length = 11;
     }
@@ -194,7 +194,7 @@ const make_token = function (length) {
     }
     return a + '_X2Vuc28uYXBwLmxlZ2FudXguY29tXw_' + b + '_' + v.camelCase(window.btoa(moment().format())) + '_' + c;
 }
-const make_id = function (length) {
+var make_id = function (length) {
     if (!length) {
         length = 11;
     }
@@ -210,7 +210,7 @@ const make_id = function (length) {
 }
 
 
-const upload_function = function (element) {
+var upload_function = function (element) {
 
     $('#' + element).change(function () {
         if ($('#' + element).val() == '') {

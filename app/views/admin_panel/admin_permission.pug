@@ -32,45 +32,22 @@ html
                                     //button.bg-pink.btn.btn-block#btn_new_element !{i18n.new}
 
                         .card-body
-                            ul.nav.nav-tabs
-                                li.nav-item
-                                    a.nav-link.active(data-toggle='tab', href='#by_role') !{i18n.by_role}
-                                |
-                                li.nav-item
-                                    a.nav-link(data-toggle='tab', href='#by_admin') !{i18n.by_admin}
-                                |
-
-                            #myTabContent.tab-content.bg-white
-                                #by_role.tab-pane.fade.show.active
-                                    br
-                                    .row
-                                        .col-12.col-md-4
-                                            center
-                                                label !{i18n.select_role}
-                                        .col-12.col-md-4
-                                            select.form-control#sel_by_role
-                                                option(value=-1) !{i18n.choose_one}
-                                        .col-12.col-md-4
-                                            button.btn.btn-block.bg-pink#btn_sel_by_role_all !{i18n.allow_all}
-                                            button.btn.btn-block.btn-dark#btn_sel_by_role_none !{i18n.allow_none}
-                                    hr
-                                    #sp_url_role
 
 
-                                #by_admin.tab-pane.fade
-                                    br
-                                    .row
-                                        .col-12.col-md-4
-                                            center
-                                                label !{i18n.select_admin}
-                                        .col-12.col-md-4
-                                            select.form-control#sel_by_admin
-                                                option(value=-1) !{i18n.choose_one}
-                                        .col-12.col-md-4
-                                            button.btn.btn-block.bg-pink#btn_sel_by_admin_all !{i18n.allow_all}
-                                                button.btn.btn-block.btn-dark#btn_sel_by_admin_none !{i18n.allow_none}
-                                    hr
-                                    #sp_url_admin
+
+                            br
+                            .row
+                                .col-12.col-md-4
+                                    center
+                                        label !{i18n.select_role}
+                                .col-12.col-md-4
+                                    select.form-control#sel_by_role
+                                        option(value=-1) !{i18n.choose_one}
+                                .col-12.col-md-4
+                                    button.btn.btn-block.bg-pink#btn_sel_by_role_all !{i18n.allow_all}
+                                    button.btn.btn-block.btn-dark#btn_sel_by_role_none !{i18n.allow_none}
+                            hr
+                            #sp_url_role
 
 
 
