@@ -39,6 +39,14 @@ const app = new Schema({
         required: true,
         default: '27017'
     },
+    db_user: {
+        type: String,
+        required: true,
+    },
+    db_password: {
+        type: String,
+        required: true,
+    },
     mail_service: {
         type: String,
         required: true,

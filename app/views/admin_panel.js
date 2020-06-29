@@ -17,6 +17,8 @@ const api_path = env.root_path + 'api/core/';
 const base_admin_path = env.root_path + env.control_panel_url;
 const i18n_constructor = require('./../helpers/i18n_json_constructor.helper')
 const access_middleware = require('./../auth/auth.middleware').auth
+const app_model = require('./../models/core/app.m')
+const admin_model = require('./../models/core/admin.m')
 
 
 router.get('/', async function (req, res) {
@@ -390,32 +392,50 @@ router.get('/g_file_manager/', access_middleware, async function (req, res) {
 router.get('/app/:id/config', access_middleware, async function (req, res) {
     let scr_access = req.access;
     var i18n = await i18n_constructor.i18n_json(req);
-    let id = req.params.id;
+    var id = req.params.id;
 
+    if (!req.cookies || !req.cookies._APP_ || req.cookies._APP_ === 'false') {
+        res.redirect(base_admin_path + 'apps')
+        return 0;
+    }
 
-    console.info(req.user)
-    res.status(200).render('admin_panel/app_config', {
-        scr_access,
-        seo: seo,
-        resources: resources.dashboard,
-        root_path: env.root_path,
-        img_folder: site_files_path + 'img/',
-        base_admin_path,
-        core_files_path,
-        i18n,
-        user: req.user ? req.user : false,
-        _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
-        params: param_converter({
+    try {
+        let app = await app_model.findById(id).populate({path: "owner", model: admin_model});
+        console.log('********** app ******', app)
+
+        res.status(200).render('admin_panel/app_config', {
+            app,
+            scr_access,
+            seo: seo,
+            resources: resources.dashboard,
             root_path: env.root_path,
-            site_files_path,
             img_folder: site_files_path + 'img/',
             base_admin_path,
             core_files_path,
             i18n,
-            user: req.user && req.user.user ? req.user.user : false,
+            user: req.user ? req.user : false,
             _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
-        })
-    });
+            params: param_converter({
+                root_path: env.root_path,
+                site_files_path,
+                img_folder: site_files_path + 'img/',
+                base_admin_path,
+                core_files_path,
+                i18n,
+                user: req.user && req.user.user ? req.user.user : false,
+                _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
+                mail_service: app.mail_service,
+            })
+        });
+
+    } catch (e) {
+        let err = response_codes.code_500;
+        err.error = e;
+        res.status(500).json(err);
+        return 0;
+    }
+
+
 });
 
 module.exports = router;
