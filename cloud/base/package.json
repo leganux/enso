@@ -1,0 +1,42 @@
+{
+  "name": "enso_base",
+  "version": "1.0.0",
+  "description": "An amazing BaaS application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "baas",
+    "back-end",
+    "front-end",
+    "web",
+    "api",
+    "service",
+    "leganux",
+    "easy",
+    "app",
+    "rest",
+    "socket",
+    "allinone",
+    "funtions",
+    "webservices",
+    "websockets"
+  ],
+  "author": "Angel Erick Cruz Olivera :: Leganux.net",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bcryptjs": "^2.4.3",
+    "fs-extra": "^8.1.0",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "mongoose": "^5.6.9",
+    "mongoose-auto-increment": "^5.0.1",
+    "mongoose-datatables": "^3.2.0",
+    "node-cron": "^2.0.3",
+    "nodemailer": "^5.1.1",
+    "voca": "^1.4.0"
+  }
+}
