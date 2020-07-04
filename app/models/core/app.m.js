@@ -41,11 +41,16 @@ const app = new Schema({
     },
     db_user: {
         type: String,
+        required: false,
+    },
+    db_name: {
+        type: String,
         required: true,
+        default: 'EnsoApp_DB_' + (Math.random() * 10000000).toFixed(0)
     },
     db_password: {
         type: String,
-        required: true,
+        required: false,
     },
     mail_service: {
         type: String,
@@ -69,6 +74,21 @@ const app = new Schema({
         required: false,
     },
     active: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    allow_register: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    allow_see_backoffice: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
+    allow_see_reset_password: {
         type: Boolean,
         required: true,
         default: true

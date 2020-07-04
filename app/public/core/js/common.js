@@ -32,6 +32,7 @@ var save_data_api = function (url, body, update, f_) {
         method = 'PUT'
         url = url + '/' + update;
     }
+    HoldOn.open();
     $.ajax({
         url: url,
         method: method,
@@ -40,7 +41,7 @@ var save_data_api = function (url, body, update, f_) {
         HoldOn.close();
         notify_success(data.message);
         if (typeof f_ === 'function') {
-            f_();
+            f_(data);
         }
     }).fail(function (err) {
         HoldOn.close();
@@ -240,4 +241,13 @@ var upload_function = function (element) {
 
     })
 
+}
+
+
+var copy_clipboard = function (elementID) {
+    var copyText = document.getElementById(elementID);
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+    notify_success(i18n.successfully_copied)
 }

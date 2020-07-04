@@ -401,7 +401,6 @@ router.get('/app/:id/config', access_middleware, async function (req, res) {
 
     try {
         let app = await app_model.findById(id).populate({path: "owner", model: admin_model});
-        console.log('********** app ******', app)
 
         res.status(200).render('admin_panel/app_config', {
             app,

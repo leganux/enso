@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs')
 const io = require('../socket_server.system').io;
 const morgan = require('morgan');
+const moment = require('moment');
 const server = require('../server.system');
 const app = server.app;
 const env = require('../../config/environment.config').environment;
@@ -77,6 +78,7 @@ app.use(morgan(function (tokens, req, res) {
 
 
     let cadenamorgan = [
+        moment().format('YYYY-MM-DD hh:mm:ss'),
         tokens.method(req, res),
         tokens.url(req, res),
         tokens.status(req, res),
@@ -149,6 +151,7 @@ app.use(morgan(function (tokens, req, res) {
 
     ) {
         cadenamorganWEB = [
+            moment().format('YYYY-MM-DD hh:mm:ss'),
             METHOD,
             tokens.url(req, res),
             tokens.status(req, res),
@@ -157,6 +160,7 @@ app.use(morgan(function (tokens, req, res) {
 
     } else {
         cadenamorganWEB = [
+            moment().format('YYYY-MM-DD hh:mm:ss'),
             METHOD,
             tokens.url(req, res),
             tokens.status(req, res),

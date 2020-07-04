@@ -51,14 +51,30 @@ html
                                             input.form-control#app_name(value=app.name, disabled=true)
                                             label !{i18n.description}
                                             input.form-control#app_description(value=app.description)
+                                            br
+
+                                            label
+                                                input(type='checkbox' checked=app.allow_see_backoffice)#allow_backoffice
+                                                |  !{i18n.allow_users_see_back_office_panel}
+                                            br
+                                            label
+                                                input(type='checkbox' checked=app.allow_see_reset_password)#allow_reset_pasword
+                                                |  !{i18n.allow_users_reset_password}
+                                            br
+                                            label
+                                                input(type='checkbox' checked=app.allow_register)#allow_register
+                                                |  !{i18n.allow_users_register}
+
+
 
                                         .col-12.col-md-6
                                             label !{i18n.token}
                                             input.form-control#app_token(readonly=true value=app.token)
+                                            button.btn.btn-block.btn-outline-dark#gen_new_token !{i18n.generate_token}
+                                            br
                                             label !{i18n.admin} !{i18n.owner}
                                             input.form-control(value=app.owner.username disabled=true)#app_owner
                                             br
-
                                             button.btn.btn-block.btn-primary#btn_save_app !{i18n.save}
 
                                 #email.tab-pane.fade
@@ -95,6 +111,8 @@ html
                                             input.form-control(type='text' value=app.db_host)#app_db_host
                                             label !{i18n.port}
                                             input.form-control(type='text' value=app.db_port)#app_db_port
+                                            label !{i18n.name}
+                                            input.form-control(type='text' value=app.db_name)#app_db_name
                                         .col-12.col-md-6
                                             label !{i18n.username}
                                             input.form-control(type='text' value=app.db_user)#app_db_username
