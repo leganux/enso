@@ -7,6 +7,7 @@ const admin = require('./../../models/core/app.m.js');
 const access_middleware = require('./../../auth/auth.middleware').auth
 var copydir = require('copy-dir');
 var path = require('path');
+const fs = require('fs');
 const {execSync, spawnSync} = require('child_process');
 
 api_crud.all(router, app, access_middleware, [{path: 'owner', model: 'admin'}], 'name,description,token');
@@ -40,6 +41,27 @@ router.post('/deploy/', access_middleware, async (req, res) => {
 
         my_app.deployed = true;
         await my_app.save();
+
+        var variables_json = {
+            mongo_host: my_app.db_host,
+            mongo_port: my_app.db_port,
+            mongo_user: my_app.db_user,
+            mongo_password: my_app.db_password,
+            mongo_database: my_app.db_name,
+            admin_owner_id: my_app.owner,
+            app_id: my_app._id,
+            app_token: my_app.token,
+            mail_user: my_app.mail_user,
+            mail_password: my_app.mail_password,
+            mail_service: my_app.mail_service,
+            mail_host: my_app.mail_host,
+            mail_port: my_app.mail_port,
+        }
+
+        variables_json = JSON.stringify(variables_json)
+        variables_json = 'module.exports = ' + variables_json
+
+        fs.writeFileSync(path.join(__dirname, folder_dir_out, 'variables.js'), variables_json);
 
         console.log('Installing changes ... ', child.output);
 
