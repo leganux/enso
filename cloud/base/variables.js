@@ -1,0 +1,15 @@
+module.exports = {
+    mongo_host: '127.0.0.1',
+    mongo_port: '27017',
+    mongo_user: '',
+    mongo_password: '',
+    mongo_database: '',
+    admin_owner_id: '',
+    app_id: '',
+    app_token: '',
+    mail_user: '',
+    mail_password: '',
+    mail_service: '',
+    mail_host: '',
+    mail_port: '',
+}

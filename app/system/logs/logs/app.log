@@ -1490,3 +1490,665 @@ GET  /enso/api/core/app?where%5Bactive%5D=true&where%5Bowner%5D=5ecc6e15cb337f38
 2020-07-03 09:27:22  GET  /enso/content/cdn/summernote/summernote-bs4.js.map  304  5.391  ms
 2020-07-03 09:27:22  GET  /enso/api/core/app?where%5Bactive%5D=true&where%5Bowner%5D=5ecc6e15cb337f38696726ac  200  211.048  ms
 2020-07-03 09:27:23  GET  /enso/content/cdn/socket/socket.io.js.map  404  1.131  ms
+2020-07-04 07:11:54  GET  /enso/admin/app/5ed553401c73b503b759fba9/config  304  658.582  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css  304  16.665  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/daterangepicker/daterangepicker.css  304  16.591  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/icheck-bootstrap/icheck-bootstrap.min.css  304  18.059  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css  304  31.640  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/fontawesome-free/css/all.min.css  304  33.900  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css  304  47.204  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css  304  11.234  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/select2/css/select2.min.css  304  14.954  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/select2-bootstrap4-theme/select2-bootstrap4.min.css  304  15.000  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/summernote/summernote-bs4.css  304  11.269  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/datatables-bs4/css/dataTables.bootstrap4.min.css  304  10.611  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/datatables-responsive/css/responsive.bootstrap4.min.css  304  10.252  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/holdon/holdOn.css  304  60.349  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/animate/animate.css  304  63.541  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/jquery_upload/jquery_upload.css  304  63.564  ms
+2020-07-04 07:11:54  GET  /enso/content/core/js/common.js  304  63.397  ms
+2020-07-04 07:11:54  GET  /enso/content/core/js/menu.js  304  63.269  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/jquery/jquery.min.js  304  63.250  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js  304  10.395  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js  304  10.277  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/adminlte3/js/demo.js  304  7.629  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/sweetalert2/sweetalert2.min.js  304  7.140  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/select2/js/select2.full.min.js  304  6.665  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/moment/moment.min.js  304  6.394  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/inputmask/min/jquery.inputmask.bundle.min.js  304  7.546  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/daterangepicker/daterangepicker.js  304  7.525  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js  304  7.433  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js  304  7.327  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/bootstrap-switch/js/bootstrap-switch.min.js  304  7.221  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/popper/umd/popper.min.js  304  7.109  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/summernote/summernote-bs4.js  304  4.079  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/datatables/jquery.dataTables.min.js  304  4.351  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/datatables-bs4/js/dataTables.bootstrap4.min.js  304  4.239  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/datatables-responsive/js/dataTables.responsive.min.js  304  4.119  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/datatables-responsive/js/responsive.bootstrap4.min.js  304  3.999  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/voca/voca.js  304  52.279  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/holdon/holdOn.js  304  11.285  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/client/client.js  304  11.156  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/jquery_upload/jquery_upload.js  304  11.086  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/socket/socket.io.js  304  7.387  ms
+2020-07-04 07:11:54  GET  /enso/content/core/js/app_config.js  304  7.003  ms
+2020-07-04 07:11:54  GET  /enso/content/files/site/img/logo.png  304  18.192  ms
+2020-07-04 07:11:54  GET  /enso/content/files/2020/06/04/2dWyerHbp0V_90_x_90_log_f_2_png.png  304  6.931  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/fontawesome-free/webfonts/fa-solid-900.woff2  304  2.552  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/fontawesome-free/webfonts/fa-regular-400.woff2  304  3.770  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css.map  304  2.013  ms
+2020-07-04 07:11:54  GET  /enso/content/cdn/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css.map  304  1.882  ms
+2020-07-04 07:11:55  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js.map  304  1.527  ms
+2020-07-04 07:11:55  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js.map  304  1.289  ms
+2020-07-04 07:11:55  GET  /enso/content/cdn/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js.map  304  1.606  ms
+2020-07-04 07:11:55  GET  /enso/content/cdn/popper/umd/popper.min.js.map  304  2.219  ms
+2020-07-04 07:11:55  GET  /enso/content/cdn/summernote/summernote-bs4.js.map  304  1.429  ms
+2020-07-04 07:11:55  GET  /enso/content/cdn/socket/socket.io.js.map  404  2.445  ms
+2020-07-04 07:11:55  GET  /enso/api/core/app?where%5Bactive%5D=true&where%5Bowner%5D=5ecc6e15cb337f38696726ac  304  42.745  ms
+2020-07-04 07:17:51  POST  /enso/api/i18n/language_elements  200  100.644  ms
+{"0":"(node:4045) DeprecationWarning: collection.count is deprecated, and will be removed in a future version. Use Collection.countDocuments or Collection.estimatedDocumentCount instead"}
+2020-07-04 07:17:51  POST  /enso/api/i18n/language_elements/datatable  200  96.982  ms
+2020-07-04 07:18:53  GET  /enso/admin/catalogue/routes  200  530.341  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css  304  15.342  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css  304  16.216  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/fontawesome-free/css/all.min.css  304  16.214  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css  304  16.141  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/daterangepicker/daterangepicker.css  304  13.957  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/icheck-bootstrap/icheck-bootstrap.min.css  304  13.833  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css  304  60.190  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/select2-bootstrap4-theme/select2-bootstrap4.min.css  304  60.091  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/summernote/summernote-bs4.css  304  59.958  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/datatables-bs4/css/dataTables.bootstrap4.min.css  304  59.839  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/holdon/holdOn.css  304  59.717  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/select2/css/select2.min.css  304  59.593  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/animate/animate.css  304  8.003  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/jquery_upload/jquery_upload.css  304  7.615  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/datatables-responsive/css/responsive.bootstrap4.min.css  304  7.435  ms
+2020-07-04 07:18:53  GET  /enso/content/core/js/common.js  304  7.320  ms
+2020-07-04 07:18:53  GET  /enso/content/core/js/menu.js  304  7.150  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/jquery/jquery.min.js  304  6.996  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js  304  9.981  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js  304  9.746  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/adminlte3/js/demo.js  304  9.594  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/sweetalert2/sweetalert2.min.js  304  9.448  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/select2/js/select2.full.min.js  304  9.740  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/moment/moment.min.js  304  13.038  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/inputmask/min/jquery.inputmask.bundle.min.js  304  3.874  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/daterangepicker/daterangepicker.js  304  3.680  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js  304  3.587  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js  304  15.242  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/bootstrap-switch/js/bootstrap-switch.min.js  304  15.079  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/popper/umd/popper.min.js  304  14.940  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/summernote/summernote-bs4.js  304  3.114  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/datatables/jquery.dataTables.min.js  304  2.986  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/datatables-bs4/js/dataTables.bootstrap4.min.js  304  4.697  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/datatables-responsive/js/dataTables.responsive.min.js  304  15.269  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/datatables-responsive/js/responsive.bootstrap4.min.js  304  15.089  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/voca/voca.js  304  14.801  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/holdon/holdOn.js  304  15.878  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/jquery_upload/jquery_upload.js  304  15.520  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/client/client.js  304  15.907  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/socket/socket.io.js  304  16.467  ms
+2020-07-04 07:18:53  GET  /enso/content/files/site/img/logo.png  304  16.387  ms
+2020-07-04 07:18:53  GET  /enso/content/core/js/catalogue_routes.js  200  15.573  ms
+2020-07-04 07:18:53  GET  /enso/content/files/2020/06/04/2dWyerHbp0V_90_x_90_log_f_2_png.png  304  6.160  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/fontawesome-free/webfonts/fa-solid-900.woff2  304  4.713  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/fontawesome-free/webfonts/fa-regular-400.woff2  304  4.517  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css.map  304  7.319  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css.map  304  7.199  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js.map  304  6.198  ms
+2020-07-04 07:18:53  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js.map  304  5.947  ms
+2020-07-04 07:18:54  GET  /enso/content/cdn/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js.map  304  19.554  ms
+2020-07-04 07:18:54  GET  /enso/content/cdn/summernote/summernote-bs4.js.map  304  18.999  ms
+2020-07-04 07:18:54  GET  /enso/content/cdn/popper/umd/popper.min.js.map  304  19.353  ms
+2020-07-04 07:18:54  GET  /enso/content/cdn/socket/socket.io.js.map  404  0.877  ms
+2020-07-04 07:18:54  POST  /enso/api/core/routes/datatable  200  199.691  ms
+2020-07-04 07:18:54  POST  /enso/api/core/routes/datatable  200  288.535  ms
+2020-07-04 07:18:54  GET  /enso/api/core/app?where%5Bactive%5D=true&where%5Bowner%5D=5ecc6e15cb337f38696726ac  304  291.868  ms
+2020-07-04 07:19:00  POST  /enso/api/core/routes/datatable  200  46.774  ms
+2020-07-04 07:19:01  POST  /enso/api/core/routes/datatable  200  26.904  ms
+2020-07-04 07:19:01  POST  /enso/api/core/routes/datatable  200  28.619  ms
+2020-07-04 07:19:02  POST  /enso/api/core/routes/datatable  200  40.722  ms
+2020-07-04 07:19:24  POST  /enso/api/core/routes  200  85.893  ms
+2020-07-04 07:19:24  POST  /enso/api/core/routes/datatable  200  69.367  ms
+2020-07-04 07:19:33  GET  /enso/admin/admin_permission  200  300.232  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css  304  10.275  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/fontawesome-free/css/all.min.css  304  9.500  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css  304  11.440  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/daterangepicker/daterangepicker.css  304  11.267  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/icheck-bootstrap/icheck-bootstrap.min.css  304  10.460  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css  304  8.396  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css  304  7.101  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/select2/css/select2.min.css  304  6.961  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/select2-bootstrap4-theme/select2-bootstrap4.min.css  304  6.866  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/summernote/summernote-bs4.css  304  6.856  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/datatables-bs4/css/dataTables.bootstrap4.min.css  304  21.445  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/datatables-responsive/css/responsive.bootstrap4.min.css  304  21.466  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/holdon/holdOn.css  304  72.219  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/animate/animate.css  304  50.111  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/jquery_upload/jquery_upload.css  304  49.881  ms
+2020-07-04 07:19:34  GET  /enso/content/core/js/common.js  304  49.736  ms
+2020-07-04 07:19:34  GET  /enso/content/core/js/menu.js  304  49.594  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/jquery/jquery.min.js  304  33.984  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js  304  9.358  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js  304  8.914  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/adminlte3/js/demo.js  304  8.784  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/sweetalert2/sweetalert2.min.js  304  8.659  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/select2/js/select2.full.min.js  304  17.639  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/moment/moment.min.js  304  21.196  ms
+2020-07-04 07:19:34  GET  /enso/content/files/2020/06/04/2dWyerHbp0V_90_x_90_log_f_2_png.png  304  7.949  ms
+2020-07-04 07:19:34  GET  /enso/content/files/site/img/logo.png  304  7.811  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/inputmask/min/jquery.inputmask.bundle.min.js  304  7.681  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/daterangepicker/daterangepicker.js  304  6.556  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js  304  7.125  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js  304  21.470  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/bootstrap-switch/js/bootstrap-switch.min.js  304  23.543  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/popper/umd/popper.min.js  304  23.331  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/summernote/summernote-bs4.js  304  23.824  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/datatables/jquery.dataTables.min.js  304  23.695  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/datatables-bs4/js/dataTables.bootstrap4.min.js  304  23.715  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/datatables-responsive/js/dataTables.responsive.min.js  304  23.643  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/datatables-responsive/js/responsive.bootstrap4.min.js  304  6.779  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/voca/voca.js  304  6.622  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/holdon/holdOn.js  304  6.175  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/client/client.js  304  5.198  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/jquery_upload/jquery_upload.js  304  4.761  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/socket/socket.io.js  304  3.926  ms
+2020-07-04 07:19:34  GET  /enso/content/core/js/admin_permission.js  200  1.590  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css.map  304  1.883  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css.map  304  3.109  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js.map  304  2.880  ms
+2020-07-04 07:19:34  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js.map  304  2.524  ms
+2020-07-04 07:19:35  GET  /enso/content/cdn/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js.map  304  3.581  ms
+2020-07-04 07:19:35  GET  /enso/api/core/admin_roles?where%5Bactive%5D=true  200  63.865  ms
+2020-07-04 07:19:35  GET  /enso/content/cdn/socket/socket.io.js.map  404  3.542  ms
+2020-07-04 07:19:35  GET  /enso/content/cdn/popper/umd/popper.min.js.map  304  65.141  ms
+2020-07-04 07:19:35  GET  /enso/content/cdn/summernote/summernote-bs4.js.map  304  65.273  ms
+2020-07-04 07:19:35  GET  /enso/api/core/routes?where%5Bactive%5D=true  200  312.672  ms
+2020-07-04 07:19:35  GET  /enso/api/core/app?where%5Bactive%5D=true&where%5Bowner%5D=5ecc6e15cb337f38696726ac  304  140.233  ms
+2020-07-04 07:19:38  GET  /enso/api/core/permission/role/?where%5Brole%5D=5ecbe6dd7ce44e30a4c052f9  200  158.503  ms
+2020-07-04 07:19:43  POST  /enso/api/core/permission/role/updateOrCreate  200  63.874  ms
+2020-07-04 07:45:53  GET  /enso/admin/app/5ed553401c73b503b759fba9/config  200  284.233  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css  304  7.134  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css  304  6.950  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/fontawesome-free/css/all.min.css  304  6.884  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/daterangepicker/daterangepicker.css  304  6.412  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css  304  6.952  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/icheck-bootstrap/icheck-bootstrap.min.css  304  6.468  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css  304  3.743  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/select2/css/select2.min.css  304  3.585  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/select2-bootstrap4-theme/select2-bootstrap4.min.css  304  3.439  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/summernote/summernote-bs4.css  304  3.172  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/datatables-bs4/css/dataTables.bootstrap4.min.css  304  3.014  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/datatables-responsive/css/responsive.bootstrap4.min.css  304  2.876  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/holdon/holdOn.css  304  4.747  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/jquery_upload/jquery_upload.css  304  4.320  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/animate/animate.css  304  4.745  ms
+2020-07-04 07:45:53  GET  /enso/content/core/js/common.js  304  4.394  ms
+2020-07-04 07:45:53  GET  /enso/content/core/js/menu.js  304  4.315  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/jquery/jquery.min.js  304  4.204  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js  304  15.277  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js  304  25.248  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/adminlte3/js/demo.js  304  25.175  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/sweetalert2/sweetalert2.min.js  304  25.114  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/select2/js/select2.full.min.js  304  25.023  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/moment/moment.min.js  304  24.892  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/inputmask/min/jquery.inputmask.bundle.min.js  304  9.365  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/daterangepicker/daterangepicker.js  304  9.251  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js  304  8.840  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js  304  8.723  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/bootstrap-switch/js/bootstrap-switch.min.js  304  8.615  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/popper/umd/popper.min.js  304  8.523  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/summernote/summernote-bs4.js  304  4.134  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/datatables/jquery.dataTables.min.js  304  4.100  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/datatables-bs4/js/dataTables.bootstrap4.min.js  304  3.986  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/datatables-responsive/js/dataTables.responsive.min.js  304  3.881  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/datatables-responsive/js/responsive.bootstrap4.min.js  304  3.769  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/voca/voca.js  304  3.656  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/holdon/holdOn.js  304  4.720  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/client/client.js  304  8.496  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/jquery_upload/jquery_upload.js  304  8.584  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/socket/socket.io.js  304  8.480  ms
+2020-07-04 07:45:53  GET  /enso/content/core/js/app_config.js  304  9.096  ms
+2020-07-04 07:45:53  GET  /enso/content/files/site/img/logo.png  304  9.092  ms
+2020-07-04 07:45:53  GET  /enso/content/files/2020/06/04/2dWyerHbp0V_90_x_90_log_f_2_png.png  304  0.867  ms
+2020-07-04 07:45:53  GET  /enso/content/cdn/fontawesome-free/webfonts/fa-solid-900.woff2  304  1.362  ms
+2020-07-04 07:45:54  GET  /enso/content/cdn/fontawesome-free/webfonts/fa-regular-400.woff2  304  2.626  ms
+2020-07-04 07:45:54  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js.map  304  5.811  ms
+2020-07-04 07:45:54  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js.map  304  5.666  ms
+2020-07-04 07:45:54  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css.map  304  5.503  ms
+2020-07-04 07:45:54  GET  /enso/content/cdn/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css.map  304  5.353  ms
+2020-07-04 07:45:54  GET  /enso/content/cdn/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js.map  304  2.479  ms
+2020-07-04 07:45:54  GET  /enso/content/cdn/popper/umd/popper.min.js.map  304  3.694  ms
+2020-07-04 07:45:54  GET  /enso/content/cdn/summernote/summernote-bs4.js.map  304  22.565  ms
+2020-07-04 07:45:54  GET  /enso/content/cdn/socket/socket.io.js.map  404  2.207  ms
+2020-07-04 07:45:54  GET  /enso/api/core/app?where%5Bactive%5D=true&where%5Bowner%5D=5ecc6e15cb337f38696726ac  304  35.572  ms
+2020-07-04 07:48:50  GET  /enso/admin/app/5ed553401c73b503b759fba9/config  200  274.675  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css  304  5.745  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/fontawesome-free/css/all.min.css  304  5.633  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css  304  5.494  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/daterangepicker/daterangepicker.css  304  5.103  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/icheck-bootstrap/icheck-bootstrap.min.css  304  4.261  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css  304  3.982  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css  304  11.616  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/select2/css/select2.min.css  304  11.508  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/select2-bootstrap4-theme/select2-bootstrap4.min.css  304  11.388  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/summernote/summernote-bs4.css  304  11.273  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/datatables-bs4/css/dataTables.bootstrap4.min.css  304  10.870  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/datatables-responsive/css/responsive.bootstrap4.min.css  304  10.734  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/holdon/holdOn.css  304  4.415  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/animate/animate.css  304  4.274  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/jquery_upload/jquery_upload.css  304  3.753  ms
+2020-07-04 07:48:51  GET  /enso/content/core/js/common.js  304  3.592  ms
+2020-07-04 07:48:51  GET  /enso/content/core/js/menu.js  304  3.487  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/jquery/jquery.min.js  304  14.511  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js  304  6.078  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js  304  6.540  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/adminlte3/js/demo.js  304  6.123  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/sweetalert2/sweetalert2.min.js  304  6.012  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/select2/js/select2.full.min.js  304  5.886  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/moment/moment.min.js  304  5.755  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/inputmask/min/jquery.inputmask.bundle.min.js  304  5.004  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/daterangepicker/daterangepicker.js  304  4.877  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js  304  4.692  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js  304  4.544  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/bootstrap-switch/js/bootstrap-switch.min.js  304  4.405  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/popper/umd/popper.min.js  304  4.272  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/summernote/summernote-bs4.js  304  23.957  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/datatables/jquery.dataTables.min.js  304  23.821  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/datatables-bs4/js/dataTables.bootstrap4.min.js  304  23.717  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/datatables-responsive/js/dataTables.responsive.min.js  304  23.620  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/datatables-responsive/js/responsive.bootstrap4.min.js  304  23.528  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/voca/voca.js  304  23.443  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/holdon/holdOn.js  304  7.218  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/client/client.js  304  5.792  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/jquery_upload/jquery_upload.js  304  5.444  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/socket/socket.io.js  304  4.960  ms
+2020-07-04 07:48:51  GET  /enso/content/core/js/app_config.js  304  4.561  ms
+2020-07-04 07:48:51  GET  /enso/content/files/site/img/logo.png  304  8.060  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/fontawesome-free/webfonts/fa-solid-900.woff2  304  7.746  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/fontawesome-free/webfonts/fa-regular-400.woff2  304  3.263  ms
+2020-07-04 07:48:51  GET  /enso/content/files/2020/06/04/2dWyerHbp0V_90_x_90_log_f_2_png.png  304  3.189  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css.map  304  10.344  ms
+2020-07-04 07:48:51  GET  /enso/content/cdn/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css.map  304  23.888  ms
+2020-07-04 07:48:52  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js.map  304  5.944  ms
+2020-07-04 07:48:52  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js.map  304  127.636  ms
+2020-07-04 07:48:52  GET  /enso/content/cdn/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js.map  304  10.146  ms
+2020-07-04 07:48:52  GET  /enso/content/cdn/popper/umd/popper.min.js.map  304  11.040  ms
+2020-07-04 07:48:52  GET  /enso/content/cdn/summernote/summernote-bs4.js.map  304  11.002  ms
+2020-07-04 07:48:52  GET  /enso/api/core/app?where%5Bactive%5D=true&where%5Bowner%5D=5ecc6e15cb337f38696726ac  304  82.514  ms
+2020-07-04 07:48:52  GET  /enso/content/cdn/socket/socket.io.js.map  404  1.954  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5082) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5091) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5098) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5151) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5161) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5172) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5180) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5186) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5194) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5199) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5206) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5229) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5284) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5293) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5313) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5420) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+2020-07-04 09:03:28  GET  /enso/admin/app/5ed553401c73b503b759fba9/config  304  1722.684  ms
+2020-07-04 09:03:28  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css  304  38.996  ms
+2020-07-04 09:03:28  GET  /enso/content/cdn/fontawesome-free/css/all.min.css  304  38.016  ms
+2020-07-04 09:03:28  GET  /enso/content/cdn/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css  304  44.529  ms
+2020-07-04 09:03:28  GET  /enso/content/cdn/daterangepicker/daterangepicker.css  304  44.271  ms
+2020-07-04 09:03:28  GET  /enso/content/cdn/icheck-bootstrap/icheck-bootstrap.min.css  304  87.022  ms
+2020-07-04 09:03:28  GET  /enso/content/cdn/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css  304  86.690  ms
+2020-07-04 09:03:28  GET  /enso/content/cdn/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css  304  63.307  ms
+2020-07-04 09:03:28  GET  /enso/content/cdn/select2/css/select2.min.css  304  63.135  ms
+2020-07-04 09:03:28  GET  /enso/content/cdn/summernote/summernote-bs4.css  304  62.422  ms
+2020-07-04 09:03:28  GET  /enso/content/cdn/select2-bootstrap4-theme/select2-bootstrap4.min.css  304  63.259  ms
+2020-07-04 09:03:28  GET  /enso/content/cdn/datatables-bs4/css/dataTables.bootstrap4.min.css  304  46.566  ms
+2020-07-04 09:03:28  GET  /enso/content/cdn/datatables-responsive/css/responsive.bootstrap4.min.css  304  46.501  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/holdon/holdOn.css  304  50.610  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/jquery_upload/jquery_upload.css  304  56.313  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/animate/animate.css  304  53.577  ms
+2020-07-04 09:03:29  GET  /enso/content/core/js/common.js  304  50.362  ms
+2020-07-04 09:03:29  GET  /enso/content/core/js/menu.js  304  136.172  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/jquery/jquery.min.js  304  140.004  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js  304  86.870  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js  304  89.552  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/adminlte3/js/demo.js  304  91.034  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/sweetalert2/sweetalert2.min.js  304  91.118  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/select2/js/select2.full.min.js  304  26.987  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/moment/moment.min.js  304  26.838  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/inputmask/min/jquery.inputmask.bundle.min.js  304  16.499  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/daterangepicker/daterangepicker.js  304  16.415  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js  304  16.288  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js  304  16.142  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/bootstrap-switch/js/bootstrap-switch.min.js  304  23.655  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/popper/umd/popper.min.js  304  23.472  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/summernote/summernote-bs4.js  304  13.782  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/datatables/jquery.dataTables.min.js  304  13.510  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/datatables-bs4/js/dataTables.bootstrap4.min.js  304  13.452  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/datatables-responsive/js/dataTables.responsive.min.js  304  13.387  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/datatables-responsive/js/responsive.bootstrap4.min.js  304  24.048  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/voca/voca.js  304  28.396  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/holdon/holdOn.js  304  17.826  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/client/client.js  304  17.116  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/jquery_upload/jquery_upload.js  304  16.659  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/socket/socket.io.js  304  22.384  ms
+2020-07-04 09:03:29  GET  /enso/content/files/site/img/logo.png  304  67.943  ms
+2020-07-04 09:03:29  GET  /enso/content/core/js/app_config.js  200  58.793  ms
+2020-07-04 09:03:29  GET  /enso/content/files/2020/06/04/2dWyerHbp0V_90_x_90_log_f_2_png.png  304  24.398  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css.map  304  3.771  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css.map  304  3.389  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/fontawesome-free/webfonts/fa-solid-900.woff2  304  42.272  ms
+2020-07-04 09:03:29  GET  /enso/content/cdn/fontawesome-free/webfonts/fa-regular-400.woff2  304  42.140  ms
+2020-07-04 09:03:30  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js.map  304  11.029  ms
+2020-07-04 09:03:30  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js.map  304  10.979  ms
+2020-07-04 09:03:31  GET  /enso/content/cdn/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js.map  304  9.298  ms
+2020-07-04 09:03:31  GET  /enso/content/cdn/summernote/summernote-bs4.js.map  304  9.024  ms
+2020-07-04 09:03:31  GET  /enso/content/cdn/popper/umd/popper.min.js.map  304  9.568  ms
+2020-07-04 09:03:31  GET  /enso/content/cdn/socket/socket.io.js.map  404  5.190  ms
+2020-07-04 09:03:31  GET  /enso/api/core/app?where%5Bactive%5D=true&where%5Bowner%5D=5ecc6e15cb337f38696726ac  304  139.262  ms
+2020-07-04 09:04:19  POST  /enso/api/core/app/deploy  403  93.967  ms
+2020-07-04 09:05:23  GET  /enso/admin/catalogue/routes  200  1096.516  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css  304  7.577  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/fontawesome-free/css/all.min.css  304  6.274  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css  304  6.058  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/daterangepicker/daterangepicker.css  304  5.921  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/icheck-bootstrap/icheck-bootstrap.min.css  304  5.787  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css  304  9.744  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css  304  6.091  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/select2/css/select2.min.css  304  5.973  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/select2-bootstrap4-theme/select2-bootstrap4.min.css  304  5.910  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/summernote/summernote-bs4.css  304  5.772  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/datatables-bs4/css/dataTables.bootstrap4.min.css  304  5.633  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/datatables-responsive/css/responsive.bootstrap4.min.css  304  27.974  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/holdon/holdOn.css  304  11.207  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/animate/animate.css  304  10.616  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/jquery_upload/jquery_upload.css  304  6.974  ms
+2020-07-04 09:05:23  GET  /enso/content/core/js/menu.js  304  14.908  ms
+2020-07-04 09:05:23  GET  /enso/content/core/js/common.js  200  18.261  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/jquery/jquery.min.js  304  24.661  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js  304  42.702  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js  304  54.831  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/adminlte3/js/demo.js  304  58.386  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/sweetalert2/sweetalert2.min.js  304  65.121  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/select2/js/select2.full.min.js  304  68.530  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/moment/moment.min.js  304  14.156  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/inputmask/min/jquery.inputmask.bundle.min.js  304  8.813  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/daterangepicker/daterangepicker.js  304  8.865  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js  304  18.483  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js  304  18.659  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/bootstrap-switch/js/bootstrap-switch.min.js  304  18.427  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/popper/umd/popper.min.js  304  18.233  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/summernote/summernote-bs4.js  304  5.659  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/datatables/jquery.dataTables.min.js  304  5.575  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/datatables-bs4/js/dataTables.bootstrap4.min.js  304  5.485  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/datatables-responsive/js/dataTables.responsive.min.js  304  5.512  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/datatables-responsive/js/responsive.bootstrap4.min.js  304  19.318  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/voca/voca.js  304  7.894  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/holdon/holdOn.js  304  7.597  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/client/client.js  304  7.233  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/jquery_upload/jquery_upload.js  304  6.949  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/socket/socket.io.js  304  5.755  ms
+2020-07-04 09:05:23  GET  /enso/content/core/js/catalogue_routes.js  304  14.074  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/fontawesome-free/webfonts/fa-solid-900.woff2  304  7.351  ms
+2020-07-04 09:05:23  GET  /enso/content/cdn/fontawesome-free/webfonts/fa-regular-400.woff2  304  7.328  ms
+2020-07-04 09:05:23  GET  /enso/content/files/site/img/logo.png  304  8.667  ms
+2020-07-04 09:05:23  GET  /enso/content/files/2020/06/04/2dWyerHbp0V_90_x_90_log_f_2_png.png  304  8.635  ms
+{"0":"(node:5420) DeprecationWarning: collection.count is deprecated, and will be removed in a future version. Use Collection.countDocuments or Collection.estimatedDocumentCount instead"}
+2020-07-04 09:05:24  POST  /enso/api/core/routes/datatable  200  175.742  ms
+2020-07-04 09:05:24  POST  /enso/api/core/routes/datatable  200  192.400  ms
+2020-07-04 09:05:24  GET  /enso/api/core/app?where%5Bactive%5D=true&where%5Bowner%5D=5ecc6e15cb337f38696726ac  304  46.504  ms
+2020-07-04 09:06:00  POST  /enso/api/core/routes  200  57.441  ms
+2020-07-04 09:06:00  POST  /enso/api/core/routes/datatable  200  103.331  ms
+2020-07-04 09:06:07  GET  /enso/admin/admin_permission  200  718.351  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css  304  8.917  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/fontawesome-free/css/all.min.css  304  8.748  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css  304  9.267  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/daterangepicker/daterangepicker.css  304  9.018  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/icheck-bootstrap/icheck-bootstrap.min.css  304  8.815  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css  304  8.400  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css  304  83.427  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/select2/css/select2.min.css  304  83.161  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/select2-bootstrap4-theme/select2-bootstrap4.min.css  304  81.344  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/summernote/summernote-bs4.css  304  78.390  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/datatables-bs4/css/dataTables.bootstrap4.min.css  304  76.948  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/datatables-responsive/css/responsive.bootstrap4.min.css  304  76.495  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/holdon/holdOn.css  304  9.502  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/animate/animate.css  304  9.377  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/jquery_upload/jquery_upload.css  304  9.227  ms
+2020-07-04 09:06:08  GET  /enso/content/core/js/common.js  304  8.831  ms
+2020-07-04 09:06:08  GET  /enso/content/core/js/menu.js  304  8.644  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/jquery/jquery.min.js  304  8.544  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js  304  6.772  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js  304  6.462  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/adminlte3/js/demo.js  304  12.212  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/sweetalert2/sweetalert2.min.js  304  11.962  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/select2/js/select2.full.min.js  304  14.087  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/moment/moment.min.js  304  17.302  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/inputmask/min/jquery.inputmask.bundle.min.js  304  50.165  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/daterangepicker/daterangepicker.js  304  49.463  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js  304  51.213  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js  304  50.980  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/bootstrap-switch/js/bootstrap-switch.min.js  304  50.840  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/popper/umd/popper.min.js  304  51.696  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/summernote/summernote-bs4.js  304  92.150  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/datatables/jquery.dataTables.min.js  304  91.798  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/datatables-bs4/js/dataTables.bootstrap4.min.js  304  8.836  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/datatables-responsive/js/dataTables.responsive.min.js  304  8.685  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/datatables-responsive/js/responsive.bootstrap4.min.js  304  8.583  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/voca/voca.js  304  8.562  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js.map  304  15.226  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js.map  304  15.605  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/holdon/holdOn.js  304  16.790  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/client/client.js  304  16.941  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/jquery_upload/jquery_upload.js  304  16.855  ms
+2020-07-04 09:06:08  GET  /enso/content/cdn/socket/socket.io.js  304  23.094  ms
+2020-07-04 09:06:08  GET  /enso/content/core/js/admin_permission.js  304  22.203  ms
+2020-07-04 09:06:08  GET  /enso/content/files/site/img/logo.png  304  21.245  ms
+2020-07-04 09:06:08  GET  /enso/content/files/2020/06/04/2dWyerHbp0V_90_x_90_log_f_2_png.png  304  50.637  ms
+2020-07-04 09:06:09  GET  /enso/content/cdn/fontawesome-free/webfonts/fa-solid-900.woff2  304  3.312  ms
+2020-07-04 09:06:09  GET  /enso/content/cdn/fontawesome-free/webfonts/fa-regular-400.woff2  304  3.146  ms
+2020-07-04 09:06:09  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css.map  304  36.921  ms
+2020-07-04 09:06:09  GET  /enso/content/cdn/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css.map  304  36.963  ms
+2020-07-04 09:06:09  GET  /enso/content/cdn/socket/socket.io.js.map  404  4.420  ms
+2020-07-04 09:06:09  GET  /enso/content/cdn/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js.map  304  26.530  ms
+2020-07-04 09:06:09  GET  /enso/content/cdn/popper/umd/popper.min.js.map  304  26.521  ms
+2020-07-04 09:06:09  GET  /enso/content/cdn/summernote/summernote-bs4.js.map  304  26.379  ms
+2020-07-04 09:06:09  GET  /enso/api/core/app?where%5Bactive%5D=true&where%5Bowner%5D=5ecc6e15cb337f38696726ac  304  68.742  ms
+2020-07-04 09:06:10  GET  /enso/api/core/admin_roles?where%5Bactive%5D=true  304  132.958  ms
+2020-07-04 09:06:10  GET  /enso/api/core/routes?where%5Bactive%5D=true  200  261.942  ms
+2020-07-04 09:06:13  GET  /enso/api/core/permission/role/?where%5Brole%5D=5ecbe6dd7ce44e30a4c052f9  200  123.429  ms
+2020-07-04 09:06:17  POST  /enso/api/core/permission/role/updateOrCreate  200  65.155  ms
+2020-07-04 09:06:35  POST  /enso/api/core/app/deploy  403  58.979  ms
+2020-07-04 09:07:00  POST  /enso/api/core/routes/datatable  200  46.833  ms
+2020-07-04 09:07:00  POST  /enso/api/core/routes/datatable  200  55.557  ms
+2020-07-04 09:07:01  POST  /enso/api/core/routes/datatable  200  49.471  ms
+2020-07-04 09:07:02  GET  /enso/api/core/routes/5f01358813543f152ccdca09  200  63.750  ms
+2020-07-04 09:07:07  PUT  /enso/api/core/routes/5f01358813543f152ccdca09  200  44.938  ms
+2020-07-04 09:07:07  POST  /enso/api/core/routes/datatable  200  121.404  ms
+{"0":{"errno":-2,"syscall":"lstat","code":"ENOENT","path":"./../../cloud/base"}}
+2020-07-04 09:07:17  POST  /enso/api/core/app/deploy  500  55.727  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5475) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":{"errno":-2,"syscall":"lstat","code":"ENOENT","path":"./../../../cloud/base"}}
+2020-07-04 09:08:36  POST  /enso/api/core/app/deploy  500  348.183  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5523) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":{"errno":-2,"syscall":"lstat","code":"ENOENT","path":"./../../../cloud/base/"}}
+2020-07-04 09:10:29  POST  /enso/api/core/app/deploy  500  219.673  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5533) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5541) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":{"errno":-2,"syscall":"lstat","code":"ENOENT","path":"/Users/leganux/Documents/GitHub/enso/cloud/base/Users/leganux/Documents/GitHub/enso/cloud/app_5ed553401c73b503b759fba9/"}}
+2020-07-04 09:12:02  POST  /enso/api/core/app/deploy  500  238.203  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5552) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":{"errno":-2,"syscall":"lstat","code":"ENOENT","path":"/Users/leganux/Documents/GitHub/enso/cloud/base/Users/leganux/Documents/GitHub/enso/cloud/app_5ed553401c73b503b759fba9/"}}
+2020-07-04 09:12:47  POST  /enso/api/core/app/deploy  500  286.097  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5558) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":{"errno":-2,"syscall":"lstat","code":"ENOENT","path":"../../../cloud/base/"}}
+2020-07-04 09:13:47  POST  /enso/api/core/app/deploy  500  366.561  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5572) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5577) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5581) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":{"errno":-2,"syscall":"lstat","code":"ENOENT","path":"../../../cloud/base"}}
+2020-07-04 09:14:36  POST  /enso/api/core/app/deploy  500  338.580  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5588) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5597) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"_______ST_____"}
+2020-07-04 09:17:03  POST  /enso/api/core/app/deploy  200  321.687  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5613) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5621) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5636) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5643) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5664) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5673) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"stdout:","1":"auth\nconfig\ndump.rdb\nhelpers\nindex.js\nmodels\nnode_modules\npackage-lock.json\npackage.json\npublic\nroutes\nsystem\nviews\n"}
+{"0":"stderr:","1":""}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5703) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5710) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5716) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5765) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5775) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"******* stdout ___ ","1":{"type":"Buffer","data":[100,98,46,106,115,10,100,98,95,99,111,110,110,101,99,116,105,111,110,46,106,115,10,102,117,110,99,116,105,111,110,115,10,105,110,100,101,120,46,106,115,10,112,97,99,107,97,103,101,46,106,115,111,110,10,114,117,110,46,115,104,10,118,97,114,105,97,98,108,101,115,46,106,115,10]}}
+2020-07-04 09:38:22  POST  /enso/api/core/app/deploy  200  257.426  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5809) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"******* stdout ___ ","1":{"type":"Buffer","data":[97,117,116,104,10,99,111,110,102,105,103,10,100,117,109,112,46,114,100,98,10,104,101,108,112,101,114,115,10,105,110,100,101,120,46,106,115,10,109,111,100,101,108,115,10,110,111,100,101,95,109,111,100,117,108,101,115,10,112,97,99,107,97,103,101,45,108,111,99,107,46,106,115,111,110,10,112,97,99,107,97,103,101,46,106,115,111,110,10,112,117,98,108,105,99,10,114,111,117,116,101,115,10,115,121,115,116,101,109,10,118,105,101,119,115,10]}}
+2020-07-04 09:41:03  POST  /enso/api/core/app/deploy  200  383.847  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5827) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"error"}
+{"0":"stdout ","1":{"type":"Buffer","data":[116,111,116,97,108,32,48,10,108,114,119,120,114,45,120,114,45,120,32,32,32,32,32,49,32,114,111,111,116,32,32,119,104,101,101,108,32,32,32,32,50,53,66,32,74,117,110,32,51,48,32,49,57,58,52,54,32,88,49,49,32,45,62,32,46,46,47,112,114,105,118,97,116,101,47,118,97,114,47,115,101,108,101,99,116,47,88,49,49,10,108,114,119,120,114,45,120,114,45,120,32,32,32,32,32,49,32,114,111,111,116,32,32,119,104,101,101,108,32,32,32,32,50,53,66,32,74,117,110,32,51,48,32,49,57,58,52,54,32,88,49,49,82,54,32,45,62,32,46,46,47,112,114,105,118,97,116,101,47,118,97,114,47,115,101,108,101,99,116,47,88,49,49,10,100,114,119,120,114,45,120,114,45,120,32,32,49,48,49,52,32,114,111,111,116,32,32,119,104,101,101,108,32,32,32,32,51,50,75,32,74,117,110,32,51,48,32,49,57,58,53,52,32,98,105,110,10,100,114,119,120,114,45,120,114,45,120,32,32,32,51,49,49,32,114,111,111,116,32,32,119,104,101,101,108,32,32,32,57,46,55,75,32,74,117,110,32,51,48,32,49,57,58,53,52,32,108,105,98,10,100,114,119,120,114,45,120,114,45,120,32,32,32,50,54,51,32,114,111,111,116,32,32,119,104,101,101,108,32,32,32,56,46,50,75,32,74,117,110,32,51,48,32,49,57,58,53,52,32,108,105,98,101,120,101,99,10,100,114,119,120,114,45,120,114,45,120,32,32,32,32,49,52,32,114,111,111,116,32,32,119,104,101,101,108,32,32,32,52,52,56,66,32,74,117,110,32,51,48,32,50,49,58,48,53,32,108,111,99,97,108,10,100,114,119,120,114,45,120,114,45,120,32,32,32,50,51,52,32,114,111,111,116,32,32,119,104,101,101,108,32,32,32,55,46,51,75,32,74,117,110,32,51,48,32,49,57,58,53,52,32,115,98,105,110,10,100,114,119,120,114,45,120,114,45,120,32,32,32,32,52,54,32,114,111,111,116,32,32,119,104,101,101,108,32,32,32,49,46,52,75,32,74,117,110,32,51,48,32,49,57,58,53,52,32,115,104,97,114,101,10,100,114,119,120,114,45,120,114,45,120,32,32,32,32,32,53,32,114,111,111,116,32,32,119,104,101,101,108,32,32,32,49,54,48,66,32,77,97,121,32,50,55,32,49,56,58,51,49,32,115,116,97,110,100,97,108,111,110,101,10]}}
+{"0":"stderr ","1":{"type":"Buffer","data":[]}}
+2020-07-04 09:43:18  POST  /enso/api/core/app/deploy  200  402.654  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5851) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5873) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"error"}
+{"0":"stdout ","1":[null,{"type":"Buffer","data":[97,117,116,104,10,99,111,110,102,105,103,10,100,117,109,112,46,114,100,98,10,104,101,108,112,101,114,115,10,105,110,100,101,120,46,106,115,10,109,111,100,101,108,115,10,110,111,100,101,95,109,111,100,117,108,101,115,10,112,97,99,107,97,103,101,45,108,111,99,107,46,106,115,111,110,10,112,97,99,107,97,103,101,46,106,115,111,110,10,112,117,98,108,105,99,10,114,111,117,116,101,115,10,115,121,115,116,101,109,10,118,105,101,119,115,10]},{"type":"Buffer","data":[]}]}
+2020-07-04 09:49:05  POST  /enso/api/core/app/deploy  200  346.335  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5886) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"error"}
+{"0":"stdout ","1":[null,"auth\nconfig\ndump.rdb\nhelpers\nindex.js\nmodels\nnode_modules\npackage-lock.json\npackage.json\npublic\nroutes\nsystem\nviews\n",""]}
+2020-07-04 09:51:20  POST  /enso/api/core/app/deploy  200  268.426  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5902) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"error"}
+{"0":"stdout ","1":[null,"db.js\ndb_connection.js\nfunctions\nindex.js\npackage.json\nrun.sh\nvariables.js\n",""]}
+2020-07-04 09:52:16  POST  /enso/api/core/app/deploy  200  409.522  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5915) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5926) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":{"errno":-2,"code":"ENOENT","syscall":"spawnSync npm i","path":"npm i","spawnargs":[]}}
+2020-07-04 09:55:28  POST  /enso/api/core/app/deploy  500  339.252  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5969) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":{"errno":-13,"code":"EACCES","syscall":"spawnSync ./run.sh","path":"./run.sh","spawnargs":[]}}
+2020-07-04 09:58:06  POST  /enso/api/core/app/deploy  500  336.176  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6000) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6009) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Installing changes ... ","1":[null,"","npm ERR! code ETARGET\nnpm ERR! notarget No matching version found for fs@^8.1.0.\nnpm ERR! notarget In most cases you or one of your dependencies are requesting\nnpm ERR! notarget a package version that doesn't exist.\nnpm ERR! notarget \nnpm ERR! notarget It was specified as a dependency of 'app_5ed553401c73b503b759fba9'\nnpm ERR! notarget \n\nnpm ERR! A complete log of this run can be found in:\nnpm ERR!     /Users/leganux/.npm/_logs/2020-07-05T03_00_44_801Z-debug.log\n"]}
+2020-07-04 10:00:44  POST  /enso/api/core/app/deploy  200  8996.984  ms
+{"0":"Installing changes ... ","1":[null,"\n> node-cron@2.0.3 postinstall /Users/leganux/Documents/GitHub/enso/cloud/app_5ed553401c73b503b759fba9/node_modules/node-cron\n> opencollective-postinstall\n\n\u001b[96m\u001b[1mThank you for using node-cron!\u001b[96m\u001b[1m\n\u001b[0m\u001b[96mIf you rely on this package, please consider supporting our open collective:\u001b[22m\u001b[39m\n> \u001b[94mhttps://opencollective.com/node-cron/donate\u001b[0m\n\nadded 44 packages from 43 contributors and audited 44 packages in 10.548s\n\n1 package is looking for funding\n  run `npm fund` for details\n\nfound 1 low severity vulnerability\n  run `npm audit fix` to fix them, or `npm audit` for details\n","npm notice created a lockfile as package-lock.json. You should commit this file.\nnpm WARN enso_base@1.0.0 No repository field.\n\n"]}
+2020-07-04 10:05:56  POST  /enso/api/core/app/deploy  200  13824.146  ms
+{"0":"Installing changes ... ","1":[null,"\n> node-cron@2.0.3 postinstall /Users/leganux/Documents/GitHub/enso/cloud/app_5ed553401c73b503b759fba9/node_modules/node-cron\n> opencollective-postinstall\n\n\u001b[96m\u001b[1mThank you for using node-cron!\u001b[96m\u001b[1m\n\u001b[0m\u001b[96mIf you rely on this package, please consider supporting our open collective:\u001b[22m\u001b[39m\n> \u001b[94mhttps://opencollective.com/node-cron/donate\u001b[0m\n\nadded 44 packages from 43 contributors and audited 44 packages in 10.969s\n\n1 package is looking for funding\n  run `npm fund` for details\n\nfound 1 low severity vulnerability\n  run `npm audit fix` to fix them, or `npm audit` for details\n","npm notice created a lockfile as package-lock.json. You should commit this file.\nnpm WARN enso_base@1.0.0 No repository field.\n\n"]}
+2020-07-04 10:08:02  POST  /enso/api/core/app/deploy  200  14002.886  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6232) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6242) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6250) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}

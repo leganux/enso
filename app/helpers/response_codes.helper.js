@@ -160,6 +160,12 @@ var RC = {
         "success": false,
         "data": [],
     },
+    "code_533": {
+        "code": 550,
+        "message": "App not defined",
+        "success": false,
+        "data": [],
+    },
 
 }
 

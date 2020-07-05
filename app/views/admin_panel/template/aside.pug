@@ -200,6 +200,13 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
                                 i.nav-icon.fas.fa-sms
                                 |
                                 p !{i18n.sms_gateway}
+                    |
+                    if scr_access && scr_access.includes('app/:name/webservices')
+                        li.nav-item
+                            a.nav-link(href=base_admin_path + 'app/' + _app_id_ + '/webservices')#menu_webservices
+                                i.nav-icon.fas.fa-plug
+                                |
+                                p !{i18n.webservices}
                 |
 
                 li.nav-header !{i18n.misc}

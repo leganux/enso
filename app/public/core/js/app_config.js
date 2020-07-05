@@ -43,6 +43,18 @@ $(document).ready(function () {
     })
     $('#btn_save_db').click(function () {
         save_data();
+    });
+    $('#btn_deploy_app').click(function () {
+        HoldOn.open();
+        $.post(root_path + 'api/core/app/deploy', {}, function (data) {
+            HoldOn.close();
+            notify_success(data.message);
+            console.log('***** DATA DEPLOY *****', data)
+        }).fail(function (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        });
     })
 
 })
