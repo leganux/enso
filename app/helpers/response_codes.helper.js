@@ -161,8 +161,20 @@ var RC = {
         "data": [],
     },
     "code_533": {
-        "code": 550,
+        "code": 533,
         "message": "App not defined",
+        "success": false,
+        "data": [],
+    },
+    "code_534": {
+        "code": 534,
+        "message": "App not deployed",
+        "success": false,
+        "data": [],
+    },
+    "code_535": {
+        "code": 535,
+        "message": "App not active, Contact the admin app",
         "success": false,
         "data": [],
     },
