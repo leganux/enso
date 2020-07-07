@@ -73,7 +73,7 @@ $(document).ready(function () {
         processing: true,
         serverSide: true,
         ajax: {
-            url: root_path + 'api/core/admin/datatable',
+            url: root_path + 'app/api/user/' + _app_id_ + '/datatable',
             type: "POST"
         },
     });
@@ -111,7 +111,7 @@ $(document).ready(function () {
             return false;
         }
 
-        save_data_api(root_path + 'api/core/admin', body, UPDATE, function () {
+        save_data_api(root_path + 'app/api/user/' + _app_id_, body, UPDATE, function () {
             draw_datatable_rs(DT);
             UPDATE = '';
             $('#modal_new_edit').modal('hide');
@@ -121,7 +121,7 @@ $(document).ready(function () {
     $(document.body).on('change', '.actived_element', function () {
         UPDATE = $(this).val();
         var isChecked = $(this).prop('checked');
-        save_data_api(root_path + 'api/core/admin', {active: isChecked}, UPDATE, function () {
+        save_data_api(root_path + 'app/api/user/' + _app_id_, {active: isChecked}, UPDATE, function () {
             draw_datatable_rs(DT);
             UPDATE = '';
             $('#modal_new_edit').modal('hide');
@@ -130,7 +130,7 @@ $(document).ready(function () {
 
     $(document.body).on('click', '.update_element', function () {
         UPDATE = $(this).val();
-        $.getJSON(root_path + 'api/core/admin/' + UPDATE, {}, function (data) {
+        $.getJSON(root_path + 'app/api/user/' + _app_id_ + '/' + UPDATE, {}, function (data) {
             $('#modal_new_edit').modal('show');
             $('#in_username').val(data.data.username);
             $('#in_email').val(data.data.email);
@@ -150,7 +150,7 @@ $(document).ready(function () {
         let DELETE = $(this).val();
         confirm_delete(function () {
             $.ajax({
-                url: root_path + 'api/core/admin/' + DELETE,
+                url: root_path + 'app/api/user/' + _app_id_ + '/' + DELETE,
                 method: 'DELETE',
             }).done(function (data) {
                 HoldOn.close();
@@ -167,7 +167,7 @@ $(document).ready(function () {
 
     });
 
-    charge_select('#in_role', {where: {active: true}}, root_path + 'api/core/admin_roles', '_id', 'name');
+    charge_select('#in_role', {where: {active: true}}, root_path + 'app/api/user_roles/' + _app_id_, '_id', 'name');
     snakeThis('#in_username');
     upload_function('in_profile_image');
 });

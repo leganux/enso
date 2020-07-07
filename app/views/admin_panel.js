@@ -394,6 +394,8 @@ router.get('/app/:id/config', access_middleware, async function (req, res) {
     var i18n = await i18n_constructor.i18n_json(req);
     var id = req.params.id;
 
+    console.log('req.user', req.user)
+
     if (!req.cookies || !req.cookies._APP_ || req.cookies._APP_ === 'false') {
         res.redirect(base_admin_path + 'apps')
         return 0;
@@ -401,6 +403,16 @@ router.get('/app/:id/config', access_middleware, async function (req, res) {
 
     try {
         let app = await app_model.findById(id).populate({path: "owner", model: admin_model});
+
+        if (!app) {
+            res.status(404).json(response_codes.code_404)
+            return 0;
+        }
+
+        if (req.user.kind === 'admin' && app.owner._id != req.user.user) {
+            res.status(403).json(response_codes.code_403)
+            return 0;
+        }
 
         res.status(200).render('admin_panel/app_config', {
             app,
@@ -422,7 +434,7 @@ router.get('/app/:id/config', access_middleware, async function (req, res) {
                 core_files_path,
                 i18n,
                 user: req.user && req.user.user ? req.user.user : false,
-                _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
+                _app_id_: id,
                 mail_service: app.mail_service,
             })
         });
@@ -478,7 +490,7 @@ router.get('/app/:id/user_roles', access_middleware, async function (req, res) {
             core_files_path,
             i18n,
             user: req.user ? req.user : false,
-            _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
+            _app_id_: id,
             params: param_converter({
                 root_path: env.root_path,
                 site_files_path,
@@ -487,7 +499,72 @@ router.get('/app/:id/user_roles', access_middleware, async function (req, res) {
                 core_files_path,
                 i18n,
                 user: req.user && req.user.user ? req.user.user : false,
-                _app_id_: req.cookies && req.cookies._APP_ ? req.cookies._APP_ : false,
+                _app_id_: id,
+                mail_service: app.mail_service,
+            })
+        });
+
+    } catch (e) {
+        let err = response_codes.code_500;
+        err.error = e;
+        res.status(500).json(err);
+        return 0;
+    }
+
+
+});
+
+router.get('/app/:id/users', access_middleware, async function (req, res) {
+    let scr_access = req.access;
+    var i18n = await i18n_constructor.i18n_json(req);
+    var id = req.params.id;
+
+    if (!req.cookies || !req.cookies._APP_ || req.cookies._APP_ === 'false') {
+        res.redirect(base_admin_path + 'apps')
+        return 0;
+    }
+    if (req.cookies._APP_ !== id) {
+        res.status(533).json(response_codes.code_533)
+        return 0;
+    }
+
+    try {
+        let app = await app_model.findById(id).populate({path: "owner", model: admin_model});
+
+        if (!app) {
+            res.status(533).json(response_codes.code_533)
+            return 0;
+        }
+        if (!app.deployed) {
+            res.status(534).json(response_codes.code_534)
+            return 0;
+        }
+        if (!app.active) {
+            res.status(535).json(response_codes.code_535)
+            return 0;
+        }
+
+        res.status(200).render('admin_panel/app_users', {
+            app,
+            scr_access,
+            seo: seo,
+            resources: resources.dashboard,
+            root_path: env.root_path,
+            img_folder: site_files_path + 'img/',
+            base_admin_path,
+            core_files_path,
+            i18n,
+            user: req.user ? req.user : false,
+            _app_id_: id,
+            params: param_converter({
+                root_path: env.root_path,
+                site_files_path,
+                img_folder: site_files_path + 'img/',
+                base_admin_path,
+                core_files_path,
+                i18n,
+                user: req.user && req.user.user ? req.user.user : false,
+                _app_id_: id,
                 mail_service: app.mail_service,
             })
         });

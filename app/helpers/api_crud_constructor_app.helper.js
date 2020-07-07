@@ -4,6 +4,7 @@ const saltRounds = env.bcryp_salt_rounds;
 const moment = require('moment');
 const response_codes = require('./response_codes.helper').codes
 
+// req.who == req user logged must be equal to
 
 let api_functions = {};
 
@@ -12,9 +13,22 @@ let no_middleware = async function (req, res, next) {
     return 0;
 }
 
+var get_app_id = function (req) {
+    if (!req.params || !req.params.app_id) {
+        return false;
+    } else {
+        return req.params.app_id;
+    }
+}
+
 api_functions.create = function (router, model, middleware) {
-    router.post('/', middleware ? middleware : no_middleware, async (req, res) => {
+    router.post('/:app_id/', middleware ? middleware : no_middleware, async (req, res) => {
         const body = req.body;
+        //verify app
+        if (!get_app_id(req)) {
+            res.status(533).json(response_codes.code_533)
+            return 0;
+        }
 
         if (body.password) {
             body.password = await bcrypt.hash(body.password, saltRounds);
@@ -23,6 +37,8 @@ api_functions.create = function (router, model, middleware) {
         if (req.user && req.user.user) {
             body.owner = req.user.user;
         }
+
+        body.app = get_app_id(req);
 
         try {
             var response = await new model(body).save();
@@ -40,27 +56,32 @@ api_functions.create = function (router, model, middleware) {
             return 0;
         }
     });
-
 };
 
 api_functions.update = function (router, model, middleware) {
-    router.put('/:id', middleware ? middleware : no_middleware, async function (req, res) {
+    router.put('/:app_id/:id', middleware ? middleware : no_middleware, async function (req, res) {
         let body = req.body;
         let id = req.params.id;
 
         body.updatedAt = moment().format();
+        //verify app
+        if (!get_app_id(req)) {
+            res.status(533).json(response_codes.code_533)
+            return 0;
+        }
 
         try {
             if (body.password) {
                 body.password = await bcrypt.hash(body.password, saltRounds);
             }
-
             var response = await model.findById(id)
+
             //only for owner
             if (req.who && response.owner && req.who !== '*' && response.owner != req.who) {
                 res.status(403).json(response_codes.code_403);
                 return 0;
             }
+
 
             response = await model.findByIdAndUpdate(id, {$set: body});
 
@@ -83,7 +104,7 @@ api_functions.update = function (router, model, middleware) {
 };
 
 api_functions.updateWhere = function (router, model, middleware) {
-    router.put('/', middleware ? middleware : no_middleware, async function (req, res) {
+    router.put('/:app_id/', middleware ? middleware : no_middleware, async function (req, res) {
         let body = req.body.body;
         let where = req.body.where;
         let or = req.body.or;
@@ -93,8 +114,14 @@ api_functions.updateWhere = function (router, model, middleware) {
         let sort = req.body.sort;
         var find = {};
 
-        body.updatedAt = moment().format();
 
+        //verify app
+        if (!get_app_id(req)) {
+            res.status(533).json(response_codes.code_533)
+            return 0;
+        }
+
+        body.updatedAt = moment().format();
 
         if (!where && !or && !and) {
             res.status(435).json(response_codes.code_435);
@@ -166,16 +193,13 @@ api_functions.updateWhere = function (router, model, middleware) {
             if (body.password) {
                 body.password = await bcrypt.hash(body.password, saltRounds);
             }
+
+
             var actObj = await query.exec();
 
             if (!actObj) {
                 res.status(404).json(response_codes.code_404);
                 return 0;
-            }
-
-
-            for (const [key, val] of Object.entries(body)) {
-                actObj[key] = val;
             }
 
             //only for owner
@@ -184,8 +208,20 @@ api_functions.updateWhere = function (router, model, middleware) {
                 return 0;
             }
 
-            var response = await actObj.save();
+            for (const [key, val] of Object.entries(body)) {
+                actObj[key] = val;
+            }
 
+            actObj.app = get_app_id(req)
+
+            if (actObj.owner != req.user.user && req.user.kind == 'admin' && req.who !== '*') {
+                if (!response) {
+                    res.status(403).json(response_codes.code_403);
+                    return 0;
+                }
+            }
+
+            var response = await actObj.save();
 
             if (!response) {
                 res.status(434).json(response_codes.code_434);
@@ -207,7 +243,7 @@ api_functions.updateWhere = function (router, model, middleware) {
 
 api_functions.readOne = function (router, model, middleware, populate) {
 
-    router.get('/one', middleware ? middleware : no_middleware, async function (req, res) {
+    router.get('/:app_id/one', middleware ? middleware : no_middleware, async function (req, res) {
         let body = req.query.data;
         let where = req.query.where;
         let or = req.query.or;
@@ -216,6 +252,19 @@ api_functions.readOne = function (router, model, middleware, populate) {
         let paginate = req.query.paginate;
         let sort = req.query.sort;
         var find = {};
+
+        //verify app
+        if (!get_app_id(req)) {
+            res.status(533).json(response_codes.code_533)
+            return 0;
+        }
+
+        //only for owner
+        if (req.who && req.who !== '*') {
+            find['$and'].push({'owner': req.who})
+        }
+
+        find['$and'].push({'app': get_app_id(req)})
 
 
         if (where) {
@@ -249,12 +298,9 @@ api_functions.readOne = function (router, model, middleware, populate) {
 
         }
 
-        //only for owner
-        if (req.who && req.who !== '*') {
-            find['$and'].push({'owner': req.who})
-        }
 
         let query = model.findOne(find);
+
 
         if (select) {
             if (typeof select == 'string') {
@@ -300,6 +346,7 @@ api_functions.readOne = function (router, model, middleware, populate) {
                 return 0;
             }
 
+
             let ret = response_codes.code_200;
             ret.data = response;
             res.status(200).json(ret);
@@ -316,7 +363,7 @@ api_functions.readOne = function (router, model, middleware, populate) {
 
 api_functions.read = function (router, model, middleware, populate) {
 
-    router.get('/', middleware ? middleware : no_middleware, async function (req, res) {
+    router.get('/:app_id/', middleware ? middleware : no_middleware, async function (req, res) {
 
 
         let body = req.query.data;
@@ -327,6 +374,23 @@ api_functions.read = function (router, model, middleware, populate) {
         let paginate = req.query.paginate;
         let sort = req.query.sort;
         var find = {};
+
+
+        //verify app
+        if (!get_app_id(req)) {
+            res.status(533).json(response_codes.code_533)
+            return 0;
+        }
+
+        if (!find['$and']) {
+            find['$and'] = [];
+        }
+        //only for owner
+        if (req.who && req.who !== '*') {
+            find['$and'].push({'owner': req.who})
+        }
+
+        find['$and'].push({'app': get_app_id(req)})
 
 
         if (where) {
@@ -358,11 +422,6 @@ api_functions.read = function (router, model, middleware, populate) {
 
             find = {$and: inner_and};
 
-        }
-
-        //only for owner
-        if (req.who && req.who !== '*') {
-            find['$and'].push({'owner': req.who})
         }
 
 
@@ -428,11 +487,18 @@ api_functions.read = function (router, model, middleware, populate) {
 
 api_functions.readById = function (router, model, middleware, populate) {
 
-    router.get('/:id', middleware ? middleware : no_middleware, async function (req, res) {
+    router.get('/:app_id/:id', middleware ? middleware : no_middleware, async function (req, res) {
         let id = req.params.id;
         let select = req.query.select;
         let paginate = req.query.paginate;
         let sort = req.query.sort;
+        //verify app
+        if (!get_app_id(req)) {
+            console.log('Entrqui')
+
+            res.status(533).json(response_codes.code_533)
+            return 0;
+        }
 
 
         let query = model.findById(id)
@@ -483,6 +549,7 @@ api_functions.readById = function (router, model, middleware, populate) {
                 return 0;
             }
 
+
             if (!response) {
                 res.status(404).json(response_codes.code_404);
                 return 0;
@@ -504,10 +571,16 @@ api_functions.readById = function (router, model, middleware, populate) {
 
 api_functions.updateOrCreate = function (router, model, middleware) {
 
-    router.post('/updateOrCreate', middleware ? middleware : no_middleware, async function (req, res) {
+    router.post('/:app_id/updateOrCreate', middleware ? middleware : no_middleware, async function (req, res) {
         var find = {};
         let body = req.body.data;
         let where = req.body.where;
+
+        //verify app
+        if (!get_app_id(req)) {
+            res.status(533).json(response_codes.code_533)
+            return 0;
+        }
 
 
         if (where) {
@@ -521,9 +594,16 @@ api_functions.updateOrCreate = function (router, model, middleware) {
             find['$and'].push({'owner': req.who})
         }
 
+        find['$and'].push({'app': get_app_id(req)})
 
         try {
             var query = await model.findOne(where);
+
+            //only for owner
+            if (req.who && query.owner && req.who !== '*' && query.owner !== req.who) {
+                res.status(403).json(response_codes.code_403);
+                return 0;
+            }
 
 
             if (!query) {
@@ -563,8 +643,16 @@ api_functions.updateOrCreate = function (router, model, middleware) {
 };
 
 api_functions.delete = function (router, model, middleware) {
-    router.delete('/:id', middleware ? middleware : no_middleware, async function (req, res) {
+    router.delete('/:app_id/:id', middleware ? middleware : no_middleware, async function (req, res) {
         var id = req.params.id;
+
+        //verify app
+        if (!get_app_id(req)) {
+            res.status(533).json(response_codes.code_533)
+            return 0;
+        }
+
+
         try {
             var response = await model.findById(id);
             //only for owner
@@ -572,6 +660,7 @@ api_functions.delete = function (router, model, middleware) {
                 res.status(403).json(response_codes.code_403);
                 return 0;
             }
+
             response = await model.findByIdAndRemove(id);
 
             if (!response) {
@@ -603,8 +692,18 @@ api_functions.datatable = function (router, model, middleware, populate, search_
         }
     }
 
-    router.post('/datatable', middleware ? middleware : no_middleware, async (req, res) => {
+
+    router.post('/:app_id/datatable', middleware ? middleware : no_middleware, async (req, res) => {
         var order = {};
+
+
+        //verify app
+        if (!get_app_id(req)) {
+            res.status(533).json(response_codes.code_533)
+            return 0;
+        }
+
+
         if (req.body.columns && req.body.order) {
             req.body.order.map((item, i) => {
                 var name = req.body.columns[item.column].data;
@@ -615,11 +714,12 @@ api_functions.datatable = function (router, model, middleware, populate, search_
 
         var find = {};
 
-
         //only for owner
         if (req.who && req.who !== '*') {
             find['owner'] = req.who.toString();
         }
+
+        find['app'] = get_app_id(req);
 
         model.dataTables({
             limit: req.body.length,
@@ -630,7 +730,7 @@ api_functions.datatable = function (router, model, middleware, populate, search_
             },
             sort: order,
             populate: populate,
-            find
+            find: find
         }).then(async function (table) {
             table.success = true;
             table.message = 'OK';

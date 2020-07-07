@@ -12,15 +12,27 @@ const {execSync, spawnSync} = require('child_process');
 
 api_crud.all(router, app, access_middleware, [{path: 'owner', model: 'admin'}], 'name,description,token');
 
-router.post('/deploy/', access_middleware, async (req, res) => {
-    if (!req.cookies || !req.cookies._APP_) {
+router.post('/deploy/:id', access_middleware, async (req, res) => {
+    if (!req.params || !req.params.id) {
         res.status(533).json(response_codes.code_533)
         return 0;
     }
 
     try {
-        let app_id = req.cookies._APP_;
+        let app_id = req.params.id;
         let my_app = await app.findById(app_id);
+
+        if (!my_app) {
+            res.status(404).json(response_codes.code_404)
+            return 0;
+        }
+
+        if (my_app.owner != req.user.user && req.user.kind == 'admin') {
+            console.log('HERE')
+            res.status(403).json(response_codes.code_403)
+            return 0;
+        }
+
         let response = response_codes.code_200;
         let folder_dir_out = '../../../cloud/app_' + my_app._id + '/';
         let folder_dir_in = '../../../cloud/base';

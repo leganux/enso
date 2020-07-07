@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"enso.user_roles"}],"uuid":"d2ca2e1c8b4041f298864790943594f1"}

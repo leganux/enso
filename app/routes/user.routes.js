@@ -3,9 +3,9 @@ const router = express.Router();
 const user_model = require('./../models/users.m');
 const user_role_model = require('./../models/user_roles.m');
 const app_model = require('./../models/user_roles.m');
-const api_crud = require('../../helpers/api_crud_constructor.helper');
+const api_crud = require('../helpers/api_crud_constructor_app.helper');
 
-const access_middleware = require('./../../auth/auth.middleware').auth
+const access_middleware = require('./../auth/auth.middleware').auth
 
 api_crud.all(router, user_model, access_middleware,
     [

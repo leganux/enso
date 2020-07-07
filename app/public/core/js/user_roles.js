@@ -9,31 +9,10 @@ $(document).ready(function () {
                 "data": "_id"
             },
             {
-                "data": "username"
+                "data": "name"
             },
             {
-                "data": "email"
-            },
-            {
-                "data": "password",
-                render: function (data) {
-                    return data.substring(0, 13) + '...';
-                }
-            },
-            {
-                data: 'image',
-                render: function (data, v, row) {
-                    return '<img src="' + data + '" class="img-fluid img-thumbnail">'
-                }
-            },
-            {
-                "data": "role",
-                render: function (data, v, row) {
-                    if (data._id) {
-                        return data.name
-                    }
-                    return data;
-                }
+                "data": "description"
             },
             {
                 "data": "active",
@@ -69,59 +48,47 @@ $(document).ready(function () {
                 }
             }
 
+
         ],
         processing: true,
         serverSide: true,
         ajax: {
-            url: root_path + 'api/core/admin/datatable',
+            url: root_path + 'app/api/user_roles/' + _app_id_ + '/datatable',
             type: "POST"
         },
     });
+
+
     draw_datatable_rs(DT);
 
     $('#btn_new_element').click(function () {
         $('#modal_new_edit').modal('show');
-        $('#in_username').val('');
-        $('#in_email').val('');
-        $('#in_password').val('');
-        $('#in_profile_image').val('');
-        $('#in_profile_image_save').val('');
-        $('#in_role').val('-1');
-        UPDATE =''
+        $('#in_name').val('');
+        $('#in_description').val('');
     });
 
     $('#save_changes').click(function () {
         let body = {};
-        body.username = $('#in_username').val().trim()
-        body.email = $('#in_email').val().trim()
-        body.password = $('#in_password').val().trim()
-        body.role = $('#in_role').val().trim()
-        body.image = $('#in_profile_image_save').val().trim()
+        body.name = $('#in_name').val().trim()
+        body.description = $('#in_description').val().trim()
 
-        if (body.useranme === '' || body.email === '' || body.password === '' || body.role === '-1') {
+
+        if (body.name === '' || body.description === '') {
             notify_warning(i18n.fill_all_fields)
             return false;
         }
-        if (!body.email.includes('@') || !body.email.includes('.')) {
-            notify_warning(i18n.invalid_email)
-            return false;
-        }
-        if (body.password.length < 8) {
-            notify_warning(i18n.password_too_short)
-            return false;
-        }
-
-        save_data_api(root_path + 'api/core/admin', body, UPDATE, function () {
+        save_data_api(root_path + 'app/api/user_roles/' + _app_id_, body, UPDATE, function () {
             draw_datatable_rs(DT);
             UPDATE = '';
             $('#modal_new_edit').modal('hide');
         });
     });
 
+
     $(document.body).on('change', '.actived_element', function () {
         UPDATE = $(this).val();
         var isChecked = $(this).prop('checked');
-        save_data_api(root_path + 'api/core/admin', {active: isChecked}, UPDATE, function () {
+        save_data_api(root_path + 'app/api/user_roles/' + _app_id_ + '/', {active: isChecked}, UPDATE, function () {
             draw_datatable_rs(DT);
             UPDATE = '';
             $('#modal_new_edit').modal('hide');
@@ -130,13 +97,10 @@ $(document).ready(function () {
 
     $(document.body).on('click', '.update_element', function () {
         UPDATE = $(this).val();
-        $.getJSON(root_path + 'api/core/admin/' + UPDATE, {}, function (data) {
+        $.getJSON(root_path + 'app/api/user_roles/' + _app_id_ + '/' + UPDATE, {}, function (data) {
             $('#modal_new_edit').modal('show');
-            $('#in_username').val(data.data.username);
-            $('#in_email').val(data.data.email);
-            $('#in_password').val('');
-            $('#in_role').val(data.data.role);
-            $('#in_profile_image_save').val(data.data.image);
+            $('#in_name').val(data.data.name);
+            $('#in_description').val(data.data.description);
             HoldOn.close();
             notify_success(data.message);
         }).fail(function (err) {
@@ -150,7 +114,7 @@ $(document).ready(function () {
         let DELETE = $(this).val();
         confirm_delete(function () {
             $.ajax({
-                url: root_path + 'api/core/admin/' + DELETE,
+                url: root_path + 'app/api/user_roles/' + _app_id_ + '/' + DELETE,
                 method: 'DELETE',
             }).done(function (data) {
                 HoldOn.close();
@@ -167,7 +131,5 @@ $(document).ready(function () {
 
     });
 
-    charge_select('#in_role', {where: {active: true}}, root_path + 'api/core/admin_roles', '_id', 'name');
-    snakeThis('#in_username');
-    upload_function('in_profile_image');
+
 });

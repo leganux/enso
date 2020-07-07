@@ -62,6 +62,13 @@ let auth = async function (req, res, next) {
             let id = arr_url[pos];
             item_url = item_url.replace(':name', id)
         }
+        if (item_url.includes(':app_id')) {
+            let arr = item_url.split('/');
+            let arr_url = url.split('/');
+            let pos = arr.indexOf(':app_id');
+            let id = arr_url[pos];
+            item_url = item_url.replace(':app_id', id)
+        }
 
 
         if (item_url === url && method === item_method) {

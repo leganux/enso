@@ -8,6 +8,7 @@ require('./system/socket_server.system').io;
 require('./system/logs/log_controller');
 
 const api_routes = require('./routes/_api.routes')
+const app_routes = require('./routes/_app.routes')
 const view_engine = require('./views/view_engine')
 const express = require('express');
 const path = require('path');
@@ -15,6 +16,7 @@ const path = require('path');
 
 app.use(env.root_path + 'auth', auth);
 app.use(env.root_path + 'api', api_routes);
+app.use(env.root_path + 'app/api', app_routes);
 app.use(env.root_path, view_engine);
 app.use(env.root_path + 'content/', express.static(path.join(__dirname, 'public')));
 app.set("views", path.join(__dirname, "views"));
