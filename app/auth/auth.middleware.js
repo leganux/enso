@@ -1,4 +1,5 @@
 const admin_allowed_routes = require('./../helpers/allowed_routes.helper').admin_allowed_routes;
+const user_allowed_routes = require('./../helpers/allowed_routes.helper').user_allowed_routes;
 const response_code = require('./../helpers/response_codes.helper').codes;
 
 function stripTrailingSlash(str) {
@@ -24,6 +25,12 @@ let auth = async function (req, res, next) {
     }
     if (req.user.kind === 'admin') {
         routes = await admin_allowed_routes(req);
+        if (!routes || !routes.rules || routes.rules.length < 1) {
+            res.status(403).json(response_code.code_403);
+            return undefined;
+        }
+    } else if (req.user.kind === 'user') {
+        routes = await user_allowed_routes(req);
         if (!routes || !routes.rules || routes.rules.length < 1) {
             res.status(403).json(response_code.code_403);
             return undefined;

@@ -28,6 +28,8 @@ $(document).ready(function () {
         body.mail_port = $('#app_mail_port').val()
         body.mail_user = $('#app_mail_user').val()
         body.mail_pass = $('#app_mail_password').val()
+        body.default_role = $('#default_role').val()
+        body.default_role_new = $('#default_role_register').val()
 
         save_data_api(root_path + 'api/core/app', body, _app_id_, function (data) {
             console.log(data);

@@ -1,6 +1,9 @@
 setTimeout(() => {
-    if (user) {
+    if (user && kind_of_user == 'admin') {
         charge_select('#app_select_', {where: {active: true, owner: user}}, root_path + 'api/core/app', '_id', 'name');
+        $('#app_select_').show()
+    } else {
+        $('#app_select_').hide()
     }
 
     setTimeout(() => {

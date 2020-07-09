@@ -576,6 +576,7 @@ api_functions.updateOrCreate = function (router, model, middleware) {
         let body = req.body.data;
         let where = req.body.where;
 
+
         //verify app
         if (!get_app_id(req)) {
             res.status(533).json(response_codes.code_533)
@@ -589,10 +590,14 @@ api_functions.updateOrCreate = function (router, model, middleware) {
             }
         }
 
+        if (!find['$and']) {
+            find['$and'] = [];
+        }
         //only for owner
         if (req.who && req.who !== '*') {
             find['$and'].push({'owner': req.who})
         }
+
 
         find['$and'].push({'app': get_app_id(req)})
 
@@ -600,13 +605,14 @@ api_functions.updateOrCreate = function (router, model, middleware) {
             var query = await model.findOne(where);
 
             //only for owner
-            if (req.who && query.owner && req.who !== '*' && query.owner !== req.who) {
+            if (query && req.who && query.owner && req.who !== '*' && query.owner !== req.who) {
                 res.status(403).json(response_codes.code_403);
                 return 0;
             }
 
 
             if (!query) {
+                where.app = get_app_id(req)
                 query = new model(where);
             }
 

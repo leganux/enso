@@ -5,6 +5,7 @@ const dataTables = require('mongoose-datatables');
 const admin = require('./admin.m')
 
 
+
 const app = new Schema({
     name: {
         type: String,
@@ -23,6 +24,16 @@ const app = new Schema({
         type: Schema.Types.ObjectId,
         required: true,
         ref: admin
+    },
+    default_role: {
+        type: String,
+        required: false,
+
+    },
+    default_role_new: {
+        type: String,
+        required: false,
+
     },
     deployed: {
         type: Boolean,

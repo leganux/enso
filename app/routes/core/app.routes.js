@@ -3,12 +3,162 @@ const router = express.Router();
 const api_crud = require('../../helpers/api_crud_constructor.helper');
 const response_codes = require('../../helpers/response_codes.helper').codes;
 const app = require('./../../models/core/app.m.js');
+const user_roles = require('./../../models/user_roles.m');
+const user_routes = require('./../../models/routes_user.m');
+const user_permission = require('./../../models/user_permission_by_rol.m');
 const admin = require('./../../models/core/app.m.js');
 const access_middleware = require('./../../auth/auth.middleware').auth
 var copydir = require('copy-dir');
 var path = require('path');
 const fs = require('fs');
 const {execSync, spawnSync} = require('child_process');
+
+var add_user_default_path_and_permission = function (role_id, app_id) {
+    let routes_admin_list = [
+        {
+            url: 'dashboard',
+            description: 'Dashboard panel',
+            type: 'admin_panel',
+            active: true
+        },
+        {
+            url: 'app/:name/config',
+            description: 'App configuration',
+            type: 'admin_panel',
+            active: true
+        }, {
+            url: 'app/:name/user_roles',
+            description: 'Roles of users',
+            type: 'admin_panel',
+            active: true
+        }, {
+            url: 'app/:name/user_permission',
+            description: 'Permission user by role',
+            type: 'admin_panel',
+            active: true
+        }, {
+            url: 'app/:name/dynamic_db',
+            description: 'Dynamic Database',
+            type: 'admin_panel',
+            active: true
+        }, {
+            url: 'app/:name/cloud_functions',
+            description: 'Rest functions',
+            type: 'admin_panel',
+            active: true
+        }, {
+            url: 'app/:name/files',
+            description: 'File Admin',
+            type: 'admin_panel',
+            active: true
+        }, {
+            url: 'app/:name/cron',
+            description: 'Cron functions panel',
+            type: 'admin_panel',
+            active: true
+        }, {
+            url: 'app/:name/mailing',
+            description: 'Mailing panel',
+            type: 'admin_panel',
+            active: true
+        }, {
+            url: 'app/:name/sms_gateway',
+            description: 'Gateway to send SMS ',
+            type: 'admin_panel',
+            active: true
+        }, {
+            url: 'app/:name/webservices',
+            description: 'Webservices panel config',
+            type: 'admin_panel',
+            active: true
+        }, {
+            url: 'app/:name/users',
+            description: 'Users panel',
+            type: 'admin_panel',
+            active: true
+        }, {
+            url: 'app/api/user_roles/:app_id',
+            description: 'roles of users ',
+            type: 'api',
+            active: true,
+            methods: 'POST,GET,PUT,DELETE'
+        }, {
+            url: 'app/api/user/:app_id',
+            description: 'user in this app',
+            type: 'api',
+            active: true,
+            methods: 'POST,GET,PUT,DELETE'
+        },
+        {
+            url: 'app/api/routes/:app_id',
+            description: 'routes for users',
+            type: 'api',
+            active: true,
+            methods: 'POST,GET,PUT,DELETE'
+        }, {
+            url: 'app/api/permission/role/:app_id',
+            description: 'Permission by roles',
+            type: 'api',
+            active: true,
+            methods: 'POST,GET,PUT,DELETE'
+        }, {
+            url: 'api/core/app/deploy/:app_id',
+            description: 'Deploying this app',
+            type: 'api',
+            active: true,
+            methods: 'POST,GET,PUT,DELETE'
+        }, {
+            url: 'api/core/app/',
+            description: 'Save changes in  app',
+            type: 'api',
+            active: true,
+            methods: 'POST,GET,PUT,DELETE'
+        },
+    ];
+    routes_admin_list.map(async function (item, i) {
+
+        let rExist = await user_routes.findOne({
+            app: app_id,
+            type: item.type,
+            url: item.url
+        });
+
+        if (!rExist) {
+            item.app = app_id;
+            rExist = new user_routes(item);
+            rExist = await rExist.save()
+        }
+
+        let perm = await user_permission.findOne({
+            app: app_id,
+            role: role_id,
+            route: rExist._id
+        });
+
+        if (!perm) {
+            perm = new user_permission({
+                role: role_id,
+                route: rExist._id,
+                app: app_id
+            })
+            if (item.type == 'admin_panel') {
+                perm.see = true;
+            } else {
+                perm.create = true;
+                perm.read_me = false;
+                perm.read_all = true;
+                perm.update_me = false;
+                perm.update_all = true;
+                perm.delete_me = false;
+                perm.delete_all = true;
+            }
+            perm = await perm.save()
+
+        }
+
+    });
+    return 1;
+}
 
 api_crud.all(router, app, access_middleware, [{path: 'owner', model: 'admin'}], 'name,description,token');
 
@@ -28,7 +178,7 @@ router.post('/deploy/:id', access_middleware, async (req, res) => {
         }
 
         if (my_app.owner != req.user.user && req.user.kind == 'admin') {
-            console.log('HERE')
+
             res.status(403).json(response_codes.code_403)
             return 0;
         }
@@ -51,6 +201,33 @@ router.post('/deploy/:id', access_middleware, async (req, res) => {
             return 0;
         }
 
+
+        if (!my_app.default_role || my_app.default_role == '') {
+            let df_role = new user_roles({
+                name: 'Unregistered',
+                description: 'The default role for users that are not registered or logged ',
+                active: true,
+                app: my_app._id,
+            });
+            let role = await df_role.save()
+            my_app.default_role = role._id;
+
+        }
+        if (!my_app.default_role_new || my_app.default_role_new == '') {
+
+
+            let df_role = new user_roles({
+                name: 'New user role  by default',
+                description: 'The default role for users that are register by themselves ',
+                active: true,
+                app: my_app._id,
+            });
+            let role = await df_role.save()
+            my_app.default_role_new = role._id;
+            add_user_default_path_and_permission(role._id, app_id)
+        }
+
+
         my_app.deployed = true;
         await my_app.save();
 
@@ -68,6 +245,8 @@ router.post('/deploy/:id', access_middleware, async (req, res) => {
             mail_service: my_app.mail_service,
             mail_host: my_app.mail_host,
             mail_port: my_app.mail_port,
+            default_role: my_app.default_role,
+            default_role_new: my_app.default_role_new,
         }
 
         variables_json = JSON.stringify(variables_json)

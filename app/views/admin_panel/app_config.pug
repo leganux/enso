@@ -65,6 +65,14 @@ html
                                                 input(type='checkbox' checked=app.allow_register)#allow_register
                                                 |  !{i18n.allow_users_register}
 
+                                            br
+                                            br
+                                            label !{i18n.default_role_not_register_logged_users}
+                                            input.form-control#default_role(value=app.default_role)
+                                            label !{i18n.default_role_new_users}
+                                            input.form-control#default_role_register(value=app.default_role_new)
+
+
 
 
                                         .col-12.col-md-6
@@ -75,7 +83,7 @@ html
                                             label !{i18n.admin} !{i18n.owner}
                                             input.form-control(value=app.owner.username disabled=true)#app_owner
                                             br
-                                            button.btn.btn-block.btn-primary#btn_save_app !{i18n.save}
+                                            button.btn.btn-block.btn-dark#btn_save_app !{i18n.save}
 
                                 #email.tab-pane.fade
                                     br
@@ -97,7 +105,7 @@ html
                                             label !{i18n.password}
                                             input.form-control(type='password' value=app.mail_pass)#app_mail_password
                                             br
-                                            button.btn.btn-block.btn-primary#btn_save_email !{i18n.save}
+                                            button.btn.btn-block.btn-dark#btn_save_email !{i18n.save}
 
 
                                 #database.tab-pane.fade
@@ -119,7 +127,7 @@ html
                                             label !{i18n.password}
                                             input.form-control(type='password' value=app.db_password)#app_db_password
                                             br
-                                            button.btn.btn-block.btn-primary#btn_save_db !{i18n.save}
+                                            button.btn.btn-block.btn-dark#btn_save_db !{i18n.save}
 
                         .card-footer
                             | !{i18n.create_modify_delete}
