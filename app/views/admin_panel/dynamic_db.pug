@@ -1,0 +1,83 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        include template/seo
+        include template/styles
+    body.hold-transition.sidebar-mini.accent-pink
+        .wrapper
+            include template/nav
+            include template/aside
+            .content-wrapper
+                section.content-header
+                    .container-fluid
+                        .row.mb-2
+                            .col-sm-6
+                                h1 !{i18n.dynamic_db}
+                            |
+                            .col-sm-6
+                                ol.breadcrumb.float-sm-right
+                                    li.breadcrumb-item
+                                        a(href=base_admin_path + 'dashboard') !{i18n.home}
+                                    |
+                                    li.breadcrumb-item.active !{i18n.dynamic_db}
+                section.content
+
+                    br
+                    ul.nav.nav-tabs
+                        li.nav-item
+                            a.nav-link.active(data-toggle='tab', href='#tables') Tables
+                        li.nav-item
+                            a.nav-link(data-toggle='tab', href='#structure') Structure
+                        li.nav-item
+                            a.nav-link(data-toggle='tab', href='#data') Data
+
+                    #myTabContent.tab-content
+                        #tales.tab-pane.fade.show.active
+                            .card
+                                .card-header.bg-dark
+                                    .row
+                                        .col-12.col-md-10
+                                            h3.card-title !{i18n.list_of} !{i18n.dynamic_db}
+                                        .col-12.col-md-2
+                                            button.bg-pink.btn.btn-block#btn_new_element !{i18n.new}
+
+
+                                .card-body
+                                    table.table.table-bordered.table-striped.display.table-hover#datatable
+                                        thead
+                                            tr
+                                                th !{i18n.id}
+                                                th !{i18n.language}
+                                                th !{i18n.reference}
+                                                th !{i18n.content}
+                                                th !{i18n.active}
+                                                th !{i18n.date_register}
+                                                th !{i18n.date_last_update}
+                                                th !{i18n.actions}
+
+
+
+                        #structure.tab-pane.fade
+                            p
+                                | Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.
+                        #data.tab-pane.fade
+                            p
+                                | Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.
+
+
+            include template/footer
+            include template/control_bar
+
+        //include modals/dynamic_
+        include template/params
+        include template/scripts
+        script.
+            $(document).ready(function () {
+                $('#menu_dynamyc_db').addClass('active');
+
+            });
+        script(src=core_files_path + 'js/common.js')
+        script(src=core_files_path + 'js/dynamic_db.js')
+

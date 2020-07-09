@@ -343,4 +343,285 @@ router.get('/app/:id/user_permission', access_middleware, async function (req, r
 
 });
 
+router.get('/app/:id/dynamic_db', access_middleware, async function (req, res) {
+    var id = req.params.id;
+    if (!req.cookies || !req.cookies._APP_ || req.cookies._APP_ === 'false') {
+        res.redirect(base_admin_path + 'apps')
+        return 0;
+    }
+    if (req.cookies._APP_ !== id) {
+        res.status(533).json(response_codes.code_533)
+        return 0;
+    }
+
+    try {
+        let app = await app_model.findById(id).populate({path: "owner", model: admin_model});
+
+        if (!app) {
+            res.status(533).json(response_codes.code_533)
+            return 0;
+        }
+        if (!app.deployed) {
+            res.status(534).json(response_codes.code_534)
+            return 0;
+        }
+        if (!app.active) {
+            res.status(535).json(response_codes.code_535)
+            return 0;
+        }
+
+        let config = await get_app_basic_config(req, res, {
+            app: model_to_json(app)
+        })
+        res.status(200).render('admin_panel/dynamic_db', config);
+    } catch (e) {
+        let err = response_codes.code_500;
+        err.error = e;
+        res.status(500).json(err);
+        return 0;
+    }
+
+
+});
+router.get('/app/:id/cloud_functions', access_middleware, async function (req, res) {
+    var id = req.params.id;
+    if (!req.cookies || !req.cookies._APP_ || req.cookies._APP_ === 'false') {
+        res.redirect(base_admin_path + 'apps')
+        return 0;
+    }
+    if (req.cookies._APP_ !== id) {
+        res.status(533).json(response_codes.code_533)
+        return 0;
+    }
+
+    try {
+        let app = await app_model.findById(id).populate({path: "owner", model: admin_model});
+
+        if (!app) {
+            res.status(533).json(response_codes.code_533)
+            return 0;
+        }
+        if (!app.deployed) {
+            res.status(534).json(response_codes.code_534)
+            return 0;
+        }
+        if (!app.active) {
+            res.status(535).json(response_codes.code_535)
+            return 0;
+        }
+
+        let config = await get_app_basic_config(req, res, {
+            app: model_to_json(app)
+        })
+        res.status(200).render('admin_panel/cloud_functions', config);
+    } catch (e) {
+        let err = response_codes.code_500;
+        err.error = e;
+        res.status(500).json(err);
+        return 0;
+    }
+
+
+});
+router.get('/app/:id/files', access_middleware, async function (req, res) {
+    var id = req.params.id;
+    if (!req.cookies || !req.cookies._APP_ || req.cookies._APP_ === 'false') {
+        res.redirect(base_admin_path + 'apps')
+        return 0;
+    }
+    if (req.cookies._APP_ !== id) {
+        res.status(533).json(response_codes.code_533)
+        return 0;
+    }
+
+    try {
+        let app = await app_model.findById(id).populate({path: "owner", model: admin_model});
+
+        if (!app) {
+            res.status(533).json(response_codes.code_533)
+            return 0;
+        }
+        if (!app.deployed) {
+            res.status(534).json(response_codes.code_534)
+            return 0;
+        }
+        if (!app.active) {
+            res.status(535).json(response_codes.code_535)
+            return 0;
+        }
+
+        let config = await get_app_basic_config(req, res, {
+            app: model_to_json(app)
+        })
+        res.status(200).render('admin_panel/files', config);
+    } catch (e) {
+        let err = response_codes.code_500;
+        err.error = e;
+        res.status(500).json(err);
+        return 0;
+    }
+
+
+});
+router.get('/app/:id/cron', access_middleware, async function (req, res) {
+    var id = req.params.id;
+    if (!req.cookies || !req.cookies._APP_ || req.cookies._APP_ === 'false') {
+        res.redirect(base_admin_path + 'apps')
+        return 0;
+    }
+    if (req.cookies._APP_ !== id) {
+        res.status(533).json(response_codes.code_533)
+        return 0;
+    }
+
+    try {
+        let app = await app_model.findById(id).populate({path: "owner", model: admin_model});
+
+        if (!app) {
+            res.status(533).json(response_codes.code_533)
+            return 0;
+        }
+        if (!app.deployed) {
+            res.status(534).json(response_codes.code_534)
+            return 0;
+        }
+        if (!app.active) {
+            res.status(535).json(response_codes.code_535)
+            return 0;
+        }
+
+        let config = await get_app_basic_config(req, res, {
+            app: model_to_json(app)
+        })
+        res.status(200).render('admin_panel/cron', config);
+    } catch (e) {
+        let err = response_codes.code_500;
+        err.error = e;
+        res.status(500).json(err);
+        return 0;
+    }
+
+
+});
+router.get('/app/:id/mailing', access_middleware, async function (req, res) {
+    var id = req.params.id;
+    if (!req.cookies || !req.cookies._APP_ || req.cookies._APP_ === 'false') {
+        res.redirect(base_admin_path + 'apps')
+        return 0;
+    }
+    if (req.cookies._APP_ !== id) {
+        res.status(533).json(response_codes.code_533)
+        return 0;
+    }
+
+    try {
+        let app = await app_model.findById(id).populate({path: "owner", model: admin_model});
+
+        if (!app) {
+            res.status(533).json(response_codes.code_533)
+            return 0;
+        }
+        if (!app.deployed) {
+            res.status(534).json(response_codes.code_534)
+            return 0;
+        }
+        if (!app.active) {
+            res.status(535).json(response_codes.code_535)
+            return 0;
+        }
+
+        let config = await get_app_basic_config(req, res, {
+            app: model_to_json(app)
+        })
+        res.status(200).render('admin_panel/mailing', config);
+    } catch (e) {
+        let err = response_codes.code_500;
+        err.error = e;
+        res.status(500).json(err);
+        return 0;
+    }
+
+
+});
+router.get('/app/:id/sms_gateway', access_middleware, async function (req, res) {
+    var id = req.params.id;
+    if (!req.cookies || !req.cookies._APP_ || req.cookies._APP_ === 'false') {
+        res.redirect(base_admin_path + 'apps')
+        return 0;
+    }
+    if (req.cookies._APP_ !== id) {
+        res.status(533).json(response_codes.code_533)
+        return 0;
+    }
+
+    try {
+        let app = await app_model.findById(id).populate({path: "owner", model: admin_model});
+
+        if (!app) {
+            res.status(533).json(response_codes.code_533)
+            return 0;
+        }
+        if (!app.deployed) {
+            res.status(534).json(response_codes.code_534)
+            return 0;
+        }
+        if (!app.active) {
+            res.status(535).json(response_codes.code_535)
+            return 0;
+        }
+
+        let config = await get_app_basic_config(req, res, {
+            app: model_to_json(app)
+        })
+        res.status(200).render('admin_panel/sms_gateway', config);
+    } catch (e) {
+        let err = response_codes.code_500;
+        err.error = e;
+        res.status(500).json(err);
+        return 0;
+    }
+
+
+});
+router.get('/app/:id/webservices', access_middleware, async function (req, res) {
+    var id = req.params.id;
+    if (!req.cookies || !req.cookies._APP_ || req.cookies._APP_ === 'false') {
+        res.redirect(base_admin_path + 'apps')
+        return 0;
+    }
+    if (req.cookies._APP_ !== id) {
+        res.status(533).json(response_codes.code_533)
+        return 0;
+    }
+
+    try {
+        let app = await app_model.findById(id).populate({path: "owner", model: admin_model});
+
+        if (!app) {
+            res.status(533).json(response_codes.code_533)
+            return 0;
+        }
+        if (!app.deployed) {
+            res.status(534).json(response_codes.code_534)
+            return 0;
+        }
+        if (!app.active) {
+            res.status(535).json(response_codes.code_535)
+            return 0;
+        }
+
+        let config = await get_app_basic_config(req, res, {
+            app: model_to_json(app)
+        })
+        res.status(200).render('admin_panel/webservices', config);
+    } catch (e) {
+        let err = response_codes.code_500;
+        err.error = e;
+        res.status(500).json(err);
+        return 0;
+    }
+
+
+});
+
 module.exports = router;
