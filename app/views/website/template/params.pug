@@ -1,0 +1,15 @@
+if params
+    each val in params
+        if val.kind == 'object'
+            script.
+                window['!{val.name}'] = JSON.parse('!{val.value}');
+        if val.kind == 'number'
+            script.
+                window['!{val.name}'] = Number('!{val.value}');
+        if val.kind == 'boolean'
+            script.
+                window['!{val.name}'] = eval('!{val.value}');
+        if val.kind == 'string'
+            script.
+                window['!{val.name}'] = '!{val.value}';
+

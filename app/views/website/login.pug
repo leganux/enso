@@ -1,0 +1,66 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        include template/seo
+        include template/styles
+
+    body.hold-transition.login-page.bg-dark
+        .login-box.bg-light
+            .login-logo.bg-pink
+                a(href=root_path)
+                    img.brand-image.img-fluid.animated.pulse.infinite(src=img_folder + 'logo.png', alt='Ensō Logo')
+
+
+            .card
+                .card-header
+
+                    center
+                        h2 !{app.name.toUpperCase()}
+                .card-body.login-card-body
+                    p.login-box-msg !{i18n.sign_in_instruction}
+
+                    form(action=root_path + 'auth/user/' + app._id, method='post')#login_form
+                        .input-group.mb-3
+                            input.form-control(type='email', placeholder=i18n.email, name='email')
+                            .input-group-append
+                                .input-group-text
+                                    span.fas.fa-envelope
+                        .input-group.mb-3
+                            input.form-control(type='password', placeholder=i18n.password, name='password')
+                            .input-group-append
+                                .input-group-text
+                                    span.fas.fa-lock
+                        .row
+                            .col-8
+
+                            .col-4
+                                button.btn.btn-primary.btn-block(type='submit') !{i18n.sign_in}
+                            // /.col
+                    //.social-auth-links.text-center.mb-3
+                        p - OR -
+                        a.btn.btn-block.btn-primary(href='#')
+                            i.fab.fa-facebook.mr-2
+                            |  Sign in using Facebook
+                        a.btn.btn-block.btn-danger(href='#')
+                            i.fab.fa-google-plus.mr-2
+                            |  Sign in using Google+
+                    hr
+                    .row
+                        .col-6
+                        .col-6
+                            p.mb-1
+                                a(href=root_path + 'app/reset/' + app._id) !{i18n.i_forgot_my_password}
+                            p.mb-0
+                                a.text-center(href=root_path + 'app/new_user/' + app._id) !{i18n.register}
+
+
+
+
+
+        include template/params
+        include template/scripts
+        script(src=core_files_path + 'js/common.js')
+        script.
+            setCookie('_APP_', false, 10);
