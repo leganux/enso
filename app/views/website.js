@@ -35,6 +35,10 @@ router.get('/app/login/:app_id', async function (req, res) {
         res.status(535).json(response_codes.code_535)
         return 0;
     }
+    if (!my_app.allow_see_backoffice) {
+        res.status(200).redirect(env.root_path)
+        return 0;
+    }
 
     var i18n = await i18n_constructor.i18n_json(req);
     res.status(200).render('website/login', {

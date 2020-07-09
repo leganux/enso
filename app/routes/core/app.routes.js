@@ -22,6 +22,32 @@ var add_user_default_path_and_permission = function (role_id, app_id) {
             active: true
         },
         {
+            url: 'catalogue/places',
+            description: 'Catalogue of places',
+            type: 'admin_panel',
+            active: true
+        }, {
+            url: 'catalogue/languages',
+            description: 'Catalogue of languages',
+            type: 'admin_panel',
+            active: true
+        }, {
+            url: 'catalogue/dynamic_content',
+            description: 'Catalogue of dynamic content',
+            type: 'admin_panel',
+            active: true
+        }, {
+            url: 'cdn',
+            description: 'Catalogue of places',
+            type: 'admin_panel',
+            active: true
+        }, {
+            url: 'cdn',
+            description: 'Catalogue of places',
+            type: 'admin_panel',
+            active: true
+        },
+        {
             url: 'app/:name/config',
             description: 'App configuration',
             type: 'admin_panel',
@@ -110,6 +136,61 @@ var add_user_default_path_and_permission = function (role_id, app_id) {
         }, {
             url: 'api/core/app/',
             description: 'Save changes in  app',
+            type: 'api',
+            active: true,
+            methods: 'POST,GET,PUT,DELETE'
+        },
+        {
+            url: 'api/places/country',
+            description: 'Places catalogue country',
+            type: 'api',
+            active: true,
+            methods: 'POST,GET,PUT,DELETE'
+        }, {
+            url: 'api/places/state',
+            description: 'Places catalogue state',
+            type: 'api',
+            active: true,
+            methods: 'POST,GET,PUT,DELETE'
+        }, {
+            url: 'api/places/city',
+            description: 'Places catalogue city',
+            type: 'api',
+            active: true,
+            methods: 'POST,GET,PUT,DELETE'
+        }, {
+            url: 'api/core/cdn',
+            description: 'cdn',
+            type: 'api',
+            active: true,
+            methods: 'POST,GET,PUT,DELETE'
+        }, {
+            url: 'api/core/cdn/scan_folder',
+            description: 'CDN Scan Folder',
+            type: 'api',
+            active: true,
+            methods: 'POST'
+        }, {
+            url: 'api/core/cdn/zip_uploader',
+            description: 'CDN upload ZIP',
+            type: 'api',
+            active: true,
+            methods: 'POST'
+        }, {
+            url: 'api/i18n/dynamic_content',
+            description: ' catalogue dynamic content',
+            type: 'api',
+            active: true,
+            methods: 'POST,GET,PUT,DELETE'
+        }, {
+            url: 'api/i18n/language_list',
+            description: 'List of languages for system',
+            type: 'api',
+            active: true,
+            methods: 'POST,GET,PUT,DELETE'
+        }, {
+            url: 'api/i18n/language_elements',
+            description: 'Elements of every languge',
             type: 'api',
             active: true,
             methods: 'POST,GET,PUT,DELETE'
