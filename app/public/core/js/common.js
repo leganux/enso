@@ -2,6 +2,16 @@ var draw_datatable_rs = function (datatable) {
     datatable.clear().draw();
 }
 
+var draw_datatable_local = function (array, datatable) {
+    if (!array || !datatable) {
+        return 0;
+    }
+    datatable.clear().draw();
+    HoldOn.open();
+    datatable.clear().rows.add(array).draw();
+    HoldOn.close();
+    notify_success('ok');
+}
 var draw_datatable = function (url, datatable) {
     if (!url || !datatable) {
         return 0;
@@ -43,6 +53,7 @@ var save_data_api = function (url, body, update, f_) {
         if (typeof f_ === 'function') {
             f_(data);
         }
+
     }).fail(function (err) {
         HoldOn.close();
         notify_error(err.responseJSON.message);

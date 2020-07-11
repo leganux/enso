@@ -23,35 +23,39 @@ html
                                     |
                                     li.breadcrumb-item.active !{i18n.dynamic_db}
                 section.content
+                    .card
+                        .card-header.bg-dark
+                            .row
+                                .col-12.col-md-8
+                                    h3.card-title !{i18n.list_of} !{i18n.dynamic_db}
+                                .col-12.col-md-4
+                                    button.bg-pink.btn.btn-block#btn_rebuild !{i18n.rebuild_database}
+                        .card-body
+                            br
+                            ul.nav.nav-tabs
+                                li.nav-item
+                                    a.nav-link.active(data-toggle='tab', href='#tables')#tab_tables Collections
+                                li.nav-item
+                                    a.nav-link.disabled(data-toggle='tab', href='#structure')#tab_structure Fields
+                                li.nav-item
+                                    a.nav-link.disabled(data-toggle='tab', href='#data')#tab_data Docs
 
-                    br
-                    ul.nav.nav-tabs
-                        li.nav-item
-                            a.nav-link.active(data-toggle='tab', href='#tables') Tables
-                        li.nav-item
-                            a.nav-link(data-toggle='tab', href='#structure') Structure
-                        li.nav-item
-                            a.nav-link(data-toggle='tab', href='#data') Data
 
-                    #myTabContent.tab-content
-                        #tales.tab-pane.fade.show.active
-                            .card
-                                .card-header.bg-dark
+                            #myTabContent.tab-content
+                                #tables.tab-pane.fade.show.active
+                                    br
                                     .row
-                                        .col-12.col-md-10
-                                            h3.card-title !{i18n.list_of} !{i18n.dynamic_db}
-                                        .col-12.col-md-2
+                                        .col-12.col-md-8
+                                        .col-12.col-md-4
                                             button.bg-pink.btn.btn-block#btn_new_element !{i18n.new}
-
-
-                                .card-body
+                                    br
                                     table.table.table-bordered.table-striped.display.table-hover#datatable
                                         thead
                                             tr
                                                 th !{i18n.id}
-                                                th !{i18n.language}
-                                                th !{i18n.reference}
-                                                th !{i18n.content}
+                                                th !{i18n.name}
+                                                th !{i18n.description}
+                                                th !{i18n.url}
                                                 th !{i18n.active}
                                                 th !{i18n.date_register}
                                                 th !{i18n.date_last_update}
@@ -59,18 +63,40 @@ html
 
 
 
-                        #structure.tab-pane.fade
-                            p
-                                | Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.
-                        #data.tab-pane.fade
-                            p
-                                | Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.
+                                #structure.tab-pane.fade
+                                    br
+                                    .row
+                                        .col-12.col-md-8
+                                        .col-12.col-md-4
+                                            button.bg-pink.btn.btn-block#btn_new_element_str !{i18n.new}
+                                    br
+
+                                    table.table.table-bordered.table-striped.display.table-hover#datatable_st
+                                        thead
+                                            tr
+                                                th !{i18n.id}
+                                                th !{i18n.name}
+                                                th !{i18n.description}
+                                                th !{i18n.kind}
+                                                th !{i18n.related}
+                                                th !{i18n.mandatory}
+                                                th !{i18n.default}
+                                                th !{i18n.default_type}
+                                                th !{i18n.default_custom}
+                                                th !{i18n.date_register}
+                                                th !{i18n.date_last_update}
+                                                th !{i18n.actions}
+
+                                #data.tab-pane.fade
+                                    p
+                                        | Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.
 
 
             include template/footer
             include template/control_bar
 
-        //include modals/dynamic_
+        include modals/dynamic_db_collection
+        include modals/dynamic_db_structure
         include template/params
         include template/scripts
         script.

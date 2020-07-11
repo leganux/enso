@@ -195,6 +195,19 @@ var add_user_default_path_and_permission = function (role_id, app_id) {
             active: true,
             methods: 'POST,GET,PUT,DELETE'
         },
+        {
+            url: 'app/api/db/collection/:app_id',
+            description: 'DB collection definition',
+            type: 'api',
+            active: true,
+            methods: 'POST,GET,PUT,DELETE'
+        },{
+            url: 'app/api/db/structure/:app_id',
+            description: 'Structure definition',
+            type: 'api',
+            active: true,
+            methods: 'POST,GET,PUT,DELETE'
+        },
     ];
     routes_admin_list.map(async function (item, i) {
 

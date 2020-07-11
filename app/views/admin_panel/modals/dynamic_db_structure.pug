@@ -1,0 +1,48 @@
+#modal_new_edit_str.modal.fade( aria-hidden='true', data-backdrop="static", data-keyboard="false")
+    .modal-dialog.modal-lg
+        .modal-content
+            .modal-header.bg-dark
+                h4.modal-title !{i18n.new_edit}
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                br
+                label !{i18n.name}
+                input(type="text").form-control#in_str_name
+                label !{i18n.description}
+                textarea(rows=5).form-control#in_str_description
+                label !{i18n.kind}
+                select.form-control#in_str_kind
+                    option(value="string") String
+                    option(value="number") Number
+                    option(value="boolean") Boolean
+                    option(value="date") Date
+                    option(value="buffer") Buffer
+                    option(value="mixed") Mixed
+                    option(value="array") Array
+                    option(value="oid_array") Object ID Array
+                    option(value="oid_single") Object ID Single
+                label !{i18n.related}
+                select.form-control#in_str_related
+                label !{i18n.mandatory}
+                select.form-control#in_str_mandatory
+                    option(value=true) !{i18n.yes}
+                    option(value=false) !{i18n.no}
+                label !{i18n.default}
+                select.form-control#in_str_default
+                    option(value=true) !{i18n.yes}
+                    option(value=false) !{i18n.no}
+                label !{i18n.default_type}
+                select.form-control#in_str_default_type
+                    option(value='timestamp') Timestamp
+                    option(value='math_random') Math Random
+                    option(value='math_random') String Random
+                    option(value='custom') !{i18n.custom}
+                label !{i18n.custom}
+                input(type="text").form-control#in_str_custom
+
+
+
+            .modal-footer.justify-content-end
+                button.btn.btn-default(type='button', data-dismiss='modal') !{i18n.cancel}
+                button.btn.bg-pink(type='button')#save_changes_str !{i18n.save}
