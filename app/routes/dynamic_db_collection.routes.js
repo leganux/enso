@@ -13,4 +13,8 @@ api_crud.all(router, dynamic_db_collection, access_middleware, [{
     model: fields
 }], 'url,description,type,name');
 
+router.post('/field/:app_id', access_middleware, async function (req, res) {
+    let body = req.body;
+});
+
 module.exports = router;

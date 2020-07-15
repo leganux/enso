@@ -265,22 +265,31 @@ $(document).ready(function () {
         $('#in_str_related').val('');
         $('#in_str_mandatory').val('false');
         $('#in_str_default').val('false');
+        $('#SP_dft_').hide();
         $('#in_str_default_type').val('timestamp');
         $('#in_str_custom').val('');
+        UPDATEstr = '';
     });
+
+    $('#in_str_default').change(function () {
+        if ($(this).val() == 'true') {
+            $('#SP_dft_').show();
+        } else {
+            $('#SP_dft_').hide();
+        }
+    })
 
     $('#save_changes_str').click(function () {
         let body = {};
         body.name = $('#in_str_name').val().trim();
-        body.name = $('#in_str_description').val().trim();
+        body.description = $('#in_str_description').val();
         body.kind = $('#in_str_kind').val().trim();
-        body.related = $('#in_str_related').val().trim();
+        body.related = $('#in_str_related').val();
         body.mandatory = $('#in_str_mandatory').val() == 'true';
-        body.default = $('#in_str_default').val().trim() == 'true';
-        body.default_type = $('#in_str_default_type').val().trim();
-        body.defult_custom = $('#in_str_custom').val().trim();
-        body.description = $('#in_description').val().trim();
-        body.app = _app_id__
+        body.default = $('#in_str_default').val() == 'true';
+        body.default_type = $('#in_str_default_type').val();
+        body.defult_custom = $('#in_str_custom').val();
+        body.app = _app_id_
 
 
         if (body.name === '' || body.description === '') {
@@ -288,13 +297,13 @@ $(document).ready(function () {
             return false;
         }
 
-        if (UPDATEstr !== '') {
-            save_data_api(root_path + 'app/api/db/collection/field/' + _app_id_ , body, '', function () {
+        if (UPDATEstr === '') {
+            save_data_api(root_path + 'app/api/db/collection/field/' + _app_id_, body, '', function () {
                 draw_datatable_local(DTstr);
                 $('#modal_new_edit').modal('hide');
             });
         } else {
-            save_data_api(root_path + 'app/api/db/collection/' + _app_id_ , body, UPDATEstr, function () {
+            save_data_api(root_path + 'app/api/db/collection/' + _app_id_, body, UPDATEstr, function () {
                 draw_datatable_local(DTstr);
                 $('#modal_new_edit').modal('hide');
             });
@@ -302,4 +311,5 @@ $(document).ready(function () {
 
     });
 
+    snakeThis('#in_str_name');
 });

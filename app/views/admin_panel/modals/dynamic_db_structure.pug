@@ -26,20 +26,21 @@
                 select.form-control#in_str_related
                 label !{i18n.mandatory}
                 select.form-control#in_str_mandatory
-                    option(value=true) !{i18n.yes}
-                    option(value=false) !{i18n.no}
+                    option(value='true') !{i18n.yes}
+                    option(value='false') !{i18n.no}
                 label !{i18n.default}
                 select.form-control#in_str_default
-                    option(value=true) !{i18n.yes}
-                    option(value=false) !{i18n.no}
-                label !{i18n.default_type}
-                select.form-control#in_str_default_type
-                    option(value='timestamp') Timestamp
-                    option(value='math_random') Math Random
-                    option(value='math_random') String Random
-                    option(value='custom') !{i18n.custom}
-                label !{i18n.custom}
-                input(type="text").form-control#in_str_custom
+                    option(value='false') !{i18n.no}
+                    option(value='true') !{i18n.yes}
+                #SP_dft_(style='display:none')
+                    label !{i18n.default_type}
+                    select.form-control#in_str_default_type
+                        option(value='timestamp') Timestamp
+                        option(value='math_random') Math Random
+                        option(value='math_random') String Random
+                        option(value='custom') !{i18n.custom}
+                    label !{i18n.custom}
+                    input(type="text").form-control#in_str_custom
 
 
 
