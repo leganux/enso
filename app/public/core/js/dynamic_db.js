@@ -1,9 +1,10 @@
+var UPDATE = '';
+var UPDATEstr = '';
+var STRUCTURE = '';
+var DATA = '';
 $(document).ready(function () {
     $.fn.dataTable.ext.errMode = 'none';
-    var UPDATE = '';
-    var UPDATEstr = '';
-    var STRUCTURE = '';
-    var DATA = '';
+
     var DT = $("#datatable").DataTable({
         "responsive": true,
         "data": {},
@@ -249,12 +250,7 @@ $(document).ready(function () {
             }
 
         ],
-        processing: true,
-        serverSide: true,
-        ajax: {
-            url: root_path + 'app/api/db/structure/' + _app_id_ + '/datatable',
-            type: "POST"
-        },
+        processing: false,
     });
 
     $('#btn_new_element_str').click(function () {
@@ -298,18 +294,94 @@ $(document).ready(function () {
         }
 
         if (UPDATEstr === '') {
-            save_data_api(root_path + 'app/api/db/collection/field/' + _app_id_, body, '', function () {
-                draw_datatable_local(DTstr);
-                $('#modal_new_edit').modal('hide');
+            save_data_api(root_path + 'app/api/db/collection/field/' + STRUCTURE + '/' + _app_id_, body, '', function () {
+                get_structure(STRUCTURE)
+                $('#modal_new_edit_str').modal('hide');
+                UPDATEstr = ''
             });
         } else {
-            save_data_api(root_path + 'app/api/db/collection/' + _app_id_, body, UPDATEstr, function () {
-                draw_datatable_local(DTstr);
-                $('#modal_new_edit').modal('hide');
+            save_data_api(root_path + 'app/api/db/structure/' + _app_id_, body, UPDATEstr, function () {
+                get_structure(STRUCTURE)
+                $('#modal_new_edit_str').modal('hide');
             });
+            UPDATEstr = ''
         }
+
 
     });
 
     snakeThis('#in_str_name');
+
+
+    $(document.body).on('click', '.update_element_str', function () {
+        UPDATEstr = $(this).val();
+        $.getJSON(root_path + 'app/api/db/structure/' + _app_id_ + '/' + UPDATEstr, {}, function (data) {
+            $('#modal_new_edit_str').modal('show');
+            $('#in_str_name').val(data.data.name);
+            $('#in_str_description').val(data.data.description);
+            $('#in_str_kind').val(data.data.kind);
+            $('#in_str_related').val(data.data.related);
+            $('#in_str_mandatory').val(String(data.data.mandatory));
+            $('#in_str_default').val(String(data.data.default));
+            if (eval(data.data.default)) {
+                $('#in_str_default_type').val(data.data.default_type)
+                $('#in_str_custom').val(data.data.defult_custom)
+            }
+            HoldOn.close();
+            notify_success(data.message);
+        }).fail(function (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        });
+    });
+
+    $(document.body).on('click', '.delete_element_str', function () {
+        let DELETE = $(this).val();
+        confirm_delete(function () {
+            $.ajax({
+                url: root_path + 'app/api/db/structure/' + _app_id_ + '/' + DELETE,
+                method: 'DELETE',
+            }).done(function (data) {
+                HoldOn.close();
+                notify_success(i18n.element_deleted)
+                get_structure(STRUCTURE)
+                DELETE = '';
+            }).fail(function (err) {
+                HoldOn.close();
+                notify_error(err.responseJSON.message);
+                console.error(err);
+                DELETE = '';
+            });
+        });
+
+    });
+
+
+    $(document.body).on('change', '.mandatory_element', function () {
+        UPDATE = $(this).val();
+        var isChecked = $(this).prop('checked');
+        save_data_api(root_path + 'app/api/db/structure/' + _app_id_, {mandatory: isChecked}, UPDATE, function () {
+            get_structure(STRUCTURE)
+            UPDATE = '';
+
+        });
+    });
+
+    $('#btn_rebuild').click(function () {
+        HoldOn.open();
+        $.post(root_path + 'app/api/db/collection/rebuild/' + _app_id_, function (data) {
+
+            HoldOn.close();
+            notify_success(data.message);
+        }).fail(function (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        });
+
+
+    });
+
+
 });
