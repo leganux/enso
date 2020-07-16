@@ -1,1 +1,1 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"enso.file_admins"}],"uuid":"c76938d07481466b936e00b3d0946759"}
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"enso.file_admins"}],"uuid":"411f9f3de3b24da3869331badecdf900"}

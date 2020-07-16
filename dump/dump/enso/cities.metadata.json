@@ -1,1 +1,1 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"enso.cities"}],"uuid":"fcdd390f31aa471ca4be471140206be3"}
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"enso.cities"}],"uuid":"7698a0efb4ae48d5bee0282f796c19dd"}
