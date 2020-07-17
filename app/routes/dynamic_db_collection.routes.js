@@ -69,7 +69,7 @@ router.post('/rebuild/:app_id', access_middleware, async function (req, res) {
             return 0;
         }
 
-        let database = await dynamic_db_collection.findOne({app: app_id})
+        let database = await dynamic_db_collection.find({app: app_id})
             .populate({path: 'fields', model: fields})
             .exec();
 
@@ -81,8 +81,108 @@ router.post('/rebuild/:app_id', access_middleware, async function (req, res) {
         let folder_dir_out = '../../cloud/app_' + my_app._id + '/';
 
 
-        let construccion = 'OK'
+        let construccion = `
+        const mongoose = require('mongoose');
+        const {Schema} = mongoose;
+        const moment = require('moment');
+        const dataTables = require('mongoose-datatables');
+        
+        let schemas = {};
+        let models = {};
+        
+        function gen_id(length) {
+        var result           = '';
+        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return result;
+        }
+        
+        `;
 
+        for (var i = 0; i < database.length; i++) {
+            let item = database[i];
+            let name = item.name;
+            let fields = item.fields;
+            construccion = construccion + 'schemas["' + name + '"] = new Schema({'
+            for (var j = 0; j < fields.length; j++) {
+                let jtem = fields[j];
+                let inner = '';
+
+                try {
+                    switch (jtem.kind) {
+                        case 'string':
+                            inner = 'type:String,\n '
+                            break;
+                        case 'number':
+                            inner = 'type:Number,\n '
+                            break;
+                        case 'boolean':
+                            inner = 'type:Boolean,\n '
+                            break;
+                        case 'date':
+                            inner = 'type:Date,\n '
+                            break;
+                        case 'buffer':
+                            inner = 'type:Buffer,\n '
+                            break;
+                        case 'mixed':
+                            inner = 'type:Mixed,\n '
+                            break;
+                        case 'array':
+                            inner = 'type:Array,\n '
+                            break;
+                        case 'oid_array':
+                            inner = 'type:[Schema.Types.ObjectId],'
+                            var f = await dynamic_db_collection.findById(jtem.related);
+                            console.log(f.name, f)
+                            if (f) {
+                                inner = inner + 'ref:models["' + f.name + '"],\n '
+                            }
+                            break;
+                        case 'oid_single':
+                            inner = 'type:Schema.Types.ObjectId,'
+                            var f = await dynamic_db_collection.findById(jtem.related);
+                            console.log(f.name, f)
+                            if (f) {
+                                inner = inner + 'ref:models["' + f.name + '"],\n'
+                            }
+                            break;
+                    }
+                    if (jtem.mandatory) {
+                        inner = inner + 'required:true,\n'
+                    }
+                    if (jtem.default) {
+                        switch (jtem.default_type) {
+                            case 'timestamp':
+                                inner = inner + 'default:moment().format(),\n'
+                                break;
+                            case 'math_random':
+                                inner = inner + 'default:Math.random(),\n'
+                                break;
+                            case 'string_random':
+                                inner = inner + 'default:gen_id(11),\n'
+                                break;
+                            case 'custom':
+                                inner = inner + 'default:' + jtem.defult_custom + ', \n'
+                                break;
+                        }
+                    }
+                } catch (e) {
+                    console.error(e)
+                }
+                construccion = construccion + jtem.name + ':{' + inner + '}, \n';
+            }
+            construccion = construccion + '});'
+            construccion = construccion + '\n schemas["' + name + '"].plugin(dataTables); \n '
+            construccion = construccion + '\n models["' + name + '"]= mongoose.model("' + name + '", schemas["' + name + '"], "dynamic_db_' + name + '"); \n'
+
+
+        }
+
+        construccion = construccion + ' module.exports = models;'
         fs.writeFileSync(path.join(__dirname, folder_dir_out, 'db.js'), construccion);
         res.status(200).json('')
 

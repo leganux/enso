@@ -5604,3 +5604,296 @@
 {"0":"(node:3940) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
 {"0":"DB is connected"}
 2020-07-15 09:34:19  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  163.778  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5136) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5144) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5202) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5221) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5227) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5233) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5599) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5642) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5651) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5663) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5709) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5720) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5737) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5747) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5761) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5826) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5835) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5850) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:5996) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6005) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6012) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6038) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6045) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6056) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6066) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6094) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":{}}
+2020-07-16 07:21:11  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  500  450.224  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6113) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"(node:6113) UnhandledPromiseRejectionWarning: ReferenceError: moment is not defined\n    at /Users/leganux/Documents/GitHub/enso/app/routes/dynamic_db_collection.routes.js:143:34\n    at CoreMongooseArray.map (<anonymous>)\n    at /Users/leganux/Documents/GitHub/enso/app/routes/dynamic_db_collection.routes.js:100:20\n    at Array.map (<anonymous>)\n    at /Users/leganux/Documents/GitHub/enso/app/routes/dynamic_db_collection.routes.js:94:18\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)"}
+{"0":"(node:6113) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)"}
+{"0":"(node:6113) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code."}
+2020-07-16 07:22:22  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  346.493  ms
+{"0":"(node:6113) UnhandledPromiseRejectionWarning: TypeError: Cannot set property 'ref' of undefined\n    at /Users/leganux/Documents/GitHub/enso/app/routes/dynamic_db_collection.routes.js:132:46\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)"}
+{"0":"(node:6113) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 2)"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6128) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"(node:6128) UnhandledPromiseRejectionWarning: ReferenceError: moment is not defined\n    at /Users/leganux/Documents/GitHub/enso/app/routes/dynamic_db_collection.routes.js:149:34\n    at CoreMongooseArray.map (<anonymous>)\n    at /Users/leganux/Documents/GitHub/enso/app/routes/dynamic_db_collection.routes.js:100:20\n    at Array.map (<anonymous>)\n    at /Users/leganux/Documents/GitHub/enso/app/routes/dynamic_db_collection.routes.js:94:18\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)"}
+{"0":"(node:6128) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 1)"}
+{"0":"(node:6128) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code."}
+2020-07-16 07:24:25  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  289.376  ms
+{"0":"(node:6128) UnhandledPromiseRejectionWarning: TypeError: Cannot set property 'ref' of undefined\n    at /Users/leganux/Documents/GitHub/enso/app/routes/dynamic_db_collection.routes.js:136:50\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)"}
+{"0":"(node:6128) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 2)"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6157) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":{}}
+2020-07-16 07:26:06  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  171.876  ms
+{"0":{}}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6169) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+2020-07-16 07:27:59  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  386.161  ms
+{"0":{}}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6180) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+2020-07-16 07:28:22  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  355.478  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6310) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6319) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+2020-07-16 07:59:08  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  268.899  ms
+2020-07-16 07:59:38  GET  /enso/admin/app/5ed553401c73b503b759fba9/dynamic_db  200  2632.173  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css  304  10.640  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/fontawesome-free/css/all.min.css  304  10.551  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css  304  10.634  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/daterangepicker/daterangepicker.css  304  2.068  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/icheck-bootstrap/icheck-bootstrap.min.css  304  50.699  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css  304  50.635  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css  304  50.480  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/select2/css/select2.min.css  304  6.260  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/select2-bootstrap4-theme/select2-bootstrap4.min.css  304  6.077  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/summernote/summernote-bs4.css  304  5.773  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/datatables-bs4/css/dataTables.bootstrap4.min.css  304  16.802  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/datatables-responsive/css/responsive.bootstrap4.min.css  304  16.989  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/holdon/holdOn.css  304  16.918  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/animate/animate.css  304  6.984  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/jquery_upload/jquery_upload.css  304  6.946  ms
+2020-07-16 07:59:39  GET  /enso/content/core/js/common.js  304  6.779  ms
+2020-07-16 07:59:39  GET  /enso/content/core/js/menu.js  304  10.644  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/jquery/jquery.min.js  304  10.521  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js  304  9.269  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js  304  7.462  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/adminlte3/js/demo.js  304  6.749  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/sweetalert2/sweetalert2.min.js  304  7.100  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/select2/js/select2.full.min.js  304  6.037  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js.map  304  5.683  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/moment/moment.min.js  304  5.535  ms
+2020-07-16 07:59:39  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js.map  304  5.413  ms
+2020-07-16 07:59:40  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css.map  304  56.515  ms
+2020-07-16 07:59:40  GET  /enso/content/cdn/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css.map  304  56.132  ms
+2020-07-16 07:59:40  GET  /enso/content/cdn/fontawesome-free/webfonts/fa-solid-900.woff2  304  55.893  ms
+2020-07-16 07:59:40  GET  /enso/content/cdn/fontawesome-free/webfonts/fa-regular-400.woff2  304  15.220  ms
+2020-07-16 07:59:40  GET  /enso/content/files/site/img/logo.png  304  15.069  ms
+2020-07-16 07:59:40  GET  /enso/content/cdn/inputmask/min/jquery.inputmask.bundle.min.js  304  107.389  ms
+2020-07-16 07:59:40  GET  /enso/content/cdn/daterangepicker/daterangepicker.js  304  107.176  ms
+2020-07-16 07:59:40  GET  /enso/content/cdn/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js  304  10.322  ms
+2020-07-16 07:59:41  GET  /enso/content/cdn/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js  304  2.966  ms
+2020-07-16 07:59:41  GET  /enso/content/cdn/bootstrap-switch/js/bootstrap-switch.min.js  304  2.834  ms
+2020-07-16 07:59:41  GET  /enso/content/cdn/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js.map  304  2.839  ms
+2020-07-16 07:59:41  GET  /enso/content/cdn/popper/umd/popper.min.js  304  2.265  ms
+2020-07-16 07:59:41  GET  /enso/content/cdn/summernote/summernote-bs4.js  304  2.100  ms
+2020-07-16 07:59:41  GET  /enso/content/cdn/datatables/jquery.dataTables.min.js  304  1.473  ms
+2020-07-16 07:59:41  GET  /enso/content/cdn/popper/umd/popper.min.js.map  304  2.109  ms
+2020-07-16 07:59:41  GET  /enso/content/cdn/datatables-bs4/js/dataTables.bootstrap4.min.js  304  1.217  ms
+2020-07-16 07:59:41  GET  /enso/content/cdn/datatables-responsive/js/dataTables.responsive.min.js  304  3.042  ms
+2020-07-16 07:59:41  GET  /enso/content/cdn/datatables-responsive/js/responsive.bootstrap4.min.js  304  2.931  ms
+2020-07-16 07:59:41  GET  /enso/content/cdn/summernote/summernote-bs4.js.map  304  2.931  ms
+2020-07-16 07:59:41  GET  /enso/content/cdn/voca/voca.js  304  8.496  ms
+2020-07-16 07:59:41  GET  /enso/content/cdn/holdon/holdOn.js  304  8.013  ms
+2020-07-16 07:59:41  GET  /enso/content/cdn/client/client.js  304  5.256  ms
+2020-07-16 07:59:41  GET  /enso/content/cdn/jquery_upload/jquery_upload.js  304  6.575  ms
+2020-07-16 07:59:41  GET  /enso/content/cdn/socket/socket.io.js  304  37.417  ms
+2020-07-16 07:59:41  GET  /enso/content/core/js/dynamic_db.js  304  37.189  ms
+2020-07-16 07:59:41  GET  /enso/content/cdn/socket/socket.io.js.map  404  2.366  ms
+{"0":"(node:6319) DeprecationWarning: collection.count is deprecated, and will be removed in a future version. Use Collection.countDocuments or Collection.estimatedDocumentCount instead"}
+2020-07-16 07:59:42  POST  /enso/app/api/db/collection/5ed553401c73b503b759fba9/datatable  200  342.976  ms
+2020-07-16 07:59:42  POST  /enso/app/api/db/collection/5ed553401c73b503b759fba9/datatable  200  360.201  ms
+2020-07-16 07:59:54  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  96.233  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6383) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6399) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6410) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6418) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6461) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6471) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6482) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6491) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6499) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6514) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6522) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":{}}
+2020-07-16 08:49:44  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  500  172.048  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6532) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+2020-07-16 08:50:01  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  274.722  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6536) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6541) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+2020-07-16 08:50:29  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  146.692  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6556) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6566) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":{}}
+2020-07-16 08:56:49  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  288.994  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6575) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"perfil_extendido","1":{"active":true,"fields":["5f0fb3290efa850e78cf9bba","5f0fb3990efa850e78cf9bbb"],"createdAt":"2020-07-16T01:36:03.000Z","updatedAt":"2020-07-16T01:36:03.000Z","_id":"5f0fb2f40efa850e78cf9bb9","name":"perfil_extendido","description":"El perfil extendido del usuario","app":"5ed553401c73b503b759fba9","__v":2}}
+2020-07-16 08:58:12  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  196.875  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6630) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"perfil_extendido","1":{"active":true,"fields":["5f0fb3290efa850e78cf9bba","5f0fb3990efa850e78cf9bbb"],"createdAt":"2020-07-16T01:36:03.000Z","updatedAt":"2020-07-16T01:36:03.000Z","_id":"5f0fb2f40efa850e78cf9bb9","name":"perfil_extendido","description":"El perfil extendido del usuario","app":"5ed553401c73b503b759fba9","__v":2}}
+2020-07-16 09:06:35  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  241.017  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6645) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"perfil_extendido","1":{"active":true,"fields":["5f0fb3290efa850e78cf9bba","5f0fb3990efa850e78cf9bbb"],"createdAt":"2020-07-16T01:36:03.000Z","updatedAt":"2020-07-16T01:36:03.000Z","_id":"5f0fb2f40efa850e78cf9bb9","name":"perfil_extendido","description":"El perfil extendido del usuario","app":"5ed553401c73b503b759fba9","__v":2}}
+2020-07-16 09:07:33  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  436.526  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6651) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6656) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6661) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"perfil_extendido","1":{"active":true,"fields":["5f0fb3290efa850e78cf9bba","5f0fb3990efa850e78cf9bbb"],"createdAt":"2020-07-16T01:36:03.000Z","updatedAt":"2020-07-16T01:36:03.000Z","_id":"5f0fb2f40efa850e78cf9bb9","name":"perfil_extendido","description":"El perfil extendido del usuario","app":"5ed553401c73b503b759fba9","__v":2}}
+2020-07-16 09:08:00  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  198.596  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6670) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6679) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6687) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"perfil_extendido","1":{"active":true,"fields":["5f0fb3290efa850e78cf9bba","5f0fb3990efa850e78cf9bbb"],"createdAt":"2020-07-16T01:36:03.000Z","updatedAt":"2020-07-16T01:36:03.000Z","_id":"5f0fb2f40efa850e78cf9bb9","name":"perfil_extendido","description":"El perfil extendido del usuario","app":"5ed553401c73b503b759fba9","__v":2}}
+2020-07-16 09:14:49  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  288.145  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6694) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"perfil_extendido","1":{"active":true,"fields":["5f0fb3290efa850e78cf9bba","5f0fb3990efa850e78cf9bbb"],"createdAt":"2020-07-16T01:36:03.000Z","updatedAt":"2020-07-16T01:36:03.000Z","_id":"5f0fb2f40efa850e78cf9bb9","name":"perfil_extendido","description":"El perfil extendido del usuario","app":"5ed553401c73b503b759fba9","__v":2}}
+2020-07-16 09:15:32  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  235.032  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6703) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"perfil_extendido","1":{"active":true,"fields":["5f0fb3290efa850e78cf9bba","5f0fb3990efa850e78cf9bbb"],"createdAt":"2020-07-16T01:36:03.000Z","updatedAt":"2020-07-16T01:36:03.000Z","_id":"5f0fb2f40efa850e78cf9bb9","name":"perfil_extendido","description":"El perfil extendido del usuario","app":"5ed553401c73b503b759fba9","__v":2}}
+2020-07-16 09:16:10  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  236.475  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6729) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"perfil_extendido","1":{"active":true,"fields":["5f0fb3290efa850e78cf9bba","5f0fb3990efa850e78cf9bbb"],"createdAt":"2020-07-16T01:36:03.000Z","updatedAt":"2020-07-16T01:36:03.000Z","_id":"5f0fb2f40efa850e78cf9bb9","name":"perfil_extendido","description":"El perfil extendido del usuario","app":"5ed553401c73b503b759fba9","__v":2}}
+2020-07-16 09:19:08  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  274.379  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6737) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"perfil_extendido","1":{"active":true,"fields":["5f0fb3290efa850e78cf9bba","5f0fb3990efa850e78cf9bbb"],"createdAt":"2020-07-16T01:36:03.000Z","updatedAt":"2020-07-16T01:36:03.000Z","_id":"5f0fb2f40efa850e78cf9bb9","name":"perfil_extendido","description":"El perfil extendido del usuario","app":"5ed553401c73b503b759fba9","__v":2}}
+2020-07-16 09:19:47  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  318.888  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:6767) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"perfil_extendido","1":{"active":true,"fields":["5f0fb3290efa850e78cf9bba","5f0fb3990efa850e78cf9bbb"],"createdAt":"2020-07-16T01:36:03.000Z","updatedAt":"2020-07-16T01:36:03.000Z","_id":"5f0fb2f40efa850e78cf9bb9","name":"perfil_extendido","description":"El perfil extendido del usuario","app":"5ed553401c73b503b759fba9","__v":2}}
+2020-07-16 09:25:27  POST  /enso/app/api/db/collection/rebuild/5ed553401c73b503b759fba9  200  141.222  ms
