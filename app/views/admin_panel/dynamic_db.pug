@@ -88,15 +88,23 @@ html
                                                 th !{i18n.actions}
 
                                 #data.tab-pane.fade
-                                    p
-                                        | Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.
-
+                                    br
+                                    .row
+                                        .col-12.col-md-8
+                                        .col-12.col-md-4
+                                            button.bg-pink.btn.btn-block#btn_new_element_data !{i18n.new}
+                                    br
+                                    table.table.table-bordered.table-striped.display.table-hover#datatable_data
+                                        thead
+                                            tr#datatable_data_fields
+                                                th !{i18n.id}
 
             include template/footer
             include template/control_bar
 
         include modals/dynamic_db_collection
         include modals/dynamic_db_structure
+        include modals/dynamic_db_data
         include template/params
         include template/scripts
         script.

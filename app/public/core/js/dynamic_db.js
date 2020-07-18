@@ -2,6 +2,7 @@ var UPDATE = '';
 var UPDATEstr = '';
 var STRUCTURE = '';
 var DATA = '';
+var DT_data = {};
 $(document).ready(function () {
     $.fn.dataTable.ext.errMode = 'none';
 
@@ -175,10 +176,6 @@ $(document).ready(function () {
         $('#tab_structure').removeClass('disabled').click();
         get_structure(STRUCTURE);
         charge_select('#in_str_related', {where: {active: true}}, root_path + 'app/api/db/collection/' + _app_id_, '_id', 'name');
-    });
-    $(document.body).on('click', '.data_element', function () {
-        DATA = $(this).val();
-        $('#tab_data').removeClass('disabled').click()
     });
 
 
@@ -379,9 +376,90 @@ $(document).ready(function () {
             notify_error(err.responseJSON.message);
             console.error(err);
         });
-
-
     });
 
+    let get_data_from_DB = function (id) {
+
+    }
+
+    // data element
+    $(document.body).on('click', '.data_element', function () {
+        DATA = $(this).val();
+        $('#tab_data').removeClass('disabled').click();
+        HoldOn.open()
+
+        $.getJSON(root_path + 'app/api/db/collection/' + _app_id_ + '/' + DATA, {}, function (data) {
+            HoldOn.close()
+            $('#datatable_data_fields').html('<th>' + i18n.id + '</th>')
+            $('#space_fields').html('')
+            let fields_columns = [];
+            fields_columns.push({"data": "_id"});
+
+            data.data.fields.map(async (item, i) => {
+                $('#datatable_data_fields').append('<th>' + item.name + '</th>')
+                fields_columns.push({"data": item.name})
+                $('#space_fields').append('<br><label>' + item.name + '</label>')
+                switch (item.kind) {
+                    case 'string':
+                        $('#space_fields').append('<br><input type="text"  id="element_data_' + item.name + '" class="form-control"> ')
+                        break;
+                    case 'number':
+                        $('#space_fields').append('<br><input type="number"  id="element_data_' + item.name + '" class="form-control"> ')
+                        break;
+                    case 'boolean':
+                        $('#space_fields').append('<br><select  id="element_data_' + item.name + '" class="form-control"><option value="true">true</option> <option value="false">false</option></select> ')
+
+                        break;
+                    case 'date':
+                        $('#space_fields').append('<br><input type="date"  id="element_data_' + item.name + '" class="form-control"> ')
+                        break;
+                    case 'buffer':
+                        $('#space_fields').append('<br><textarea rows="5"  id="element_data_' + item.name + '" class="form-control"> </textarea>')
+                        break;
+                    case 'mixed':
+                        $('#space_fields').append('<br><textarea rows="5"  id="element_data_' + item.name + '" class="form-control"> </textarea>')
+                        break;
+                    case 'array':
+                        $('#space_fields').append('<br><textarea rows="5"  id="element_data_' + item.name + '" class="form-control"> </textarea>')
+                        break;
+                    case 'oid_array':
+                        $('#space_fields').append('<br><select multiple  id="element_data_' + item.name + '" class="form-control"> </select>')
+                        break;
+                    case 'oid_single':
+                        $('#space_fields').append('<br><select  id="element_data_' + item.name + '" class="form-control"> </select>')
+                        break;
+                }
+
+            });
+
+            $('#datatable_data_fields').append('<th>' + i18n.actions + '</th>')
+            fields_columns.push({
+                data: "_id",
+                render: function (data, v, row) {
+                    return '<button value="' + data + '" class="btn btn-dark btn-block update_element_dta"> <i class="fas fa-edit"></i></button>' +
+                        '<button value="' + data + '" class="btn btn-danger btn-block delete_element_dta"> <i class="fas fa-trash"></i></button>';
+                }
+            })
+
+            DT_data = $("#datatable_data").DataTable({
+                "responsive": true,
+                "data": {},
+                "columns": fields_columns,
+            });
+
+            get_data_from_DB(DATA)
+
+            console.info(data);
+        }).fail(function (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        });
+    });
+
+
+    $('#btn_new_element_data').click(function () {
+        $('#modal_new_edit_data').modal('show')
+    })
 
 });
