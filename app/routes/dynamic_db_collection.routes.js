@@ -82,8 +82,8 @@ router.post('/rebuild/:app_id', access_middleware, async function (req, res) {
 
 
         let construccion = `
-        const mongoose = require('mongoose');
-        const {Schema} = mongoose;
+        const mongoose = require('./db_connection');
+        const {Schema} = require('mongoose');
         const moment = require('moment');
         const dataTables = require('mongoose-datatables');
         
@@ -177,12 +177,9 @@ router.post('/rebuild/:app_id', access_middleware, async function (req, res) {
             }
             construccion = construccion + '});'
             construccion = construccion + '\n schemas["' + name + '"].plugin(dataTables); \n '
-            construccion = construccion + '\n models["' + name + '"]= mongoose.model("' + name + '", schemas["' + name + '"], "dynamic_db_' + name + '"); \n'
-
-
+            construccion = construccion + '\n models["' + name + '"]= mongoose.model("' + name + '", schemas["' + name + '"], "dynamic_db_' + name + '"); \n';
         }
-
-        construccion = construccion + ' module.exports = models;'
+        construccion = construccion + '  module.exports = {models, schemas, mongoose};'
         fs.writeFileSync(path.join(__dirname, folder_dir_out, 'db.js'), construccion);
         res.status(200).json('')
 

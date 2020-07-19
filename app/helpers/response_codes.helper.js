@@ -178,6 +178,12 @@ var RC = {
         "success": false,
         "data": [],
     },
+    "code_536": {
+        "code": 536,
+        "message": "Collection not active, Contact the admin app",
+        "success": false,
+        "data": [],
+    },
 
 }
 

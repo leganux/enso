@@ -88,12 +88,10 @@ api_functions.updateWhere = function (router, model, middleware) {
 
         body.updatedAt = moment().format();
 
-
         if (!where && !or && !and) {
             res.status(435).json(response_codes.code_435);
             return 0;
         }
-
         if (where) {
             for (const [key, val] of Object.entries(where)) {
                 find[key] = val;
@@ -124,9 +122,7 @@ api_functions.updateWhere = function (router, model, middleware) {
             find = {$and: inner_and};
 
         }
-
         let query = model.findOne(find);
-
         if (select) {
             if (typeof select == 'string') {
                 select = select.split(',')
@@ -153,8 +149,6 @@ api_functions.updateWhere = function (router, model, middleware) {
             }
             query.sort(order);
         }
-
-
         try {
             if (body.password) {
                 body.password = await bcrypt.hash(body.password, saltRounds);
@@ -201,7 +195,7 @@ api_functions.updateWhere = function (router, model, middleware) {
 api_functions.readOne = function (router, model, middleware, populate) {
 
     router.get('/one', middleware ? middleware : no_middleware, async function (req, res) {
-        let body = req.query.data;
+
         let where = req.query.where;
         let or = req.query.or;
         let and = req.query.and;
@@ -312,13 +306,14 @@ api_functions.read = function (router, model, middleware, populate) {
     router.get('/', middleware ? middleware : no_middleware, async function (req, res) {
 
 
-        let body = req.query.data;
+
         let where = req.query.where;
         let or = req.query.or;
         let and = req.query.and;
         let select = req.query.select;
         let paginate = req.query.paginate;
         let sort = req.query.sort;
+
         var find = {};
 
 
@@ -548,11 +543,7 @@ api_functions.updateOrCreate = function (router, model, middleware) {
             res.status(500).json(response_codes.code_500);
             return 0;
         }
-
-
     });
-
-
 };
 
 api_functions.delete = function (router, model, middleware) {

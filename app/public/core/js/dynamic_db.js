@@ -1,8 +1,15 @@
 var UPDATE = '';
+var UPDATE_DATA = '';
+var DATA_DB_NAME = '';
 var UPDATEstr = '';
 var STRUCTURE = '';
 var DATA = '';
+var LIST_OF_FIELDS = [];
+var LIST_OF_FIELDS_MANDATORY = [];
+var DATA_OBJECT_FIELDS = [];
 var DT_data = {};
+
+
 $(document).ready(function () {
     $.fn.dataTable.ext.errMode = 'none';
 
@@ -395,7 +402,17 @@ $(document).ready(function () {
             let fields_columns = [];
             fields_columns.push({"data": "_id"});
 
+            DATA_OBJECT_FIELDS = data.data;
+            DATA_DB_NAME = data.data.name;
+
             data.data.fields.map(async (item, i) => {
+                LIST_OF_FIELDS.push(item.name);
+
+                if (eval(item.mandatory)) {
+                    LIST_OF_FIELDS_MANDATORY.push(item.name);
+                }
+
+
                 $('#datatable_data_fields').append('<th>' + item.name + '</th>')
                 fields_columns.push({"data": item.name})
                 $('#space_fields').append('<br><label>' + item.name + '</label>')
@@ -423,10 +440,10 @@ $(document).ready(function () {
                         $('#space_fields').append('<br><textarea rows="5"  id="element_data_' + item.name + '" class="form-control"> </textarea>')
                         break;
                     case 'oid_array':
-                        $('#space_fields').append('<br><select multiple  id="element_data_' + item.name + '" class="form-control"> </select>')
+                        $('#space_fields').append('<br><input placeholder="Coma separated (,) ID  "  id="element_data_' + item.name + '" class="form-control"> ')
                         break;
                     case 'oid_single':
-                        $('#space_fields').append('<br><select  id="element_data_' + item.name + '" class="form-control"> </select>')
+                        $('#space_fields').append('<br><input  placeholder="ID" id="element_data_' + item.name + '" class="form-control"> ')
                         break;
                 }
 
@@ -446,10 +463,8 @@ $(document).ready(function () {
                 "data": {},
                 "columns": fields_columns,
             });
-
             get_data_from_DB(DATA)
 
-            console.info(data);
         }).fail(function (err) {
             HoldOn.close();
             notify_error(err.responseJSON.message);
@@ -459,7 +474,49 @@ $(document).ready(function () {
 
 
     $('#btn_new_element_data').click(function () {
-        $('#modal_new_edit_data').modal('show')
-    })
+        $('#modal_new_edit_data').modal('show');
+        LIST_OF_FIELDS.map(function (item, i) {
+            $('#element_data_' + item).val('')
+        });
+
+    });
+
+    $('#save_changes_data').click(function () {
+        let arr_mnd = LIST_OF_FIELDS_MANDATORY.map(function (item, i) {
+            if ($('#element_data_' + item).val() == '') {
+                notify_warning(i18n.fill_all_fields)
+                return 0;
+            } else {
+                return 1;
+            }
+        });
+        if (arr_mnd.includes(0)) {
+            return false;
+        }
+
+        let body = {};
+
+        LIST_OF_FIELDS.map(function (item, i) {
+            body[item] = $('#element_data_' + item).val()
+        });
+
+        console.log('BODY', body)
+        if (UPDATE_DATA !== '') {   //update
+
+        } else {//new
+            HoldOn.open()
+            $.post(root_path + 'app/api/db/data/' + _app_id_ + '/' + DATA_DB_NAME, body, function (data) {
+                console.log('newData', data);
+                $('#modal_new_edit_data').modal('hide')
+                HoldOn.close()
+            }).fail(function (err) {
+                HoldOn.close();
+                notify_error(err.responseJSON.message);
+                console.error(err);
+            });
+        }
+
+    });
+
 
 });
