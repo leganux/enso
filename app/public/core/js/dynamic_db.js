@@ -386,7 +386,26 @@ $(document).ready(function () {
     });
 
     let get_data_from_DB = function (id) {
+        HoldOn.open();
+        $.getJSON(root_path + 'app/api/db/collection/' + _app_id_ + '/' + id, {}, function (datas) {
+            HoldOn.open();
 
+            $.getJSON(root_path + 'app/api/db/data/' + _app_id_ + '/' + datas.data.name, {}, function (data) {
+
+                HoldOn.close();
+                draw_datatable_local(data.data, DT_data)
+
+            }).fail(function (err) {
+                HoldOn.close();
+                notify_error(err.responseJSON.message);
+                console.error(err);
+            });
+
+        }).fail(function (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        });
     }
 
     // data element
@@ -509,6 +528,7 @@ $(document).ready(function () {
                 console.log('newData', data);
                 $('#modal_new_edit_data').modal('hide')
                 HoldOn.close()
+                get_data_from_DB(DATA)
             }).fail(function (err) {
                 HoldOn.close();
                 notify_error(err.responseJSON.message);

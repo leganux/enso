@@ -17,6 +17,7 @@ process.on('message', async (msg) => {
         if (msg.kind == 'DB') {
             switch (msg.method) {
                 case 'POST':
+                    var who = msg.who;
                     var new_element = new models[msg.db_name](msg.data);
                     var saved = await new_element.save();
                     if (saved) {
@@ -37,6 +38,7 @@ process.on('message', async (msg) => {
                     }
                     break;
                 case 'PUT':
+                    var who = msg.who;
                     var model = models[msg.db_name];
                     var body = msg.data;
                     var id = msg.id;
@@ -53,7 +55,7 @@ process.on('message', async (msg) => {
 
                         var response = await model.findById(id)
                         //only for owner
-                        if (req.who && response.owner && req.who !== '*' && response.owner != req.who) {
+                        if (who && response.owner && who !== '*' && response.owner != who) {
                             process.send(
                                 {
                                     error: response_codes.code_403,
@@ -105,6 +107,7 @@ process.on('message', async (msg) => {
                     }
                     break;
                 case 'GET_ALL':
+                    var who = msg.who;
                     var {where, or, and, select, paginate, sort} = msg.data;
                     var find = {};
                     var model = models[msg.db_name];
@@ -139,8 +142,8 @@ process.on('message', async (msg) => {
 
                     }
                     //only for owner
-                    if (req.who && req.who !== '*') {
-                        find['$and'].push({'owner': req.who})
+                    if (who && who !== '*') {
+                        find['$and'].push({'owner': who})
                     }
                     var query = model.find(find);
                     if (select) {
@@ -169,13 +172,13 @@ process.on('message', async (msg) => {
                         }
                         query.sort(order);
                     }
-                    if (populate) {
-                        if (populate && populate.length > 0) {
-                            populate.map(function (item, i, arr) {
-                                query.populate(item)
-                            });
-                        }
-                    }
+                    /*  if (populate) {
+                          if (populate && populate.length > 0) {
+                              populate.map(function (item, i, arr) {
+                                  query.populate(item)
+                              });
+                          }
+                      }*/
                     try {
                         var response = await query.exec();
                         if (!response) {
@@ -205,6 +208,7 @@ process.on('message', async (msg) => {
                     }
                     break;
                 case 'GET_ONE':
+                    var who = msg.who;
                     var {where, or, and, select, paginate, sort} = msg.data;
                     var find = {};
                     var model = models[msg.db_name];
@@ -240,8 +244,8 @@ process.on('message', async (msg) => {
 
                     }
                     //only for owner
-                    if (req.who && req.who !== '*') {
-                        find['$and'].push({'owner': req.who})
+                    if (who && who !== '*') {
+                        find['$and'].push({'owner': who})
                     }
                     var query = model.findOne(find);
                     if (select) {
@@ -270,13 +274,13 @@ process.on('message', async (msg) => {
                         }
                         query.sort(order);
                     }
-                    if (populate) {
-                        if (populate && populate.length > 0) {
-                            populate.map(function (item, i, arr) {
-                                query.populate(item)
-                            });
-                        }
-                    }
+                    /*   if (populate) {
+                           if (populate && populate.length > 0) {
+                               populate.map(function (item, i, arr) {
+                                   query.populate(item)
+                               });
+                           }
+                       }*/
                     try {
                         var response = await query.exec();
                         if (!response) {
@@ -306,6 +310,7 @@ process.on('message', async (msg) => {
                     }
                     break;
                 case 'GET_ID':
+                    var who = msg.who;
                     var {id} = msg.id;
                     var model = models[msg.db_name];
 
@@ -340,21 +345,21 @@ process.on('message', async (msg) => {
                         query.sort(order);
                     }
 
-                    if (populate) {
+                    /* if (populate) {
 
-                        if (populate && populate.length > 0) {
-                            populate.map(function (item, i, arr) {
-                                query.populate(item)
-                            });
-                        }
-                    }
+                         if (populate && populate.length > 0) {
+                             populate.map(function (item, i, arr) {
+                                 query.populate(item)
+                             });
+                         }
+                     }*/
 
                     try {
 
                         var response = await query.exec();
 
                         //only for owner
-                        if (req.who && response.owner && req.who !== '*' && (response.owner !== req.who || response.owner._id !== req.who)) {
+                        if (who && response.owner && who !== '*' && (response.owner !== who || response.owner._id !== who)) {
                             process.send(
                                 {
                                     error: response_codes.code_433,
@@ -390,6 +395,7 @@ process.on('message', async (msg) => {
                     }
                     break;
                 case 'PUT_where':
+                    var who = msg.who;
                     var {where, body, and, or, select, paginate, sort} = msg.data;
                     var model = models[msg.db_name];
 
@@ -482,7 +488,7 @@ process.on('message', async (msg) => {
                         }
 
                         //only for owner
-                        if (req.who && actObj.owner && req.who !== '*' && actObj.owner != req.who) {
+                        if (who && actObj.owner && who !== '*' && actObj.owner != who) {
                             process.send(
                                 {
                                     error: response_codes.code_403,
@@ -521,7 +527,7 @@ process.on('message', async (msg) => {
 
                     break;
                 case 'updateOrCreate':
-
+                    var who = msg.who;
                     var {where, body} = msg.data;
                     var model = models[msg.db_name];
                     var find = {};
@@ -533,8 +539,8 @@ process.on('message', async (msg) => {
                     }
 
                     //only for owner
-                    if (req.who && req.who !== '*') {
-                        find['$and'].push({'owner': req.who})
+                    if (who && who !== '*') {
+                        find['$and'].push({'owner': who})
                     }
 
                     try {
@@ -584,13 +590,14 @@ process.on('message', async (msg) => {
 
                     break;
                 case 'DELETE':
+                    var who = msg.who;
                     var model = models[msg.db_name];
                     var id = msg.id;
 
                     try {
                         var response = await model.findById(id);
                         //only for owner
-                        if (req.who && response.owner && req.who !== '*' && response.owner !== req.who) {
+                        if (who && response.owner && who !== '*' && response.owner !== who) {
                             process.send(
                                 {
                                     error: response_codes.code_403,
@@ -627,7 +634,7 @@ process.on('message', async (msg) => {
                     }
                     break;
                 case 'DATATABLE':
-                    var req = msg.req;
+                    var who = msg.who;
                     var search_fields = msg.search;
                     var model = models[msg.db_name];
 
@@ -645,8 +652,8 @@ process.on('message', async (msg) => {
 
 
                     //only for owner
-                    if (req.who && req.who !== '*') {
-                        find['owner'] = req.who.toString();
+                    if (who && who !== '*') {
+                        find['owner'] = who.toString();
                     }
 
                     model.dataTables({

@@ -88,7 +88,8 @@ router.post('/:app_id/:name', access_middleware, async (req, res) => {
             method: 'POST',
             data: body,
             app_id: app_id,
-            db_name: name
+            db_name: name,
+            who:req.who
         }
 
         let folder_dir_out = '../../cloud/app_' + my_app._id + '/';
@@ -209,7 +210,7 @@ router.post('/:app_id/:name/updateOrCreate', access_middleware, async (req, res)
             method: 'updateOrCreate',
             data: {body, where},
             app_id: app_id,
-            db_name: name
+            db_name: name,  who:req.who
         }
 
         let folder_dir_out = '../../cloud/app_' + my_app._id + '/';
@@ -330,7 +331,7 @@ router.put('/:app_id/:name/:id', access_middleware, async (req, res) => {
             data: body,
             app_id: app_id,
             db_name: name,
-            id: id
+            id: id,  who:req.who
         }
 
         let folder_dir_out = '../../cloud/app_' + my_app._id + '/';
@@ -451,7 +452,7 @@ router.put('/:app_id/:name/', access_middleware, async (req, res) => {
             method: 'PUT_where',
             data: {where, body, and, or, select, paginate, sort},
             app_id: app_id,
-            db_name: name,
+            db_name: name,  who:req.who
         }
 
         let folder_dir_out = '../../cloud/app_' + my_app._id + '/';
@@ -540,7 +541,8 @@ router.get('/:app_id/:name/', access_middleware, async (req, res) => {
             method: 'GET_ALL',
             data: {where, or, and, select, paginate, sort},
             app_id: app_id,
-            db_name: name
+            db_name: name,
+            who: req.who
         }
 
         let folder_dir_out = '../../cloud/app_' + my_app._id + '/';
@@ -630,7 +632,7 @@ router.get('/:app_id/:name/one', access_middleware, async (req, res) => {
             method: 'GET_ONE',
             data: {where, or, and, select, paginate, sort},
             app_id: app_id,
-            db_name: name
+            db_name: name,  who:req.who
         }
 
         let folder_dir_out = '../../cloud/app_' + my_app._id + '/';
@@ -720,7 +722,7 @@ router.get('/:app_id/:name/:id', access_middleware, async (req, res) => {
             id: id,
             data: {select, paginate, sort},
             app_id: app_id,
-            db_name: name
+            db_name: name,  who:req.who
         }
 
         let folder_dir_out = '../../cloud/app_' + my_app._id + '/';
@@ -803,7 +805,7 @@ router.delete('/:app_id/:name/:id', access_middleware, async (req, res) => {
             method: 'DELETE',
             id: id,
             app_id: app_id,
-            db_name: name
+            db_name: name,  who:req.who
         }
 
         let folder_dir_out = '../../cloud/app_' + my_app._id + '/';
@@ -897,7 +899,7 @@ router.post('/:app_id/:name/datatable', access_middleware, async (req, res) => {
             req: req,
             search_fields,
             app_id: app_id,
-            db_name: name
+            db_name: name,  who:req.who
         }
 
         let folder_dir_out = '../../cloud/app_' + my_app._id + '/';
