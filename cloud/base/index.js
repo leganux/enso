@@ -7,13 +7,12 @@ var lodash = require('lodash');
 var voca = require('voca');
 var {models, schemas, mongoose} = require('./db');
 var functions = require('./functions/main');
+var response_codes = require('./helpers/response_codes.helper')
 
 
 process.on('message', async (msg) => {
     console.log('Message from parent:', msg);
-
     try {
-
         if (msg.kind == 'DB') {
             switch (msg.method) {
                 case 'POST':
@@ -28,6 +27,7 @@ process.on('message', async (msg) => {
                                 data: saved
                             }
                         );
+                        return 0;
                     } else {
                         process.send(
                             {
@@ -35,6 +35,7 @@ process.on('message', async (msg) => {
                                 end: true,
                             }
                         );
+                        return 0;
                     }
                     break;
                 case 'PUT':
@@ -62,6 +63,7 @@ process.on('message', async (msg) => {
                                     end: true,
                                 }
                             );
+                            return 0
                         }
 
                         response = await model.findByIdAndUpdate(id, {$set: body});
@@ -73,6 +75,7 @@ process.on('message', async (msg) => {
                                     end: true,
                                 }
                             );
+                            return 0
                         }
 
                         process.send(
@@ -89,22 +92,7 @@ process.on('message', async (msg) => {
                         return 0;
                     }
 
-                    if (saved) {
-                        process.send(
-                            {
-                                error: false,
-                                end: true,
-                                data: saved
-                            }
-                        );
-                    } else {
-                        process.send(
-                            {
-                                error: 'not_saved',
-                                end: true,
-                            }
-                        );
-                    }
+
                     break;
                 case 'GET_ALL':
                     var who = msg.who;
@@ -188,6 +176,7 @@ process.on('message', async (msg) => {
                                     end: true,
                                 }
                             );
+                            return 0;
                         }
                         process.send(
                             {
@@ -205,6 +194,7 @@ process.on('message', async (msg) => {
                                 end: true,
                             }
                         );
+                        return 0;
                     }
                     break;
                 case 'GET_ONE':
@@ -290,6 +280,7 @@ process.on('message', async (msg) => {
                                     end: true,
                                 }
                             );
+                            return 0;
                         }
                         process.send(
                             {
@@ -310,13 +301,15 @@ process.on('message', async (msg) => {
                     }
                     break;
                 case 'GET_ID':
+                    console.log('******************')
                     var who = msg.who;
-                    var {id} = msg.id;
+                    var id = msg.id;
                     var model = models[msg.db_name];
 
                     var {select, paginate, sort} = msg.data;
 
-                    var query = model.findById(id)
+                    var query = model.findById(id);
+
 
                     if (select) {
                         if (typeof select == 'string') {
@@ -357,6 +350,17 @@ process.on('message', async (msg) => {
                     try {
 
                         var response = await query.exec();
+                        console.log('REPONSE ? *** ', response)
+
+                        if (!response) {
+                            process.send(
+                                {
+                                    error: response_codes.code_404,
+                                    end: true,
+                                }
+                            );
+                            return 0;
+                        }
 
                         //only for owner
                         if (who && response.owner && who !== '*' && (response.owner !== who || response.owner._id !== who)) {
@@ -366,16 +370,9 @@ process.on('message', async (msg) => {
                                     end: true,
                                 }
                             );
+                            return 0
                         }
 
-                        if (!response) {
-                            process.send(
-                                {
-                                    error: response_codes.code_404,
-                                    end: true,
-                                }
-                            );
-                        }
 
                         process.send(
                             {
@@ -386,6 +383,7 @@ process.on('message', async (msg) => {
                         );
 
                     } catch (e) {
+                        console.error(e);
                         process.send(
                             {
                                 error: e,
@@ -506,6 +504,7 @@ process.on('message', async (msg) => {
                                     end: true,
                                 }
                             );
+                            return 0;
                         }
 
                         process.send(
@@ -523,6 +522,7 @@ process.on('message', async (msg) => {
                                 end: true,
                             }
                         );
+                        return 0;
                     }
 
                     break;
@@ -567,6 +567,7 @@ process.on('message', async (msg) => {
                                     end: true
                                 }
                             );
+                            return 0;
                         }
 
                         process.send(
@@ -585,6 +586,7 @@ process.on('message', async (msg) => {
                                 end: true
                             }
                         );
+                        return 0;
                     }
 
 
@@ -614,6 +616,7 @@ process.on('message', async (msg) => {
                                     end: true
                                 }
                             );
+                            return 0;
                         }
 
                         process.send(
@@ -631,6 +634,7 @@ process.on('message', async (msg) => {
                                 end: true
                             }
                         );
+                        return 0
                     }
                     break;
                 case 'DATATABLE':

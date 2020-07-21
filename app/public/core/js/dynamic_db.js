@@ -477,11 +477,23 @@ $(document).ready(function () {
                 }
             })
 
-            DT_data = $("#datatable_data").DataTable({
-                "responsive": true,
-                "data": {},
-                "columns": fields_columns,
-            });
+            try {
+                DT_data.destroy();
+                DT_data = $("#datatable_data").DataTable({
+                    "responsive": true,
+                    "data": {},
+                    "columns": fields_columns,
+                });
+            } catch (e) {
+                console.info('Destroyed !!');
+                DT_data = $("#datatable_data").DataTable({
+                    "responsive": true,
+                    "data": {},
+                    "columns": fields_columns,
+                });
+            }
+
+
             get_data_from_DB(DATA)
 
         }).fail(function (err) {
@@ -521,7 +533,12 @@ $(document).ready(function () {
 
         console.log('BODY', body)
         if (UPDATE_DATA !== '') {   //update
-
+            HoldOn.open()
+            save_data_api(root_path + 'app/api/db/data/' + _app_id_ + '/' + DATA_DB_NAME, body, UPDATE_DATA, function () {
+                HoldOn.close()
+                $('#modal_new_edit_data').modal('hide');
+                get_data_from_DB(DATA)
+            })
         } else {//new
             HoldOn.open()
             $.post(root_path + 'app/api/db/data/' + _app_id_ + '/' + DATA_DB_NAME, body, function (data) {
@@ -537,6 +554,55 @@ $(document).ready(function () {
         }
 
     });
+
+    $(document.body).on('click', '.update_element_dta', function () {
+        UPDATE_DATA = $(this).val();
+        HoldOn.open()
+        $.getJSON(root_path + 'app/api/db/data/' + _app_id_ + '/' + DATA_DB_NAME + '/' + UPDATE_DATA, {}, function (data) {
+            HoldOn.close()
+
+            $('#modal_new_edit_data').modal('show');
+
+            DATA_OBJECT_FIELDS.fields.map(function (item, i) {
+                if (item.kind == 'boolean') {
+                    $('#element_data_' + item.name).val(data.data[item.name].toString());
+                } else if (item.kind == 'date') {
+                    $('#element_data_' + item.name).val(moment(data.data[item.name]).format('YYYY-MM-DD'));
+                } else {
+                    $('#element_data_' + item.name).val(data.data[item.name]);
+                }
+
+            })
+
+
+        }).fail(function (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+            DELETE = '';
+        });
+
+    })
+
+    $(document.body).on('click', '.delete_element_dta', function () {
+        let DELETE = $(this).val();
+        confirm_delete(function () {
+            $.ajax({
+                url: root_path + 'app/api/db/data/' + _app_id_ + '/' + DATA_DB_NAME + '/' + DELETE,
+                method: 'DELETE',
+            }).done(function (data) {
+                HoldOn.close();
+                notify_success(i18n.element_deleted)
+                get_data_from_DB(DATA)
+                DELETE = '';
+            }).fail(function (err) {
+                HoldOn.close();
+                notify_error(err.responseJSON.message);
+                console.error(err);
+                DELETE = '';
+            });
+        });
+    })
 
 
 });
