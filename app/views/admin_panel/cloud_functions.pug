@@ -36,8 +36,8 @@ html
                                 thead
                                     tr
                                         th !{i18n.id}
-                                        th !{i18n.language}
-                                        th !{i18n.reference}
+                                        th !{i18n.name}
+                                        th !{i18n.url}
                                         th !{i18n.content}
                                         th !{i18n.active}
                                         th !{i18n.date_register}
@@ -50,7 +50,7 @@ html
             include template/footer
             include template/control_bar
 
-        //include modals/dynamic_
+        include modals/cloud_functions
         include template/params
         include template/scripts
         script.
@@ -59,5 +59,5 @@ html
 
             });
         script(src=core_files_path + 'js/common.js')
-        script(src=core_files_path + 'js/dynamic_db.js')
+        script(src=core_files_path + 'js/cloud_functions.js')
 

@@ -23,6 +23,8 @@ let cdn = {
                 rp + 'holdon/holdOn.css',
                 rp + 'animate/animate.css',
                 rp + 'jquery_upload/jquery_upload.css',
+                rp + 'codemirror/lib/codemirror.css',
+                rp + 'codemirror/theme/dracula.css',
             ],
             scripts: [
                 rp + 'jquery/jquery.min.js',
@@ -48,6 +50,10 @@ let cdn = {
                 rp + 'client/client.js',
                 rp + 'jquery_upload/jquery_upload.js',
                 rp + 'socket/socket.io.js',
+                rp + 'codemirror/lib/codemirror.js',
+                rp + 'codemirror/mode/javascript/javascript.js',
+                rp + 'codemirror/addon/selection/active-line.js',
+                rp + 'codemirror/addon/edit/matchbrackets.js',
 
             ]
         },

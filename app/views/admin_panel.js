@@ -383,6 +383,7 @@ router.get('/app/:id/dynamic_db', access_middleware, async function (req, res) {
 
 
 });
+
 router.get('/app/:id/cloud_functions', access_middleware, async function (req, res) {
     var id = req.params.id;
     if (!req.cookies || !req.cookies._APP_ || req.cookies._APP_ === 'false') {
@@ -393,7 +394,6 @@ router.get('/app/:id/cloud_functions', access_middleware, async function (req, r
         res.status(533).json(response_codes.code_533)
         return 0;
     }
-
     try {
         let app = await app_model.findById(id).populate({path: "owner", model: admin_model});
 
@@ -409,7 +409,6 @@ router.get('/app/:id/cloud_functions', access_middleware, async function (req, r
             res.status(535).json(response_codes.code_535)
             return 0;
         }
-
         let config = await get_app_basic_config(req, res, {
             app: model_to_json(app)
         })

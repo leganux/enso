@@ -1,0 +1,17 @@
+#modal_new_edit.modal.fade( aria-hidden='true', data-backdrop="static", data-keyboard="false")
+    .modal-dialog.modal-lg
+        .modal-content
+            .modal-header.bg-dark
+                h4.modal-title !{i18n.new_edit}
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                br
+                label !{i18n.name}
+                input(type='text').form-control#in_name
+                hr
+                label !{i18n.content}
+                textarea#in_content
+            .modal-footer.justify-content-end
+                button.btn.btn-default(type='button', data-dismiss='modal') !{i18n.cancel}
+                button.btn.bg-pink(type='button')#save_changes !{i18n.save}
