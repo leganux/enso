@@ -10,6 +10,7 @@ var functions = require('./functions/main');
 var response_codes = require('./helpers/response_codes.helper');
 
 var response_function = function (error, success) {
+
     if (error) {
         process.send(
             {
@@ -32,7 +33,7 @@ var response_function = function (error, success) {
 
 
 process.on('message', async (msg) => {
-    console.log('Message from parent:', msg);
+
     try {
         if (msg.kind == 'DB') {
             switch (msg.method) {
@@ -322,7 +323,7 @@ process.on('message', async (msg) => {
                     }
                     break;
                 case 'GET_ID':
-                    console.log('******************')
+
                     var who = msg.who;
                     var id = msg.id;
                     var model = models[msg.db_name];
@@ -371,7 +372,7 @@ process.on('message', async (msg) => {
                     try {
 
                         var response = await query.exec();
-                        console.log('REPONSE ? *** ', response)
+
 
                         if (!response) {
                             process.send(
@@ -718,6 +719,7 @@ process.on('message', async (msg) => {
                     break;
             }
         } else if (msg.kind == 'FUNCTION') {
+
             let function_ = msg.function_name;
             let active_function_ = functions[function_];
             await active_function_(msg.req, response_function);

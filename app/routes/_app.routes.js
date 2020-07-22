@@ -11,7 +11,7 @@ router.use('/db/collection', require('./dynamic_db_collection.routes'));
 router.use('/db/structure', require('./dynamic_db_structure.routes'));
 router.use('/db/data', require('./dynamic_db_data.routes'));
 router.use('/cloud_functions', require('./cloud_functions.routes'));
-
+router.use('/cron_functions', require('./cron_functions.routes'));
 
 
 module.exports = router;

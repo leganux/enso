@@ -25,16 +25,6 @@ $(document).ready(function () {
                 "data": "description"
             },
             {
-                "data": "method"
-            },
-            {
-                "data": "name",
-                render: function (data, v, roow) {
-                    return '<input ident="' + roow._id + '" id="cpy_' + roow._id + '" class="copy_me form-control" type="text" readonly value="' + root_path + 'app/api/cloud_functions/exec/' + _app_id_ + '/' + data + '">';
-                }
-
-            },
-            {
                 "data": "content"
             },
             {
