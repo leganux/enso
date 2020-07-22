@@ -7,7 +7,28 @@ var lodash = require('lodash');
 var voca = require('voca');
 var {models, schemas, mongoose} = require('./db');
 var functions = require('./functions/main');
-var response_codes = require('./helpers/response_codes.helper')
+var response_codes = require('./helpers/response_codes.helper');
+
+var response_function = function (error, success) {
+    if (error) {
+        process.send(
+            {
+                error: error,
+                end: true,
+            }
+        );
+        return 0;
+    }
+    process.send(
+        {
+            error: false,
+            end: true,
+            data: success
+        }
+    );
+    return 0;
+
+}
 
 
 process.on('message', async (msg) => {
@@ -696,6 +717,11 @@ process.on('message', async (msg) => {
 
                     break;
             }
+        } else if (msg.kind == 'FUNCTION') {
+            let function_ = msg.function_name;
+            let active_function_ = functions[function_];
+            await active_function_(msg.req, response_function);
+            return 0;
         }
     } catch (e) {
         console.error('Error en child', e)

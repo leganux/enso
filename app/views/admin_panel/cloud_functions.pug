@@ -26,8 +26,10 @@ html
                     .card
                         .card-header.bg-dark
                             .row
-                                .col-12.col-md-10
+                                .col-12.col-md-8
                                     h3.card-title !{i18n.list_of} !{i18n.cloud_functions}
+                                .col-12.col-md-2
+                                    button.bg-pink.btn.btn-block#btn_build_function !{i18n.rebuild_functions}
                                 .col-12.col-md-2
                                     button.bg-pink.btn.btn-block#btn_new_element !{i18n.new}
 
@@ -37,6 +39,8 @@ html
                                     tr
                                         th !{i18n.id}
                                         th !{i18n.name}
+                                        th !{i18n.description}
+                                        th !{i18n.method}
                                         th !{i18n.url}
                                         th !{i18n.content}
                                         th !{i18n.active}

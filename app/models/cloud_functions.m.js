@@ -12,6 +12,14 @@ const cloud_functions = new Schema({
         required: true,
         unique: false
     },
+    description: {
+        type: String,
+        required: false,
+    },
+    method: { // POST, GET, PUT, DELETE
+        type: String,
+        required: false,
+    },
     content: {
         type: String,
         required: false

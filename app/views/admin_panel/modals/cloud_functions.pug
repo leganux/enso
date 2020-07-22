@@ -9,7 +9,16 @@
                 br
                 label !{i18n.name}
                 input(type='text').form-control#in_name
-                hr
+                label !{i18n.description}
+                textarea(rows='5').form-control#in_description
+                label !{i18n.method}
+                select.form-control#in_method
+                    option(value='GET') GET
+                    option(value='POST') POST
+                    option(value='PUT') PUT
+                    option(value='DELETE') DELETE
+
+                br
                 label !{i18n.content}
                 textarea#in_content
             .modal-footer.justify-content-end

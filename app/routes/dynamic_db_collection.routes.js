@@ -181,7 +181,7 @@ router.post('/rebuild/:app_id', access_middleware, async function (req, res) {
         }
         construccion = construccion + '  module.exports = {models, schemas, mongoose};'
         fs.writeFileSync(path.join(__dirname, folder_dir_out, 'db.js'), construccion);
-        res.status(200).json('')
+        res.status(200).json(response_codes.code_200)
 
     } catch (e) {
         console.error(e)

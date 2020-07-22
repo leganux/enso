@@ -184,6 +184,12 @@ var RC = {
         "success": false,
         "data": [],
     },
+    "code_537": {
+        "code": 537,
+        "message": "Function not active, Contact the admin app",
+        "success": false,
+        "data": [],
+    },
 
 }
 
