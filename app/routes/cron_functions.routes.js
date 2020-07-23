@@ -56,11 +56,15 @@ router.post('/rebuild/:app_id', access_middleware, async function (req, res) {
 
 
         let construccion = `
-        let models =  require('./../db');
+        let db =  require('./../db');
+        let mongoose =  require('./../db').mongoose;
         let getModelByName = function(name){
-        return models[name]; 
+        return db.models[name]; 
         }
-        
+        let getSchemaByName = function(name){
+        return db.schemas[name]; 
+        }
+         
         var cron_function = {};
         `;
         for (var i = 0; i < functions.length; i++) {
