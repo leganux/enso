@@ -161,7 +161,9 @@ router.get('/cdn/', access_middleware, async function (req, res) {
 });
 
 router.get('/console_log/', access_middleware, async function (req, res) {
-    let config = await get_app_basic_config(req, res)
+    let config = await get_app_basic_config(req, res, {
+        general_socket_path: env.root_path + env.socket_path,
+    })
 
     res.status(200).render('admin_panel/console_log', config);
 });

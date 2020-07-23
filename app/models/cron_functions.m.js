@@ -32,15 +32,15 @@ const cron_functions = new Schema({
         type: String,
         required: false
     },
-    dayOfTheMonth: {
+    day_of_mont: {
         type: String,
         required: false
     },
-    dayOfTheWeek: {
+    day_of_week: {
         type: String,
         required: false
     },
-    monthOfTheYear: {
+    month_of_year: {
         type: String,
         required: false
     },

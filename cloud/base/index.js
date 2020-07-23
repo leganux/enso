@@ -7,6 +7,7 @@ var lodash = require('lodash');
 var voca = require('voca');
 var {models, schemas, mongoose} = require('./db');
 var functions = require('./functions/main');
+var functions_cron = require('./functions/cron');
 var response_codes = require('./helpers/response_codes.helper');
 
 var response_function = function (error, success) {
@@ -723,6 +724,14 @@ process.on('message', async (msg) => {
             let function_ = msg.function_name;
             let active_function_ = functions[function_];
             await active_function_(msg.req, response_function);
+            return 0;
+        } else if (msg.kind == 'CRON') {
+
+            console.info('Excecuting function', msg.function_name)
+            let function_ = msg.function_name;
+            let active_function_ = functions_cron[function_];
+            await active_function_();
+            console.info('Excecuted function', msg.function_name)
             return 0;
         }
     } catch (e) {

@@ -25,8 +25,26 @@ $(document).ready(function () {
                 "data": "description"
             },
             {
-                "data": "content"
+                "data": "minute"
             },
+            {
+                "data": "hour"
+            },
+            {
+                "data": "day_of_mont"
+            },
+            {
+                "data": "day_of_week"
+            },
+            {
+                "data": "month_of_year"
+            },
+            {
+                "data": "content"
+            }, {
+                "data": "cron_string"
+            },
+
             {
                 "data": "active",
                 render: function (data, v, row) {
@@ -65,7 +83,7 @@ $(document).ready(function () {
         processing: true,
         serverSide: true,
         ajax: {
-            url: root_path + 'app/api/cloud_functions/' + _app_id_ + '/datatable',
+            url: root_path + 'app/api/cron_functions/' + _app_id_ + '/datatable',
             type: "POST"
         },
     });
@@ -74,15 +92,24 @@ $(document).ready(function () {
         $('#modal_new_edit').modal('show');
         $('#in_name').val('');
         $('#in_description').val('');
-        $('#in_method').val('POST');
+        $('#in_minute').val('');
+        $('#in_hour').val('');
+        $('#in_day_of_month').val('');
+        $('#in_day_of_week').val('');
+        $('#in_month_of_year').val('');
+        $('#in_cron_string').val('* * * * *');
+
         editor.setValue(`//Example function
-async function (req, res) {
+async function () {
   try{
-   var response ={message:'The result is', response : Number(req.body.a) + Number(req.body.b)};  
-  res(null, response );
+ let  A = 5  ;
+  let  B = 7  ;
+   var response ={message:'The result is', response : A+ B};  
+   console.log(response);
+ 
   }catch(e){
   console.error(e)
-     res(e, null );
+     
   };
  
 }`);
@@ -93,7 +120,13 @@ async function (req, res) {
         let body = {};
         body.name = $('#in_name').val()
         body.description = $('#in_description').val()
-        body.method = $('#in_method').val()
+        body.minute = $('#in_minute').val()
+        body.hour = $('#in_hour').val()
+        body.day_of_mont = $('#in_day_of_month').val()
+        body.day_of_week = $('#in_day_of_week').val()
+        body.month_of_year = $('#in_month_of_year').val()
+        body.cron_string = $('#in_cron_string').val()
+
         body.content = editor.getValue()
 
         if (body.name === '') {
@@ -101,7 +134,7 @@ async function (req, res) {
             return false;
         }
 
-        save_data_api(root_path + 'app/api/cloud_functions/' + _app_id_, body, UPDATE, function () {
+        save_data_api(root_path + 'app/api/cron_functions/' + _app_id_, body, UPDATE, function () {
             draw_datatable_rs(DT);
             UPDATE = '';
             $('#modal_new_edit').modal('hide');
@@ -111,19 +144,27 @@ async function (req, res) {
     $(document.body).on('change', '.actived_element', function () {
         UPDATE = $(this).val();
         var isChecked = $(this).prop('checked');
-        save_data_api(root_path + 'app/api/cloud_functions/' + _app_id_, {active: isChecked}, UPDATE, function () {
+        save_data_api(root_path + 'app/api/cron_functions/' + _app_id_, {active: isChecked}, UPDATE, function () {
             draw_datatable_rs(DT);
             UPDATE = '';
             $('#modal_new_edit').modal('hide');
+            $('#btn_build_function').click()
         });
     });
     $(document.body).on('click', '.update_element', function () {
         UPDATE = $(this).val();
-        $.getJSON(root_path + 'app/api/cloud_functions/' + _app_id_ + '/' + UPDATE, {}, function (data) {
+        $.getJSON(root_path + 'app/api/cron_functions/' + _app_id_ + '/' + UPDATE, {}, function (data) {
             $('#modal_new_edit').modal('show');
             $('#in_name').val(data.data.name);
             $('#in_description').val(data.data.description);
-            $('#in_method').val(data.data.method);
+            $('#in_minute').val(data.data.minute);
+            $('#in_hour').val(data.data.hour);
+            $('#in_day_of_month').val(data.data.day_of_mont);
+            $('#in_day_of_week').val(data.data.day_of_week);
+            $('#in_month_of_year').val(data.data.month_of_year);
+            $('#in_cron_string').val(data.data.cron_string);
+
+
             editor.setValue(data.data.content);
             HoldOn.close();
             notify_success(data.message);
@@ -137,7 +178,7 @@ async function (req, res) {
         let DELETE = $(this).val();
         confirm_delete(function () {
             $.ajax({
-                url: root_path + 'app/api/cloud_functions/' + _app_id_ + '/' + DELETE,
+                url: root_path + 'app/api/cron_functions/' + _app_id_ + '/' + DELETE,
                 method: 'DELETE',
             }).done(function (data) {
                 HoldOn.close();
@@ -158,7 +199,7 @@ async function (req, res) {
 
     $('#btn_build_function').click(function () {
         HoldOn.open();
-        $.post(root_path + 'app/api/cloud_functions/rebuild/' + _app_id_, function (data) {
+        $.post(root_path + 'app/api/cron_functions/rebuild/' + _app_id_, function (data) {
             HoldOn.close();
             notify_success(data.message);
         }).fail(function (err) {
@@ -166,6 +207,27 @@ async function (req, res) {
             notify_error(err.responseJSON.message);
             console.error(err);
         });
-    })
+    });
+
+    $('#build_cron_string').click(function () {
+        let body = {};
+        body.minute = $('#in_minute').val()
+        body.hour = $('#in_hour').val()
+        body.day_of_mont = $('#in_day_of_month').val()
+        body.day_of_week = $('#in_day_of_week').val()
+        body.month_of_year = $('#in_month_of_year').val()
+
+        HoldOn.open();
+        $.post(root_path + 'app/api/cron_functions/make_cron_string/' + _app_id_, body, function (data) {
+            HoldOn.close();
+            notify_success(data.message);
+            $('#in_cron_string').val(data.data)
+        }).fail(function (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        });
+    });
+
 
 });

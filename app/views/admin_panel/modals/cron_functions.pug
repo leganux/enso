@@ -11,8 +11,23 @@
                 input(type='text').form-control#in_name
                 label !{i18n.description}
                 textarea(rows='5').form-control#in_description
-                label !{i18n.minute}
+                label !{i18n.minute} (empty, *, Number [0,59])
                 input(type='text').form-control#in_minute
+                label !{i18n.hour} (empty, *, Number [0,12])
+                input(type='text').form-control#in_hour
+                label !{i18n.day_of_month} (empty, *, Number [1,30])
+                input(type='text').form-control#in_day_of_month
+                label !{i18n.day_of_week} (empty, *, Number [1,7])
+                input(type='text').form-control#in_day_of_week
+                label !{i18n.month_of_year} (empty, *, Number [1,12])
+                input(type='text').form-control#in_month_of_year
+                br
+                .row
+                    .col-6
+                    .col-6
+                        .btn.btn-outline-primary.btn-block#build_cron_string  !{i18n.build_string}
+                label !{i18n.cron_string}
+                input(type='text', readonly=true ).form-control#in_cron_string
                 br
                 label !{i18n.content}
                 textarea#in_content

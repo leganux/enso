@@ -60,7 +60,20 @@ $(document).ready(function () {
                 notify_error(err.responseJSON.message);
                 console.error(err);
             });
+
             HoldOn.open();
+            $.post(root_path + 'app/api/cron_functions/rebuild/' + _app_id_, function (data) {
+                HoldOn.close();
+                notify_success(data.message);
+            }).fail(function (err) {
+                HoldOn.close();
+                notify_error(err.responseJSON.message);
+                console.error(err);
+            });
+
+
+            HoldOn.open();
+
             $.post(root_path + 'app/api/db/collection/rebuild/' + _app_id_, function (data) {
 
                 HoldOn.close();
