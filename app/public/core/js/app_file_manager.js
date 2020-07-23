@@ -2,7 +2,7 @@ $(document).ready(function () {
     $.fn.dataTable.ext.errMode = 'none';
 
     var uploadObj = $("#fileuploader").uploadFile({
-        url: root_path + 'api/core/files/upload',
+        url: root_path + 'app/api/app_files/' + _app_id_ + '/upload',
         fileName: "file",
         multiple: true,
         maxFileCount: 10,
@@ -68,7 +68,7 @@ $(document).ready(function () {
         processing: true,
         serverSide: true,
         ajax: {
-            url: root_path + 'api/core/files/datatable',
+            url: root_path + 'app/api/app_files/' + _app_id_ + '/datatable',
             type: "POST"
         },
     });
@@ -90,7 +90,7 @@ $(document).ready(function () {
         let DELETE = $(this).val();
         confirm_delete(function () {
             $.ajax({
-                url: root_path + 'api/core/files/' + DELETE,
+                url: root_path + 'app/api/app_files/' + _app_id_ + '/' + DELETE,
                 method: 'DELETE',
             }).done(function (data) {
                 HoldOn.close();
