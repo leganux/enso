@@ -13,6 +13,9 @@ router.use('/db/data', require('./dynamic_db_data.routes'));
 router.use('/cloud_functions', require('./cloud_functions.routes'));
 router.use('/cron_functions', require('./cron_functions.routes'));
 router.use('/app_files', require('./app_files.routes'));
+router.use('/contacts', require('./contacts.routes'));
+router.use('/contact_group', require('./contact_group.routes'));
+router.use('/mailing', require('./mailing.routes'));
 
 
 module.exports = router;

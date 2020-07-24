@@ -1,0 +1,121 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        include template/seo
+        include template/styles
+    body.hold-transition.sidebar-mini.accent-pink
+        .wrapper
+            include template/nav
+            include template/aside
+            .content-wrapper
+                section.content-header
+                    .container-fluid
+                        .row.mb-2
+                            .col-sm-6
+                                h1 !{i18n.mailing}
+                            |
+                            .col-sm-6
+                                ol.breadcrumb.float-sm-right
+                                    li.breadcrumb-item
+                                        a(href=base_admin_path + 'dashboard') !{i18n.home}
+                                    |
+                                    li.breadcrumb-item.active !{i18n.mailing}
+                section.content
+                    br
+                    .row
+                        .col-12.col-md-4
+                            .card
+                                .card-header.bg-dark
+                                    h3.card-title  !{i18n.saved_templates}
+                                .card-body#saved_mails
+                                    br
+                                    center
+                                        h3 !{i18n.no_templates_found}
+
+                            br
+                            .card
+                                .card-header.bg-dark
+                                    h3.card-title  !{i18n.contacts}
+                                .card-body
+                                    .row
+                                        .col-8
+                                            button.btn-link.btn
+                                                i.fas.fa-user-edit
+                                                |  !{i18n.contact_groups}
+                                            br
+                                            input(type="text",placeholder=i18n.group_name).form-control#group_name
+                                            input(type="text",placeholder=i18n.description).form-control#group_description
+                                        .col-4
+                                            br
+                                            button.btn.btn-primary.btn-block#add_group
+                                                i.fas.fa-plus-circle
+                                    hr
+                                    #sp_for_goups(style="max-height: 300px !important; height: 300px !important; overflow-y:auto;")
+                                    br
+                                    .row
+                                        .col-8
+                                            button.btn-link.btn
+                                                i.fas.fa-user-plus
+                                                |  !{i18n.contacts}
+                                            br
+                                            input(type="text",placeholder=i18n.name).form-control#contacts_name
+                                            input(type="mail",placeholder=i18n.email).form-control#contacts_mail
+                                            select.form-control#contacts_group
+                                                option(value=-1) Choose one..
+
+                                        .col-4
+                                            br
+                                            button.btn.btn-primary.btn-block#add_contact
+                                                i.fas.fa-plus-circle
+                                    hr
+                                    #sp_for_contacts(style="max-height: 300px !important; height: 300px !important; overflow-y:auto;")
+                                    br
+
+
+                        .col-12.col-md-8
+                            .card
+                                .card-header.bg-dark
+                                    .row
+                                        .col-12.col-md-4
+                                            h3.card-title  !{i18n.mailing}
+                                        .col-12.col-md-4
+                                            button.bg-pink.btn.btn-block#btn_save !{i18n.save}
+                                        .col-12.col-md-4
+                                            button.bg-pink.btn.btn-block#btn_send !{i18n.send}
+
+                                .card-body
+                                    br
+                                    label !{i18n.to} !{i18n.comma_separed}
+                                    input(type="text", placeholder=i18n.to).form-control#to
+                                    br
+                                    label !{i18n.subject}
+                                    input(type="text",placeholder=i18n.subject).form-control#subject
+                                    br
+                                    #content_html
+
+                                .card-footer
+                                    | !{i18n.mailing}
+
+
+
+
+
+
+
+            include template/footer
+            include template/control_bar
+
+        include modals/g_file_manager
+        include template/params
+        include template/scripts
+        script.
+            $(document).ready(function () {
+                $('#menu_files').addClass('active');
+
+
+            });
+        script(src=core_files_path + 'js/common.js')
+        script(src=core_files_path + 'js/mailing.js')
+
