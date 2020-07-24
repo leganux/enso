@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"enso.mails"},{"v":{"$numberInt":"2"},"key":{"subject":{"$numberInt":"1"}},"name":"subject_1","ns":"enso.mails","background":true}],"uuid":"b92e50ea461c47f58e756c56ecbfa204"}
