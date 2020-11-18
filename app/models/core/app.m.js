@@ -3,6 +3,8 @@ const {Schema} = mongoose;
 const moment = require('moment');
 const dataTables = require('mongoose-datatables');
 const admin = require('./admin.m')
+const randomGenerator = require('../../helpers/random_generator.helper');
+const { randomGenerator_number } = require('../../helpers/random_generator.helper');
 
 
 
@@ -57,7 +59,7 @@ const app = new Schema({
     db_name: {
         type: String,
         required: true,
-        default: 'EnsoApp_DB_' + (Math.random() * 10000000).toFixed(0)
+        default: randomGenerator.randomGenerator_number
     },
     db_password: {
         type: String,
@@ -107,12 +109,12 @@ const app = new Schema({
     createdAt: {
         type: Date,
         required: true,
-        default: moment().format()
+        default: moment
     },
     updatedAt: {
         type: Date,
         required: true,
-        default: moment().format()
+        default: moment
     },
 });
 
