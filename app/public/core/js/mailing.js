@@ -74,11 +74,13 @@ $(document).ready(function () {
                 data.data.map(function (item, i) {
                     $('#sp_for_goups').append('<div class="row">' +
                         '                    <div class="col-8">' +
-                        '                      <button value="' + item._id + '" class="btn-link btn choose_c_group"><i class="fas fa-envelope"></i> ' + item.name + '</button>' +
-                        '<br> <small> ' + item.description + ' </small>' +
+                        '                      <button value="' + item._id + '" class="btn-link btn choose_c_group text-capitalize"><i class="fas fa-envelope"></i> ' + item.name + '</button>' +
+                        '                       <br> <small class="pl-3"> ' + item.description + ' </small>' +
                         '                    </div>' +
                         '                    <div class="col-4">' +
-                        '                      <button value="' + item._id + '" class="btn btn-danger btn-sm btn-block delete_c_group"><i class="fas fa-trash"></i></button>' +
+                        '                      <button value="' + item._id + '" class="btn btn-danger btn-sm btn-block delete_c_group w-75 mb-3 ml-auto mr-auto"><i class="fas fa-trash"></i></button>' +
+                        //add item.id for the new button, it exist but without a funcition   
+                        '                     <button value="' + item._id + '" class="btn btn-success btn-sm btn-block select_All w-75 mb-3 ml-auto mr-auto"><i class="fas fa-mail-bulk"></i></button>' +
                         '                    </div>' +
                         '                  </div> <hr>');
                 });
@@ -101,11 +103,11 @@ $(document).ready(function () {
                 data.data.map(function (item, i) {
                     $('#sp_for_contacts').append('<div class="row">' +
                         '                    <div class="col-8">' +
-                        '                      <button value="' + item._id + '" class="btn-link btn choose_c"><i class="fas fa-envelope"></i> ' + item.name + '</button>' +
-                        '<br> <small> ' + item.email + ' </small>' +
+                        '                      <button value="' + item._id + '" class="btn-link btn choose_c text-capitalize""><i class="fas fa-envelope"></i> ' + item.name + '</button>' +
+                        '<br> <small class="pl-3"> ' + item.email + ' </small>' +
                         '                    </div>' +
                         '                    <div class="col-4">' +
-                        '                      <button value="' + item._id + '" class="btn btn-danger btn-sm btn-block delete_c"><i class="fas fa-trash"></i></button>' +
+                        '                      <button value="' + item._id + '" class="btn btn-danger btn-sm btn-block delete_c w-75 mb-3 ml-auto mr-auto"><i class="fas fa-trash"></i></button>' +
                         '                    </div>' +
                         '                  </div> <hr>');
                 });
@@ -288,7 +290,7 @@ $(document).ready(function () {
                         '<br> <small> ' + item.email + ' </small>' +
                         '                    </div>' +
                         '                    <div class="col-4">' +
-                        '                      <button value="' + item._id + '" class="btn btn-danger btn-sm btn-block delete_c"><i class="fas fa-trash"></i></button>' +
+                        '                      <button value="' + item._id + '" class="btn btn-danger btn-sm btn-block"><i class="fas fa-trash"></i></button>' +
                         '                    </div>' +
                         '                  </div> <hr>');
                 });
@@ -334,4 +336,27 @@ $(document).ready(function () {
         })
         return ne_array;
     }
+});
+
+$(document.body).on('click', '.select_All', function () {
+    let value = $(this).val();
+
+    $.getJSON(root_path + 'app/api/contacts/' + _app_id_ + '/',{ 
+        where: 
+        { 
+            group : value
+        }
+    }, function (data) {
+       data.data.map(function(item){
+            
+            let mails = $('#to').val()
+            mails = item.email
+            console.log(item.group,item.email)
+       })
+
+    }).fail(function (err) {
+        console.log("aqui no llegue :(")
+    });
+    
+
 });

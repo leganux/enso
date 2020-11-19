@@ -35,11 +35,11 @@ html
                                         h3 !{i18n.no_templates_found}
 
                             br
-                            .card.h-auto.rounded-bottom(style="min-height:100px;")
+                            .card.h-auto.rounded-bottom(style="min-height:200px;")
                                 .card-header.bg-dark
                                     h3.card-title  Groups 
                                     //!{i18n.contacts}
-                                .card-body.p-2
+                                .card-body.p-3
                                     .row
                                         .col-8
                                             button.btn-link.btn
@@ -50,31 +50,31 @@ html
                                             input(type="text",placeholder=i18n.description).mb-2.ml-1.form-control#group_description
                                         .col-4
                                             br
-                                            button.btn.btn-primary.btn-block#add_group.m-auto.pb-4.w-75.h-25
+                                            button.btn.btn-primary.btn-block#add_group.w-75.m-auto
                                                 i.fas.fa-plus-circle
                                     hr
-                                    #sp_for_goups(style="max-height: 100px !important; height: auto !important; overflow-y:auto;")
+                                    #sp_for_goups(style="mix-height: 100px !important; height: auto !important; overflow-y:auto;")
                                         
                                     br
 
                             .card.h-auto.rounded-bottom(style="min-height:100px;")
                                 .card-header.bg-dark
                                     h3.card-title !{i18n.contacts}
-                                .card-body
+                                .card-body.p-3
                                     .row
                                         .col-8
                                             button.btn-link.btn
-                                                i.fas.fa-user-plus
-                                                |  !{i18n.contacts}
+                                                i.fas.fa-user-plus  
+                                                |  !{i18n.contacts}.  
                                             br
-                                            input(type="text",placeholder=i18n.name).mb-2.form-control#contacts_name
-                                            input(type="mail",placeholder=i18n.email).mb-2.form-control#contacts_mail
-                                            select.form-control.text-muted#contacts_group
+                                            input(type="text",placeholder=i18n.name).mb-2.ml-1.form-control#contacts_name
+                                            input(type="mail",placeholder=i18n.email).mb-2.ml-1.form-control#contacts_mail
+                                            select.custom-select.form-control.text-muted#contacts_group.mb-2.ml-1
                                                 option(value=-1) Choose one..
 
-                                        .col-4
+                                        .col-4.pt-4
                                             br
-                                            button.btn.btn-primary.btn-block#add_contact
+                                            button.btn.btn-primary.btn-block#add_contact.w-75.m-auto
                                                 i.fas.fa-plus-circle
                                     hr
                                     #sp_for_contacts(style="min-height: 100px !important; height: auto !important; overflow-y:auto;")
@@ -119,7 +119,7 @@ html
         include template/scripts
         script.
             $(document).ready(function () {
-                $('#menu_files').addClass('active');
+                $('#menu_mailing').addClass('active');
 
 
             });
