@@ -40,22 +40,25 @@ html
                                     h3.card-title  Groups 
                                     //!{i18n.contacts}
                                 .card-body.p-3
-                                    .row
-                                        .col-8
-                                            button.btn-link.btn
-                                                i.fas.fa-user-edit
-                                                |  !{i18n.contact_groups}
-                                            br
-                                            input(type="text",placeholder=i18n.group_name).mb-2.ml-1.form-control#group_name
-                                            input(type="text",placeholder=i18n.description).mb-2.ml-1.form-control#group_description
-                                        .col-4
-                                            br
-                                            button.btn.btn-primary.btn-block#add_group.w-75.m-auto
-                                                i.fas.fa-plus-circle
-                                    hr
-                                    #sp_for_goups(style="mix-height: 100px !important; height: auto !important; overflow-y:auto;")
-                                        
-                                    br
+                                    .container-fluid  
+                                        .row
+                                            .col-8
+                                                button.btn-link.btn
+                                                    i.fas.fa-user-edit
+                                                    |  !{i18n.contact_groups}
+                                                br
+                                                input(type="text",placeholder=i18n.group_name).mb-2.ml-1.form-control#group_name
+                                                input(type="text",placeholder=i18n.description).mb-2.ml-1.form-control#group_description
+                                            .col-4
+                                                br
+                                                button.btn.btn-primary.btn-block#add_group.w-75.m-auto
+                                                    i.fas.fa-plus-circle
+                                        hr
+                                        .row
+                                            .col
+                                                #sp_for_goups(style="mix-height: 100px !important; height: auto !important; overflow-y:auto; overflow-x:hidden;")
+
+                                        br
 
                             .card.h-auto.rounded-bottom(style="min-height:100px;")
                                 .card-header.bg-dark
@@ -77,7 +80,9 @@ html
                                             button.btn.btn-primary.btn-block#add_contact.w-75.m-auto
                                                 i.fas.fa-plus-circle
                                     hr
-                                    #sp_for_contacts(style="min-height: 100px !important; height: auto !important; overflow-y:auto;")
+                                    .row
+                                        .col
+                                            #sp_for_contacts(style="min-height: 100px !important; height: auto !important; overflow-y:auto; overflow-x:hidden;")
                                     br
 
 
