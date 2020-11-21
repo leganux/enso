@@ -2615,3 +2615,6 @@
 2020-07-23 09:12:12  GET  /enso/app/api/contacts/5ed553401c73b503b759fba9/5f1a3d961a502e0beef943df?where%5Bapp%5D=5ed553401c73b503b759fba9  304  38.415  ms
 2020-07-23 09:12:53  GET  /enso/app/api/contacts/5ed553401c73b503b759fba9?where%5Bapp%5D=5ed553401c73b503b759fba9&where%5Bgroup%5D=5f1a3bd71a502e0beef943dd  304  37.191  ms
 2020-07-23 09:12:56  GET  /enso/app/api/contacts/5ed553401c73b503b759fba9/5f1a3d961a502e0beef943df?where%5Bapp%5D=5ed553401c73b503b759fba9  304  105.075  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:7479) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
