@@ -32,12 +32,12 @@ const app_file_admin = new Schema({
     createdAt: {
         type: Date,
         required: true,
-        default: moment().format()
+        default: moment
     },
     updatedAt: {
         type: Date,
         required: true,
-        default: moment().format()
+        default: moment
     },
 });
 
