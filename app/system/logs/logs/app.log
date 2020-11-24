@@ -31533,6 +31533,7 @@
 2020-11-20 02:32:53  GET  /enso/app/api/contacts/5ed553401c73b503b759fba9?where%5Bapp%5D=5ed553401c73b503b759fba9  304  86.354  ms
 2020-11-20 02:32:53  GET  /enso/api/core/app?where%5Bactive%5D=true&where%5Bowner%5D=5ecc6e15cb337f38696726ac  304  50.158  ms
 {"0":"Http server start at 8088/enso/"}
+<<<<<<< HEAD
 {"0":"(node:4473) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
 {"0":"DB is connected"}
 2020-11-24 09:39:27  GET  /enso/admin  200  531.345  ms
@@ -41690,3 +41691,7 @@
 2020-11-24 02:34:50  POST  /enso/app/api/mailing/5ed553401c73b503b759fba9/send_mail  200  10.434  ms
 {"0":"Message sent: %s","1":"<cf7048d4-fac1-85ea-d2c2-810c59db7acc@example.com>"}
 {"0":"Preview URL: %s","1":"https://ethereal.email/message/X70rzHOUYS42YYogX71ublCLPi6rS8-QAAAAJgaxqK0jAoMSHlUi1DJRFVE"}
+=======
+{"0":"(node:6756) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+>>>>>>> 530d5c55ca90771b0037a26d678bac55471adef7
