@@ -167,7 +167,43 @@ $(document).ready(function () {
     getAllContacts_single()
 
     $('#btn_send').click(function () {
+        let body = {};
+   
+        body.contacts = $('#to').val();
+        body.contacts = body.contacts.split(',')
+        body.subject = $('#subject').val();
+        body.html = $('#content_html').summernote('code');
+        
+        
+        console.log(body.contacts.toString())
+        
+       
 
+        if (body.subject === '' || body.contacts.length == 0) {
+            notify_warning(i18n.fill_all_fields)
+            return false;
+        }
+
+        if ($('#content_html').summernote('isEmpty')) {
+            notify_warning(i18n.fill_all_fields)
+            return false;
+        }
+        
+        HoldOn.open();
+        $.post(root_path + 'app/api/mailing/' + _app_id_+ '/send_mail', body, function (data) {
+            HoldOn.close();
+            
+            notify_success(data.message)
+            $('#content_html').summernote('code', '');
+            $('#subject').val('')
+            
+        }).fail(function (err) {
+            HoldOn.close();
+            
+            notify_error(err.responseJSON.message);
+            console.error(err);
+           
+        });
 
     });
 

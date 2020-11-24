@@ -100,12 +100,14 @@ html
                                             input.form-control(type='text' value=app.mail_port)#app_mail_port
 
                                         .col-12.col-md-6
+                                            label !{i18n.from}
+                                            input.form-control(type='text' value=app.mail_from)#app_mail_from
                                             label !{i18n.username}
                                             input.form-control(type='text' value=app.mail_user)#app_mail_user
                                             label !{i18n.password}
                                             input.form-control(type='password' value=app.mail_pass)#app_mail_password
                                             br
-                                            button.btn.btn-block.btn-dark#btn_save_email !{i18n.save}
+                                        button.btn.btn-block.btn-dark#btn_save_email !{i18n.save}   
 
 
                                 #database.tab-pane.fade

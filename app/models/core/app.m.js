@@ -86,6 +86,10 @@ const app = new Schema({
         type: String,
         required: false,
     },
+    mail_from: {
+        type: String,
+        required: false,
+    },
     active: {
         type: Boolean,
         required: true,

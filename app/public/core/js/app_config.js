@@ -28,6 +28,7 @@ $(document).ready(function () {
         body.mail_port = $('#app_mail_port').val()
         body.mail_user = $('#app_mail_user').val()
         body.mail_pass = $('#app_mail_password').val()
+        body.mail_from = $('#app_mail_from').val()
         body.default_role = $('#default_role').val()
         body.default_role_new = $('#default_role_register').val()
 
