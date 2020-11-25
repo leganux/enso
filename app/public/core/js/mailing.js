@@ -119,6 +119,7 @@ $(document).ready(function () {
         });
     }
 
+
     $(document.body).on('click', '.delete_template', function () {
         let value = $(this).val();
         confirm_delete(function () {
@@ -284,17 +285,17 @@ $(document).ready(function () {
             });
         });
     });
-    $(document.body).on('click', '.delete_c_group', function () {
+    $(document.body).on('click', '.delete_c', function () {
         let value = $(this).val();
         confirm_delete(function () {
             $('#saved_mails').html('');
             $.ajax({
-                url: root_path + 'app/api/contact_group/' + _app_id_ + '/' + value,
+                url: root_path + 'app/api/contacts/' + _app_id_ + '/' + value,
                 method: 'DELETE',
             }).done(function (data) {
                 HoldOn.close();
                 notify_success(i18n.element_deleted)
-                getAllContacts();
+                getAllContacts();       
 
             }).fail(function (err) {
                 HoldOn.close();
@@ -304,6 +305,7 @@ $(document).ready(function () {
             });
         });
     });
+ 
 
     $(document.body).on('click', '.choose_c_group', function () {
         let value = $(this).val();

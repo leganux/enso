@@ -9,7 +9,22 @@ const fs = require('fs');
 const {fork} = require('child_process');
 const response_codes = require('./../helpers/response_codes.helper').codes;
 
-api_crud.all(router, contact_group, access_middleware, false, 'name');
+//api_crud.all(router, contact_group, access_middleware, false, 'name');
+
+router.delete('/:app_id/:id', (req,res)=>{
+    console.log(req)
+})
+
+
+api_crud.create(router, contact_group, access_middleware);
+api_crud.update(router, contact_group, access_middleware);
+api_crud.updateWhere(router, contact_group, access_middleware);
+api_crud.readOne(router, contact_group, access_middleware, false);
+api_crud.readById(router, contact_group, access_middleware, false);
+api_crud.read(router, contact_group, access_middleware, false);
+api_crud.updateOrCreate(router, contact_group, access_middleware);
+api_crud.datatable(router, contact_group, access_middleware, false, 'name');
+
 
 
 module.exports = router;
