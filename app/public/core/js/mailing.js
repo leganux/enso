@@ -138,6 +138,8 @@ $(document).ready(function () {
                 console.error(err);
                 DELETE = '';
             });
+            var container = i18n.no_templates_found
+            $('#saved_mails').html("<center><h3>"+container+"</h3></center>");
         });
     });
 
@@ -273,6 +275,7 @@ $(document).ready(function () {
                 url: root_path + 'app/api/contact_group/' + _app_id_ + '/' + value,
                 method: 'DELETE',
             }).done(function (data) {
+                console.log("AQUI")
                 HoldOn.close();
                 notify_success(i18n.element_deleted)
                 getAllContacts();

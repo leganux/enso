@@ -651,7 +651,7 @@ api_functions.updateOrCreate = function (router, model, middleware) {
 api_functions.delete = function (router, model, middleware) {
     router.delete('/:app_id/:id', middleware ? middleware : no_middleware, async function (req, res) {
         var id = req.params.id;
-
+        
         //verify app
         if (!get_app_id(req)) {
             res.status(533).json(response_codes.code_533)

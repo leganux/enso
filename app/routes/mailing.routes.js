@@ -6,53 +6,70 @@ const access_middleware = require('./../auth/auth.middleware').auth
 const app = require('./../models/core/app.m')
 var path = require('path');
 const fs = require('fs');
-const {fork} = require('child_process');
+const { fork } = require('child_process');
 const response_codes = require('./../helpers/response_codes.helper').codes;
 const nodemailer = require("nodemailer");
 
 api_crud.all(router, mails, access_middleware, false, 'name');
 
 //SMTP transporter
-router.post('/:_app_id_/send_mail',async(req,res)=>{
-  let {body,params} = req;
-  let {contacts,subject,html} = body;
-  console.log(contacts,subject,html);
-  console.log(body,params);
-  res.send('recived');
+router.post('/:_app_id_/send_mail', async (req, res) => {
+  let { body, params } = req;
+  let { contacts, subject, html } = body;
+  //console.log(contacts,subject,html);
+  console.log(params);
+
   var mails = contacts.toString();
-  
-  
-  let transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
-    port: 587,
-    secure: false, // true for 465, false for other ports
-    auth: {
-      user: 'evans9@ethereal.email', // generated ethereal user prube
-      pass: '9jqw7MNG7jxDnxBfvJ' // generated ethereal password prube
-    },
-    tls: {
-      rejectUnauthorized: false
-    },
-  });    
+  let id = params._app_id_
+  console.log(id)
+  var appInfo = await app.findById(id)
+
+  console.log(appInfo.name)
+  console.log(appInfo.mail_host)
+
+
+  try {
+    var transporter = nodemailer.createTransport({
+      host: appInfo.mail_host,
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: appInfo.mail_user,
+        pass: appInfo.mail_pass,
+      },
+      tls: {
+        rejectUnauthorized: false
+      },
+    });
 
     var info = await transporter.sendMail({
-      from: '"Fred Foo 👻" <foo@example.com>', // sender address
-      bcc: "'" + mails + "'", // list of receivers
+      from: appInfo.mail_from,//'"Fred Foo 👻" <foo@example.com>' sender address
+      bcc: mails, // list of receivers
       subject: body.subject, // Subject line
-      text: "Hello world?", // plain text body
+      //text: "Hello world?", // plain text body
       html: html, // html body
-     
+
     });
-  
-    console.log("Message sent: %s", info.messageId);
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-  
-    // Preview only available when sending through an Ethereal account
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou... */
-       
-      
-});  
+
+    let ret = response_codes.code_200;
+    ret.data = info;
+    res.status(200).json(ret);
+    return 0;
+
+
+
+  } catch (e) {
+    console.error(e)
+    res.status(500).json(response_codes.code_500);
+    return 0;
+  }
+
+
+
+
+
+
+});
 
 
 
