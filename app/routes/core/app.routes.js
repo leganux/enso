@@ -83,6 +83,11 @@ var add_user_default_path_and_permission = function (role_id, app_id) {
             type: 'admin_panel',
             active: true
         }, {
+            url: 'app/:name/contacts',
+            description: 'Contacts panel',
+            type: 'admin_panel',
+            active: true
+        }, {
             url: 'app/:name/mailing',
             description: 'Mailing panel',
             type: 'admin_panel',

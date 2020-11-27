@@ -1,0 +1,75 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        include template/seo
+        include template/styles
+    body.hold-transition.sidebar-mini.accent-pink
+        .wrapper
+            include template/nav
+            include template/aside
+            .content-wrapper
+                section.content-header
+                    .container-fluid
+                        .row.mb-2
+                            .col-sm-6
+                                h1 !{i18n.contacts}
+                            |
+                            .col-sm-6
+                                ol.breadcrumb.float-sm-right
+                                    li.breadcrumb-item
+                                        a(href=base_admin_path + 'dashboard') !{i18n.home}
+                                    |
+                                    li.breadcrumb-item.active !{i18n.files}
+                section.content
+                    .card
+                        .card-header.bg-dark
+                            .row
+                                .col-12.col-md-8
+                                    h3.card-title.mt-2 !{i18n.list_of} !{i18n.contacts}
+                                .col-12.col-md-4
+                                    button.bg-pink.btn.btn-block#btn_new_element !{i18n.new_contact}
+
+                        .card-body
+                            table.table.table-bordered.table-striped.display.table-hover#datatable
+                                thead
+                                    tr
+                                        th !{i18n.id}
+                                        th !{i18n.name}
+                                        th !{i18n.email}
+                                        th !{i18n.description}
+                                        th !{i18n.lada}
+                                        th !{i18n.phone}
+                                        th !{i18n.group_name}
+                                        th !{i18n.country}
+                                        th !{i18n.state}
+                                        th !{i18n.city}
+                                        th !{i18n.cp}
+                                        th !{i18n.street}
+                                        th !{i18n.ext_number}
+                                        th !{i18n.int_number}
+                                        th !{i18n.reference}
+
+
+                                        
+
+
+
+                        .card-footer
+                            | !{i18n.create_modify_delete}
+
+            include template/footer
+            include template/control_bar
+
+        include modals/contacts
+        include template/params
+        include template/scripts
+        script.
+            $(document).ready(function () {
+                $('#menu_contacts').addClass('active');
+            });
+        script(src=core_files_path + 'js/common.js')
+        script(src=core_files_path + 'js/app_file_manager.js')
+        script(src=core_files_path + 'js/contacts.js')
+

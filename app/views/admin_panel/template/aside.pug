@@ -187,6 +187,13 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
                                 |
                                 p !{i18n.cron_functions}
                     |
+                    if scr_access && scr_access.includes('app/:name/contacts')
+                        li.nav-item
+                            a.nav-link(href=base_admin_path + 'app/' + _app_id_ + '/contacts')#menu_contacts
+                                i.nav-icon.fas.fa-address-book
+                                |
+                                p !{i18n.contacts}
+                    |
                     if scr_access && scr_access.includes('app/:name/mailing')
                         li.nav-item
                             a.nav-link(href=base_admin_path + 'app/' + _app_id_ + '/mailing')#menu_mailing

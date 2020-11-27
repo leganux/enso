@@ -143,6 +143,14 @@ html
         script.
             $(document).ready(function () {
                 $('#menu_config').addClass('active');
+                
+                $('#email_serice').change(function(){
+                    if($('#email_serice').val() != 'smtp'){
+                        $('#app_mail_port').prop('readonly',true);
+                    }else{
+                        $('#app_mail_port').prop('readonly',false);    
+                    }
+                })
 
             });
         script(src=core_files_path + 'js/common.js')
