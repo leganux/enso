@@ -13,7 +13,7 @@ const state = new Schema({
         required: false
     },
     country_id: {
-        type: Number,
+        type: String,
         required: false,
     },
     active: {

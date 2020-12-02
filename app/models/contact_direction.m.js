@@ -12,17 +12,17 @@ const { schema } = require('./core/app.m');
 const contact_direction = new Schema({
     country: {
         type: Schema.Types.ObjectId,
-        required: true,
+        required: false,
         ref: country
     },
     state: {
         type: Schema.Types.ObjectId,
-        required: true,
+        required: false,
         ref: state
     },
     city: {
         type: Schema.Types.ObjectId,
-        required: true,
+        required: false,
         ref: city
     },
     postalCode: {

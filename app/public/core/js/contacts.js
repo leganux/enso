@@ -1,8 +1,8 @@
 $(document).ready(function () {
- 
+
     $.fn.dataTable.ext.errMode = 'none';
     var UPDATE = '';
-   
+
     var DT = $("#datatable").DataTable({
         "responsive": true,
         "data": {},
@@ -84,7 +84,7 @@ $(document).ready(function () {
         },
     });
     draw_datatable_rs(DT);
-    
+
     $('#btn_new_element').click(function () {
         $('#modal_new_edit').modal('show');
         $('#in_name').val('');
@@ -92,17 +92,86 @@ $(document).ready(function () {
         $('#in_description').val('');
         $('#in_lada').val('');
         $('#in_phone').val('');
-        $('#in_country').val('');
-        $('#in_state').val('');
-        $('#in_city').val('');
         $('#in_cp').val('');
         $('#in_street').val('');
         $('#in_ext_number').val('');
         $('#in_int_number').val('');
         $('#in_reference').val('');
+
+        //get all countries
+        $.getJSON(root_path + 'api/places/country', {}, function (data) {
+
+            for (let i = 0; i < data.data.length; i++) {
+                let option = document.createElement("option");
+                option.value = data.data[i].id
+                option.text = data.data[i].name
+                $('#in_country').append(option)
+            }
+            $('#in_country').select2()
+            $('.select2-selection').css("height", "40px")
+            HoldOn.close();
+        }).fail(function (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        });
+
+
+
+        $('#in_state').val('');
+        $('#in_city').val('');
         UPDATE = ''
     });
-    
+
+    $('#in_country').change(function () {
+        //get all states
+        $('#in_state').children("option").remove()
+        $('#in_city').children("option").remove()
+        let val = $('#in_country').val()
+        $.getJSON(root_path + 'api/places/state', { where: { country_id: String(val) } }, function (data) {
+
+            for (let i = 0; i < data.data.length; i++) {
+                let option = document.createElement("option");
+                option.value = data.data[i].id
+                option.text = data.data[i].name
+                $('#in_state').append(option)
+            }
+            $('#in_state').select2()
+            $('.select2-selection').css("height", "40px")
+            HoldOn.close();
+            notify_success(data.message);
+        }).fail(function (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        });
+    })
+    $('#in_state').change(function () {
+        //get all cities
+        HoldOn.open()
+        $('#in_city').children("option").remove()
+        let val = $('#in_state').val()
+
+        $.getJSON(root_path + 'api/places/city', { where: { state_id: String(val) } }, function (data) {
+            for (let i = 0; i < data.data.length; i++) {
+                let option = document.createElement("option");
+                option.value = data.data[i].id
+                option.text = data.data[i].name
+                $('#in_city').append(option)
+            }
+
+            $('#in_city').select2()
+            $('.select2-selection').css("height", "40px")
+            HoldOn.close();
+            notify_success(data.message);
+        }).fail(function (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        });
+    })
+
+
 
 
     $('#save_changes').click(function () {
@@ -114,13 +183,13 @@ $(document).ready(function () {
         body.description = $('#in_description').val();
         body.lada = $('#in_lada').val()
         body.phone = $('#in_phone').val();
-        direction.country = $('#in_country').val();
+        direction.country = $('#in_country').val()//cambiar a string;
         direction.state = $('#in_state').val();
         direction.city = $('#in_city').val();
-        direction.cp = $('#in_cp').val();
+        direction.postalCode = $('#in_cp').val();
         direction.street = $('#in_street').val();
-        direction.ext_number = $('#in_ext_number').val();
-        direction.int_number = $('#in_int_number').val();
+        direction.ExtNumber = $('#in_ext_number').val();
+        direction.IntNUmber = $('#in_int_number').val();
         direction.reference = $('#in_reference').val();
 
 
@@ -128,15 +197,24 @@ $(document).ready(function () {
             notify_warning(i18n.fill_all_fields)
             return false;
         }
-        save_data_api(root_path + 'app/api/contacts_direction/' + _app_id_, direction, UPDATE, function () {
-            //mandar a llamar app_id para comparar con app_id de direccion
+        HoldOn.open();
+        $.post(root_path + 'app/api/contacts/' + _app_id_ + '/direction', direction, function (data) {
+            HoldOn.close();
+            console.log("direccion guardada")
+            notify_success(data.message);
+
+        }).fail(function (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+
         });
-        save_data_api(root_path + 'app/api/contacts/' + _app_id_,[{body,direction}], UPDATE, function () {
+        /*save_data_api(root_path + 'app/api/contacts/' + _app_id_,body, UPDATE, function () {
             draw_datatable_rs(DT);
             UPDATE = '';
             $('#modal_new_edit').modal('hide');
             $('#btn_build_function').click()
-        });
+        });*/
     });
     $(document.body).on('click', '.update_element', function () {
         UPDATE = $(this).val();
@@ -150,7 +228,7 @@ $(document).ready(function () {
             $('#in_country').val(data.data.country);
             $('#in_state').val(data.data.state);
             $('#in_city').val(data.data.city);
-            $('#in_cp').val(data.data.cp);
+            $('#in_cp').val(data.data.postalCode);
             $('#in_street').val(data.data.street);
             $('#in_ext_number').val(data.data.ExtNumber);
             $('#in_int_number').val(data.data.IntNUmber);

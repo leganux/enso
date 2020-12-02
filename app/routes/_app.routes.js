@@ -16,6 +16,7 @@ router.use('/app_files', require('./app_files.routes'));
 router.use('/contacts', require('./contacts.routes'));
 router.use('/contact_group', require('./contact_group.routes'));
 router.use('/mailing', require('./mailing.routes'));
+router.use('/contact_direction', require('./contact_direction.routes'));
 
 
 module.exports = router;

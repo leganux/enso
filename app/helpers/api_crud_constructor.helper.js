@@ -328,7 +328,7 @@ api_functions.read = function (router, model, middleware, populate) {
         let sort = req.query.sort;
         var find = {};
 
-
+    
         if (where) {
             for (const [key, val] of Object.entries(where)) {
                 find[key] = val;
@@ -366,6 +366,7 @@ api_functions.read = function (router, model, middleware, populate) {
         }
 
 
+        
         let query = model.find(find);
 
         if (select) {

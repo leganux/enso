@@ -21,7 +21,7 @@ var get_app_id = function (req) {
     }
 }
 
-api_functions.create = function (router, model, middleware) {
+api_functions. create = function (router, model, middleware) {
     router.post('/:app_id/', middleware ? middleware : no_middleware, async (req, res) => {
         const body = req.body;
         //verify app
@@ -365,7 +365,7 @@ api_functions.read = function (router, model, middleware, populate) {
 
     router.get('/:app_id/', middleware ? middleware : no_middleware, async function (req, res) {
 
-
+       
         let body = req.query.data;
         let where = req.query.where;
         let or = req.query.or;
@@ -374,7 +374,7 @@ api_functions.read = function (router, model, middleware, populate) {
         let paginate = req.query.paginate;
         let sort = req.query.sort;
         var find = {};
-
+       
 
         //verify app
         if (!get_app_id(req)) {

@@ -13,7 +13,7 @@ const city = new Schema({
         required: false
     },
     state_id: {
-        type: Number,
+        type: String,
         required: false,
     },
     active: {

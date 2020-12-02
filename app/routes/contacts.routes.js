@@ -13,8 +13,18 @@ const fs = require('fs');
 const { fork } = require('child_process');
 const response_codes = require('./../helpers/response_codes.helper').codes;
 
-api_crud.all(router, contacts, access_middleware, false, 'name');
-api_crud.datatable(router, contacts, access_middleware, [{
+//api_crud.all(router, contacts, access_middleware, false, 'name');
+
+
+var get_app_id = function (req) {
+    if (!req.params || !req.params.app_id) {
+        return false;
+    } else {
+        return req.params.app_id;
+    }
+}
+
+var populate = [{
     path: 'app',
     model: app
 },
@@ -31,6 +41,58 @@ api_crud.datatable(router, contacts, access_middleware, [{
         path: 'city',
         model: city
     }]
-}], 'id');
+}]
+
+api_crud.datatable(router, contacts, access_middleware, populate , 'id');
+
+
+router.post('/:app_id/direction', async(req,res) =>{
+    const body = req.body;
+    if (!get_app_id(req)) {
+        res.status(533).json(response_codes.code_533)
+        return 0;
+    }
+
+    if (body.password) {
+        body.password = await bcrypt.hash(body.password, saltRounds);
+    }
+
+    if (req.user && req.user.user) {
+        body.owner = req.user.user;
+    }
+
+    body.app = get_app_id(req);
+
+    try {
+        var response = await new dir(body).save();
+        if (!response) {
+            res.status(433).json(response_codes.code_433);
+            return 0;
+        }
+        let ret = response_codes.code_200;
+        ret.data = response;
+        res.status(200).json(ret);
+        return 0;
+    } catch (e) {
+        console.error('*** Error en CREATE ' + dir.collection.collectionName, e);
+        res.status(500).json(response_codes.code_500);
+        return 0;
+    }
+})
+
+
+
+
+
+//api_crud.create(router, contacts, access_middleware);
+api_crud.update(router, contacts, access_middleware);
+api_crud.updateWhere(router, contacts, access_middleware);
+api_crud.readOne(router, contacts, access_middleware, populate);
+api_crud.readById(router, contacts, access_middleware, populate);
+api_crud.read(router, contacts, access_middleware, populate);
+api_crud.updateOrCreate(router, contacts, access_middleware);
+api_crud.datatable(router, contacts, access_middleware, populate, 'name');
+
+
 
 module.exports = router;

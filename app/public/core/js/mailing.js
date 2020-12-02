@@ -202,7 +202,6 @@ $(document).ready(function () {
             
         }).fail(function (err) {
             HoldOn.close();
-            
             notify_error(err.responseJSON.message);
             console.error(err);
            
