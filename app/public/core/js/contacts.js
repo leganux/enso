@@ -26,31 +26,72 @@ $(document).ready(function () {
                 "data": "phone"
             },
             {
-                "data": "group"
+                "data": "group",
+
             },
             {
-                "data": "country"
+                "data": "direction",
+                render: function (data, v, row) {
+                    if (data && data.country) {
+                        return data.country.name
+                    }
+                }
             },
             {
-                "data": "state"
+                "data": "direction",
+                render: function (data, v, row) {
+                    if (data && data.state) {
+                        return data.state.name
+                    }
+                }
             },
             {
-                "data": "city"
+                "data": "direction",
+                render: function (data, v, row) {
+                    if (data && data.city) {
+                        return data.city.name
+                    }
+                }
             },
             {
-                "data": "postalCode",
+                "data": "direction",
+                render: function (data, v, row) {
+                    if (data && data.postalCode) {
+                        return data.postalCode
+                    }
+                }
             },
             {
-                "data": "street",
+                "data": "direction",
+                render: function (data, v, row) {
+                    if (data && data.street) {
+                        return data.street
+                    }
+                }
             },
             {
-                "data": "ExtNumber",
+                "data": "direction",
+                render: function (data, v, row) {
+                    if (data && data.ExtNumber) {
+                        return data.ExtNumber
+                    }
+                }
             },
             {
-                "data": "IntNUmber",
+                "data": "direction",
+                render: function (data, v, row) {
+                    if (data && data.IntNUmber) {
+                        return data.IntNUmber
+                    }
+                }
             },
             {
-                "data": "reference",
+                "data": "direction",
+                render: function (data, v, row) {
+                    if (data && data.reference) {
+                        return data.reference
+                    }
+                }
             },
             {
                 "data": "createdAt",
@@ -98,11 +139,44 @@ $(document).ready(function () {
         $('#in_int_number').val('');
         $('#in_reference').val('');
 
-        //get all countries
-        $.getJSON(root_path + 'api/places/country', {}, function (data) {
 
+        getlocation()
+        getgroup()
+
+
+        $('#in_state').val('');
+        $('#in_city').val('');
+        UPDATE = ''
+    });
+
+    var getgroup = function () {
+        //get all groups
+        $.getJSON(root_path + 'app/api/contact_group/' + _app_id_, {}, function (data) {
             for (let i = 0; i < data.data.length; i++) {
                 let option = document.createElement("option");
+                option.title = data.data[i]._id
+                option.value = data.data[i].id
+                option.text = data.data[i]._id + " - " + data.data[i].name 
+                $('#in_group').append(option)
+            }
+            $('#in_group').select2()
+            $('.select2-selection').css("height", "40px")
+            HoldOn.close();
+        }).fail(function (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        });
+    }
+    var getlocation = function () {
+        //clean the options
+        $('option').remove();
+        
+        //get all countries
+        $.getJSON(root_path + 'api/places/country', {}, function (data) {
+            for (let i = 0; i < data.data.length; i++) {
+                let option = document.createElement("option");
+                option.title = data.data[i]._id
                 option.value = data.data[i].id
                 option.text = data.data[i].name
                 $('#in_country').append(option)
@@ -115,14 +189,7 @@ $(document).ready(function () {
             notify_error(err.responseJSON.message);
             console.error(err);
         });
-
-
-
-        $('#in_state').val('');
-        $('#in_city').val('');
-        UPDATE = ''
-    });
-
+    }
     $('#in_country').change(function () {
         //get all states
         $('#in_state').children("option").remove()
@@ -132,6 +199,7 @@ $(document).ready(function () {
 
             for (let i = 0; i < data.data.length; i++) {
                 let option = document.createElement("option");
+                option.title = data.data[i]._id
                 option.value = data.data[i].id
                 option.text = data.data[i].name
                 $('#in_state').append(option)
@@ -155,11 +223,11 @@ $(document).ready(function () {
         $.getJSON(root_path + 'api/places/city', { where: { state_id: String(val) } }, function (data) {
             for (let i = 0; i < data.data.length; i++) {
                 let option = document.createElement("option");
+                option.title = data.data[i]._id
                 option.value = data.data[i].id
                 option.text = data.data[i].name
                 $('#in_city').append(option)
             }
-
             $('#in_city').select2()
             $('.select2-selection').css("height", "40px")
             HoldOn.close();
@@ -172,26 +240,24 @@ $(document).ready(function () {
     })
 
 
-
-
     $('#save_changes').click(function () {
         let body = {};
         let direction = {};
 
         body.name = $('#in_name').val();
-        body.emai = $('#in_email').val();
+        body.email = $('#in_email').val();
         body.description = $('#in_description').val();
         body.lada = $('#in_lada').val()
         body.phone = $('#in_phone').val();
-        direction.country = $('#in_country').val()//cambiar a string;
-        direction.state = $('#in_state').val();
-        direction.city = $('#in_city').val();
+        body.group = $('#in_group option:selected').attr("title")
+        direction.country = $('#in_country option:selected').attr("title")
+        direction.state = $('#in_state option:selected').attr("title")
+        direction.city = $('#in_city option:selected').attr("title")
         direction.postalCode = $('#in_cp').val();
         direction.street = $('#in_street').val();
         direction.ExtNumber = $('#in_ext_number').val();
         direction.IntNUmber = $('#in_int_number').val();
-        direction.reference = $('#in_reference').val();
-
+        direction.reference = $('#in_reference').val()
 
         if (body.name === '') {
             notify_warning(i18n.fill_all_fields)
@@ -209,15 +275,30 @@ $(document).ready(function () {
             console.error(err);
 
         });
-        /*save_data_api(root_path + 'app/api/contacts/' + _app_id_,body, UPDATE, function () {
-            draw_datatable_rs(DT);
-            UPDATE = '';
-            $('#modal_new_edit').modal('hide');
-            $('#btn_build_function').click()
-        });*/
+
+        $.getJSON(root_path + 'app/api/contact_direction/' + _app_id_, {}, function (data) {
+            body.direction = data[0]._id
+
+            save_data_api(root_path + 'app/api/contacts/' + _app_id_, body, UPDATE, function () {
+                draw_datatable_rs(DT);
+                UPDATE = '';
+                $('#modal_new_edit').modal('hide');
+                $('#btn_build_function').click()
+            });
+
+            HoldOn.close();
+            notify_success(data.message);
+        }).fail(function (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        })
+
     });
     $(document.body).on('click', '.update_element', function () {
         UPDATE = $(this).val();
+        getlocation()
+        getgroup()
         $.getJSON(root_path + 'app/api/contacts/' + _app_id_ + '/' + UPDATE, {}, function (data) {
             $('#modal_new_edit').modal('show');
             $('#in_name').val(data.data.name);
@@ -225,15 +306,15 @@ $(document).ready(function () {
             $('#in_description').val(data.data.description);
             $('#in_lada').val(data.data.lada);
             $('#in_phone').val(data.data.phone);
-            $('#in_country').val(data.data.country);
-            $('#in_state').val(data.data.state);
-            $('#in_city').val(data.data.city);
-            $('#in_cp').val(data.data.postalCode);
-            $('#in_street').val(data.data.street);
-            $('#in_ext_number').val(data.data.ExtNumber);
-            $('#in_int_number').val(data.data.IntNUmber);
-            $('#in_reference').val(data.data.reference);
-
+            $('#selected_group').html(" "+ data.data.group);
+            $('#selected_country').html("  "+ data.data.direction.country.name);
+            $('#selected_state').html("  "+ data.data.direction.state.name);
+            $('#selected_city').html("  "+ data.data.direction.city.name);
+            $('#in_cp').val(data.data.direction.postalCode);
+            $('#in_street').val(data.data.direction.street);
+            $('#in_ext_number').val(data.data.direction.ExtNumber);
+            $('#in_int_number').val(data.data.direction.IntNUmber);
+            $('#in_reference').val(data.data.direction.reference);
 
             HoldOn.close();
             notify_success(data.message);
@@ -247,7 +328,7 @@ $(document).ready(function () {
         let DELETE = $(this).val();
         confirm_delete(function () {
             $.ajax({
-                url: root_path + 'app/api/cron_functions/' + _app_id_ + '/' + DELETE,
+                url: root_path + 'app/api/contacts/' + _app_id_ + '/' + DELETE,
                 method: 'DELETE',
             }).done(function (data) {
                 HoldOn.close();

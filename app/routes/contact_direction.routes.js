@@ -10,10 +10,28 @@ var path = require('path');
 const fs = require('fs');
 const { fork } = require('child_process');
 const contact_direction = require('./../models/contact_direction.m');
+
 const response_codes = require('./../helpers/response_codes.helper').codes;
 
 
-api_crud.all(router, contact_direction, access_middleware, false, 'name');
+//api_crud.all(router, contact_direction, access_middleware, false, 'name');
+
+router.get("/:app_id/", (req, res) => {
+    console.log("aqui llego back")
+    contact_direction.find({}, (err, dir) => {
+        if (err) {
+            return res.status(500).send({ message: "Error al realizar la peticion" })
+        }
+        if (!dir) {
+            return res.status(400).send({ message: "No hay direcciones" })
+        }
+
+        res.status(200).send(dir)
+    }).sort({$natural:-1}).limit(1)
+
+})
+
+
 
 
 module.exports = router;

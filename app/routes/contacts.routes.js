@@ -43,11 +43,12 @@ var populate = [{
     }]
 }]
 
-api_crud.datatable(router, contacts, access_middleware, populate , 'id');
+api_crud.datatable(router, contacts, access_middleware, populate, 'id');
 
 
-router.post('/:app_id/direction', async(req,res) =>{
+router.post('/:app_id/direction', async (req, res) => {
     const body = req.body;
+
     if (!get_app_id(req)) {
         res.status(533).json(response_codes.code_533)
         return 0;
@@ -80,11 +81,48 @@ router.post('/:app_id/direction', async(req,res) =>{
     }
 })
 
+router.delete("/:app_id/:id", async (req, res) => {
+    var id = req.params.id;
+    console.log(id)
+    //verify app
+    if (!get_app_id(req)) {
+        res.status(533).json(response_codes.code_533)
+        return 0;
+    }
+    try {
+        var response = await contacts.findById(id);
+        let deleteDirectionId = response.direction
+
+
+        var deleteDirection = await dir.findByIdAndRemove(deleteDirectionId)
+        if (!deleteDirection) {
+            res.status(404).json(response_codes.code_404);
+            return 0;
+        }
+
+        response = await contacts.findByIdAndRemove(id);
+        if (!response) {
+            res.status(404).json(response_codes.code_404);
+            return 0;
+        }
+
+        let ret = response_codes.code_200;
+        ret.data = response;
+        res.status(200).json(ret);
+        return 0;
+    } catch (e) {
+        console.error('*** Error en DELETE ' + contacts.collection.collectionName, e);
+        res.status(500).json(response_codes.code_500);
+        return 0;
+    }
+
+
+})
 
 
 
 
-//api_crud.create(router, contacts, access_middleware);
+api_crud.create(router, contacts, access_middleware);
 api_crud.update(router, contacts, access_middleware);
 api_crud.updateWhere(router, contacts, access_middleware);
 api_crud.readOne(router, contacts, access_middleware, populate);

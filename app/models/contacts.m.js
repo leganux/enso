@@ -32,7 +32,7 @@ const contact = new Schema({
     },
     direction: {
         type: Schema.Types.ObjectId,
-        required: true,
+        required: false,
         ref: contact_direction
     },
     app: {

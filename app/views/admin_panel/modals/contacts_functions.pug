@@ -17,12 +17,26 @@
                 input(type='number').form-control#in_lada
                 label !{i18n.phone} 
                 input(type='number').form-control#in_phone
+                label !{i18n.group_name} 
+                span :
+                    ins#selected_group.text-danger
+                select(type='text').form-control#in_group
+                    option !{i18n.select_an_option} 
                 label !{i18n.country} 
+                span :
+                    ins#selected_country.text-danger
                 select(type='text').form-control#in_country
+                    option !{i18n.select_an_option} 
                 label !{i18n.state} 
-                select(type='text').form-control#in_state
+                span :
+                    ins#selected_state.text-danger
+                select(type='text').form-control#in_state  
+                    option !{i18n.select_an_option}  
                 label !{i18n.city} 
+                span :
+                    ins#selected_city.text-danger
                 select(type='text').form-control#in_city
+                    option !{i18n.select_an_option} 
                 label !{i18n.cp} 
                 input(type='number').form-control#in_cp
                 label !{i18n.street} 

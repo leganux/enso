@@ -27,7 +27,7 @@ const contact_direction = new Schema({
     },
     postalCode: {
         type: Number,
-        requiere: false,
+        required: false,
     },
     street: {
         type: String,
@@ -35,11 +35,11 @@ const contact_direction = new Schema({
     },
     ExtNumber: { // internal or external number
         type: Number,
-        requiere: false,
+        required: false,
     },
     IntNUmber: {
         type: Number,
-        requiere: false,
+        required: false,
     },
     reference:{
         type: String,
