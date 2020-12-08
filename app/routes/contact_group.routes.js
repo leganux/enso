@@ -57,6 +57,21 @@ router.delete('/:app_id/:id', async (req,res)=>{
     
 })
 
+router.get("/:app_id/groups", (req, res) => {
+    contact_group.find({}, (err, dir) => {
+        if (err) {
+            return res.status(500).send({ message: "Error al realizar la peticion" })
+        }
+        if (!dir) {
+            return res.status(400).send({ message: "No hay direcciones" })
+        }
+
+        res.status(200).send(dir)
+    })
+
+})
+
+
 
 api_crud.create(router, contact_group, access_middleware);
 api_crud.update(router, contact_group, access_middleware);

@@ -17,7 +17,6 @@ const response_codes = require('./../helpers/response_codes.helper').codes;
 //api_crud.all(router, contact_direction, access_middleware, false, 'name');
 
 router.get("/:app_id/", (req, res) => {
-    console.log("aqui llego back")
     contact_direction.find({}, (err, dir) => {
         if (err) {
             return res.status(500).send({ message: "Error al realizar la peticion" })
