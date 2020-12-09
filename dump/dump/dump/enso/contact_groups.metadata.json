@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"enso.contact_groups"},{"v":2,"key":{"name":1},"name":"name_1","ns":"enso.contact_groups","background":true}],"uuid":"b8c8a45f510b4823836cbe8f01d3bc98"}

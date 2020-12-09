@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"enso.user_routes"}],"uuid":"ec926fa0a0724d6398413cdbc2aad15d"}

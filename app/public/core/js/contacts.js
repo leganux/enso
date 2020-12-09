@@ -218,7 +218,7 @@ $(document).ready(function () {
             });
         })
     }
-    //getlocation()
+    getlocation()
     getgroup()
 
 
@@ -308,7 +308,7 @@ $(document).ready(function () {
         UPDATE = $(this).val();
         var countryID, stateID, cityID
 
-        try {
+        /*try {
 
             const fullfields = await fetch(root_path + 'app/api/contacts/' + _app_id_ + '/' + UPDATE, {})
                 .then(response => response.json())
@@ -344,7 +344,7 @@ $(document).ready(function () {
             console.log(stateID)
             console.log(cityID)
 
-            fetch(root_path + 'api/places/country', {})
+            const countries = await fetch(root_path + 'api/places/country', {})
                 .then(data => data.json())
                 .then(data => {
                     $('#in_country option').remove()
@@ -365,29 +365,27 @@ $(document).ready(function () {
             $('#in_country').trigger("change")
 
 
-            $('#in_country').change(function () {
-                fetch(root_path + 'api/places/state', { where: { country_id: "5" } })
-                    .then(data => data.json())
-                    .then(data => {
-                        $('#in_state option').remove()
-                        for (let i = 0; i < data.data.length; i++) {
-                            let option = document.createElement("option");
-                            option.title = data.data[i]._id
-                            option.value = data.data[i].id
-                            option.text = data.data[i].name
-                            $('#in_state').append(option)
-                        }
-                        $('#in_state').select2()
-                        $('.select2-selection').css("height", "40px")
-
-
-                    })
+           $('#in_country').change( async function () {
+                 const states = await $.getJSON(root_path + 'api/places/state', { where: { country_id: String(countryID) } }, function (data) {
+                    for (let i = 0; i < data.data.length; i++) {
+                        let option = document.createElement("option");
+                        option.title = data.data[i]._id
+                        option.value = data.data[i].id
+                        option.text = data.data[i].name
+                        $('#in_state').append(option)
+                    }
+                    $('#in_state').select2()
+                    $("#in_state").trigger("change")
+                    $('.select2-selection').css("height", "40px")
+                    HoldOn.close();
+                    notify_success(data.message);
+                })
             })
 
             $('#in_state').val(stateID)
             $('#in_state').trigger("change")
 
-            $('#in_state').change(function () {
+           const cities = await $('#in_state').change(function () {
                 fetch(root_path + 'api/places/city', { where: { country_id: "5" } })
                     .then(data => data.json())
                     .then(data => {
@@ -412,7 +410,7 @@ $(document).ready(function () {
             /*$('#selected_group').html(" " + data.data.group);
              //$('#selected_country').html("  " + data.data.direction.country.name);
              //$('#selected_state').html("  " + data.data.direction.state.name);
-             //$('#selected_city').html("  " + data.data.direction.city.name);*/
+             //$('#selected_city').html("  " + data.data.direction.city.name);
  
              HoldOn.close();
              //notify_success(data.message);
@@ -420,52 +418,82 @@ $(document).ready(function () {
             console.log(e)
         }
 
-    });
+     });*/
 
-    /* $.getJSON(root_path + 'app/api/contacts/' + _app_id_ + '/' + UPDATE, {}, async function (data) {
-         $('#modal_new_edit').modal('show');
-         $('#in_name').val(data.data.name);
-         $('#in_email').val(data.data.email);
-         $('#in_description').val(data.data.description);
-         $('#in_lada').val(data.data.lada);
-         $('#in_phone').val(data.data.phone);
-         $('#selected_group').html(" " + data.data.group);
-         $('#selected_country').html("  " + data.data.direction.country.name);
+        $.getJSON(root_path + 'app/api/contacts/' + _app_id_ + '/' + UPDATE, {},  async function (data) {
+            $('#modal_new_edit').modal('show');
+            $('#in_name').val(data.data.name);
+            $('#in_email').val(data.data.email);
+            $('#in_description').val(data.data.description);
+            $('#in_lada').val(data.data.lada);
+            $('#in_phone').val(data.data.phone);
+            $('#selected_group').html(" " + data.data.group);
+            $('#selected_country').html("  " + data.data.direction.country.name);
+            $('#in_group').val(data.data.group)
+            $('#in_group').trigger("change")
+            var state = data.data.direction.state.id
+            var country = data.data.direction.country.id
+            var city = data.data.direction.city.id
 
+
+            async function first(){
+                $('#in_country').val(country)
+                $('#in_country').trigger("change")
+            }
+            async function second(){
+                $('#in_country').trigger("change")
+                $('#in_state').val(state)
+                $('#in_state').trigger("change")
+            }
+            async function third(){
+                $('#in_state').val(city)
+                $('#in_state').trigger("change")
+            }
+            
+               
+
+                console.log("aqui llego")
+
+                const countries = await first()
+                const states = await second()
+                const cities = await third()
+
+                console.log(countries)
+                console.log(states)
+                console.log(cities)
 
          
-        $('#in_group').val(data.data.group)
-        $('#in_group').trigger("change")
-
-         $('#in_country').val(data.data.direction.country.id)
-         $('#in_country').trigger("change")
 
 
-         setTimeout(() => {
-             $('#in_state').val(data.data.direction.state.id)
-             $('#in_state').trigger("change")
-         }, 1000);
-
-         $('#in_city').val(data.data.direction.city.id)
-         $('#in_city').trigger("change")
 
 
-         $('#selected_state').html("  " + data.data.direction.state.name);
-         $('#selected_city').html("  " + data.data.direction.city.name);
-         $('#in_cp').val(data.data.direction.postalCode);
-         $('#in_street').val(data.data.direction.street);
-         $('#in_ext_number').val(data.data.direction.ExtNumber);
-         $('#in_int_number').val(data.data.direction.IntNUmber);
-         $('#in_reference').val(data.data.direction.reference);
 
-         HoldOn.close();
-         notify_success(data.message);
-     }).fail(function (err) {
-         HoldOn.close();
-         notify_error(err.responseJSON.message);
-         console.error(err);
-     });
- });*/
+
+
+
+            // await $('#in_city').val(data.data.direction.city.id)
+            //await $('#in_city').trigger("change")
+
+
+
+
+
+            $('#selected_state').html("  " + data.data.direction.state.name);
+            $('#selected_city').html("  " + data.data.direction.city.name);
+            $('#in_cp').val(data.data.direction.postalCode);
+            $('#in_street').val(data.data.direction.street);
+            $('#in_ext_number').val(data.data.direction.ExtNumber);
+            $('#in_int_number').val(data.data.direction.IntNUmber);
+            $('#in_reference').val(data.data.direction.reference);
+
+            HoldOn.close();
+            notify_success(data.message);
+        }).fail(function (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        });
+    });
     $(document.body).on('click', '.delete_element', function () {
         let DELETE = $(this).val();
         confirm_delete(function () {

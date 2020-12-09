@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"enso.states"}],"uuid":"a00605ab6ae443d4956e21ec1f6b94f3"}

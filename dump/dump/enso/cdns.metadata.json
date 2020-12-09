@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"enso.cdns"}],"uuid":"8935c3bdd1834d4396049ff8ae6e0081"}

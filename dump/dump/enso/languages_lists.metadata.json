@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"enso.languages_lists"}],"uuid":"55b37eb17b0c4e90ac625c741df6dd21"}

@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"enso.dynamic_db_structures"}],"uuid":"18b3a3711f3949e08c840c9fa0b7c302"}
