@@ -210,7 +210,6 @@ router.put('/:app_id/:id', async function (req, res) {
         }
 
         let responsedir = await dir.findByIdAndUpdate(dirid, {$set: direction})
-        console.log('XXXXXX',responsedir)
         body.direction = responsedir._id
 
         response = await contacts.findByIdAndUpdate(id, {$set: body});
