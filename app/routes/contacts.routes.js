@@ -8,10 +8,14 @@ const dir = require('./../models/contact_direction.m')
 const country = require('./../models/core/country.m')
 const state = require('./../models/core/state.m')
 const city = require('./../models/core/city.m')
+const direction = require('../models/contact_direction.m')
+const group = require('../models/contact_group.m')
 var path = require('path');
 const fs = require('fs');
 const { fork } = require('child_process');
+const { model } = require('./../models/core/country.m');
 const response_codes = require('./../helpers/response_codes.helper').codes;
+const moment = require('moment');
 
 //api_crud.all(router, contacts, access_middleware, false, 'name');
 
@@ -27,6 +31,10 @@ var get_app_id = function (req) {
 var populate = [{
     path: 'app',
     model: app
+},
+{
+    path: 'group',
+    model: group
 },
 {
     path: 'direction',
@@ -119,11 +127,113 @@ router.delete("/:app_id/:id", async (req, res) => {
 
 })
 
+//create method
+router.post('/:app_id/',  async (req, res) => {
+    const body = req.body;
+    //verify app
+    if (!get_app_id(req)) {
+        res.status(533).json(response_codes.code_533)
+        return 0;
+    }
+
+    if (body.password) {
+        body.password = await bcrypt.hash(body.password, saltRounds);
+    }
+
+    if (req.user && req.user.user) {
+        body.owner = req.user.user;
+    }
+
+    body.app = get_app_id(req);
+    body.direction.app = body.app
+
+
+    try {
+        let response = await new direction(body.direction).save();
+        if (!response) {
+            res.status(433).json(response_codes.code_433);
+            return 0;
+        }
+        let ret = response_codes.code_200;
+        ret.data = response;
+        res.status(200).json(ret);
+
+
+        
+        body.direction._id = response._id
+
+        let responsetwo = await new contacts(body).save()
+        if (!responsetwo) {
+            res.status(433).json(response_codes.code_433);
+            return 0;
+        }
+        let rettwo = response_codes.code_200;
+        rettwo.data = responsetwo;
+        res.status(200).json(rettwo);
+        
+
+        return 0;
+    } catch (e) {
+        console.error('*** Error en CREATE' + contacts.collection.collectionName, e);
+        res.status(500).json(response_codes.code_500);
+        return 0;
+    }
+});
+
+//update method
+router.put('/:app_id/:id', async function (req, res) {
+    let body = req.body;
+    
+    let direction = body.direction
+    let id = req.params.id;
+
+    body.updatedAt = moment().format();
+    //verify app
+    if (!get_app_id(req)) {
+        res.status(533).json(response_codes.code_533)
+        return 0;
+    }
+
+    try {
+       
+        var response = await contacts.findById(id)
+        
+        console.log(response)
+        let dirid = response.direction
+        console.log(dirid)
+
+
+        //only for owner
+        if (req.who && response.owner && req.who !== '*' && response.owner != req.who) {
+            res.status(403).json(response_codes.code_403);
+            return 0;
+        }
+
+        let responsedir = await dir.findByIdAndUpdate(dirid, {$set: direction})
+        console.log('XXXXXX',responsedir)
+        body.direction = responsedir._id
+
+        response = await contacts.findByIdAndUpdate(id, {$set: body});
+
+        if (!response || !responsedir) {
+            res.status(434).json(response_codes.code_434);
+            return 0;
+        }
+
+        let ret = response_codes.code_200;
+        ret.data = response;
+        res.status(200).json(ret);
+        return 0;
+
+    } catch (e) {
+        console.error('*** Error en UPDATE ' + contacts.collection.collectionName, e);
+        res.status(500).json(response_codes.code_500);
+        return 0;
+    }
+});
 
 
 
-api_crud.create(router, contacts, access_middleware);
-api_crud.update(router, contacts, access_middleware);
 api_crud.updateWhere(router, contacts, access_middleware);
 api_crud.readOne(router, contacts, access_middleware, populate);
 api_crud.readById(router, contacts, access_middleware, populate);

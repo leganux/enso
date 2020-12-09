@@ -1,5 +1,5 @@
 
-
+var countryID, stateID, cityID
 $(document).ready(function () {
 
     $.fn.dataTable.ext.errMode = 'none';
@@ -29,6 +29,11 @@ $(document).ready(function () {
             },
             {
                 "data": "group",
+                render: function (data, v, row) {
+                    if (data) {
+                        return data.name
+                    }
+                }
 
             },
             {
@@ -128,32 +133,34 @@ $(document).ready(function () {
     });
     draw_datatable_rs(DT);
 
-    var getgroup = function () {
-        //get all groups
-        $.getJSON(root_path + 'app/api/contact_group/' + _app_id_ + "/groups", {}, function (data) {
+    var getgroup = async function () {
+        $("#in_group").html('')
+        try {
+            let response = await fetch(root_path + 'app/api/contact_group/' + _app_id_ + "/groups", {})
+            let data = await response.json()
+
             for (let i = 0; i < data.length; i++) {
                 let option = document.createElement("option");
-                option.title = data[i]._id
                 option.value = data[i]._id
-                option.text = data[i]._id + " - " + data[i].name
+                option.text = data[i].name
                 $('#in_group').append(option)
             }
             $('#in_group').select2()
             $('.select2-selection').css("height", "40px")
             HoldOn.close();
-        }).fail(function (err) {
+
+        } catch (err) {
             HoldOn.close();
             notify_error(err.responseJSON.message);
             console.error(err);
-        });
+        }
+
     }
 
-    var getlocation = function () {
-        //clean the options
-        $('option').remove();
-
-        //get all countries
-        $.getJSON(root_path + 'api/places/country', {}, function (data) {
+    var getlocationCountry = async function () {
+        try {
+            let response = await fetch(root_path + 'api/places/country', {})
+            let data = await response.json()
             for (let i = 0; i < data.data.length; i++) {
                 let option = document.createElement("option");
                 option.title = data.data[i]._id
@@ -164,66 +171,91 @@ $(document).ready(function () {
             $('#in_country').select2()
             $('.select2-selection').css("height", "40px")
             HoldOn.close();
-        }).fail(function (err) {
+        } catch (err) {
             HoldOn.close();
             notify_error(err.responseJSON.message);
             console.error(err);
-        });
-
-        $('#in_country').change(function () {
-            //get all states
-            $('#in_state').children("option").remove()
-            $('#in_city').children("option").remove()
-            let val = $('#in_country').val()
-            $.getJSON(root_path + 'api/places/state', { where: { country_id: String(val) } }, function (data) {
-                for (let i = 0; i < data.data.length; i++) {
-                    let option = document.createElement("option");
-                    option.title = data.data[i]._id
-                    option.value = data.data[i].id
-                    option.text = data.data[i].name
-                    $('#in_state').append(option)
-                }
-                $('#in_state').select2()
-                $("#in_state").trigger("change")
-                $('.select2-selection').css("height", "40px")
-                HoldOn.close();
-                notify_success(data.message);
-            }).fail(function (err) {
-                HoldOn.close();
-                notify_error(err.responseJSON.message);
-                console.error(err);
-            });
-        })
-        $('#in_state').change(function () {
-            //get all cities
-            HoldOn.open()
-            $('#in_city').children("option").remove()
-            let val = $('#in_state').val()
-            $.getJSON(root_path + 'api/places/city', { where: { state_id: String(val) } }, function (data) {
-                for (let i = 0; i < data.data.length; i++) {
-                    let option = document.createElement("option");
-                    option.title = data.data[i]._id
-                    option.value = data.data[i].id
-                    option.text = data.data[i].name
-                    $('#in_city').append(option)
-                }
-                $('#in_city').select2()
-                $('.select2-selection').css("height", "40px")
-                HoldOn.close();
-                notify_success(data.message);
-            }).fail(function (err) {
-                HoldOn.close();
-                notify_error(err.responseJSON.message);
-                console.error(err);
-            });
-        })
+        }
     }
-    getlocation()
+    var getlocationState = async function (country_id) {
+        countryID = String(country_id)
+        try {
+            let response = await fetch(root_path + 'api/places/state' + '?where[country_id]=' + countryID, {})
+            let data = await response.json()
+
+            for (let i = 0; i < data.data.length; i++) {
+                let option = document.createElement("option");
+                option.title = data.data[i]._id
+                option.value = data.data[i].id
+                option.text = data.data[i].name
+                $('#in_state').append(option)
+            }
+            $('#in_state').select2()
+            $("#in_state").trigger("change")
+            $('.select2-selection').css("height", "40px")
+            HoldOn.close();
+            notify_success(data.message);
+
+
+        } catch (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        }
+    }
+
+    var getlocationCity = async function (state_id) {
+        state_Id = String(state_id)
+        try {
+            let response = await fetch(root_path + 'api/places/city' + '?where[state_id]=' + state_Id, {})
+            let data = await response.json()
+            for (let i = 0; i < data.data.length; i++) {
+                let option = document.createElement("option");
+                option.title = data.data[i]._id
+                option.value = data.data[i].id
+                option.text = data.data[i].name
+                $('#in_city').append(option)
+            }
+            $('#in_city').select2()
+            $('.select2-selection').css("height", "40px")
+            HoldOn.close();
+            notify_success(data.message);
+        } catch (err) {
+            HoldOn.close();
+            notify_error(err.stringify(err));
+            console.error(err);
+        }
+
+    }
+
+    $('#in_country').change(async function () {
+        $('#in_state').html('')
+        $('#in_city').html('')
+
+        let val = $('#in_country').val()
+        await getlocationState(val)
+    })
+
+
+    $('#in_state').change(async function () {
+        $('#in_city').html('')
+
+        let val = $('#in_state').val()
+
+        await getlocationCity(val)
+    })
+
+    
+    getlocationCountry()
     getgroup()
 
-
-
     $('#btn_new_element').click(function () {
+        $('#in_state').html('')
+        $('#in_city').html('')
+        $('#in_country').html('')
+        $('#in_group').html('')
+        getlocationCountry()
+        getgroup()
         $('#modal_new_edit').modal('show');
         $('#in_name').val('');
         $('#in_email').val('');
@@ -242,7 +274,7 @@ $(document).ready(function () {
     });
 
 
-    $('#save_changes').click(function () {
+    $('#save_changes').click(async function () {
         let body = {};
         let direction = {};
 
@@ -251,28 +283,49 @@ $(document).ready(function () {
         body.description = $('#in_description').val();
         body.lada = $('#in_lada').val()
         body.phone = $('#in_phone').val();
-        body.group = $('#in_group option:selected').attr("title")
-        direction.country = $('#in_country option:selected').attr("title")
-        direction.state = $('#in_state option:selected').attr("title")
-        direction.city = $('#in_city option:selected').attr("title")
+
+        body.group = $('#in_group').select2('data')[0].id
+
+        direction.country = $('#in_country').select2('data')[0].title
+        direction.state = $('#in_state').select2('data')[0].title
+        direction.city = $('#in_city').select2('data')[0].title
+
         direction.postalCode = $('#in_cp').val();
         direction.street = $('#in_street').val();
         direction.ExtNumber = $('#in_ext_number').val();
         direction.IntNUmber = $('#in_int_number').val();
         direction.reference = $('#in_reference').val()
 
+        body.direction = direction
+        
+
         //Conditions
         if (body.name === '') {
             notify_warning(i18n.fill_all_fields)
             return false;
         }
-        if (isNaN(body.lada) || isNaN(body.phone) || isNaN(direction.postalCode)) {
+        if (isNaN(body.phone) || isNaN(direction.postalCode)) {
             notify_warning(i18n.most_be_a_number)
             return false;
         }
 
+        save_data_api(root_path + 'app/api/contacts/' + _app_id_, body, UPDATE, function () {
+            draw_datatable_rs(DT);
+            UPDATE = '';
+            $('#modal_new_edit').modal('hide');
+            $('#btn_build_function').click()
+            HoldOn.close();
+            console.log("direccion guardada")
+            notify_success(data.message);
+        }).fail(function (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+
+        });;
+
         //Api function
-        HoldOn.open();
+        /*HoldOn.open();
         $.post(root_path + 'app/api/contacts/' + _app_id_ + '/direction', direction, function (data) {
             HoldOn.close();
             console.log("direccion guardada")
@@ -283,217 +336,63 @@ $(document).ready(function () {
             notify_error(err.responseJSON.message);
             console.error(err);
 
-        });
+        });*/
 
-        $.getJSON(root_path + 'app/api/contact_direction/' + _app_id_, {}, function (data) {
-            body.direction = data[0]._id
+        //$.getJSON(root_path + 'app/api/contact_direction/' + _app_id_, {}, function (data) {
+        //body.direction = data[0]._id
 
-            save_data_api(root_path + 'app/api/contacts/' + _app_id_, body, UPDATE, function () {
-                draw_datatable_rs(DT);
-                UPDATE = '';
-                $('#modal_new_edit').modal('hide');
-                $('#btn_build_function').click()
-            });
 
-            HoldOn.close();
-            notify_success(data.message);
-        }).fail(function (err) {
-            HoldOn.close();
-            notify_error(err.responseJSON.message);
-            console.error(err);
-        })
 
     });
+
     $(document.body).on('click', '.update_element', async function () {
         UPDATE = $(this).val();
-        var countryID, stateID, cityID
+        try {
 
-        /*try {
+            let response = await fetch(root_path + 'app/api/contacts/' + _app_id_ + '/' + UPDATE, {})
+            let data = await response.json()
 
-            const fullfields = await fetch(root_path + 'app/api/contacts/' + _app_id_ + '/' + UPDATE, {})
-                .then(response => response.json())
-                .then(data => {
-                    $('#modal_new_edit').modal('show');
-                    $('#in_name').val(data.data.name);
-                    $('#in_email').val(data.data.email);
-                    $('#in_description').val(data.data.description);
-                    $('#in_lada').val(data.data.lada);
-                    $('#in_phone').val(data.data.phone);
-                    $('#in_cp').val(data.data.direction.postalCode);
-                    $('#in_street').val(data.data.direction.street);
-                    $('#in_ext_number').val(data.data.direction.ExtNumber);
-                    $('#in_int_number').val(data.data.direction.IntNUmber);
-                    $('#in_reference').val(data.data.direction.reference);
-
-
-                    $('#in_group').val(data.data.group)
-                    $('#in_group').trigger("change")
-
-                    countryID = data.data.direction.country.id
-                    
-
-                    stateID = data.data.direction.state.id
-                    
-
-                    cityID = data.data.direction.city.id
-
-
-                })
-
-            console.log(countryID)
-            console.log(stateID)
-            console.log(cityID)
-
-            const countries = await fetch(root_path + 'api/places/country', {})
-                .then(data => data.json())
-                .then(data => {
-                    $('#in_country option').remove()
-                    for (let i = 0; i < data.data.length; i++) {
-                        let option = document.createElement("option");
-                        option.title = data.data[i]._id
-                        option.value = data.data[i].id
-                        option.text = data.data[i].name
-                        $('#in_country').append(option)
-                    }
-                    $('#in_country').select2()
-                    $('.select2-selection').css("height", "40px")
-
-
-                })
-
-            $('#in_country').val(countryID)
-            $('#in_country').trigger("change")
-
-
-           $('#in_country').change( async function () {
-                 const states = await $.getJSON(root_path + 'api/places/state', { where: { country_id: String(countryID) } }, function (data) {
-                    for (let i = 0; i < data.data.length; i++) {
-                        let option = document.createElement("option");
-                        option.title = data.data[i]._id
-                        option.value = data.data[i].id
-                        option.text = data.data[i].name
-                        $('#in_state').append(option)
-                    }
-                    $('#in_state').select2()
-                    $("#in_state").trigger("change")
-                    $('.select2-selection').css("height", "40px")
-                    HoldOn.close();
-                    notify_success(data.message);
-                })
-            })
-
-            $('#in_state').val(stateID)
-            $('#in_state').trigger("change")
-
-           const cities = await $('#in_state').change(function () {
-                fetch(root_path + 'api/places/city', { where: { country_id: "5" } })
-                    .then(data => data.json())
-                    .then(data => {
-                        $('#in_city option').remove()
-                        for (let i = 0; i < data.data.length; i++) {
-                            let option = document.createElement("option");
-                            option.title = data.data[i]._id
-                            option.value = data.data[i].id
-                            option.text = data.data[i].name
-                            $('#in_city').append(option)
-                        }
-                        $('#in_city').select2()
-                        $('.select2-selection').css("height", "40px")
-
-                    })
-            })
-
-            $('#in_city').val(cityID)
-            $('#in_city').trigger("change")
-
-
-            /*$('#selected_group').html(" " + data.data.group);
-             //$('#selected_country').html("  " + data.data.direction.country.name);
-             //$('#selected_state').html("  " + data.data.direction.state.name);
-             //$('#selected_city').html("  " + data.data.direction.city.name);
- 
-             HoldOn.close();
-             //notify_success(data.message);
-        } catch (e) {
-            console.log(e)
-        }
-
-     });*/
-
-        $.getJSON(root_path + 'app/api/contacts/' + _app_id_ + '/' + UPDATE, {},  async function (data) {
             $('#modal_new_edit').modal('show');
             $('#in_name').val(data.data.name);
             $('#in_email').val(data.data.email);
             $('#in_description').val(data.data.description);
             $('#in_lada').val(data.data.lada);
             $('#in_phone').val(data.data.phone);
-            $('#selected_group').html(" " + data.data.group);
-            $('#selected_country').html("  " + data.data.direction.country.name);
-            $('#in_group').val(data.data.group)
-            $('#in_group').trigger("change")
-            var state = data.data.direction.state.id
-            var country = data.data.direction.country.id
-            var city = data.data.direction.city.id
-
-
-            async function first(){
-                $('#in_country').val(country)
-                $('#in_country').trigger("change")
-            }
-            async function second(){
-                $('#in_country').trigger("change")
-                $('#in_state').val(state)
-                $('#in_state').trigger("change")
-            }
-            async function third(){
-                $('#in_state').val(city)
-                $('#in_state').trigger("change")
-            }
-            
-               
-
-                console.log("aqui llego")
-
-                const countries = await first()
-                const states = await second()
-                const cities = await third()
-
-                console.log(countries)
-                console.log(states)
-                console.log(cities)
-
-         
-
-
-
-
-
-
-
-
-            // await $('#in_city').val(data.data.direction.city.id)
-            //await $('#in_city').trigger("change")
-
-
-
-
-
-            $('#selected_state').html("  " + data.data.direction.state.name);
-            $('#selected_city').html("  " + data.data.direction.city.name);
             $('#in_cp').val(data.data.direction.postalCode);
             $('#in_street').val(data.data.direction.street);
             $('#in_ext_number').val(data.data.direction.ExtNumber);
             $('#in_int_number').val(data.data.direction.IntNUmber);
             $('#in_reference').val(data.data.direction.reference);
 
-            HoldOn.close();
-            notify_success(data.message);
-        }).fail(function (err) {
+            await getgroup()
+            $('#in_group').val(data.data.group._id)
+            $('#in_group').trigger("change")
+
+            countryID = data.data.direction.country.id
+            stateID = data.data.direction.state.id
+            cityID = data.data.direction.city.id
+
+            await getlocationCountry()
+            $('#in_country').val(countryID)
+            $('#in_country').trigger("change")
+            await getlocationState(countryID)
+            $('#in_state').val(stateID)
+            $('#in_state').trigger("change")
+            await getlocationCity(stateID)
+            $('#in_city').val(cityID)
+            $('#in_city').trigger("change")
+
+
+        } catch (err) {
             HoldOn.close();
             notify_error(err.responseJSON.message);
             console.error(err);
-        });
+        }
+
+
     });
+
+
     $(document.body).on('click', '.delete_element', function () {
         let DELETE = $(this).val();
         confirm_delete(function () {
@@ -514,5 +413,6 @@ $(document).ready(function () {
         });
 
     });
+
 
 });
