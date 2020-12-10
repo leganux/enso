@@ -1,0 +1,49 @@
+#modal_new_edit.modal.fade( aria-hidden='true', data-backdrop="static", data-keyboard="false")
+    .modal-dialog.modal-xl
+        .modal-content
+            .modal-header.bg-dark
+                h4.modal-title !{i18n.new_edit}
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                br
+                label !{i18n.name}
+                input(type='text').form-control#in_name
+                label !{i18n.description}
+                textarea(rows='5').form-control#in_description
+                label !{i18n.url}
+                input(type='text').form-control#in_url
+                label !{i18n.url} 2
+                input(type='text').form-control#in_url2
+                label !{i18n.url} 3
+                input(type='text').form-control#in_url3 
+                label !{i18n.method}
+                select(type='text').form-control#in_method
+                    option(value = "non")  !{i18n.select_an_option} 
+                    option(value = "0") !{i18n.get} 
+                    option(value = "1") !{i18n.put} 
+                    option(value = "2") !{i18n.post} 
+                    option(value = "3") !{i18n.delete} 
+                label !{i18n.param} !{i18n.name} 
+                input(type='text').form-control#in_param_name
+                label !{i18n.param} !{i18n.description} 
+                input(type='text').form-control#in_param_description
+                label !{i18n.param} !{i18n.format} 
+                select(type='text').form-control#in_format
+                    option(value = "non") !{i18n.select_an_option} 
+                    option(value = "0") !{i18n.object} 
+                    option(value = "1") !{i18n.array} 
+                    option(value = "2") !{i18n.string} 
+                    option(value = "3") !{i18n.number} 
+                label !{i18n.param} !{i18n.default} 
+                input(type='text').form-control#in_param_default
+                label !{i18n.type} !{i18n.name} 
+                input(type='text').form-control#in_type_name
+                label !{i18n.type} !{i18n.description} 
+                input(type='text').form-control#in_type_description
+                label !{i18n.type} !{i18n.key} 
+                input(type='text').form-control#in_type_key
+
+            .modal-footer.justify-content-end
+                button.btn.btn-default(type='button', data-dismiss='modal') !{i18n.cancel}
+                button.btn.bg-pink(type='button')#save_changes !{i18n.save}

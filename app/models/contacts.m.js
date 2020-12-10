@@ -23,7 +23,7 @@ const contact = new Schema({
         required: false,
     },
     lada: {
-        type: Number,
+        type: String,
         required: false,
     },
     phone: {
