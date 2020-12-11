@@ -267,6 +267,9 @@ $(document).ready(function () {
 
     })
 
+    /** 
+     * TODO: prueba */
+
     $(document.body).on('click', '.delete_element', function () {
         let DELETE = $(this).val();
         confirm_delete(function () {
