@@ -158,8 +158,6 @@ router.post('/:app_id/',  async (req, res) => {
         ret.data = response;
         res.status(200).json(ret);
 
-
-        
         body.direction._id = response._id
 
         let responsetwo = await new contacts(body).save()

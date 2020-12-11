@@ -27,7 +27,7 @@ const webserviceParam = new Schema({
     },
     paramtype:{
         type: Schema.Types.ObjectId,
-        required: true,
+        required: false,
         ref: paramtype
     },
     app: {

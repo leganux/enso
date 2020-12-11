@@ -181,7 +181,7 @@ $(document).ready(function () {
             return false;
         }
 
-        save_data_api(root_path + 'app/api/webservice/' + _app_id_, body, UPDATE, function () {
+        await save_data_api(root_path + 'app/api/webservice/' + _app_id_, body, UPDATE, function () {
             draw_datatable_rs(DT);
             UPDATE = '';
             $('#modal_new_edit').modal('hide');

@@ -8,7 +8,7 @@ const app = require('./core/app.m');
 
 const paramType = new Schema({
     name: {
-        type: Number,
+        type: String,
         require: false
     },
     description: {
@@ -37,4 +37,4 @@ const paramType = new Schema({
 });
 
 paramType.plugin(dataTables);
-module.exports = mongoose.model('paramType ', paramType);
+module.exports = mongoose.model('paramType', paramType);
