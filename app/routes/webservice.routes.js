@@ -11,7 +11,7 @@ var path = require('path');
 const fs = require('fs');
 const { fork } = require('child_process');
 const response_codes = require('./../helpers/response_codes.helper').codes;
-const { findById } = require('./../models/core/app.m');
+const { findById, findByIdAndUpdate } = require('./../models/core/app.m');
 const { response } = require('express');
 
 
@@ -50,75 +50,6 @@ var populate = [{
 
 //api_crud.all(router, webservice, access_middleware, false, 'name');
 
-/*router.post('/:app_id/', async (req, res) => {
-    const body = req.body;
-    //verify app
-    if (!get_app_id(req)) {
-        res.status(533).json(response_codes.code_533)
-        return 0;
-    }
-
-    if (body.password) {
-        body.password = await bcrypt.hash(body.password, saltRounds);
-    }
-
-    if (req.user && req.user.user) {
-        body.owner = req.user.user;
-    }
-
-    body.app = get_app_id(req);
-    body.params.app = body.app
-    body.params.paramtype.app = body.app
-
-
-
-    try {
-        let response = await new type(body.params.paramtype).save();
-        if (!response) {
-            res.status(433).json(response_codes.code_433);
-            return 0;
-        }
-        let ret = response_codes.code_200;
-        ret.data = response;
-        //res.status(200).json(ret);
-
-        body.params.paramtype = response._id
-
-
-        let responsetwo = await new params(body.params).save()
-        if (!responsetwo) {
-            res.status(433).json(response_codes.code_433);
-            return 0;
-        }
-        let rettwo = response_codes.code_200;
-        rettwo.data = responsetwo;
-        //res.status(200).json(rettwo);
-
-        body.params = responsetwo._id
-        console.log(body.params)
-
-
-
-
-        let responsethree = await new webservice(body).save()
-        if (!responsethree) {
-            res.status(433).json(response_codes.code_433);
-            return 0;
-        }
-        let retthree = response_codes.code_200;
-        retthree.data = responsethree;
-        res.status(200).json(retthree);
-        console.log(body)
-
-
-        return 0;
-    } catch (e) {
-        console.error('*** Error en CREATE' + webservice.collection.collectionName, e);
-        res.status(500).json(response_codes.code_500);
-        return 0;
-    }
-});*/
-
 router.post('/params/:app_id/', async (req, res) => {
     const body = req.body;
     var arrayparams = {}
@@ -139,7 +70,6 @@ router.post('/params/:app_id/', async (req, res) => {
     body.app = get_app_id(req);
     body.params.app = body.app
     body.params.paramtype.app = body.app
-    console.log(body)
 
 
     try {
@@ -149,9 +79,7 @@ router.post('/params/:app_id/', async (req, res) => {
             res.status(433).json(response_codes.code_433);
             return 0;
         }
-        console.log(responsebody)
-        responsebody.params.push("554644654654")
-        console.log(responsebody)
+
         let response = await new type(body.params.paramtype).save();
         if (!response) {
             res.status(433).json(response_codes.code_433);
@@ -175,11 +103,8 @@ router.post('/params/:app_id/', async (req, res) => {
 
 
         responsebody.params.push(responsetwo._id)
-        console.log(body.params)
 
-        
-        // mandar findbyidAndUpdate con id de response body, ya tiene cargado el nuevo param
-        /** TODO: let responsethree = await new webservice(responsebody).save() 
+        let responsethree = await webservice.findByIdAndUpdate(responsebody._id, { params: responsebody.params })
         if (!responsethree) {
             res.status(433).json(response_codes.code_433);
             return 0;
@@ -187,8 +112,6 @@ router.post('/params/:app_id/', async (req, res) => {
         let retthree = response_codes.code_200;
         retthree.data = responsethree;
         res.status(200).json(retthree);
-        console.log(body)*/
-
 
         return 0;
     } catch (e) {
@@ -198,13 +121,65 @@ router.post('/params/:app_id/', async (req, res) => {
     }
 })
 
+router.delete('/:app_id/:id', async (req, res) => {
+    var id = req.params.id;
+    let parames = {}
+    let parameters = {}
+    let types = {}
+
+    //verify app
+    if (!get_app_id(req)) {
+        res.status(533).json(response_codes.code_533)
+        return 0;
+    }
+
+
+    try {
+        var response = await webservice.findById(id);
+        //only for owner
+        if (req.who && response.owner && req.who !== '*' && response.owner !== req.who) {
+            res.status(403).json(response_codes.code_403);
+            return 0;
+        }
+
+        parames = response.params
+
+        async function deletetypes(e) {
+            parameters = await params.findById(e)
+            types = await type.findByIdAndRemove(parameters.paramtype)
+            parameters = await params.findByIdAndRemove(e)
+        }
+
+        parames.forEach(e => {
+            deletetypes(e)
+        })
+
+        response = await webservice.findByIdAndRemove(id);
+
+        if (!response) {
+            res.status(404).json(response_codes.code_404);
+            return 0;
+        }
+
+        let ret = response_codes.code_200;
+        ret.data = response;
+        res.status(200).json(ret);
+        return 0;
+
+    } catch (e) {
+        console.error('*** Error en DELETE ' + webservice.collection.collectionName, e);
+        res.status(500).json(response_codes.code_500);
+        return 0;
+    }
+
+});
+
 api_crud.create(router, webservice, access_middleware);
 api_crud.update(router, webservice, access_middleware);
 api_crud.updateWhere(router, webservice, access_middleware);
 api_crud.readOne(router, webservice, access_middleware, populate);
 api_crud.readById(router, webservice, access_middleware, populate);
 api_crud.read(router, webservice, access_middleware, populate);
-api_crud.delete(router, webservice, access_middleware);
 api_crud.updateOrCreate(router, webservice, access_middleware);
 api_crud.datatable(router, webservice, access_middleware, populate, "name");
 

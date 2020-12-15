@@ -1,6 +1,7 @@
 $(document).ready(function () {
     $.fn.dataTable.ext.errMode = 'none';
     var UPDATE = '';
+    var UPDATEPARAM = '';
 
     var DT = $("#datatable").DataTable({
         "responsive": true,
@@ -32,7 +33,9 @@ $(document).ready(function () {
                 render: function (data, v, row) {
                     if (data) {
                         let ides = data.map((item, i) => {
-                            return item._id
+                            return item._id +
+                                '<button value="' + item._id + '" class="btn btn-primary btn-block btn_edit_param"> <i class="fas fa-pen-square"></i></button>' 
+                               
                         })
                         return ides.join(", ")
                     }
@@ -76,7 +79,7 @@ $(document).ready(function () {
                 render: function (data, v, row) {
                     if (data) {
                         let defults = data.map((item, i) => {
-                            return item.defult
+                            return item.default
                         })
                         return defults.join(", ")
                     }
@@ -150,6 +153,7 @@ $(document).ready(function () {
     draw_datatable_rs(DT);
     $("#in_method").select2()
     $("#in_format").select2()
+    $("#in_format_edit").select2()
     $('.select2-selection').css("height", "40px")
 
     $('#btn_new_element').click(function () {
@@ -175,7 +179,6 @@ $(document).ready(function () {
 
     $(document.body).on('click', '.btn_new_param', function () {
         let value = $(this).val()
-        console.log("clic")
         $('#modal_new_param').modal('show');
         $('#in_webservice ').val(value);
         $('#in_param_name').val('');
@@ -235,7 +238,7 @@ $(document).ready(function () {
         params.format = $('#in_format').select2('data')[0].id
         params.default = $('#in_param_default').val();
 
-        type.name = $('#in_param_name').val();
+        type.name = $('#in_type_name').val();
         type.description = $('#in_type.description').val();
         type.key = $('#in_type_key').val();
 
@@ -252,7 +255,7 @@ $(document).ready(function () {
         save_data_api(root_path + 'app/api/webservice/params/' + _app_id_, body, UPDATE, function (data) {
             draw_datatable_rs(DT);
             UPDATE = '';
-            $('#modal_new_params').modal('hide');
+            $('#modal_new_param').modal('hide');
             $('#btn_build_function').click()
             HoldOn.close();
             console.log("webservice guardado")
@@ -267,8 +270,51 @@ $(document).ready(function () {
 
     })
 
-    /** 
-     * TODO: prueba */
+    $("#save_params").click(async function () {
+        let body = {};
+        let params = {};
+        let type = {};
+
+        body.id = $('#in_webservice').val();
+
+        params.name = $('#in_param_name').val();
+        params.description = $('#in_param_description').val();
+        params.format = $('#in_format').select2('data')[0].id
+        params.default = $('#in_param_default').val();
+
+        type.name = $('#in_type_name').val();
+        type.description = $('#in_type.description').val();
+        type.key = $('#in_type_key').val();
+
+        params.paramtype = type
+        body.params = params
+
+        if (params.name === '') {
+            notify_warning(i18n.fill_all_fields)
+            return false;
+        }
+
+
+
+        save_data_api(root_path + 'app/api/webservice/params/' + _app_id_, body, UPDATE, function (data) {
+            draw_datatable_rs(DT);
+            UPDATE = '';
+            $('#modal_new_param').modal('hide');
+            $('#btn_build_function').click()
+            HoldOn.close();
+            console.log("webservice guardado")
+            notify_success(data.message);
+        }).fail(function (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+
+        });;
+
+
+    })
+
+
 
     $(document.body).on('click', '.delete_element', function () {
         let DELETE = $(this).val();
@@ -320,7 +366,28 @@ $(document).ready(function () {
 
     });
 
+    $(document.body).on('click', '.btn_edit_param', async function () {
+        
+        let paramtouse = $(this).val();
+        console.log(paramtouse)
+        
+        
+        try {
+            let response = await fetch(root_path + 'app/api/webservice_params/' + _app_id_ + "/" + paramtouse, {})
+            let data = await response.json()
 
+            console.log(data)
 
+            /**
+             * TODO: AGREGAR FUNCION DE EDICION - EDITAR SAVE-PARAMS
+             */
+            
+        } catch (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        }
+
+    });
 
 })

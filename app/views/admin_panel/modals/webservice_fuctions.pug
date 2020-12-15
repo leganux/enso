@@ -65,6 +65,41 @@
                 button.btn.btn-default(type='button', data-dismiss='modal') !{i18n.cancel}
                 button.btn.bg-pink(type='button')#save_changes_params !{i18n.save}
 
+#modal_edit_param.modal.fade( aria-hidden='true', data-backdrop="static", data-keyboard="false")
+    .modal-dialog.modal-xl
+        .modal-content
+            .modal-header.bg-dark
+                h4.modal-title !{i18n.new_edit}
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                br
+                label !{i18n.param} 
+                input(type='text').form-control#in_param
+                label !{i18n.param} !{i18n.name} 
+                input(type='text').form-control#in_param_name_edit
+                label !{i18n.param} !{i18n.description} 
+                input(type='text').form-control#in_param_description_edit
+                label !{i18n.param} !{i18n.format} 
+                select(type='text').form-control#in_format_edit
+                    option(value = "non") !{i18n.select_an_option} 
+                    option(value = "0") !{i18n.object} 
+                    option(value = "1") !{i18n.array} 
+                    option(value = "2") !{i18n.string} 
+                    option(value = "3") !{i18n.number} 
+                label !{i18n.param} !{i18n.default} 
+                input(type='text').form-control#in_param_default_edit
+                label !{i18n.type} !{i18n.name} 
+                input(type='text').form-control#in_type_name_edit
+                label !{i18n.type} !{i18n.description} 
+                input(type='text').form-control#in_type_description_edit
+                label !{i18n.type} !{i18n.key} 
+                input(type='text').form-control#in_type_key_edit
+
+            .modal-footer.justify-content-end
+                button.btn.btn-default(type='button', data-dismiss='modal') !{i18n.cancel}
+                button.btn.bg-pink(type='button')#save_params !{i18n.save}                
+
 
 
 

@@ -19,6 +19,7 @@ router.use('/mailing', require('./mailing.routes'));
 router.use('/sms_gateway', require('./sms_gateway.routes'));
 router.use('/contact_direction', require('./contact_direction.routes'));
 router.use('/webservice', require('./webservice.routes'));
+router.use('/webservice_params', require('./webservice_params.routes'));
 
 
 module.exports = router;
