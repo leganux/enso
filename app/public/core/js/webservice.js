@@ -33,15 +33,15 @@ $(document).ready(function () {
                 render: function (data, v, row) {
                     if (data) {
                         let ides = data.map((item, i) => {
-                            return item._id +
-                                '<button value="' + item._id + '" class="btn btn-primary btn-block btn_edit_param"> <i class="fas fa-pen-square"></i></button>' 
-                               
+                            return item._id + " - " + i18n.name + " : " + item.name +
+                                '<button value="' + item._id + '" class="btn btn-primary btn-block btn_edit_param"> <i class="fas fa-pen-square"></i></button>'+
+                                '<button value="' + item._id + '" class="btn btn-danger btn-block btn_delete_param"> <i class="fas fa-trash"></i></button>';
                         })
-                        return ides.join(", ")
+                        return ides.join(" ")
                     }
                 }
             },
-            {
+            /*{
                 "data": "params",
                 render: function (data, v, row) {
                     if (data) {
@@ -51,7 +51,7 @@ $(document).ready(function () {
                         return names.join(", ")
                     }
                 }
-            },
+            },*/
             {
                 "data": "params",
                 render: function (data, v, row) {
@@ -93,6 +93,8 @@ $(document).ready(function () {
                             return item.paramtype.name
                         })
                         return panames.join(", ")
+                    }else{
+                        return 0
                     }
                 }
             },
@@ -272,37 +274,34 @@ $(document).ready(function () {
 
     $("#save_params").click(async function () {
         let body = {};
-        let params = {};
         let type = {};
 
-        body.id = $('#in_webservice').val();
+       
 
-        params.name = $('#in_param_name').val();
-        params.description = $('#in_param_description').val();
-        params.format = $('#in_format').select2('data')[0].id
-        params.default = $('#in_param_default').val();
+        body.name = $('#in_param_name_edit').val();
+        body.description = $('#in_param_description_edit').val();
+        body.format = $('#in_format_edit').select2('data')[0].id
+        body.default = $('#in_param_default_edit').val();
 
-        type.name = $('#in_type_name').val();
-        type.description = $('#in_type.description').val();
-        type.key = $('#in_type_key').val();
+        type.name = $('#in_type_name_edit').val();
+        type.description = $('#in_type_description_edit').val();
+        type.key = $('#in_type_key_edit').val();
 
-        params.paramtype = type
-        body.params = params
+        body.paramtype = type
+        console.log(type)
 
-        if (params.name === '') {
+        if (body.name === '') {
             notify_warning(i18n.fill_all_fields)
             return false;
         }
 
-
-
-        save_data_api(root_path + 'app/api/webservice/params/' + _app_id_, body, UPDATE, function (data) {
+        save_data_api(root_path + 'app/api/webservice_params/' + _app_id_, body, UPDATE, function (data) {
             draw_datatable_rs(DT);
             UPDATE = '';
-            $('#modal_new_param').modal('hide');
+            $('#modal_edit_param').modal('hide');
             $('#btn_build_function').click()
             HoldOn.close();
-            console.log("webservice guardado")
+            console.log("param guardado")
             notify_success(data.message);
         }).fail(function (err) {
             HoldOn.close();
@@ -367,26 +366,58 @@ $(document).ready(function () {
     });
 
     $(document.body).on('click', '.btn_edit_param', async function () {
-        
-        let paramtouse = $(this).val();
-        console.log(paramtouse)
-        
+
+        UPDATE = $(this).val();
         
         try {
-            let response = await fetch(root_path + 'app/api/webservice_params/' + _app_id_ + "/" + paramtouse, {})
+            let response = await fetch(root_path + 'app/api/webservice_params/' + _app_id_ + "/" + UPDATE, {})
             let data = await response.json()
 
-            console.log(data)
+            console.log(data.data)
 
             /**
              * TODO: AGREGAR FUNCION DE EDICION - EDITAR SAVE-PARAMS
              */
-            
+
+            $('#modal_edit_param').modal('show');
+            $('#in_param_edit').val(UPDATE);
+            $('#in_param_edit').attr('disabled','disabled');
+            $('#in_param_name_edit').val(data.data.name);
+            $('#in_param_description_edit').val(data.data.description);
+            $('#in_param_default_edit').val(data.data.default);
+            $('#in_type_name_edit').val(data.data.paramtype.name);
+            $('#in_type_description_edit').val(data.data.paramtype.description);
+            $('#in_type_key_edit').val(data.data.paramtype.key);
+            $('#in_format_edit').val(data.data.format)
+            $('#in_format_edit').trigger("change")
+
+
         } catch (err) {
             HoldOn.close();
             notify_error(err.responseJSON.message);
             console.error(err);
         }
+
+    });
+
+    $(document.body).on('click', '.btn_delete_param', function () {
+        let DELETE = $(this).val();
+        confirm_delete(function () {
+            $.ajax({
+                url: root_path + 'app/api/webservice_params/' + _app_id_ + '/' + DELETE,
+                method: 'DELETE',
+            }).done(function (data) {
+                HoldOn.close();
+                notify_success(i18n.element_deleted)
+                draw_datatable_rs(DT);
+                DELETE = '';
+            }).fail(function (err) {
+                HoldOn.close();
+                notify_error(err.responseJSON.message);
+                console.error(err);
+                DELETE = '';
+            });
+        });
 
     });
 

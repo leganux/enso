@@ -15,7 +15,7 @@ const webservice = new Schema({
     },
     description: {
         type: String,
-        unique: false
+       required: false,
     },
     url: {
         type: String,
