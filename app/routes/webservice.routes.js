@@ -3,7 +3,7 @@ const router = express.Router();
 const api_crud = require('../helpers/api_crud_constructor_app.helper');
 const webservice = require('../models/webservice.m');
 const params = require("../models/webservice_params.m")
-const type = require("../models/param_type.m")
+const type = require("../models/core/param_type.m")
 const group = require('../models/contact_group.m')
 const access_middleware = require('./../auth/auth.middleware').auth
 const app = require('./../models/core/app.m')
@@ -38,10 +38,6 @@ var populate = [{
         {
             path: 'paramtype',
             model: type,
-            populate: [{
-                path: 'app',
-                model: app
-            }]
         }
 
     ]

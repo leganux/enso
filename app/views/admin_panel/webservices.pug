@@ -33,9 +33,11 @@ html
                             br
                             ul.nav.nav-tabs
                                 li.nav-item
-                                    a.nav-link.active(data-toggle='tab' href='#catalogue') Catalogue
+                                    a.nav-link.active(data-toggle='tab' href='#catalogue')#tab_catalog Catalogue
                                 li.nav-item
-                                    a.nav-link(data-toggle='tab' href='#execute') Execute
+                                    a.nav-link.disabled(data-toggle='tab' href='#execute')#tab_execute Execute
+                                li.nav-item
+                                    a.nav-link(data-toggle='tab' href='#add')   add
 
 
                             #myTabContent.tab-content
@@ -57,13 +59,6 @@ html
                                                 th !{i18n.url} 3
                                                 th !{i18n.method}
                                                 th !{i18n.param} 
-                                                
-                                                th !{i18n.param} !{i18n.description}
-                                                th !{i18n.param} !{i18n.format}
-                                                th !{i18n.param} !{i18n.default}
-                                                th !{i18n.type} !{i18n.name}
-                                                th !{i18n.type} !{i18n.description}
-                                                th !{i18n.type} !{i18n.key}
                                                 th !{i18n.date_register}
                                                 th !{i18n.date_last_update}
                                                 th !{i18n.actions} 
@@ -72,6 +67,18 @@ html
                                 #execute.tab-pane.fade
                                     p
                                     | In Construction :) please come back later
+
+                                #add.tab-pane.fade
+                                    label !{i18n.type} !{i18n.key} 
+                                    input(type='text').form-control#in_add_key
+                                    label !{i18n.type} !{i18n.name} 
+                                    input(type='text').form-control#in_add_name
+                                    label !{i18n.type} !{i18n.description} 
+                                    input(type='text').form-control#in_add_description
+
+                                    
+                                    button.btn.btn-default(type='button', data-dismiss='modal') !{i18n.cancel}
+                                    button.btn.bg-pink(type='button')#add_params !{i18n.save}
 
 
 

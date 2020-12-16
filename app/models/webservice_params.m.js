@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 const moment = require('moment');
 const dataTables = require('mongoose-datatables');
 
-const paramtype = require("./param_type.m");
+const paramtype = require("./core/param_type.m");
 
 const app = require('./core/app.m');
 

@@ -33,90 +33,14 @@ $(document).ready(function () {
                 render: function (data, v, row) {
                     if (data) {
                         let ides = data.map((item, i) => {
-                            return item._id + " - " + i18n.name + " : " + item.name +
-                                '<button value="' + item._id + '" class="btn btn-primary btn-block btn_edit_param"> <i class="fas fa-pen-square"></i></button>'+
-                                '<button value="' + item._id + '" class="btn btn-danger btn-block btn_delete_param"> <i class="fas fa-trash"></i></button>';
+                            return " <br> " + i18n.param + " : "  + item._id + " <br> " + i18n.name + " : " + item.name +  " <br> " + i18n.description + " : " + item.description + " <br> " + i18n.format + " : " + item.format +
+                                " <br> " + i18n.default + " : " + item.default +  " <br> " + i18n.type + " : " + item.paramtype.type +  " <br> " + i18n.name + " : " + item.paramtype.name + " <br> " + i18n.description + " : " + item.paramtype.description +
+                                " <br> " + i18n.key + " : " + item.paramtype.key +
+                                '<button style="max-width:80%" value="' + item._id + '" class="btn btn-primary btn-block btn_edit_param"> <i class="fas fa-pen-square"></i></button>'+
+                                '<button style="max-width:80%" value="' + item._id + '" class="btn btn-danger btn-block btn_delete_param"> <i class="fas fa-trash"></i></button>';
+                               
                         })
                         return ides.join(" ")
-                    }
-                }
-            },
-            /*{
-                "data": "params",
-                render: function (data, v, row) {
-                    if (data) {
-                        let names = data.map((item, i) => {
-                            return item.name
-                        })
-                        return names.join(", ")
-                    }
-                }
-            },*/
-            {
-                "data": "params",
-                render: function (data, v, row) {
-                    if (data) {
-                        let des = data.map((item, i) => {
-                            return item.description
-                        })
-                        return des.join(", ")
-                    }
-                }
-            },
-            {
-                "data": "params",
-                render: function (data, v, row) {
-                    if (data) {
-                        let format = data.map((item, i) => {
-                            return item.format
-                        })
-                        return format.join(", ")
-                    }
-                }
-            },
-            {
-                "data": "params",
-                render: function (data, v, row) {
-                    if (data) {
-                        let defults = data.map((item, i) => {
-                            return item.default
-                        })
-                        return defults.join(", ")
-                    }
-                }
-            },
-            {
-                "data": "params",
-                render: function (data, v, row) {
-                    if (data) {
-                        let panames = data.map((item, i) => {
-                            return item.paramtype.name
-                        })
-                        return panames.join(", ")
-                    }else{
-                        return 0
-                    }
-                }
-            },
-            {
-                "data": "params",
-                render: function (data, v, row) {
-                    if (data) {
-                        let padescrition = data.map((item, i) => {
-                            return item.paramtype.description
-                        })
-                        return padescrition.join(", ")
-                    }
-                }
-            },
-            {
-                "data": "params",
-                render: function (data, v, row) {
-                    if (data) {
-                        let parakey = data.map((item, i) => {
-                            return item.paramtype.key
-                        })
-                        return parakey.join(", ")
                     }
                 }
             },
@@ -136,8 +60,9 @@ $(document).ready(function () {
             {
                 data: "_id",
                 render: function (data, v, row) {
-                    return '<button value="' + data + '" class="btn btn-dark btn-block update_element"> <i class="fas fa-edit"></i></button>' +
+                    return '<button value="' + data + '" class="btn btn-warning btn-block play_element"> <i class="fas fa-play"></i></button>' +
                         '<button value="' + data + '" class="btn btn-success btn-block btn_new_param"> <i class="fas fa-swatchbook"></i></button>' +
+                        '<button value="' + data + '" class="btn btn-primary btn-block update_element"> <i class="fas fa-edit"></i></button>' +
                         '<button value="' + data + '" class="btn btn-danger btn-block delete_element"> <i class="fas fa-trash"></i></button>';
 
 
@@ -155,6 +80,8 @@ $(document).ready(function () {
     draw_datatable_rs(DT);
     $("#in_method").select2()
     $("#in_format").select2()
+    $("#in_type").select2()
+    $("#in_type_edit").select2()
     $("#in_format_edit").select2()
     $('.select2-selection').css("height", "40px")
 
@@ -191,6 +118,7 @@ $(document).ready(function () {
         $('#in_type_key').val('');
         $('#in_format').val("non")
         $('#in_format').trigger("change")
+        
         UPDATE = ''
 
     });
@@ -272,6 +200,44 @@ $(document).ready(function () {
 
     })
 
+    async function getypes(){
+
+        /**
+         * TODO: revisar las rutas params_type debido a error 404 
+         * TODO: Arreglar Crud con rutas de type
+         */
+        let response = await fetch(root_path + 'api/core/params_type', {})
+        let data = await response.json()
+
+        console.log(data)
+    }
+
+    getypes()
+
+    $("#add_params").click(async function () { 
+        let body = {}
+
+        body.key = $('#in_add_key').val();
+        body.name = $('#in_add_name').val();
+        body.description = $('#in_add_description').val();
+
+        save_data_api(root_path + 'app/api/params_type/' + _app_id_, body, UPDATE, function (data) {
+            draw_datatable_rs(DT);
+            UPDATE = '';
+            $('#modal_edit_param').modal('hide');
+            $('#btn_build_function').click()
+            HoldOn.close();
+            console.log("param guardado")
+            notify_success(data.message);
+        }).fail(function (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+
+        });;
+
+
+     })
     $("#save_params").click(async function () {
         let body = {};
         let type = {};
@@ -420,5 +386,14 @@ $(document).ready(function () {
         });
 
     });
+
+    $(document.body).on('click', '.play_element', function () {
+        $('#tab_execute').removeClass('disabled').click();
+    });
+
+    $('#tab_catalog').click(function () {
+        $('#tab_execute').addClass('disabled')
+    })
+
 
 })

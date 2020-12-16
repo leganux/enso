@@ -54,13 +54,13 @@
                     option(value = "3") !{i18n.number} 
                 label !{i18n.param} !{i18n.default} 
                 input(type='text').form-control#in_param_default
+                label !{i18n.type} !{i18n.key} 
+                select(type='text').form-control#in_type_key
                 label !{i18n.type} !{i18n.name} 
                 input(type='text').form-control#in_type_name
                 label !{i18n.type} !{i18n.description} 
                 input(type='text').form-control#in_type_description
-                label !{i18n.type} !{i18n.key} 
-                input(type='text').form-control#in_type_key
-
+                
             .modal-footer.justify-content-end
                 button.btn.btn-default(type='button', data-dismiss='modal') !{i18n.cancel}
                 button.btn.bg-pink(type='button')#save_changes_params !{i18n.save}
@@ -89,12 +89,13 @@
                     option(value = "3") !{i18n.number} 
                 label !{i18n.param} !{i18n.default} 
                 input(type='text').form-control#in_param_default_edit
+                label !{i18n.type} !{i18n.key} 
+                select(type='text').form-control#in_type_key_edit
                 label !{i18n.type} !{i18n.name} 
                 input(type='text').form-control#in_type_name_edit
                 label !{i18n.type} !{i18n.description} 
                 input(type='text').form-control#in_type_description_edit
-                label !{i18n.type} !{i18n.key} 
-                input(type='text').form-control#in_type_key_edit
+               
 
             .modal-footer.justify-content-end
                 button.btn.btn-default(type='button', data-dismiss='modal') !{i18n.cancel}

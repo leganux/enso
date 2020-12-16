@@ -365,7 +365,7 @@ api_functions.read = function (router, model, middleware, populate) {
 
     router.get('/:app_id/', middleware ? middleware : no_middleware, async function (req, res) {
 
-       
+        
         let body = req.query.data;
         let where = req.query.where;
         let or = req.query.or;
