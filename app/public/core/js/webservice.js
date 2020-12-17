@@ -33,12 +33,12 @@ $(document).ready(function () {
                 render: function (data, v, row) {
                     if (data) {
                         let ides = data.map((item, i) => {
-                            return " <br> " + i18n.param + " : "  + item._id + " <br> " + i18n.name + " : " + item.name +  " <br> " + i18n.description + " : " + item.description + " <br> " + i18n.format + " : " + item.format +
-                                " <br> " + i18n.default + " : " + item.default +  " <br> " + i18n.type + " : " + item.paramtype.type +  " <br> " + i18n.name + " : " + item.paramtype.name + " <br> " + i18n.description + " : " + item.paramtype.description +
+                            return " <br> " + i18n.param + " : " + item._id + " <br> " + i18n.name + " : " + item.name + " <br> " + i18n.description + " : " + item.description + " <br> " + i18n.format + " : " + item.format +
+                                " <br> " + i18n.default + " : " + item.default + " <br> " + i18n.type + " : " + item.paramtype.name + " <br> " + i18n.description + " : " + item.paramtype.description +
                                 " <br> " + i18n.key + " : " + item.paramtype.key +
-                                '<button style="max-width:80%" value="' + item._id + '" class="btn btn-primary btn-block btn_edit_param"> <i class="fas fa-pen-square"></i></button>'+
+                                '<button style="max-width:80%" value="' + item._id + '" class="btn btn-primary btn-block btn_edit_param"> <i class="fas fa-pen-square"></i></button>' +
                                 '<button style="max-width:80%" value="' + item._id + '" class="btn btn-danger btn-block btn_delete_param"> <i class="fas fa-trash"></i></button>';
-                               
+
                         })
                         return ides.join(" ")
                     }
@@ -85,6 +85,112 @@ $(document).ready(function () {
     $("#in_format_edit").select2()
     $('.select2-selection').css("height", "40px")
 
+
+    async function getypes() {
+        $("#in_type_key").html("")
+        /**
+         * TODO: Arreglar Crud con rutas de type
+         */
+        try {
+            let response = await fetch(root_path + 'api/core/type', {})
+            let data = await response.json()
+
+            console.log(data.data)
+            for (let i = 0; i < data.data.length; i++) {
+                let option = document.createElement("option")
+                option.title = data.data[i]._id
+                option.value = data.data[i].key
+                option.text = data.data[i].name
+                $("#in_type_key").append(option)
+            }
+            $("#in_type_key").select2()
+            $('.select2-selection').css("height", "40px")
+            $("#in_type_key").change()
+            HoldOn.close();
+        }
+
+
+        catch (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        }
+    }
+
+    async function getypefull(id) {
+        typeid = Number(id)
+        $("#in_type_name").val("")
+        try {
+            let response = await fetch(root_path + 'api/core/type/' + '?where[key]=' + typeid, {})
+            let data = await response.json()
+            $("#in_type_name").attr("disabled", "disabled")
+            $("#in_type_description").attr("disabled", "disabled")
+            $("#in_type_name").val(data.data[0].name)
+            $("#in_type_description").val(data.data[0].description)
+
+        } catch (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        }
+    }
+
+    $('#in_type_key').change(async function () {
+        let id = $(this).select2('data')[0].id
+        await getypefull(id)
+    })
+    $('#in_type_key_edit').change(async function () {
+        let id = $(this).select2('data')[0].id
+        await getypefull_edit(id)
+    })
+
+    async function getypes_edit() {
+        $("#in_type_key_edit").html("")
+        /**
+         * TODO: Arreglar Crud con rutas de type
+         */
+        try {
+            let response = await fetch(root_path + 'api/core/type', {})
+            let data = await response.json()
+
+            for (let i = 0; i < data.data.length; i++) {
+                let option = document.createElement("option")
+                option.title = data.data[i]._id
+                option.value = data.data[i].key
+                option.text = data.data[i].name
+                $("#in_type_key_edit").append(option)
+            }
+            $("#in_type_key_edit").select2()
+            $('.select2-selection').css("height", "40px")
+            $("#in_type_key_edit").change()
+            HoldOn.close();
+        }
+
+
+        catch (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        }
+    }
+    async function getypefull_edit(id) {
+        typeid = Number(id)
+        $("#in_type_name_edit").val("")
+        try {
+            let response = await fetch(root_path + 'api/core/type/' + '?where[key]=' + typeid, {})
+            let data = await response.json()
+            $("#in_type_name_edit").attr("disabled", "disabled")
+            $("#in_type_description_edit").attr("disabled", "disabled")
+            $("#in_type_name_edit").val(data.data[0].name)
+            $("#in_type_description_edit").val(data.data[0].description)
+
+        } catch (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        }
+    }
+
     $('#btn_new_element').click(function () {
         $('#modal_new_edit').modal('show');
         $('#in_name').val('');
@@ -106,19 +212,18 @@ $(document).ready(function () {
     });
 
 
-    $(document.body).on('click', '.btn_new_param', function () {
+    $(document.body).on('click', '.btn_new_param', async function () {
         let value = $(this).val()
         $('#modal_new_param').modal('show');
         $('#in_webservice ').val(value);
         $('#in_param_name').val('');
         $('#in_param_description').val('');
         $('#in_param_default').val('');
-        $('#in_type_name').val('');
-        $('#in_type_description').val('');
-        $('#in_type_key').val('');
+        await getypes()
+
         $('#in_format').val("non")
         $('#in_format').trigger("change")
-        
+
         UPDATE = ''
 
     });
@@ -159,7 +264,7 @@ $(document).ready(function () {
     $("#save_changes_params").click(async function () {
         let body = {};
         let params = {};
-        let type = {};
+
 
         body.id = $('#in_webservice').val();
 
@@ -168,19 +273,15 @@ $(document).ready(function () {
         params.format = $('#in_format').select2('data')[0].id
         params.default = $('#in_param_default').val();
 
-        type.name = $('#in_type_name').val();
-        type.description = $('#in_type.description').val();
-        type.key = $('#in_type_key').val();
+        params.paramtype = $('#in_type_key').select2('data')[0].title
 
-        params.paramtype = type
+
         body.params = params
 
         if (params.name === '') {
             notify_warning(i18n.fill_all_fields)
             return false;
         }
-
-
 
         save_data_api(root_path + 'app/api/webservice/params/' + _app_id_, body, UPDATE, function (data) {
             draw_datatable_rs(DT);
@@ -195,66 +296,24 @@ $(document).ready(function () {
             notify_error(err.responseJSON.message);
             console.error(err);
 
-        });;
+        });
 
 
     })
 
-    async function getypes(){
-
-        /**
-         * TODO: revisar las rutas params_type debido a error 404 
-         * TODO: Arreglar Crud con rutas de type
-         */
-        let response = await fetch(root_path + 'api/core/params_type', {})
-        let data = await response.json()
-
-        console.log(data)
-    }
-
-    getypes()
-
-    $("#add_params").click(async function () { 
-        let body = {}
-
-        body.key = $('#in_add_key').val();
-        body.name = $('#in_add_name').val();
-        body.description = $('#in_add_description').val();
-
-        save_data_api(root_path + 'app/api/params_type/' + _app_id_, body, UPDATE, function (data) {
-            draw_datatable_rs(DT);
-            UPDATE = '';
-            $('#modal_edit_param').modal('hide');
-            $('#btn_build_function').click()
-            HoldOn.close();
-            console.log("param guardado")
-            notify_success(data.message);
-        }).fail(function (err) {
-            HoldOn.close();
-            notify_error(err.responseJSON.message);
-            console.error(err);
-
-        });;
-
-
-     })
     $("#save_params").click(async function () {
         let body = {};
         let type = {};
 
-       
 
         body.name = $('#in_param_name_edit').val();
         body.description = $('#in_param_description_edit').val();
         body.format = $('#in_format_edit').select2('data')[0].id
         body.default = $('#in_param_default_edit').val();
 
-        type.name = $('#in_type_name_edit').val();
-        type.description = $('#in_type_description_edit').val();
-        type.key = $('#in_type_key_edit').val();
+        body.paramtype = $('#in_type_key_edit').select2('data')[0].title
 
-        body.paramtype = type
-        console.log(type)
+        console.log(body)
 
         if (body.name === '') {
             notify_warning(i18n.fill_all_fields)
@@ -274,7 +333,7 @@ $(document).ready(function () {
             notify_error(err.responseJSON.message);
             console.error(err);
 
-        });;
+        });
 
 
     })
@@ -330,30 +389,27 @@ $(document).ready(function () {
 
 
     });
-
+    getypes_edit()
     $(document.body).on('click', '.btn_edit_param', async function () {
 
         UPDATE = $(this).val();
-        
+
         try {
             let response = await fetch(root_path + 'app/api/webservice_params/' + _app_id_ + "/" + UPDATE, {})
             let data = await response.json()
 
             console.log(data.data)
-
-            /**
-             * TODO: AGREGAR FUNCION DE EDICION - EDITAR SAVE-PARAMS
-             */
-
             $('#modal_edit_param').modal('show');
+
             $('#in_param_edit').val(UPDATE);
-            $('#in_param_edit').attr('disabled','disabled');
+            $('#in_param_edit').attr('disabled', 'disabled');
             $('#in_param_name_edit').val(data.data.name);
             $('#in_param_description_edit').val(data.data.description);
             $('#in_param_default_edit').val(data.data.default);
-            $('#in_type_name_edit').val(data.data.paramtype.name);
-            $('#in_type_description_edit').val(data.data.paramtype.description);
+
             $('#in_type_key_edit').val(data.data.paramtype.key);
+            $('#in_type_key_edit').trigger("change")
+
             $('#in_format_edit').val(data.data.format)
             $('#in_format_edit').trigger("change")
 
@@ -368,9 +424,27 @@ $(document).ready(function () {
 
     $(document.body).on('click', '.btn_delete_param', function () {
         let DELETE = $(this).val();
-        confirm_delete(function () {
+        let paramdelete
+        confirm_delete(async function () {
+            try {
+                let response = await fetch(root_path + 'app/api/webservice/' + _app_id_, {})
+                let data = await response.json()
+                for (let i = 0; i < data.data.length; i++) {
+                    for (let j = 0; j < data.data[i].params.length; j++) {
+                        if (data.data[i].params[j]._id == DELETE)
+                            console.log(data.data[i]._id)
+                        paramdelete = data.data[i]._id
+                    }
+
+                }
+            } catch (err) {
+                HoldOn.close();
+                notify_error(err.responseJSON.message);
+                console.error(err);
+            }
+
             $.ajax({
-                url: root_path + 'app/api/webservice_params/' + _app_id_ + '/' + DELETE,
+                url: root_path + 'app/api/webservice_params/' + _app_id_ + '/' + DELETE + '/' + paramdelete,
                 method: 'DELETE',
             }).done(function (data) {
                 HoldOn.close();
@@ -387,13 +461,121 @@ $(document).ready(function () {
 
     });
 
+    var Execute = ''
     $(document.body).on('click', '.play_element', function () {
         $('#tab_execute').removeClass('disabled').click();
+        Execute = $(this).val()
+        console.log(Execute)
+        searchExecute(Execute)
     });
 
     $('#tab_catalog').click(function () {
         $('#tab_execute').addClass('disabled')
     })
+
+
+    async function searchExecute(id) {
+        serch_id = id
+
+        try {
+            let response = await fetch(root_path + 'app/api/webservice/' + _app_id_+ '/' +serch_id, {})
+            let data = await response.json()
+            console.log(data.data)
+
+            switch(data.data.method){
+                case "GET":
+                    $('#card_exe').css("background-color","blue")
+                    $('#in_method_exe').val(data.data.method)
+                    break;
+                case "PUT":
+                    $('#card_exe').css("background-color","yellow")
+                    $('#in_method_exe').val(data.data.method)
+                    break;    
+                case "POST":
+                    $('#card_exe').css("background-color","#a5d6a7")
+                    $('#in_method_exe').val(data.data.method)
+                    break;
+                case "DELETE":
+                    $('#card_exe').css("background-color","red")
+                    $('#in_method_exe').val(data.data.method)
+                    break;    
+                default:
+                    console.log("no existe")
+                    break
+            }
+            $("#description_webservice").text(data.data.description)
+
+          
+
+
+        } catch (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        }
+    }
+
+    var DTE = $("#datatable_exe").DataTable({
+        "responsive": true,
+        "data": {},
+        "columns": [
+            {
+                "data": "_id"
+            },
+            {
+                "data": "name"
+            },
+            {
+                "data": "description"
+            },
+            {
+                "data": "format"
+            },
+            {
+                "data": "default",
+                render: function (data, v, row) {
+                    return '<input ip="default_exe" value="' + data + '" type="text" class="form control">'
+                }
+            },
+            {
+                "data": "active"
+            },
+            {
+                "data": "createdAt",
+                render: function (data, v, row) {
+                    return moment(data).format('DD/MM/YYYY h:mm:ss')
+                }
+
+            },
+            {
+                "data": "updatedAt",
+                render: function (data, v, row) {
+                    return moment(data).format('DD/MM/YYYY h:mm:ss')
+                }
+            },
+            {
+                data: "_id",
+                render: function (data, v, row) {
+                    return '<button value="' + data + '" class="btn btn-warning btn-block play_element"> <i class="fas fa-play"></i></button>' +
+                        '<button value="' + data + '" class="btn btn-success btn-block btn_new_param"> <i class="fas fa-swatchbook"></i></button>' +
+                        '<button value="' + data + '" class="btn btn-primary btn-block update_element"> <i class="fas fa-edit"></i></button>' +
+                        '<button value="' + data + '" class="btn btn-danger btn-block delete_element"> <i class="fas fa-trash"></i></button>';
+
+
+                }
+            }
+
+        ],
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: root_path + 'app/api/webservice_params/' + _app_id_ + '/datatable',
+            type: "POST"
+        },
+    });
+    draw_datatable_rs(DTE);
+
+
 
 
 })

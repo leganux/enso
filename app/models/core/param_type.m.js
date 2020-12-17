@@ -4,8 +4,6 @@ const moment = require('moment');
 const dataTables = require('mongoose-datatables');
 
 
-
-
 const paramType = new Schema({
     name: {
         type: String,

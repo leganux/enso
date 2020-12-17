@@ -48,7 +48,7 @@ var populate = [{
 
 router.post('/params/:app_id/', async (req, res) => {
     const body = req.body;
-    var arrayparams = {}
+    
     //verify app
     if (!get_app_id(req)) {
         res.status(533).json(response_codes.code_533)
@@ -65,8 +65,6 @@ router.post('/params/:app_id/', async (req, res) => {
 
     body.app = get_app_id(req);
     body.params.app = body.app
-    body.params.paramtype.app = body.app
-
 
     try {
 
@@ -75,18 +73,6 @@ router.post('/params/:app_id/', async (req, res) => {
             res.status(433).json(response_codes.code_433);
             return 0;
         }
-
-        let response = await new type(body.params.paramtype).save();
-        if (!response) {
-            res.status(433).json(response_codes.code_433);
-            return 0;
-        }
-        let ret = response_codes.code_200;
-        ret.data = response;
-        //res.status(200).json(ret);
-
-        body.params.paramtype = response._id
-
 
         let responsetwo = await new params(body.params).save()
         if (!responsetwo) {
@@ -121,7 +107,7 @@ router.delete('/:app_id/:id', async (req, res) => {
     var id = req.params.id;
     let parames = {}
     let parameters = {}
-    let types = {}
+
 
     //verify app
     if (!get_app_id(req)) {
@@ -129,7 +115,7 @@ router.delete('/:app_id/:id', async (req, res) => {
         return 0;
     }
 
-
+    console.log(id)
     try {
         var response = await webservice.findById(id);
         //only for owner
@@ -139,10 +125,8 @@ router.delete('/:app_id/:id', async (req, res) => {
         }
 
         parames = response.params
-
+        console.log(parames)
         async function deletetypes(e) {
-            parameters = await params.findById(e)
-            types = await type.findByIdAndRemove(parameters.paramtype)
             parameters = await params.findByIdAndRemove(e)
         }
 

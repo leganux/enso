@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const api_crud = require('../helpers/api_crud_constructor_app.helper');
-const params = require("../models/webservice_params.m")
+const params = require("../models/webservice_params.m");
+const web = require("../models/webservice.m")
 const type = require("../models/core/param_type.m")
 const access_middleware = require('./../auth/auth.middleware').auth
 const app = require('./../models/core/app.m')
@@ -21,7 +22,7 @@ var populate = [{
 {
     path: 'paramtype',
     model: type,
-    
+
 
 }]
 
@@ -39,7 +40,6 @@ var get_app_id = function (req) {
 router.put('/:app_id/:id', async function (req, res) {
     let body = req.body;
     let id = req.params.id;
-    let typeID
 
     body.updatedAt = moment().format();
 
@@ -55,26 +55,16 @@ router.put('/:app_id/:id', async function (req, res) {
             body.password = await bcrypt.hash(body.password, saltRounds);
         }
         var response = await params.findById(id)
-        console.log(response)
 
-        typeID = response.paramtype
+
         //only for owner
         if (req.who && response.owner && req.who !== '*' && response.owner != req.who) {
             res.status(403).json(response_codes.code_403);
             return 0;
         }
 
-
-        responsetwo = await type.findByIdAndUpdate(typeID, { $set: body.paramtype });
-        console.log(responsetwo)
-        if (!responsetwo) {
-            res.status(434).json(response_codes.code_434);
-            return 0;
-        }
-        body.paramtype = responsetwo._id
-
         response = await params.findByIdAndUpdate(id, { $set: body });
-        console.log(response)
+
         if (!response) {
             res.status(434).json(response_codes.code_434);
             return 0;
@@ -91,10 +81,9 @@ router.put('/:app_id/:id', async function (req, res) {
     }
 });
 
-router.delete('/:app_id/:id', async (req, res) => {
+router.delete('/:app_id/:id/:idel', async (req, res) => {
     var id = req.params.id;
-    let typeid
-
+    var idel = req.params.idel;
 
     //verify app
     if (!get_app_id(req)) {
@@ -102,27 +91,28 @@ router.delete('/:app_id/:id', async (req, res) => {
         return 0;
     }
 
-
     try {
         var response = await params.findById(id);
+        var responsetwo = await web.findById(idel);
         //only for owner
         if (req.who && response.owner && req.who !== '*' && response.owner !== req.who) {
             res.status(403).json(response_codes.code_403);
             return 0;
         }
 
-        console.log(response.paramtype)
-        typeid = response.paramtype
 
-        responsetwo = await type.findByIdAndRemove(typeid);
-        console.log(responsetwo)
-        if (!responsetwo) {
-            res.status(404).json(response_codes.code_404);
+        var help = responsetwo.params.indexOf(id)
+
+        responsetwo.params.splice(help, 1)
+
+        let responsethree = await web.findByIdAndUpdate(idel, { params: responsetwo.params })
+        if (!responsethree) {
+            res.status(433).json(response_codes.code_433);
             return 0;
         }
 
+
         response = await params.findByIdAndRemove(id);
-        console.log(response)
         if (!response) {
             res.status(404).json(response_codes.code_404);
             return 0;
