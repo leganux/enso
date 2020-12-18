@@ -35,7 +35,7 @@ html
                                 li.nav-item
                                     a.nav-link.active(data-toggle='tab' href='#catalogue')#tab_catalog Catalogue
                                 li.nav-item
-                                    a.nav-link(data-toggle='tab' href='#execute')#tab_execute Execute
+                                    a.nav-link.disabled(data-toggle='tab' href='#execute')#tab_execute Execute
                                
 
                             #myTabContent.tab-content
@@ -63,23 +63,23 @@ html
                                                 
                         
                                 #execute.tab-pane.fade.m-auto
-                                    h3.mt-3.pl-2 Nombre del webservice
-                                    .card.mt-3#card_exe 
+                                    h3.mt-3.pl-2#name_webservice
+                                    .card.mt-3
                                         //dsdf                                    
-                                        .card-header
+                                        .card-header#card_exe 
                                             .row
                                                 .col-12.col-md-4
                                                     label !{i18n.method} 
-                                                    input(type='text').form-control#in_method_exe
+                                                    input(type='text' disabled).form-control#in_method_exe
                                                 .col-12.col-md-8
                                                     label !{i18n.url} 
                                                     select(type='text').form-control#in_url_exe
-                                        .card-body 
+                                        .card-body#card_body 
                                             .row.pl-4.pr-5.pb-4.mt-3(style="border-bottom: 1px solid black")
                                                 .col-12.col-md-8
                                                     p.card-text#description_webservice
                                                 .col-12.col-md-4
-                                                    button.bg-pink.btn.btn-block#btn_execute !{i18n.execute} 
+                                                    button.bg-gray.btn.btn-block#btn_execute !{i18n.execute} 
 
                                             br
                                             .h4 !{i18n.param} 
@@ -87,6 +87,7 @@ html
                                                 thead
                                                     tr
                                                         th !{i18n.id}
+                                                        th !{i18n.type}
                                                         th !{i18n.name}
                                                         th !{i18n.description}
                                                         th !{i18n.format}
@@ -94,7 +95,7 @@ html
                                                         th !{i18n.active}
                                                         th !{i18n.date_register}
                                                         th !{i18n.date_last_update}
-                                                        th !{i18n.actions} 
+                                                        
                                                         
                                                                 
                                                     

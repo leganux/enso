@@ -13,6 +13,8 @@ const { fork } = require('child_process');
 const response_codes = require('./../helpers/response_codes.helper').codes;
 const { findById, findByIdAndUpdate } = require('./../models/core/app.m');
 const { response } = require('express');
+const axios = require("axios");
+const { route } = require('./webservice_params.routes');
 
 
 var get_app_id = function (req) {
@@ -48,7 +50,7 @@ var populate = [{
 
 router.post('/params/:app_id/', async (req, res) => {
     const body = req.body;
-    
+
     //verify app
     if (!get_app_id(req)) {
         res.status(533).json(response_codes.code_533)
@@ -104,7 +106,7 @@ router.post('/params/:app_id/', async (req, res) => {
 })
 
 router.delete('/:app_id/:id', async (req, res) => {
-    var id = req.params.id;
+    let id = req.params.id;
     let parames = {}
     let parameters = {}
 
@@ -153,6 +155,20 @@ router.delete('/:app_id/:id', async (req, res) => {
     }
 
 });
+
+router.post("/recive/:app_id/", async (req, res) => {
+
+    body = req.body
+    console.log(body)
+
+    axios({
+        method: 'get',
+        url: 'https://reqres.in/api/users/2'
+    })
+        .then(res => console.log(res))
+        .catch(err => console.error(err))
+
+})
 
 api_crud.create(router, webservice, access_middleware);
 api_crud.update(router, webservice, access_middleware);

@@ -43,7 +43,7 @@ router.put('/:app_id/:id', async function (req, res) {
 
     body.updatedAt = moment().format();
 
-    console.log(body.paramtype)
+    
     //verify app
     if (!get_app_id(req)) {
         res.status(533).json(response_codes.code_533)
@@ -140,7 +140,7 @@ api_crud.readOne(router, params, access_middleware, populate);
 api_crud.readById(router, params, access_middleware, populate);
 api_crud.read(router, params, access_middleware, populate);
 api_crud.updateOrCreate(router, params, access_middleware);
-api_crud.datatable(router, params, access_middleware, populate, "name");
+api_crud.datatable(router, params, access_middleware, populate, "id");
 
 
 

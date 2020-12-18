@@ -3,6 +3,7 @@ $(document).ready(function () {
     var UPDATE = '';
     var UPDATEPARAM = '';
 
+    $('[data-toggle="tooltip"]').tooltip()
     var DT = $("#datatable").DataTable({
         "responsive": true,
         "data": {},
@@ -36,8 +37,8 @@ $(document).ready(function () {
                             return " <br> " + i18n.param + " : " + item._id + " <br> " + i18n.name + " : " + item.name + " <br> " + i18n.description + " : " + item.description + " <br> " + i18n.format + " : " + item.format +
                                 " <br> " + i18n.default + " : " + item.default + " <br> " + i18n.type + " : " + item.paramtype.name + " <br> " + i18n.description + " : " + item.paramtype.description +
                                 " <br> " + i18n.key + " : " + item.paramtype.key +
-                                '<button style="max-width:80%" value="' + item._id + '" class="btn btn-primary btn-block btn_edit_param"> <i class="fas fa-pen-square"></i></button>' +
-                                '<button style="max-width:80%" value="' + item._id + '" class="btn btn-danger btn-block btn_delete_param"> <i class="fas fa-trash"></i></button>';
+                                '<button style="max-width:80%" value="' + item._id + '" class="btn btn-primary btn-block btn_edit_param" data-toggle="tooltip" data-placement="right" title="Edit param"> <i class="fas fa-pen-square"></i></button>' +
+                                '<button style="max-width:80%" value="' + item._id + '" class="btn btn-danger btn-block btn_delete_param" data-toggle="tooltip" data-placement="right" title="Delete param"> <i class="fas fa-trash"></i></button>';
 
                         })
                         return ides.join(" ")
@@ -60,10 +61,10 @@ $(document).ready(function () {
             {
                 data: "_id",
                 render: function (data, v, row) {
-                    return '<button value="' + data + '" class="btn btn-warning btn-block play_element"> <i class="fas fa-play"></i></button>' +
-                        '<button value="' + data + '" class="btn btn-success btn-block btn_new_param"> <i class="fas fa-swatchbook"></i></button>' +
-                        '<button value="' + data + '" class="btn btn-primary btn-block update_element"> <i class="fas fa-edit"></i></button>' +
-                        '<button value="' + data + '" class="btn btn-danger btn-block delete_element"> <i class="fas fa-trash"></i></button>';
+                    return '<button value="' + data + '" class="btn btn-warning btn-block play_element  data-toggle="tooltip" data-placement="right" title="Execute webservice"> <i class="fas fa-play"></i></button>' +
+                        '<button value="' + data + '" class="btn btn-success btn-block btn_new_param" data-toggle="tooltip" data-placement="right" title="New param"> <i class="fas fa-swatchbook"></i></button>' +
+                        '<button value="' + data + '" class="btn btn-primary btn-block update_element" data-toggle="tooltip" data-placement="right" title="Edit webservice"> <i class="fas fa-edit"></i></button>' +
+                        '<button value="' + data + '" class="btn btn-danger btn-block delete_element" data-toggle="tooltip" data-placement="right" title="Delete webservice"> <i class="fas fa-trash"></i></button>';
 
 
                 }
@@ -461,51 +462,72 @@ $(document).ready(function () {
 
     });
 
+    ////////////Execute//////////////
+
+
     var Execute = ''
-    $(document.body).on('click', '.play_element', function () {
+    $(document.body).on('click', '.play_element', async function () {
         $('#tab_execute').removeClass('disabled').click();
         Execute = $(this).val()
-        console.log(Execute)
-        searchExecute(Execute)
+        await searchExecute(Execute)
+        await paramToSelect()
     });
 
     $('#tab_catalog').click(function () {
         $('#tab_execute').addClass('disabled')
+        $("#in_url_exe").html("")
     })
 
+    $("#in_url_exe").select2()
 
     async function searchExecute(id) {
         serch_id = id
 
         try {
-            let response = await fetch(root_path + 'app/api/webservice/' + _app_id_+ '/' +serch_id, {})
+            let response = await fetch(root_path + 'app/api/webservice/' + _app_id_ + '/' + serch_id, {})
             let data = await response.json()
-            console.log(data.data)
 
-            switch(data.data.method){
+
+            switch (data.data.method) {
                 case "GET":
-                    $('#card_exe').css("background-color","blue")
+                    $('#card_exe').css("background-color", "#29b6f6")
                     $('#in_method_exe').val(data.data.method)
                     break;
                 case "PUT":
-                    $('#card_exe').css("background-color","yellow")
+                    $('#card_exe').css("background-color", " #fdd835")
                     $('#in_method_exe').val(data.data.method)
-                    break;    
+                    break;
                 case "POST":
-                    $('#card_exe').css("background-color","#a5d6a7")
+                    $('#card_exe').css("background-color", "#a5d6a7")
+
                     $('#in_method_exe').val(data.data.method)
                     break;
                 case "DELETE":
-                    $('#card_exe').css("background-color","red")
+                    $('#card_exe').css("background-color", "#f44336")
                     $('#in_method_exe').val(data.data.method)
-                    break;    
+                    break;
                 default:
                     console.log("no existe")
                     break
             }
             $("#description_webservice").text(data.data.description)
+            $("#name_webservice").text(data.data.name)
 
-          
+            let optionone = document.createElement("option")
+            optionone.value = data.data.url
+            optionone.text = data.data.url
+            $("#in_url_exe").append(optionone)
+
+            let optiontwo = document.createElement("option")
+            optiontwo.value = data.data.urltwo
+            optiontwo.text = data.data.urltwo
+            $("#in_url_exe").append(optiontwo)
+
+            let optionthree = document.createElement("option")
+            optionthree.value = data.data.urlthree
+            optionthree.text = data.data.urlthree
+            $("#in_url_exe").append(optionthree)
+
 
 
         } catch (err) {
@@ -515,30 +537,63 @@ $(document).ready(function () {
         }
     }
 
+    var typeFormat
+    var defaultoption
     var DTE = $("#datatable_exe").DataTable({
         "responsive": true,
         "data": {},
         "columns": [
             {
-                "data": "_id"
+                "data": "_id",
             },
             {
-                "data": "name"
+                "data": "paramtype",
+                render: function (data, v, row) {
+                    return '<p>' + data.name + '</p>'
+                }
+            },
+            {
+                "data": "name",
             },
             {
                 "data": "description"
             },
             {
-                "data": "format"
+                "data": "format",
+                render: function (data, v, row) {
+                    typeFormat = data
+                    return '<p>' + data + '</p>'
+                }
             },
             {
                 "data": "default",
                 render: function (data, v, row) {
-                    return '<input ip="default_exe" value="' + data + '" type="text" class="form control">'
+                    switch (typeFormat) {
+                        case "Object":
+                            defaultoption = '<textarea ip="default_exe_' + data + '" type="text" class="form control">' + data + '</textarea>'
+                            break;
+                        case "Array":
+                            defaultoption = '<textarea ip="default_exe_' + data + '" type="text" class="form control">' + data + '</textarea>'
+                            break;
+                        case "String":
+                            defaultoption = '<input ip="default_exe_' + data + '" value="' + data + '" type="text" class="form control">'
+                            break;
+                        case "Number":
+                            defaultoption = '<input ip="default_exe_' + data + '" value="' + data + '" type="number" class="form control">'
+                            break;
+                        default:
+                            defaultoption = ""
+                            break;
+                    }
+                    return defaultoption
+
                 }
             },
             {
-                "data": "active"
+                "data": "active",
+                render: function (data, v, row) {
+                    return ' <input type="checkbox" style="margin-left:25px" class="form-check-input" id="in_active">'
+                }
             },
             {
                 "data": "createdAt",
@@ -553,27 +608,60 @@ $(document).ready(function () {
                     return moment(data).format('DD/MM/YYYY h:mm:ss')
                 }
             },
-            {
-                data: "_id",
-                render: function (data, v, row) {
-                    return '<button value="' + data + '" class="btn btn-warning btn-block play_element"> <i class="fas fa-play"></i></button>' +
-                        '<button value="' + data + '" class="btn btn-success btn-block btn_new_param"> <i class="fas fa-swatchbook"></i></button>' +
-                        '<button value="' + data + '" class="btn btn-primary btn-block update_element"> <i class="fas fa-edit"></i></button>' +
-                        '<button value="' + data + '" class="btn btn-danger btn-block delete_element"> <i class="fas fa-trash"></i></button>';
 
-
-                }
-            }
 
         ],
-        processing: true,
-        serverSide: true,
-        ajax: {
-            url: root_path + 'app/api/webservice_params/' + _app_id_ + '/datatable',
-            type: "POST"
-        },
+        processing: false,
+        serverSide: false,
+        searching: false,
+
     });
-    draw_datatable_rs(DTE);
+
+    var paramstoselect = {}
+
+    async function paramToSelect() {
+        try {
+            let response = await fetch(root_path + 'app/api/webservice/' + _app_id_ + '/' + serch_id, {})
+            let data = await response.json()
+            paramstoselect = data.data.params
+            draw_datatable_local(paramstoselect, DTE)
+        } catch (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        }
+    }
+
+    $("#btn_execute").click(async function () {
+
+
+        /*let response = await fetch(root_path + 'app/api/webservice/' + _app_id_ + '/' + serch_id, {})
+        let data = await response.json()
+        let body = {}
+
+       body = data.data
+
+       console.log(data.data.params)*/
+
+       let body = {}
+
+        body.search = serch_id
+
+        $.post(root_path + 'app/api/webservice/recive/' + _app_id_, body, function (data) {
+            HoldOn.close();
+            notify_success(data.message);
+        }).fail(function (err) {
+            HoldOn.close();
+            notify_error(err.responseJSON.message);
+            console.error(err);
+        })
+
+
+
+    })
+
+
+
 
 
 

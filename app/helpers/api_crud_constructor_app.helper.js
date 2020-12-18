@@ -702,7 +702,6 @@ api_functions.datatable = function (router, model, middleware, populate, search_
     router.post('/:app_id/datatable', middleware ? middleware : no_middleware, async (req, res) => {
         var order = {};
 
-
         //verify app
         if (!get_app_id(req)) {
             res.status(533).json(response_codes.code_533)
