@@ -149,7 +149,10 @@ router.get('/catalogue/dynamic_content/', access_middleware, async function (req
     let config = await get_app_basic_config(req, res)
     res.status(200).render('admin_panel/dynamic_content', config);
 });
-
+router.get('/catalogue/chatbots_type/', access_middleware, async function (req, res) {
+    let config = await get_app_basic_config(req, res)
+    res.status(200).render('admin_panel/chatbot_type', config);
+});
 router.get('/admin_permission/', access_middleware, async function (req, res) {
     let config = await get_app_basic_config(req, res)
     res.status(200).render('admin_panel/admin_permission', config);
@@ -655,6 +658,46 @@ router.get('/app/:id/webservices', access_middleware, async function (req, res) 
             app: model_to_json(app)
         })
         res.status(200).render('admin_panel/webservices', config);
+    } catch (e) {
+        let err = response_codes.code_500;
+        err.error = e;
+        res.status(500).json(err);
+        return 0;
+    }
+
+
+});
+router.get('/app/:id/chatbots', access_middleware, async function (req, res) {
+    var id = req.params.id;
+    if (!req.cookies || !req.cookies._APP_ || req.cookies._APP_ === 'false') {
+        res.redirect(base_admin_path + 'apps')
+        return 0;
+    }
+    if (req.cookies._APP_ !== id) {
+        res.status(533).json(response_codes.code_533)
+        return 0;
+    }
+
+    try {
+        let app = await app_model.findById(id).populate({path: "owner", model: admin_model});
+
+        if (!app) {
+            res.status(533).json(response_codes.code_533)
+            return 0;
+        }
+        if (!app.deployed) {
+            res.status(534).json(response_codes.code_534)
+            return 0;
+        }
+        if (!app.active) {
+            res.status(535).json(response_codes.code_535)
+            return 0;
+        }
+
+        let config = await get_app_basic_config(req, res, {
+            app: model_to_json(app)
+        })
+        res.status(200).render('admin_panel/chatbots', config);
     } catch (e) {
         let err = response_codes.code_500;
         err.error = e;

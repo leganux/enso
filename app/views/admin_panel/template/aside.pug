@@ -72,6 +72,13 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
                                     i.fas.fa-route.nav-icon
                                     |
                                     p !{i18n.routes}
+                        |
+                        if scr_access && scr_access.includes('catalogue/chatbots_type')
+                            li.nav-item
+                                a.nav-link(href=base_admin_path + 'catalogue/chatbots_type')#menu_chatbots
+                                    i.fas.fa-robot.nav-icon
+                                    |
+                                    p !{i18n.chatbots}
                 |
                 if scr_access && scr_access.includes('cdn')
                     li.nav-item
@@ -214,6 +221,13 @@ aside.main-sidebar.sidebar-dark-pink.elevation-4
                                 i.nav-icon.fas.fa-plug
                                 |
                                 p !{i18n.webservices}
+                    |
+                    if scr_access && scr_access.includes('app/:name/chatbots')
+                        li.nav-item
+                            a.nav-link(href=base_admin_path + 'app/' + _app_id_ + '/chatbots')#menu_chatbots
+                                i.nav-icon.fas.fa-robot
+                                |
+                                p !{i18n.chatbots}
                 |
 
                 li.nav-header.navbar-pink !{i18n.misc}

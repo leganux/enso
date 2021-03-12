@@ -1,0 +1,72 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        include template/seo
+        include template/styles
+    body.hold-transition.sidebar-mini.accent-pink
+        .wrapper
+            include template/nav
+            include template/aside
+            .content-wrapper
+                section.content-header
+                    .container-fluid
+                        .row.mb-2
+                            .col-sm-6
+                                h1 !{i18n.chatbots}
+                            |
+                            .col-sm-6
+                                ol.breadcrumb.float-sm-right
+                                    li.breadcrumb-item
+                                        a(href=base_admin_path + 'dashboard') !{i18n.home}
+                                    |
+                                    li.breadcrumb-item.active !{i18n.chatbots}
+
+                    section.content
+                        .card
+                            .card-header.bg-dark
+                                .row
+                                    .col-12.col-md-8
+                                        h3.card-title !{i18n.list_of} !{i18n.chatbots}
+
+                            .card-body
+                                br
+                                .row
+                                    .col-12.col-md-8
+                                    .col-12.col-md-4
+                                        button.bg-pink.btn.btn-block#btn_new_element !{i18n.new} !{i18n.chatbots}
+                                br
+                                table.table.table-bordered.table-striped.display.table-hover#datatable
+                                    thead
+                                        tr
+                                            th !{i18n.id}
+                                            th !{i18n.name}
+                                            th !{i18n.description}
+                                            th !{i18n.chatbot_type}
+                                            th !{i18n.google_auth}
+                                            th !{i18n.google_password}
+                                            th !{i18n.private_key}
+                                            th !{i18n.public_key}
+                                            th !{i18n.url}
+                                            th !{i18n.telegram_token}
+                                            th !{i18n.webhook}
+                                            th !{i18n.collection_of_products}
+
+
+            include template/footer
+            include template/control_bar
+
+        include modals/webservice_fuctions
+        include template/params
+        include template/scripts
+        script.
+            $(document).ready(function () {
+                $('#menu_chatbots').addClass('active');
+
+
+            });
+        script(src=core_files_path + 'js/common.js')
+        script(src=core_files_path + 'js/webservice.js')
+        //script(src=core_files_path + 'js/chatbots.js')
+
