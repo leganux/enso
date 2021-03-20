@@ -52,12 +52,15 @@ html
                                             th !{i18n.telegram_token}
                                             th !{i18n.webhook}
                                             th !{i18n.collection_of_products}
+                                            th !{i18n.date_register}
+                                            th !{i18n.date_last_update}
+                                            th !{i18n.actions}
 
 
             include template/footer
             include template/control_bar
 
-        include modals/webservice_fuctions
+        include modals/chatbot_modal
         include template/params
         include template/scripts
         script.
@@ -67,6 +70,6 @@ html
 
             });
         script(src=core_files_path + 'js/common.js')
-        script(src=core_files_path + 'js/webservice.js')
-        //script(src=core_files_path + 'js/chatbots.js')
+        //script(src=core_files_path + 'js/webservice.js')
+        script(src=core_files_path + 'js/chatbots.js')
 

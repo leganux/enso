@@ -1,0 +1,115 @@
+#modal_new_edit.modal.fade( aria-hidden='true', data-backdrop="static", data-keyboard="false")
+    .modal-dialog.modal-xl
+        .modal-content
+            .modal-header.bg-dark
+                h4.modal-title !{i18n.new_edit}
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                br
+                label !{i18n.name}
+                input(type='text').form-control#in_name
+                label !{i18n.description}
+                textarea(rows='5').form-control#in_description
+                label !{i18n.chatbot_type}
+                select.form-control#in_chatboot_type
+                    option(value="") Select an option...
+                label !{i18n.chatbot_type}  !{i18n.description}
+                input(type='text' disabled).form-control#in_des_type
+                label !{i18n.google_auth}
+                input(type='text').form-control#in_google
+                label !{i18n.google_password}
+                input(type='text').form-control#in_google_pass
+                label !{i18n.private_key}
+                input(type='text').form-control#in_private
+                label !{i18n.public_key}
+                input(type='text').form-control#in_public
+                label !{i18n.url}
+                input(type='text').form-control#url
+                label !{i18n.telegram_token}
+                input(type='text').form-control#in_token
+                label !{i18n.webhook}
+                input(type='text').form-control#in_webhook
+                label !{i18n.collection_of_products}
+                input(type='text').form-control#in_collection
+
+
+            .modal-footer.justify-content-end
+                button.btn.btn-default(type='button', data-dismiss='modal') !{i18n.cancel}
+                button.btn.bg-pink(type='button')#save_changes !{i18n.save}
+
+
+#modal_new_param.modal.fade( aria-hidden='true', data-backdrop="static", data-keyboard="false")
+    .modal-dialog.modal-xl
+        .modal-content
+            .modal-header.bg-dark
+                h4.modal-title !{i18n.new_edit}
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                br
+                label !{i18n.webservices}
+                input(type='text').form-control#in_webservice
+                label !{i18n.param} !{i18n.name}
+                input(type='text').form-control#in_param_name
+                label !{i18n.param} !{i18n.description}
+                input(type='text').form-control#in_param_description
+                label !{i18n.param} !{i18n.format}
+                select(type='text').form-control#in_format
+                    option(value = "non") !{i18n.select_an_option}
+                    option(value = "Object") !{i18n.object}
+                    option(value = "Array") !{i18n.array}
+                    option(value = "String") !{i18n.string}
+                    option(value = "Number") !{i18n.number}
+                label !{i18n.param} !{i18n.default}
+                input(type='text').form-control#in_param_default
+                label !{i18n.type} !{i18n.key}
+                select(type='text').form-control#in_type_key
+                label !{i18n.type} !{i18n.name}
+                input(type='text').form-control#in_type_name
+                label !{i18n.type} !{i18n.description}
+                input(type='text').form-control#in_type_description
+
+            .modal-footer.justify-content-end
+                button.btn.btn-default(type='button', data-dismiss='modal') !{i18n.cancel}
+                button.btn.bg-pink(type='button')#save_changes_params !{i18n.save}
+
+#modal_edit_param.modal.fade( aria-hidden='true', data-backdrop="static", data-keyboard="false")
+    .modal-dialog.modal-xl
+        .modal-content
+            .modal-header.bg-dark
+                h4.modal-title !{i18n.new_edit}
+                button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') &times;
+            .modal-body
+                br
+                label !{i18n.param}
+                input(type='text').form-control#in_param_edit
+                label !{i18n.param} !{i18n.name}
+                input(type='text').form-control#in_param_name_edit
+                label !{i18n.param} !{i18n.description}
+                input(type='text').form-control#in_param_description_edit
+                label !{i18n.param} !{i18n.format}
+                select(type='text').form-control#in_format_edit
+                    option(value = "non") !{i18n.select_an_option}
+                    option(value = "Object") !{i18n.object}
+                    option(value = "Array") !{i18n.array}
+                    option(value = "String") !{i18n.string}
+                    option(value = "Number") !{i18n.number}
+                label !{i18n.param} !{i18n.default}
+                input(type='text').form-control#in_param_default_edit
+                label !{i18n.type} !{i18n.key}
+                select(type='text').form-control#in_type_key_edit
+                label !{i18n.type} !{i18n.name}
+                input(type='text').form-control#in_type_name_edit
+                label !{i18n.type} !{i18n.description}
+                input(type='text').form-control#in_type_description_edit
+
+
+            .modal-footer.justify-content-end
+                button.btn.btn-default(type='button', data-dismiss='modal') !{i18n.cancel}
+                button.btn.bg-pink(type='button')#save_params !{i18n.save}
+
+
+
+
