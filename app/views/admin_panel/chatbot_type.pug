@@ -32,32 +32,56 @@ html
                                     button.bg-pink.btn.btn-block#btn_new_element !{i18n.new}
 
                         .card-body
-                            table.table.table-bordered.table-striped.display.table-hover#datatable
-                                thead
-                                    tr
-                                        th !{i18n.id}
-                                        th !{i18n.name}
-                                        th !{i18n.description}
-                                        th !{i18n.key}
-                                        th !{i18n.active}
-                                        th !{i18n.date_register}
-                                        th !{i18n.date_last_update}
-                                        th !{i18n.actions}
+                            ul.nav.nav-tabs
+                                li.nav-item
+                                    a.nav-link.active(data-toggle='tab', href='#tables')#tab_tables Types
+                                li.nav-item
+                                    a.nav-link(data-toggle='tab', href='#structure')#tab_structure Origin
+
+                            #myTabContent.tab-content
+                                #tables.tab-pane.fade.show.active
+                                    br
+                                    table.table.table-bordered.table-striped.display.table-hover#datatable
+                                        thead
+                                            tr
+                                                th !{i18n.id}
+                                                th !{i18n.name}
+                                                th !{i18n.description}
+                                                th !{i18n.key}
+                                                th !{i18n.active}
+                                                th !{i18n.date_register}
+                                                th !{i18n.date_last_update}
+                                                th !{i18n.actions}
+                                #structure.tab-pane.fade
+                                    br
+                                    table.table.table-bordered.table-striped.display.table-hover#datatable_type
+                                        thead
+                                            tr
+                                                th !{i18n.id}
+                                                th !{i18n.name}
+                                                th !{i18n.description}
+                                                th !{i18n.origin}
+                                                th !{i18n.active}
+                                                th !{i18n.date_register}
+                                                th !{i18n.date_last_update}
+                                                th !{i18n.actions}
+
 
                         .card-footer
                             | !{i18n.create_modify_delete}
 
 
 
-            include template/footer
-            include template/control_bar
+
+        include template/footer
+        include template/control_bar
 
         include modals/chatbot_type
         include template/params
         include template/scripts
         script.
             $(document).ready(function () {
-                $('#menu_languajes').addClass('active');
+                $('#menu_chatbots').addClass('active');
                 $('#menu_catalogs').parent().addClass('menu-open');
             });
         script(src=core_files_path + 'js/common.js')

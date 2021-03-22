@@ -1,10 +1,12 @@
 const env = require('./config/environment.config').environment;
 const server = require('./system/server.system');
 const app = server.app;
+const https = require('https')
+const http = require('http')
 
 const auth = require('./auth/routing').router;
 
-require('./system/socket_server.system').io;
+const io_ = require('./system/socket_server.system').io;
 require('./system/logs/log_controller');
 
 const api_routes = require('./routes/_api.routes')
@@ -12,7 +14,7 @@ const app_routes = require('./routes/_app.routes')
 const view_engine = require('./views/view_engine')
 const express = require('express');
 const path = require('path');
-
+let io = {};
 
 app.use(env.root_path + 'auth', auth);
 app.use(env.root_path + 'api', api_routes);
@@ -48,3 +50,12 @@ app.use(function (req, res) {
 });
 
 
+
+if (env.active_socket) {
+   io = io_
+
+}
+
+module.exports = {
+    io: io
+};

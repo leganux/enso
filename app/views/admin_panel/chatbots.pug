@@ -31,30 +31,45 @@ html
                                         h3.card-title !{i18n.list_of} !{i18n.chatbots}
 
                             .card-body
-                                br
-                                .row
-                                    .col-12.col-md-8
-                                    .col-12.col-md-4
-                                        button.bg-pink.btn.btn-block#btn_new_element !{i18n.new} !{i18n.chatbots}
-                                br
-                                table.table.table-bordered.table-striped.display.table-hover#datatable
-                                    thead
-                                        tr
-                                            th !{i18n.id}
-                                            th !{i18n.name}
-                                            th !{i18n.description}
-                                            th !{i18n.chatbot_type}
-                                            th !{i18n.google_auth}
-                                            th !{i18n.google_password}
-                                            th !{i18n.private_key}
-                                            th !{i18n.public_key}
-                                            th !{i18n.url}
-                                            th !{i18n.telegram_token}
-                                            th !{i18n.webhook}
-                                            th !{i18n.collection_of_products}
-                                            th !{i18n.date_register}
-                                            th !{i18n.date_last_update}
-                                            th !{i18n.actions}
+                                ul.nav.nav-tabs
+                                    li.nav-item
+                                        a.nav-link.active(data-toggle='tab', href='#tables')#tab_tables Types
+                                    li.nav-item
+                                        a.nav-link(data-toggle='tab', href='#conversations')#tab_conversaciones Conversations
+                                    li.nav-item
+                                        a.nav-link(data-toggle='tab', href='#message')#tab_message Message
+
+                                #myTabContent.tab-content
+                                    #tables.tab-pane.fade.show.active
+                                    br
+                                    .row
+                                        .col-12.col-md-8
+                                        .col-12.col-md-4
+                                            button.bg-pink.btn.btn-block#btn_new_element !{i18n.new} !{i18n.chatbots}
+                                    br
+                                    table.table.table-bordered.table-striped.display.table-hover#datatable
+                                        thead
+                                            tr
+                                                th !{i18n.id}
+                                                th !{i18n.name}
+                                                th !{i18n.description}
+                                                th !{i18n.chatbot_type}
+                                                th !{i18n.origin}
+                                                th !{i18n.google_auth}
+                                                th !{i18n.google_password}
+                                                th !{i18n.private_key}
+                                                th !{i18n.public_key}
+                                                th !{i18n.url}
+                                                th !{i18n.telegram_token}
+                                                th !{i18n.webhook}
+                                                th !{i18n.collection_of_products}
+                                                th !{i18n.date_register}
+                                                th !{i18n.date_last_update}
+                                                th !{i18n.actions}
+
+                                    #conversations.tab-pane.fade.show.active
+
+                                    #message.tab-pane.fade.show.active
 
 
             include template/footer
@@ -65,7 +80,7 @@ html
         include template/scripts
         script.
             $(document).ready(function () {
-                $('#menu_chatbots').addClass('active');
+                $('#menu_chatbot').addClass('active');
 
 
             });

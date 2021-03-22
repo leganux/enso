@@ -5,6 +5,7 @@ const dataTables = require('mongoose-datatables');
 
 const params = require("./webservice_params.m");
 const chatbottype = require("./core/chetbot_type.m")
+const origin = require("./core/origin_chatbot")
 
 const app = require('./core/app.m');
 
@@ -22,6 +23,11 @@ const chatbot = new Schema({
         type: Schema.Types.ObjectId,
         required: true,
         ref: chatbottype,
+    },
+    origin_chatbot: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: origin,
     },
     google_auth: {
         type: String,

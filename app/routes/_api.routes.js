@@ -11,6 +11,7 @@ router.use('/core/permission/role', require('./core/permission_by_rol.routes'));
 router.use('/core/routes/', require('./core/routes_admin.routes'));
 router.use('/core/files/', require('./core/general_file_manager.routes'));
 router.use('/core/chatbotstype/', require('./core/chatbot_type.routes'));
+router.use('/core/origin_chatbot/', require('./core/origin_chatbot.routes'));
 
 router.use('/places/city', require('./core/city.routes'));
 router.use('/places/country', require('./core/country.routes'));

@@ -149,6 +149,7 @@ var environment = {
      *  => Boolean : true or false
      * */
     socket_path: (process.env.SOCKET_PATH),
+    socket_port: (process.env.SOCKET_PORT),
 
     /******
      *  name of log file
