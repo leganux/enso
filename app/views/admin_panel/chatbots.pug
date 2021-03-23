@@ -35,41 +35,74 @@ html
                                     li.nav-item
                                         a.nav-link.active(data-toggle='tab', href='#tables')#tab_tables Types
                                     li.nav-item
-                                        a.nav-link(data-toggle='tab', href='#conversations')#tab_conversaciones Conversations
+                                        a.nav-link(data-toggle='tab', href='#conversations')#tab_conversaciones.disabled Conversations
                                     li.nav-item
-                                        a.nav-link(data-toggle='tab', href='#message')#tab_message Message
+                                        a.nav-link(data-toggle='tab', href='#message')#tab_message.disabled Message
 
                                 #myTabContent.tab-content
                                     #tables.tab-pane.fade.show.active
-                                    br
-                                    .row
-                                        .col-12.col-md-8
-                                        .col-12.col-md-4
-                                            button.bg-pink.btn.btn-block#btn_new_element !{i18n.new} !{i18n.chatbots}
-                                    br
-                                    table.table.table-bordered.table-striped.display.table-hover#datatable
-                                        thead
-                                            tr
-                                                th !{i18n.id}
-                                                th !{i18n.name}
-                                                th !{i18n.description}
-                                                th !{i18n.chatbot_type}
-                                                th !{i18n.origin}
-                                                th !{i18n.google_auth}
-                                                th !{i18n.google_password}
-                                                th !{i18n.private_key}
-                                                th !{i18n.public_key}
-                                                th !{i18n.url}
-                                                th !{i18n.telegram_token}
-                                                th !{i18n.webhook}
-                                                th !{i18n.collection_of_products}
-                                                th !{i18n.date_register}
-                                                th !{i18n.date_last_update}
-                                                th !{i18n.actions}
+                                        br
+                                        .row
+                                            .col-12.col-md-8
+                                            .col-12.col-md-4
+                                                button.bg-pink.btn.btn-block#btn_new_element !{i18n.new} !{i18n.chatbots}
+                                        br
+                                        table.table.table-bordered.table-striped.display.table-hover#datatable
+                                            thead
+                                                tr
+                                                    th !{i18n.id}
+                                                    th !{i18n.name}
+                                                    th !{i18n.description}
+                                                    th !{i18n.chatbot_type}
+                                                    th !{i18n.origin}
+                                                    th !{i18n.google_auth}
+                                                    th !{i18n.google_password}
+                                                    th !{i18n.private_key}
+                                                    th !{i18n.public_key}
+                                                    th !{i18n.url}
+                                                    th !{i18n.telegram_token}
+                                                    th !{i18n.webhook}
+                                                    th !{i18n.collection_of_products}
+                                                    th !{i18n.date_register}
+                                                    th !{i18n.date_last_update}
+                                                    th !{i18n.actions}
 
-                                    #conversations.tab-pane.fade.show.active
+                                    #conversations.tab-pane.fade
+                                        br
+                                        .row
+                                            .col-12#spce4_table
+                                            .col-12(style='display:none;')
+                                                table#Template_table_list.display.table.table-striped.table-bordered.table-hover(width='100%')
+                                                    thead
+                                                        tr
+                                                            th #{i18n.endpoint_id}
+                                                            th #{i18n.chat_id}
+                                                            th #{i18n.chat_plataform}
+                                                            th #{i18n.chat_active}
+                                                            th #{i18n.date_register}
+                                                            th #{i18n.last_message}
+                                                            th #{i18n.last_time}
+                                                            th #{i18n.actions}
 
-                                    #message.tab-pane.fade.show.active
+
+                                    #message.tab-pane.fade
+                                            br
+                                            .row
+                                                .col-8
+                                                .col-2
+                                                    button.DeactiveConversation_close.btn.btn-block.btn-danger
+                                                        i.fas.fa-comment-slash
+                                                .col-2
+                                            br
+                                            br
+                                            .row
+                                                .col-2
+                                                .col-8#chatHere_
+
+                                                .col-2
+
+                            .card-footer
+                                p #{i18n.admin_menu_baas_conversation}
 
 
             include template/footer

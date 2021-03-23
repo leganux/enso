@@ -15,6 +15,14 @@ const view_engine = require('./views/view_engine')
 const express = require('express');
 const path = require('path');
 let io = {};
+if (env.active_socket) {
+    io = io_
+
+}
+
+module.exports = {
+    io: io
+};
 
 app.use(env.root_path + 'auth', auth);
 app.use(env.root_path + 'api', api_routes);
@@ -40,6 +48,10 @@ app.get(env.root_path + 'logout', function (req, res) {
     req.user = false;
     res.redirect(env.root_path);
 });
+
+
+//require("./routes/webhook/socket")
+//app.use(env.root_path + 'api', require("./routes/webhook/telegram.routes"));
 app.use(function (req, res) {
     res.status('404').json(
         {
@@ -51,11 +63,3 @@ app.use(function (req, res) {
 
 
 
-if (env.active_socket) {
-   io = io_
-
-}
-
-module.exports = {
-    io: io
-};
