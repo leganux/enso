@@ -74,7 +74,7 @@ router.post('/:app_id/:endpoint', async (req, res) => {
             chat_id: body.message.chat.id,
             origin_chatbot: data_or._id
         });
-        console.log("chatlist si o no",chatlist)
+        console.log("chatlist si o no", chatlist)
         if (!chatlist) {
             let chatlist_nuevo = new modelChatList({
                 endpoint_id: data._id,
@@ -84,7 +84,7 @@ router.post('/:app_id/:endpoint', async (req, res) => {
                 origin_chatbot: data_or._id,
                 app: app
             });
-            console.log("cahtlist: ",chatlist_nuevo)
+            console.log("cahtlist: ", chatlist_nuevo)
             chatlist = await chatlist_nuevo.save();
         }
         chatlist.last_message = body.message.text;
@@ -92,199 +92,196 @@ router.post('/:app_id/:endpoint', async (req, res) => {
         await chatlist.save();
         let isText = false;
 
-        console.log("cahtlist: ",chatlist)
-        /*let message = await modelChatConversation.findOne({
-            message_id: body.message.message_id,
-        });*/
-
-            if (body.message.text) {
-                isText = true;
-                var conv = new modelChatConversation({
-                    message_id: body.message.message_id,
-                    chatlist_id: chatlist._id,
-                    chat_id: body.message.chat.id,
-                    text: body.message.text,
-                    full_json: JSON.stringify(body),
-                    who_says: 'external',
-                    origin_chatbot: data_or._id,
-                    dt_reg: moment().format(),
-                    app: app,
-                });
-            } else if (body.message.sticker) {
-
-                let fileUrl = await getUrlFile(data.token, body.message.sticker.thumb.file_id)
-
-                var conv = new modelChatConversation({
-                    message_id: body.message.message_id,
-                    chatlist_id: chatlist._id,
-                    chat_id: body.message.chat.id,
-                    text: body.message.sticker.emoji,
-                    full_json: JSON.stringify(body),
-                    isRich: true,
-                    rich_kind: 'sticker',
-                    url: fileUrl,
-                    who_says: 'external',
-                    origin_chatbot: data_or._id,
-                    dt_reg: moment().format(),
-                    app: app
-                });
-
-            } else if (body.message.voice) {
-
-                let fileUrl = await getUrlFile(data.token, body.message.voice.file_id)
-
-                var conv = new modelChatConversation({
-                    message_id: body.message.message_id,
-                    chatlist_id: chatlist._id,
-                    chat_id: body.message.chat.id,
-                    text: '',
-                    full_json: JSON.stringify(body),
-                    isRich: true,
-                    rich_kind: 'voice',
-                    url: fileUrl,
-                    who_says: 'external',
-                    origin_chatbot: data_or._id,
-                    dt_reg: moment().format(),
-                    app: app
-                });
-
-            } else if (body.message.audio) {
-
-                let fileUrl = await getUrlFile(data.token, body.message.audio.file_id)
-
-                var conv = new modelChatConversation({
-                    message_id: body.message.message_id,
-                    chatlist_id: chatlist._id,
-                    chat_id: body.message.chat.id,
-                    text: '',
-                    full_json: JSON.stringify(body),
-                    isRich: true,
-                    rich_kind: 'voice',
-                    url: fileUrl,
-                    who_says: 'external',
-                    origin_chatbot: data_or._id,
-                    dt_reg: moment().format(),
-                    app: app
-                });
-
-            } else if (body.message.animation) {
-
-                let fileUrl = await getUrlFile(data.token, body.message.animation.file_id)
-
-                var conv = new modelChatConversation({
-                    message_id: body.message.message_id,
-                    chatlist_id: chatlist._id,
-                    chat_id: body.message.chat.id,
-                    text: '',
-                    full_json: JSON.stringify(body),
-                    isRich: true,
-                    rich_kind: 'animation',
-                    url: fileUrl,
-                    who_says: 'external',
-                    origin_chatbot: data_or._id,
-                    dt_reg: moment().format(),
-                    app: app
-                });
-
-            } else if (body.message.video_note) {
-
-                let fileUrl = await getUrlFile(data.token, body.message.video_note.file_id)
-
-                var conv = new modelChatConversation({
-                    message_id: body.message.message_id,
-                    chatlist_id: chatlist._id,
-                    chat_id: body.message.chat.id,
-                    text: '',
-                    full_json: JSON.stringify(body),
-                    isRich: true,
-                    rich_kind: 'animation',
-                    url: fileUrl,
-                    who_says: 'external',
-                    origin_chatbot: data_or._id,
-                    dt_reg: moment().format(),
-                    app: app
-                });
-
-            } else if (body.message.document) {
-
-                let fileUrl = await getUrlFile(data.token, body.message.document.file_id)
-
-                var conv = new modelChatConversation({
-                    message_id: body.message.message_id,
-                    chatlist_id: chatlist._id,
-                    chat_id: body.message.chat.id,
-                    text: '',
-                    full_json: JSON.stringify(body),
-                    isRich: true,
-                    rich_kind: 'document',
-                    url: fileUrl,
-                    who_says: 'external',
-                    origin_chatbot: data_or._id,
-                    dt_reg: moment().format(),
-                    app: app
-                });
-
-            } else if (body.message.photo) {
-
-                let fileUrl = await getUrlFile(data.token, body.message.photo[body.message.photo.length - 1].file_id)
-
-                var conv = new modelChatConversation({
-                    message_id: body.message.message_id,
-                    chatlist_id: chatlist._id,
-                    chat_id: body.message.chat.id,
-                    text: body.message.caption,
-                    full_json: JSON.stringify(body),
-                    isRich: true,
-                    rich_kind: 'photo',
-                    url: fileUrl,
-                    who_says: 'external',
-                    origin_chatbot: data_or._id,
-                    dt_reg: moment().format(),
-                    app: app
-                });
-
-            } else if (body.message.video) {
-
-                let fileUrl = await getUrlFile(data.token, body.message.video.file_id)
-
-                var conv = new modelChatConversation({
-                    message_id: body.message.message_id,
-                    chatlist_id: chatlist._id,
-                    chat_id: body.message.chat.id,
-                    text: body.message.caption,
-                    full_json: JSON.stringify(body),
-                    isRich: true,
-                    rich_kind: 'animation',
-                    url: fileUrl,
-                    who_says: 'external',
-                    origin_chatbot: data_or._id,
-                    dt_reg: moment().format(),
-                    app: app
-                });
-
-            }
-
-            var OBJCHAT = body.message;
+        console.log("cahtlist: ", chatlist)
 
 
-            console.log("conv:", conv)
-            let conversation = await conv.save();
+        if (body.message.text) {
+            isText = true;
+            var conv = new modelChatConversation({
+                message_id: body.update_id,
+                chatlist_id: chatlist._id,
+                chat_id: body.message.chat.id,
+                text: body.message.text,
+                full_json: JSON.stringify(body),
+                who_says: 'external',
+                origin_chatbot: data_or._id,
+                dt_reg: moment().format(),
+                app: app,
+            });
+        } else if (body.message.sticker) {
+
+            let fileUrl = await getUrlFile(data.telegram_token, body.message.sticker.thumb.file_id)
+
+            var conv = new modelChatConversation({
+                message_id: body.update_id,
+                chatlist_id: chatlist._id,
+                chat_id: body.message.chat.id,
+                text: body.message.sticker.emoji,
+                full_json: JSON.stringify(body),
+                isRich: true,
+                rich_kind: 'sticker',
+                url: fileUrl,
+                who_says: 'external',
+                origin_chatbot: data_or._id,
+                dt_reg: moment().format(),
+                app: app
+            });
+
+        } else if (body.message.voice) {
+
+            let fileUrl = await getUrlFile(data.telegram_token, body.message.voice.file_id)
+
+            var conv = new modelChatConversation({
+                message_id: body.update_id,
+                chatlist_id: chatlist._id,
+                chat_id: body.message.chat.id,
+                text: '',
+                full_json: JSON.stringify(body),
+                isRich: true,
+                rich_kind: 'voice',
+                url: fileUrl,
+                who_says: 'external',
+                origin_chatbot: data_or._id,
+                dt_reg: moment().format(),
+                app: app
+            });
+
+        } else if (body.message.audio) {
+
+            let fileUrl = await getUrlFile(data.telegram_token, body.message.audio.file_id)
+
+            var conv = new modelChatConversation({
+                message_id: body.update_id,
+                chatlist_id: chatlist._id,
+                chat_id: body.message.chat.id,
+                text: '',
+                full_json: JSON.stringify(body),
+                isRich: true,
+                rich_kind: 'voice',
+                url: fileUrl,
+                who_says: 'external',
+                origin_chatbot: data_or._id,
+                dt_reg: moment().format(),
+                app: app
+            });
+
+        } else if (body.message.animation) {
+
+            let fileUrl = await getUrlFile(data.telegram_token, body.message.animation.file_id)
+
+            var conv = new modelChatConversation({
+                message_id: body.update_id,
+                chatlist_id: chatlist._id,
+                chat_id: body.message.chat.id,
+                text: '',
+                full_json: JSON.stringify(body),
+                isRich: true,
+                rich_kind: 'animation',
+                url: fileUrl,
+                who_says: 'external',
+                origin_chatbot: data_or._id,
+                dt_reg: moment().format(),
+                app: app
+            });
+
+        } else if (body.message.video_note) {
+
+            let fileUrl = await getUrlFile(data.telegram_token, body.message.video_note.file_id)
+
+            var conv = new modelChatConversation({
+                message_id: body.update_id,
+                chatlist_id: chatlist._id,
+                chat_id: body.message.chat.id,
+                text: '',
+                full_json: JSON.stringify(body),
+                isRich: true,
+                rich_kind: 'animation',
+                url: fileUrl,
+                who_says: 'external',
+                origin_chatbot: data_or._id,
+                dt_reg: moment().format(),
+                app: app
+            });
+
+        } else if (body.message.document) {
+
+            let fileUrl = await getUrlFile(data.telegram_token, body.message.document.file_id)
+
+            var conv = new modelChatConversation({
+                message_id: body.update_id,
+                chatlist_id: chatlist._id,
+                chat_id: body.message.chat.id,
+                text: '',
+                full_json: JSON.stringify(body),
+                isRich: true,
+                rich_kind: 'document',
+                url: fileUrl,
+                who_says: 'external',
+                origin_chatbot: data_or._id,
+                dt_reg: moment().format(),
+                app: app
+            });
+
+        } else if (body.message.photo) {
+            console.log(body.message.photo)
+            let fileUrl = await getUrlFile(data.telegram_token, body.message.photo[body.message.photo.length - 1].file_id)
+
+            var conv = new modelChatConversation({
+                message_id: body.update_id,
+                chatlist_id: chatlist._id,
+                chat_id: body.message.chat.id,
+                text: body.message.caption,
+                full_json: JSON.stringify(body),
+                isRich: true,
+                rich_kind: 'photo',
+                url: fileUrl,
+                who_says: 'external',
+                origin_chatbot: data_or._id,
+                dt_reg: moment().format(),
+                app: app
+            });
+
+        } else if (body.message.video) {
+
+            let fileUrl = await getUrlFile(data.telegram_token, body.message.video.file_id)
+
+            var conv = new modelChatConversation({
+                message_id: body.update_id,
+                chatlist_id: chatlist._id,
+                chat_id: body.message.chat.id,
+                text: body.message.caption,
+                full_json: JSON.stringify(body),
+                isRich: true,
+                rich_kind: 'animation',
+                url: fileUrl,
+                who_says: 'external',
+                origin_chatbot: data_or._id,
+                dt_reg: moment().format(),
+                app: app
+            });
+
+        }
+
+        var OBJCHAT = body.message;
 
 
-            if (!conversation) {
-                return res.status(503).json({
-                    success: false,
-                    message: 'Can not save conversation'
-                });
-            }
-
-            fnc_send_chatlists(chatlist.endpoint_id);
-
-            telegram.emit('chat_talk_one:' + chatlist._id, JSON.stringify(conversation));
+        console.log("conv:", conv)
+        let conversation = await conv.save();
 
 
-            var REQID = chatlist._id + '_lx_data_id_telegram';
-        
+        if (!conversation) {
+            return res.status(503).json({
+                success: false,
+                message: 'Can not save conversation'
+            });
+        }
+
+        fnc_send_chatlists(chatlist.endpoint_id);
+
+        telegram.emit('chat_talk_one:' + chatlist._id, JSON.stringify(conversation));
+
+
+        var REQID = chatlist._id + '_lx_data_id_telegram';
 
 
         /*if (!chatlist.active_conv) {
@@ -360,7 +357,7 @@ router.post('/:app_id/:endpoint', async (req, res) => {
                 message: 'ok'
             });
         }*/
-    }catch (error) {
+    } catch (error) {
         console.error(error)
         return res.status(500).json({
             success: false,
@@ -369,7 +366,7 @@ router.post('/:app_id/:endpoint', async (req, res) => {
     }
     //busca el endpoit
 
-
+    res.status(200).json({})
 
 });
 

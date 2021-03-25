@@ -339,7 +339,7 @@ $(document).ready(function () {
             }
             var URLactual = window.location.host;
 
-            let url = "https://" + URLactual + "/enso/app/api/webhook/" + origin + "/"+_app_id_+"/" + name + "/"
+            let url = "https://" + URLactual + "/enso/app/api/webhook/" + origin + "/" + _app_id_ + "/" + name + "/"
             $('#in_webhook').val(url)
 
 
@@ -408,7 +408,6 @@ $(document).ready(function () {
                 {
                     data: "origin_chatbot",
                     render: function (data, v, row) {
-                        console.log(row)
                         if (data == '6058bc38dd3a3c2e46dbe2a2') {
                             return '<span class="badge badge-warning"><i class="fas fa-robot fa-2x"></i><br> WEB</span>'
                         }
@@ -453,12 +452,12 @@ $(document).ready(function () {
                         if (row.active_conv) {
                             return '<center>' +
                                 '<button class=" DeactiveConversation btn btn-block btn-danger" value="' + data + '"><i class="fas fa-comment-slash"></i></button>' +
-                                '<button platform="' + row.platform + '" chat-id="' + row.chat_id + '" class=" TakeConversation btn btn-block btn-info" value="' + data + '"><i class="far fa-comment-dots"></i></i></button>'
+                                '<button platform="' + row.origin_chatbot + '" chat-id="' + row.chat_id + '" class=" TakeConversation btn btn-block btn-info" value="' + data + '"><i class="far fa-comment-dots"></i></i></button>'
                                 + '</center>';
                         } else {
                             return '<center>' +
-                                '<button platform="' + row.platform + '" chat-id="' + row.chat_id + '" class=" TakeConversation btn btn-block btn-info" value="' + data + '"><i class="far fa-comment-dots"></i></i></button>' +
-                                '<button platform="' + row.platform + '" chat-id="' + row.chat_id + '" class=" SpyConversation btn btn-block btn-dark" value="' + data + '"><i class="fas fa-eye"></i></i></button>'
+                                '<button platform="' + row.origin_chatbot + '" chat-id="' + row.chat_id + '" class=" TakeConversation btn btn-block btn-info" value="' + data + '"><i class="far fa-comment-dots"></i></i></button>' +
+                                '<button platform="' + row.origin_chatbot + '" chat-id="' + row.chat_id + '" class=" SpyConversation btn btn-block btn-dark" value="' + data + '"><i class="fas fa-eye"></i></i></button>'
                                 + '</center>';
                         }
                     }
@@ -473,182 +472,524 @@ $(document).ready(function () {
             HoldOn.close();
         });
     };
-     let Id_conv_single_generico = '';
-     $(document.body).on('click', '.SpyConversation', function () {
-            Id_conv_single = $(this).val();
-            CHAT_ID_ = $(this).attr('chat-id')
-            PLATFORM_ = $(this).attr('platform')
-            $('#chatHere_').html('');
+    $.fn.scrollBottom = function() {
+        return $(document).height() - this.scrollTop() - this.height();
+    };
 
-            if (Chat_list_[Id_conv_single_generico]) {
-                Chat_list_[Id_conv_single_generico].destroy()
-                Chat_list_[Id_conv_single_generico] = null
-                Chat_list_[Id_conv_single_generico] = {}
+    let Id_conv_single_generico = '';
+    let list_of_emit_chats = [];
 
-                delete Chat_list_[Id_conv_single_generico]
-            }
+    $(document.body).on('click', '.SpyConversation', function () {
+        $('.type_msg').hide()
+        Id_conv_single = $(this).val();
+        CHAT_ID_ = $(this).attr('chat-id')
+        PLATFORM_ = $(this).attr('platform')
 
-            $('.DeactiveConversation_close').attr('value', Id_conv_single);
+        switch (PLATFORM_) {
+            case "6058bbb9dd3a3c2e46dbe2a1":
+                PLATFORM_ = "TELEGRAM"
+                break
+            case "6058bb97dd3a3c2e46dbe2a0":
+                PLATFORM_ = "FACEBOOK"
+                break
+            case "6058bc38dd3a3c2e46dbe2a2":
+                PLATFORM_ = "WEB"
+                break
+            case "6058bc54dd3a3c2e46dbe2a3":
+                PLATFORM_ = "OTRO"
+                break
+        }
 
-            Chat_list_[Id_conv_single_generico] = new chat_dasflow('#chatHere_');
-            Chat_list_[Id_conv_single_generico].sendFunction = function (text) {
-                socket.emit('chat_talk_one:send', JSON.stringify({
-                    chatlist_id: Id_conv_single,
-                    chat_id: CHAT_ID_,
-                    text: text,
-                    who_says: 'me',
-                    platform: PLATFORM_,
-                    dt_reg: moment().format()
-                }));
-            }
+        $('#chatHere_').html('');
 
+        $('.DeactiveConversation_close').attr('value', Id_conv_single);
+        $('#tab_message').removeClass('disabled');
+        $('#tab_conversaciones').addClass('disabled');
+        $('#tab_message').click();
 
-            Chat_list_[Id_conv_single_generico].inicialize('CHAT ' + Id_conv_single, 'DashFlow');
+        let allmesagge = []
+        let helper = []
+        socket.emit('chat_spy:conversation', Id_conv_single);
+        if (!list_of_emit_chats[Id_conv_single]) {
 
-            Chat_list_[Id_conv_single_generico].deactiveSend();
+            socket.on('chat_talk_one:' + Id_conv_single, function (msg) {
 
-            $('#Content_').removeClass('disabled');
-            $('#Structure_').addClass('disabled');
-            $('#Content_').click();
-
-            socket.emit('chat_spy:conversation', Id_conv_single);
-
-            if (!list_of_emit_chats[Id_conv_single]) {
-                list_of_emit_chats[Id_conv_single] = true;
-                socket.on('chat_talk_one:' + Id_conv_single, function (msg) {
-                    let data = JSON.parse(msg);
-
-                    console.info('************************************** _  Spy');
-                    console.info(data);
-
-                    if (data.who_says === 'external') {
-
-
-                        if (data.isRich) {
-                            switch (data.rich_kind) {
-                                case 'sticker':
-                                    Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), data.chat_id, '<img class="img img-fluid" src="' + data.url + '"> <br>' + data.text, true);
-                                    break;
-                                case 'animation':
-                                    Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), data.chat_id, '<video width="150px" autoplay loop  controls> <source src="' + data.url + '" type="video/mp4"></video>', true);
-                                    break;
-                                case 'document':
-                                    Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), data.chat_id, '<a href="' + data.url + '" download=""> Archivo </a>', true);
-                                    break;
-                                case 'voice':
-                                    Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), data.chat_id, '<audio controls> <source src="' + data.url + '" type="audio/ogg"></audio>', true);
-                                    break;
-                                case 'photo':
-                                    Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), data.chat_id, '<img class="img img-fluid" src="' + data.url + '"> <br>' + (data.text ? data.text : ''), true);
-                                    break;
-                            }
-
-                        } else {
-                            Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), data.chat_id, data.text, true);
+                let data = JSON.parse(msg)
+                if (data.who_says === 'external') {
+                    if (data.isRich) {
+                        switch (data.rich_kind) {
+                            case 'sticker':
+                                allmesagge.push({ data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>  <br>' , owner :true});
+                                break;
+                            case 'animation':
+                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><video width="150px" autoplay loop  controls> <source src="' + data.url + '" type="video/mp4"></video></div></div>', owner :true});
+                                break;
+                            case 'document':
+                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><a href="' + data.url + '" download=""> Archivo </a></div></div>', owner :true});
+                                break;
+                            case 'voice':
+                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><audio controls> <source src="' + data.url + '" type="audio/ogg"></audio></div></div>', owner :true});
+                                break;
+                            case 'photo':
+                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id,id:data.message_id,  html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" style="height: 350px" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div> <br>' + (data.text ? data.text : ''), owner :true});
+                                break;
                         }
-
                     } else {
-                        if (data.text == '') {
-
-                            let elemJson = JSON.parse(data.full_json);
-                            if (elemJson.queryResult && elemJson.queryResult.fulfillmentMessages && elemJson.queryResult.fulfillmentMessages.length > 0) {
-
-                                elemJson.queryResult.fulfillmentMessages.map(function (item, i) {
-                                    if (item.message == 'card') {
-
-                                        let NewKey = makeid(7)
-
-
-                                        let cad = '<div class="card border-primary mb-3" "> ' +
-                                            '<div class="card-header"><center><h3>' + item.card.title + '</h3></center></div> ' +
-                                            '<div class="card-body"> ' +
-                                            '<h4 class="card-title"><center>' + item.card.subtitle + '</center></h4> ' +
-                                            '<center><img class="img-fluid img-thumbnail " src="' + item.card.imageUri + '" alt="Card image"></center>' +
-                                            '<div class="row" id="SP_buttons_' + NewKey + '"></div>' +
-                                            '</div> ' +
-                                            '</div>';
-
-
-                                        Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), 'DashFlow', cad, false);
-
-
-                                        item.card.buttons.map(function (jtem, j) {
-                                            let btnID = makeid(17);
-                                            let buttons = '<div class="col-6"><button class="btn btn-sm btn-primary btn-block" postbak="' + jtem.postback + '" id="' + btnID + '_MYbtn_' + i + j + '">' + jtem.text + '</button></div>';
-                                            $('#SP_buttons_' + NewKey).append(buttons)
-
-                                            $('#' + btnID + '_MYbtn_' + i + j).click(function () {
-
-                                                let value = $('#' + btnID + '_MYbtn_' + i + j).attr('postbak');
-                                                if (value.includes('http')) {
-                                                    window.open(value)
-                                                } else {
-                                                    MyChat.sendFunction(value);
-                                                    MyChat.pushMessaje(moment().to(moment()), 'ME', value, false);
-                                                }
-
-
-                                            });
-                                        });
-
-                                    }
-
-                                    if (item.message == 'image') {
-
-                                        var cad = '<center><a href="' + item.image.imageUri + '" target="_blank"><img class="img-fluid img-thumbnail" alt="' + item.image.accessibilityText + '" src="' + item.image.imageUri + '"> </a></center>'
-
-                                        Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), 'DashFlow', cad, false);
-
-
-                                    }
-                                    if (item.message == 'text' && item.text && item.text.text.length > 0) {
-                                        item.text.text.map(function (ntem, n) {
-                                            Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), 'DashFlow', ntem, false);
-                                        })
-
-                                    }
-                                    if (item.message == 'quickReplies') {
-                                        let NewKey = makeid(37)
-
-
-                                        let cad = '<div class="card border-primary mb-3" "> ' +
-                                            '<div class="card-header"><center><h4>' + '</h4></center></div> ' +
-                                            '<div class="card-body"> ' +
-                                            '<div class="row" id="SP_buttons_' + NewKey + '"></div>' +
-                                            '</div> ' +
-                                            '</div>';
-
-
-                                        Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), 'DashFlow', cad, false);
-
-
-                                        item.quickReplies.quickReplies.map(function (jtem, j) {
-                                            let btnID = makeid(17);
-                                            let buttons = '<div class="col-6"><button class="btn btn-sm btn-primary btn-block" postbak="' + jtem + '" id="' + btnID + '_MYbtn_' + i + j + '">' + jtem + '</button></div>';
-                                            $('#SP_buttons_' + NewKey).append(buttons)
-
-                                            $('#' + btnID + '_MYbtn_' + i + j).click(function () {
-
-                                                let value = $('#' + btnID + '_MYbtn_' + i + j).attr('postbak');
-                                                if (value.includes('http')) {
-                                                    window.open(value)
-                                                } else {
-                                                    MyChat.sendFunction(value);
-                                                    MyChat.pushMessaje(moment().to(moment()), 'ME', value, false);
-                                                }
-                                            });
-                                        });
-
-                                    }
-
-                                });
-                            }
-                        } else {
-                            Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), 'DashFlow', data.text, false);
-                        }
+                        allmesagge.push({date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="incoming_msg"><div class="received_withd_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true});
                     }
-                });
+
+                }else{
+                    allmesagge.push({date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="outgoing_msg"><div class="sent_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true});
+                }
+
+                for(let item of allmesagge){
+
+                    if(!helper.find(ele => ele == item.id)){
+                        helper.push(item.id)
+                        $('#history').append(item.html)
+
+                    }
+                }
+                $('.incoming_msg').height($('.incoming_msg').children().height())
+                var elmnt = document.getElementById("history");
+                let y = elmnt.scrollHeight
+
+                $('#history').scrollTop(y);
+            })
+
+        }
+
+
+    })
+
+    /*$(document.body).on('click', '.SpyConversation', function () {
+        $('.type_msg').hide()
+        Id_conv_single = $(this).val();
+        CHAT_ID_ = $(this).attr('chat-id')
+        PLATFORM_ = $(this).attr('platform')
+
+        switch (PLATFORM_) {
+            case "6058bbb9dd3a3c2e46dbe2a1":
+                PLATFORM_ = "TELEGRAM"
+                break
+            case "6058bb97dd3a3c2e46dbe2a0":
+                PLATFORM_ = "FACEBOOK"
+                break
+            case "6058bc38dd3a3c2e46dbe2a2":
+                PLATFORM_ = "WEB"
+                break
+            case "6058bc54dd3a3c2e46dbe2a3":
+                PLATFORM_ = "OTRO"
+                break
+        }
+
+        $('#chatHere_').html('');
+
+        $('.DeactiveConversation_close').attr('value', Id_conv_single);
+        $('#tab_message').removeClass('disabled');
+        $('#tab_conversaciones').addClass('disabled');
+        $('#tab_message').click();
+
+        let allmesagge = {}
+        let helper = []
+        socket.emit('chat_spy:conversation', Id_conv_single);
+        if (!list_of_emit_chats[Id_conv_single]) {
+
+            socket.on('chat_talk_one:' + Id_conv_single, function (msg) {
+
+                let data = JSON.parse(msg)
+                if (data.who_says === 'external') {
+                    if (data.isRich) {
+                        switch (data.rich_kind) {
+                            case 'sticker':
+                                allmesagge = { data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>  <br>' , owner :true};
+                                break;
+                            case 'animation':
+                                allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><video width="150px" autoplay loop  controls> <source src="' + data.url + '" type="video/mp4"></video></div></div>', owner :true};
+                                break;
+                            case 'document':
+                                allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><a href="' + data.url + '" download=""> Archivo </a></div></div>', owner :true};
+                                break;
+                            case 'voice':
+                                allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><audio controls> <source src="' + data.url + '" type="audio/ogg"></audio></div></div>', owner :true};
+                                break;
+                            case 'photo':
+                                allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id,id:data.message_id,  html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" style="height: 350px" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div> <br>' + (data.text ? data.text : ''), owner :true};
+                                break;
+                        }
+                    } else {
+                        allmesagge = {date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="incoming_msg"><div class="received_withd_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true};
+                    }
+
+                }else{
+                    allmesagge = {date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="outgoing_msg"><div class="sent_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true};
+                }
+                $('#history').append(allmesagge.html)
+
+                $('.incoming_msg').height($('.incoming_msg').children().height())
+                var elmnt = document.getElementById("history");
+                let y = elmnt.scrollHeight
+
+                $('#history').scrollTop(y);
+            })
+
+        }
+
+
+    })*/
+
+    $(document.body).on('click', '.TakeConversation', function () {
+        $('.type_msg').show()
+
+        Id_conv_single = $(this).val();
+        CHAT_ID_ = $(this).attr('chat-id')
+        PLATFORM_ = $(this).attr('platform')
+
+        $('#chatHere_').html('');
+        $('#history').html("");
+        $(' .type_msg').html("");
+        switch (PLATFORM_) {
+            case "6058bbb9dd3a3c2e46dbe2a1":
+                PLATFORM_ = "TELEGRAM"
+                break
+            case "6058bb97dd3a3c2e46dbe2a0":
+                PLATFORM_ = "FACEBOOK"
+                break
+            case "6058bc38dd3a3c2e46dbe2a2":
+                PLATFORM_ = "WEB"
+                break
+            case "6058bc54dd3a3c2e46dbe2a3":
+                PLATFORM_ = "OTRO"
+                break
+        }
+
+
+        $(' .type_msg').append('<div class="container-send"><div class="input_msg_write"><input class="write_msg" type="text" placeholder="Type a message"><button class="msg_send_btn" value="'+Id_conv_single+'" id="ChatSendBUtton_"+Id_conv_single>' +
+            '<i class="fas fa-paper-plane" aria-hidden="true"></i> Send</button></div></div>')
+
+        $('.DeactiveConversation_close').attr('value', Id_conv_single);
+        $('#tab_message').removeClass('disabled');
+        $('#tab_conversaciones').addClass('disabled');
+        $('#tab_message').click();
+
+        let allmesagge = []
+        let helper = []
+        socket.emit('chat_speak:conversation', Id_conv_single);
+        if (!list_of_emit_chats[Id_conv_single]) {
+            socket.on('chat_talk_one:' + Id_conv_single, function (msg) {
+
+                let data = JSON.parse(msg)
+
+                if (data.who_says === 'external') {
+                    if (data.isRich) {
+                        switch (data.rich_kind) {
+                            case 'sticker':
+                                allmesagge.push({ data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>  <br>' , owner :true});
+                                break;
+                            case 'animation':
+                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><video width="150px" autoplay loop  controls> <source src="' + data.url + '" type="video/mp4"></video></div></div>', owner :true});
+                                break;
+                            case 'document':
+                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><a href="' + data.url + '" download=""> Archivo </a></div></div>', owner :true});
+                                break;
+                            case 'voice':
+                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><audio controls> <source src="' + data.url + '" type="audio/ogg"></audio></div></div>', owner :true});
+                                break;
+                            case 'photo':
+                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id,id:data.message_id,  html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" style="height: 350px" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div> <br>' + (data.text ? data.text : ''), owner :true});
+                                break;
+                        }
+                    } else {
+                        allmesagge.push({date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="incoming_msg"><div class="received_withd_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true});
+                    }
+
+                }else{
+                    allmesagge.push({date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="outgoing_msg"><div class="sent_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true});
+                }
+
+                for(let item of allmesagge){
+
+                    if(!helper.find(ele => ele == item.id)){
+                        helper.push(item.id)
+                        $('#history').append(item.html)
+
+                    }
+                }
+                $('.incoming_msg').height($('.incoming_msg').children().height())
+                var elmnt = document.getElementById("history");
+                let y = elmnt.scrollHeight
+
+                $('#history').scrollTop(y);
+
+            })
+
+        }
+
+    })
+
+    /*$(document.body).on('click', '.TakeConversation', function () {
+        $('.type_msg').show()
+
+        Id_conv_single = $(this).val();
+        CHAT_ID_ = $(this).attr('chat-id')
+        PLATFORM_ = $(this).attr('platform')
+
+        $('#chatHere_').html('');
+        $('#history').html("");
+        $(' .type_msg').html("");
+        switch (PLATFORM_) {
+            case "6058bbb9dd3a3c2e46dbe2a1":
+                PLATFORM_ = "TELEGRAM"
+                break
+            case "6058bb97dd3a3c2e46dbe2a0":
+                PLATFORM_ = "FACEBOOK"
+                break
+            case "6058bc38dd3a3c2e46dbe2a2":
+                PLATFORM_ = "WEB"
+                break
+            case "6058bc54dd3a3c2e46dbe2a3":
+                PLATFORM_ = "OTRO"
+                break
+        }
+
+
+        $(' .type_msg').append('<div class="container-send"><div class="input_msg_write"><input class="write_msg" type="text" placeholder="Type a message"><button class="msg_send_btn" value="'+Id_conv_single+'" id="ChatSendBUtton_"+Id_conv_single>' +
+            '<i class="fas fa-paper-plane" aria-hidden="true"></i> Send</button></div></div>')
+
+        $('.DeactiveConversation_close').attr('value', Id_conv_single);
+        $('#tab_message').removeClass('disabled');
+        $('#tab_conversaciones').addClass('disabled');
+        $('#tab_message').click();
+
+        let allmesagge = []
+        let helper = []
+        socket.emit('chat_speak:conversation', Id_conv_single);
+        if (!list_of_emit_chats[Id_conv_single]) {
+            socket.on('chat_talk_one:' + Id_conv_single, function (msg) {
+
+                let data = JSON.parse(msg)
+
+                if (data.who_says === 'external') {
+                    if (data.isRich) {
+                        switch (data.rich_kind) {
+                            case 'sticker':
+                                allmesagge = { data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" src="' + data.url + '"><span class="time_date">'+moment().calendar(data.dt_reg)+'</span></div></div>  <br>' , owner :true};
+                                break;
+                            case 'animation':
+                                allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><video width="150px" autoplay loop  controls> <source src="' + data.url + '" type="video/mp4"></video><span class="time_date">'+moment().calendar(data.dt_reg)+'</span></div></div>', owner :true};
+                                break;
+                            case 'document':
+                                allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><a href="' + data.url + '" download=""> Archivo </a><span class="time_date">'+moment().calendar(data.dt_reg)+'</span></div></div>', owner :true};
+                                break;
+                            case 'voice':
+                                allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><audio controls> <source src="' + data.url + '" type="audio/ogg"></audio><span class="time_date">'+moment().calendar(data.dt_reg)+'</span></div></div>', owner :true};
+                                break;
+                            case 'photo':
+                                allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id,id:data.message_id,  html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" style="height: 350px" src="' + data.url + '"><span class="time_date">'+moment().calendar(data.dt_reg)+'</span></div></div> <br>' + (data.text ? data.text : ''), owner :true};
+                                break;
+                        }
+                    } else {
+                        allmesagge = {date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="incoming_msg"><div class="received_withd_msg"><p>'+data.text+'</p><span class="time_date">'+moment().calendar(data.dt_reg)+'</span></div></div>', owner: true};
+                    }
+
+                }else{
+                    allmesagge = {date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="outgoing_msg"><div class="sent_msg"><p>'+data.text+'</p><span class="time_date">'+moment().calendar(data.dt_reg)+'</span></div></div>', owner: true};
+                }
+
+                $('#history').append(allmesagge.html)
+
+                $('.incoming_msg').height($('.incoming_msg').children().height())
+                var elmnt = document.getElementById("history");
+                let y = elmnt.scrollHeight
+
+                $('#history').scrollTop(y);
+
+            })
+
+        }
+
+    })*/
+    $(document.body).on('click', '.msg_send_btn', function () {
+        let texto = $('.write_msg').val();
+         $('.write_msg').val("");
+        let chat = $(this).val()
+        if (!texto || texto.trim() == '') {
+            return 0;
+        }
+
+        let nuevo = {
+            text: texto,
+            chat: chat,
+            app: _app_id_
+        }
+        socket.emit('chat_talk:send', JSON.stringify(nuevo))
+    });
+    
+    $('.DeactiveConversation_close').click(function () {
+        Id_conv_single = $(this).val();
+        socket.emit('chat_talk:deactive_conversation', Id_conv_single);
+        $('#tab_message').addClass("disabled")
+        $('#tab_tables').click()
+    })
+    /*Chat_list_[Id_conv_single_generico] = new chat_dasflow('#chatHere_');
+    console.log( Chat_list_[Id_conv_single_generico])
+    Chat_list_[Id_conv_single_generico].sendFunction = function (text) {
+        socket.emit('chat_talk_one:send', JSON.stringify({
+            chatlist_id: Id_conv_single,
+            chat_id: CHAT_ID_,
+            text: text,
+            who_says: 'me',
+            platform: PLATFORM_,
+            dt_reg: moment().format()
+        }));
+    }
+
+
+    Chat_list_[Id_conv_single_generico].inicialize('CHAT ' + Id_conv_single, 'DashFlow');
+
+    Chat_list_[Id_conv_single_generico].deactiveSend();
+
+    $('#Content_').removeClass('disabled');
+    $('#Structure_').addClass('disabled');
+    $('#Content_').click();
+
+    socket.emit('chat_spy:conversation', Id_conv_single);
+
+    if (!list_of_emit_chats[Id_conv_single]) {
+        list_of_emit_chats[Id_conv_single] = true;
+        socket.on('chat_talk_one:' + Id_conv_single, function (msg) {
+            let data = JSON.parse(msg);
+
+            console.info('************************************** _  Spy');
+            console.info(data);
+
+            if (data.who_says === 'external') {
+
+
+                if (data.isRich) {
+                    switch (data.rich_kind) {
+                        case 'sticker':
+                            Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), data.chat_id, '<img class="img img-fluid" src="' + data.url + '"> <br>' + data.text, true);
+                            break;
+                        case 'animation':
+                            Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), data.chat_id, '<video width="150px" autoplay loop  controls> <source src="' + data.url + '" type="video/mp4"></video>', true);
+                            break;
+                        case 'document':
+                            Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), data.chat_id, '<a href="' + data.url + '" download=""> Archivo </a>', true);
+                            break;
+                        case 'voice':
+                            Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), data.chat_id, '<audio controls> <source src="' + data.url + '" type="audio/ogg"></audio>', true);
+                            break;
+                        case 'photo':
+                            Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), data.chat_id, '<img class="img img-fluid" src="' + data.url + '"> <br>' + (data.text ? data.text : ''), true);
+                            break;
+                    }
+
+                } else {
+                    Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), data.chat_id, data.text, true);
+                }
+
+            } else {
+                if (data.text == '') {
+
+                    let elemJson = JSON.parse(data.full_json);
+                    if (elemJson.queryResult && elemJson.queryResult.fulfillmentMessages && elemJson.queryResult.fulfillmentMessages.length > 0) {
+
+                        elemJson.queryResult.fulfillmentMessages.map(function (item, i) {
+                            if (item.message == 'card') {
+
+                                let NewKey = makeid(7)
+
+
+                                let cad = '<div class="card border-primary mb-3" "> ' +
+                                    '<div class="card-header"><center><h3>' + item.card.title + '</h3></center></div> ' +
+                                    '<div class="card-body"> ' +
+                                    '<h4 class="card-title"><center>' + item.card.subtitle + '</center></h4> ' +
+                                    '<center><img class="img-fluid img-thumbnail " src="' + item.card.imageUri + '" alt="Card image"></center>' +
+                                    '<div class="row" id="SP_buttons_' + NewKey + '"></div>' +
+                                    '</div> ' +
+                                    '</div>';
+
+
+                                Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), 'DashFlow', cad, false);
+
+
+                                item.card.buttons.map(function (jtem, j) {
+                                    let btnID = makeid(17);
+                                    let buttons = '<div class="col-6"><button class="btn btn-sm btn-primary btn-block" postbak="' + jtem.postback + '" id="' + btnID + '_MYbtn_' + i + j + '">' + jtem.text + '</button></div>';
+                                    $('#SP_buttons_' + NewKey).append(buttons)
+
+                                    $('#' + btnID + '_MYbtn_' + i + j).click(function () {
+
+                                        let value = $('#' + btnID + '_MYbtn_' + i + j).attr('postbak');
+                                        if (value.includes('http')) {
+                                            window.open(value)
+                                        } else {
+                                            MyChat.sendFunction(value);
+                                            MyChat.pushMessaje(moment().to(moment()), 'ME', value, false);
+                                        }
+
+
+                                    });
+                                });
+
+                            }
+
+                            if (item.message == 'image') {
+
+                                var cad = '<center><a href="' + item.image.imageUri + '" target="_blank"><img class="img-fluid img-thumbnail" alt="' + item.image.accessibilityText + '" src="' + item.image.imageUri + '"> </a></center>'
+
+                                Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), 'DashFlow', cad, false);
+
+
+                            }
+                            if (item.message == 'text' && item.text && item.text.text.length > 0) {
+                                item.text.text.map(function (ntem, n) {
+                                    Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), 'DashFlow', ntem, false);
+                                })
+
+                            }
+                            if (item.message == 'quickReplies') {
+                                let NewKey = makeid(37)
+
+
+                                let cad = '<div class="card border-primary mb-3" "> ' +
+                                    '<div class="card-header"><center><h4>' + '</h4></center></div> ' +
+                                    '<div class="card-body"> ' +
+                                    '<div class="row" id="SP_buttons_' + NewKey + '"></div>' +
+                                    '</div> ' +
+                                    '</div>';
+
+
+                                Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), 'DashFlow', cad, false);
+
+
+                                item.quickReplies.quickReplies.map(function (jtem, j) {
+                                    let btnID = makeid(17);
+                                    let buttons = '<div class="col-6"><button class="btn btn-sm btn-primary btn-block" postbak="' + jtem + '" id="' + btnID + '_MYbtn_' + i + j + '">' + jtem + '</button></div>';
+                                    $('#SP_buttons_' + NewKey).append(buttons)
+
+                                    $('#' + btnID + '_MYbtn_' + i + j).click(function () {
+
+                                        let value = $('#' + btnID + '_MYbtn_' + i + j).attr('postbak');
+                                        if (value.includes('http')) {
+                                            window.open(value)
+                                        } else {
+                                            MyChat.sendFunction(value);
+                                            MyChat.pushMessaje(moment().to(moment()), 'ME', value, false);
+                                        }
+                                    });
+                                });
+
+                            }
+
+                        });
+                    }
+                } else {
+                    Chat_list_[Id_conv_single_generico].pushMessaje(moment().to(data.dt_reg), 'DashFlow', data.text, false);
+                }
             }
         });
+    }*/
+});
 
-})

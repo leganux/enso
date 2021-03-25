@@ -3,6 +3,7 @@ html
     head
         meta(charset='utf-8')
         meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        link(rel="stylesheet", href=core_files_path + 'css/chat.css')
         include template/seo
         include template/styles
     body.hold-transition.sidebar-mini.accent-pink
@@ -97,7 +98,16 @@ html
                                             br
                                             .row
                                                 .col-2
-                                                .col-8#chatHere_
+                                                //.col-8#chatHere_
+                                                .col-8
+                                                    .container
+                                                        h3.text-center Messaging
+                                                        .messaging.p-0
+                                                            .mesgss(style="background:#ffecf5 ; border: solid 1px black;")
+                                                                .msg_history#history
+                                                                .type_msg(style="display:none; padding:5px" )
+
+
 
                                                 .col-2
 
