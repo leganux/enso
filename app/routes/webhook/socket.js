@@ -88,6 +88,9 @@ if (env.active_socket) {
                 await converSation.save();
 
             });
+            socket.on('disconnect', function () {
+
+            });
 
 
             socket.on('chat_spy:conversation', async function (id) {

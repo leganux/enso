@@ -479,89 +479,6 @@ $(document).ready(function () {
     let Id_conv_single_generico = '';
     let list_of_emit_chats = [];
 
-    $(document.body).on('click', '.SpyConversation', function () {
-        $('.type_msg').hide()
-        Id_conv_single = $(this).val();
-        CHAT_ID_ = $(this).attr('chat-id')
-        PLATFORM_ = $(this).attr('platform')
-
-        switch (PLATFORM_) {
-            case "6058bbb9dd3a3c2e46dbe2a1":
-                PLATFORM_ = "TELEGRAM"
-                break
-            case "6058bb97dd3a3c2e46dbe2a0":
-                PLATFORM_ = "FACEBOOK"
-                break
-            case "6058bc38dd3a3c2e46dbe2a2":
-                PLATFORM_ = "WEB"
-                break
-            case "6058bc54dd3a3c2e46dbe2a3":
-                PLATFORM_ = "OTRO"
-                break
-        }
-
-        $('#chatHere_').html('');
-
-        $('.DeactiveConversation_close').attr('value', Id_conv_single);
-        $('#tab_message').removeClass('disabled');
-        $('#tab_conversaciones').addClass('disabled');
-        $('#tab_message').click();
-
-        let allmesagge = []
-        let helper = []
-        socket.emit('chat_spy:conversation', Id_conv_single);
-        if (!list_of_emit_chats[Id_conv_single]) {
-
-            socket.on('chat_talk_one:' + Id_conv_single, function (msg) {
-
-                let data = JSON.parse(msg)
-                if (data.who_says === 'external') {
-                    if (data.isRich) {
-                        switch (data.rich_kind) {
-                            case 'sticker':
-                                allmesagge.push({ data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>  <br>' , owner :true});
-                                break;
-                            case 'animation':
-                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><video width="150px" autoplay loop  controls> <source src="' + data.url + '" type="video/mp4"></video></div></div>', owner :true});
-                                break;
-                            case 'document':
-                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><a href="' + data.url + '" download=""> Archivo </a></div></div>', owner :true});
-                                break;
-                            case 'voice':
-                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><audio controls> <source src="' + data.url + '" type="audio/ogg"></audio></div></div>', owner :true});
-                                break;
-                            case 'photo':
-                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id,id:data.message_id,  html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" style="height: 350px" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div> <br>' + (data.text ? data.text : ''), owner :true});
-                                break;
-                        }
-                    } else {
-                        allmesagge.push({date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="incoming_msg"><div class="received_withd_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true});
-                    }
-
-                }else{
-                    allmesagge.push({date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="outgoing_msg"><div class="sent_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true});
-                }
-
-                for(let item of allmesagge){
-
-                    if(!helper.find(ele => ele == item.id)){
-                        helper.push(item.id)
-                        $('#history').append(item.html)
-
-                    }
-                }
-                $('.incoming_msg').height($('.incoming_msg').children().height())
-                var elmnt = document.getElementById("history");
-                let y = elmnt.scrollHeight
-
-                $('#history').scrollTop(y);
-            })
-
-        }
-
-
-    })
-
     /*$(document.body).on('click', '.SpyConversation', function () {
         $('.type_msg').hide()
         Id_conv_single = $(this).val();
@@ -590,64 +507,74 @@ $(document).ready(function () {
         $('#tab_conversaciones').addClass('disabled');
         $('#tab_message').click();
 
-        let allmesagge = {}
+        let allmesagge = []
         let helper = []
+        console.log(Id_conv_single)
         socket.emit('chat_spy:conversation', Id_conv_single);
         if (!list_of_emit_chats[Id_conv_single]) {
 
             socket.on('chat_talk_one:' + Id_conv_single, function (msg) {
 
                 let data = JSON.parse(msg)
-                if (data.who_says === 'external') {
-                    if (data.isRich) {
-                        switch (data.rich_kind) {
-                            case 'sticker':
-                                allmesagge = { data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>  <br>' , owner :true};
-                                break;
-                            case 'animation':
-                                allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><video width="150px" autoplay loop  controls> <source src="' + data.url + '" type="video/mp4"></video></div></div>', owner :true};
-                                break;
-                            case 'document':
-                                allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><a href="' + data.url + '" download=""> Archivo </a></div></div>', owner :true};
-                                break;
-                            case 'voice':
-                                allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><audio controls> <source src="' + data.url + '" type="audio/ogg"></audio></div></div>', owner :true};
-                                break;
-                            case 'photo':
-                                allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id,id:data.message_id,  html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" style="height: 350px" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div> <br>' + (data.text ? data.text : ''), owner :true};
-                                break;
+                console.log(data)
+                if(data.chatlist_id == Id_conv_single){
+                    if (data.who_says === 'external') {
+                        if (data.isRich) {
+                            switch (data.rich_kind) {
+                                case 'sticker':
+                                    allmesagge.push({ data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>  <br>' , owner :true});
+                                    break;
+                                case 'animation':
+                                    allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><video width="150px" autoplay loop  controls> <source src="' + data.url + '" type="video/mp4"></video></div></div>', owner :true});
+                                    break;
+                                case 'document':
+                                    allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><a href="' + data.url + '" download=""> Archivo </a></div></div>', owner :true});
+                                    break;
+                                case 'voice':
+                                    allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><audio controls> <source src="' + data.url + '" type="audio/ogg"></audio></div></div>', owner :true});
+                                    break;
+                                case 'photo':
+                                    allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id,id:data.message_id,  html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" style="height: 350px" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div> <br>' + (data.text ? data.text : ''), owner :true});
+                                    break;
+                            }
+                        } else {
+                            allmesagge.push({date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="incoming_msg"><div class="received_withd_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true});
                         }
-                    } else {
-                        allmesagge = {date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="incoming_msg"><div class="received_withd_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true};
+
+                    }else{
+                        allmesagge.push({date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="outgoing_msg"><div class="sent_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true});
+                    }
+                    console.log(helper.find(ele => ele == data.message_id))
+                    for(let item of allmesagge){
+
+                        if(!helper.find(ele => ele == item.id)){
+                            helper.push(item.id)
+                            $('#history').append(item.html)
+
+                        }
                     }
 
-                }else{
-                    allmesagge = {date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="outgoing_msg"><div class="sent_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true};
+                    $('.incoming_msg').height($('.incoming_msg').children().height())
+                    var elmnt = document.getElementById("history");
+                    let y = elmnt.scrollHeight
+
+                    $('#history').scrollTop(y);
                 }
-                $('#history').append(allmesagge.html)
 
-                $('.incoming_msg').height($('.incoming_msg').children().height())
-                var elmnt = document.getElementById("history");
-                let y = elmnt.scrollHeight
-
-                $('#history').scrollTop(y);
             })
 
         }
 
 
     })*/
+    var contConversations = []
 
-    $(document.body).on('click', '.TakeConversation', function () {
-        $('.type_msg').show()
-
+    $(document.body).on('click', '.SpyConversation', function () {
+        $('.type_msg').hide()
         Id_conv_single = $(this).val();
         CHAT_ID_ = $(this).attr('chat-id')
         PLATFORM_ = $(this).attr('platform')
 
-        $('#chatHere_').html('');
-        $('#history').html("");
-        $(' .type_msg').html("");
         switch (PLATFORM_) {
             case "6058bbb9dd3a3c2e46dbe2a1":
                 PLATFORM_ = "TELEGRAM"
@@ -663,67 +590,67 @@ $(document).ready(function () {
                 break
         }
 
-
-        $(' .type_msg').append('<div class="container-send"><div class="input_msg_write"><input class="write_msg" type="text" placeholder="Type a message"><button class="msg_send_btn" value="'+Id_conv_single+'" id="ChatSendBUtton_"+Id_conv_single>' +
-            '<i class="fas fa-paper-plane" aria-hidden="true"></i> Send</button></div></div>')
+        $('#history').html('');
 
         $('.DeactiveConversation_close').attr('value', Id_conv_single);
         $('#tab_message').removeClass('disabled');
         $('#tab_conversaciones').addClass('disabled');
         $('#tab_message').click();
 
-        let allmesagge = []
-        let helper = []
-        socket.emit('chat_speak:conversation', Id_conv_single);
-        if (!list_of_emit_chats[Id_conv_single]) {
+        let allmesagge = {}
+
+
+        let convExist = contConversations.filter(ele=> ele==Id_conv_single)
+        console.log(convExist.length)
+        socket.emit('chat_spy:conversation', Id_conv_single);
+        if (convExist.length<1) {
+            contConversations.push(Id_conv_single)
+
             socket.on('chat_talk_one:' + Id_conv_single, function (msg) {
 
                 let data = JSON.parse(msg)
-
-                if (data.who_says === 'external') {
-                    if (data.isRich) {
-                        switch (data.rich_kind) {
-                            case 'sticker':
-                                allmesagge.push({ data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>  <br>' , owner :true});
-                                break;
-                            case 'animation':
-                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><video width="150px" autoplay loop  controls> <source src="' + data.url + '" type="video/mp4"></video></div></div>', owner :true});
-                                break;
-                            case 'document':
-                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><a href="' + data.url + '" download=""> Archivo </a></div></div>', owner :true});
-                                break;
-                            case 'voice':
-                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><audio controls> <source src="' + data.url + '" type="audio/ogg"></audio></div></div>', owner :true});
-                                break;
-                            case 'photo':
-                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id,id:data.message_id,  html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" style="height: 350px" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div> <br>' + (data.text ? data.text : ''), owner :true});
-                                break;
+                if(data.chatlist_id == Id_conv_single){
+                    if (data.who_says === 'external') {
+                        if (data.isRich) {
+                            switch (data.rich_kind) {
+                                case 'sticker':
+                                    allmesagge = { data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>  <br>' , owner :true};
+                                    break;
+                                case 'animation':
+                                    allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><video width="150px" autoplay loop  controls> <source src="' + data.url + '" type="video/mp4"></video></div></div>', owner :true};
+                                    break;
+                                case 'document':
+                                    allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><a href="' + data.url + '" download=""> Archivo </a></div></div>', owner :true};
+                                    break;
+                                case 'voice':
+                                    allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><audio controls> <source src="' + data.url + '" type="audio/ogg"></audio></div></div>', owner :true};
+                                    break;
+                                case 'photo':
+                                    allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id,id:data.message_id,  html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" style="height: 350px" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div> <br>' + (data.text ? data.text : ''), owner :true};
+                                    break;
+                            }
+                        } else {
+                            allmesagge = {date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="incoming_msg"><div class="received_withd_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true};
                         }
-                    } else {
-                        allmesagge.push({date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="incoming_msg"><div class="received_withd_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true});
+
+                    }else{
+                        allmesagge = {date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="outgoing_msg"><div class="sent_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true};
                     }
+                    $('#history').append(allmesagge.html)
 
-                }else{
-                    allmesagge.push({date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="outgoing_msg"><div class="sent_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true});
+                    $('.incoming_msg').height($('.incoming_msg').children().height())
+                    var elmnt = document.getElementById("history");
+                    let y = elmnt.scrollHeight
+
+                    $('#history').scrollTop(y);
+                    console.log(contConversations)
                 }
-
-                for(let item of allmesagge){
-
-                    if(!helper.find(ele => ele == item.id)){
-                        helper.push(item.id)
-                        $('#history').append(item.html)
-
-                    }
-                }
-                $('.incoming_msg').height($('.incoming_msg').children().height())
-                var elmnt = document.getElementById("history");
-                let y = elmnt.scrollHeight
-
-                $('#history').scrollTop(y);
 
             })
 
         }
+
+
 
     })
 
@@ -773,31 +700,37 @@ $(document).ready(function () {
                     if (data.isRich) {
                         switch (data.rich_kind) {
                             case 'sticker':
-                                allmesagge = { data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" src="' + data.url + '"><span class="time_date">'+moment().calendar(data.dt_reg)+'</span></div></div>  <br>' , owner :true};
+                                allmesagge.push({ data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>  <br>' , owner :true});
                                 break;
                             case 'animation':
-                                allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><video width="150px" autoplay loop  controls> <source src="' + data.url + '" type="video/mp4"></video><span class="time_date">'+moment().calendar(data.dt_reg)+'</span></div></div>', owner :true};
+                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><video width="150px" autoplay loop  controls> <source src="' + data.url + '" type="video/mp4"></video></div></div>', owner :true});
                                 break;
                             case 'document':
-                                allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><a href="' + data.url + '" download=""> Archivo </a><span class="time_date">'+moment().calendar(data.dt_reg)+'</span></div></div>', owner :true};
+                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><a href="' + data.url + '" download=""> Archivo </a></div></div>', owner :true});
                                 break;
                             case 'voice':
-                                allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><audio controls> <source src="' + data.url + '" type="audio/ogg"></audio><span class="time_date">'+moment().calendar(data.dt_reg)+'</span></div></div>', owner :true};
+                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><audio controls> <source src="' + data.url + '" type="audio/ogg"></audio></div></div>', owner :true});
                                 break;
                             case 'photo':
-                                allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id,id:data.message_id,  html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" style="height: 350px" src="' + data.url + '"><span class="time_date">'+moment().calendar(data.dt_reg)+'</span></div></div> <br>' + (data.text ? data.text : ''), owner :true};
+                                allmesagge.push({data: moment().calendar(data.dt_reg),id_chat: data.chat_id,id:data.message_id,  html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" style="height: 350px" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div> <br>' + (data.text ? data.text : ''), owner :true});
                                 break;
                         }
                     } else {
-                        allmesagge = {date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="incoming_msg"><div class="received_withd_msg"><p>'+data.text+'</p><span class="time_date">'+moment().calendar(data.dt_reg)+'</span></div></div>', owner: true};
+                        allmesagge.push({date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="incoming_msg"><div class="received_withd_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true});
                     }
 
                 }else{
-                    allmesagge = {date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="outgoing_msg"><div class="sent_msg"><p>'+data.text+'</p><span class="time_date">'+moment().calendar(data.dt_reg)+'</span></div></div>', owner: true};
+                    allmesagge.push({date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="outgoing_msg"><div class="sent_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true});
                 }
 
-                $('#history').append(allmesagge.html)
+                for(let item of allmesagge){
 
+                    if(!helper.find(ele => ele == item.id)){
+                        helper.push(item.id)
+                        $('#history').append(item.html)
+
+                    }
+                }
                 $('.incoming_msg').height($('.incoming_msg').children().height())
                 var elmnt = document.getElementById("history");
                 let y = elmnt.scrollHeight
@@ -809,6 +742,96 @@ $(document).ready(function () {
         }
 
     })*/
+
+    $(document.body).on('click', '.TakeConversation', function () {
+        $('.type_msg').show()
+
+        Id_conv_single = $(this).val();
+        CHAT_ID_ = $(this).attr('chat-id')
+        PLATFORM_ = $(this).attr('platform')
+
+        $('#chatHere_').html('');
+        $('#history').html("");
+        $(' .type_msg').html("");
+        switch (PLATFORM_) {
+            case "6058bbb9dd3a3c2e46dbe2a1":
+                PLATFORM_ = "TELEGRAM"
+                break
+            case "6058bb97dd3a3c2e46dbe2a0":
+                PLATFORM_ = "FACEBOOK"
+                break
+            case "6058bc38dd3a3c2e46dbe2a2":
+                PLATFORM_ = "WEB"
+                break
+            case "6058bc54dd3a3c2e46dbe2a3":
+                PLATFORM_ = "OTRO"
+                break
+        }
+
+
+        $(' .type_msg').append('<div class="container-send"><div class="input_msg_write"><input class="write_msg" type="text" placeholder="Type a message"><button class="msg_send_btn" value="'+Id_conv_single+'" id="ChatSendBUtton_"+Id_conv_single>' +
+            '<i class="fas fa-paper-plane" aria-hidden="true"></i> Send</button></div></div>')
+
+        $('.DeactiveConversation_close').attr('value', Id_conv_single);
+        $('#tab_message').removeClass('disabled');
+        $('#tab_conversaciones').addClass('disabled');
+        $('#tab_message').click();
+
+        let allmesagge = []
+
+
+        let convExist = contConversations.filter(ele=> ele==Id_conv_single)
+        console.log(convExist.length)
+        socket.emit('chat_speak:conversation', Id_conv_single);
+        if (convExist.length<1) {
+            contConversations.push(Id_conv_single)
+
+            socket.on('chat_talk_one:' + Id_conv_single, function (msg) {
+
+                let data = JSON.parse(msg)
+                if(data.chatlist_id == Id_conv_single){
+                    if (data.who_says === 'external') {
+                        if (data.isRich) {
+                            switch (data.rich_kind) {
+                                case 'sticker':
+                                    allmesagge = { data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>  <br>' , owner :true};
+                                    break;
+                                case 'animation':
+                                    allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><video width="150px" autoplay loop  controls> <source src="' + data.url + '" type="video/mp4"></video></div></div>', owner :true};
+                                    break;
+                                case 'document':
+                                    allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><a href="' + data.url + '" download=""> Archivo </a></div></div>', owner :true};
+                                    break;
+                                case 'voice':
+                                    allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><audio controls> <source src="' + data.url + '" type="audio/ogg"></audio></div></div>', owner :true};
+                                    break;
+                                case 'photo':
+                                    allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id,id:data.message_id,  html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" style="height: 350px" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div> <br>' + (data.text ? data.text : ''), owner :true};
+                                    break;
+                            }
+                        } else {
+                            allmesagge = {date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="incoming_msg"><div class="received_withd_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true};
+                        }
+
+                    }else{
+                        allmesagge = {date:moment().calendar(data.dt_reg), id_chat: data.chat_id,id:data.message_id, html:'<div class="outgoing_msg"><div class="sent_msg"><p>'+data.text+'</p><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>', owner: true};
+                    }
+                    $('#history').append(allmesagge.html)
+
+                    $('.incoming_msg').height($('.incoming_msg').children().height())
+                    var elmnt = document.getElementById("history");
+                    let y = elmnt.scrollHeight
+
+                    $('#history').scrollTop(y);
+                    console.log(contConversations)
+                }
+
+            })
+
+        }
+
+    })
+
     $(document.body).on('click', '.msg_send_btn', function () {
         let texto = $('.write_msg').val();
          $('.write_msg').val("");
