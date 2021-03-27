@@ -13,7 +13,8 @@ const app = require('./core/app.m');
 const chatbot = new Schema({
     name: {
         type: String,
-        require: false
+        require: false,
+        unique: true
     },
     description: {
         type: String,
@@ -28,6 +29,10 @@ const chatbot = new Schema({
         type: Schema.Types.ObjectId,
         required: true,
         ref: origin,
+    },
+    sender: {
+        type: String,
+        required: false,
     },
     google_auth: {
         type: String,
