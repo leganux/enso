@@ -9,6 +9,7 @@ const chatListSchema = new Schema({
     endpoint_id: {type: Schema.Types.ObjectId, required: false, ref: Endpoint},
     chat_id: {type: String, required: false},
     active_conv: {type: Boolean, required: true, default: false},
+    sender: {type: String, required: false},
     app: {
         type: Schema.Types.ObjectId,
         required: true,

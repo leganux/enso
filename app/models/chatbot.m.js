@@ -30,7 +30,7 @@ const chatbot = new Schema({
         required: true,
         ref: origin,
     },
-    sender: {
+    facebook_recipient: {
         type: String,
         required: false,
     },

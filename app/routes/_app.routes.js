@@ -23,5 +23,6 @@ router.use('/webservice_params', require('./webservice_params.routes'));
 router.use('/chatbot', require('./chatbot.routes'));
 router.use('/webhook/telegram', require('./webhook/telegram.routes'));
 router.use('/webhook/facebook', require('./webhook/facebook.routes'));
+router.use('/webhook/web', require('./webhook/web.routes'));
 
 module.exports = router;

@@ -67,6 +67,9 @@ $(document).ready(function () {
                 }
             },
             {
+                "data": "facebook_recipient"
+            },
+            {
                 "data": "webhook",
                 render: function (data, v, row) {
                     return '<span class="dtr-data" id="web_' + row._id + '" value="' + data + '">' + data + '</span>'
@@ -92,9 +95,10 @@ $(document).ready(function () {
             {
                 data: "_id",
                 render: function (data, v, row) {
-                    return '<button value="' + data + '" class="btn btn-primary btn-block update_element" data-toggle="tooltip" data-placement="right" title="Edit "> <i class="fas fa-edit"></i></button>' +
-                        '<button value="' + data + '" class="btn btn-danger btn-block delete_element" data-toggle="tooltip" data-placement="right" title="Delete "> <i class="fas fa-trash"></i></button>' +
-                        '<button value="' + data + '" class="btn btn-success btn-block Conversations" data-toggle="tooltip" data-placement="right" title="Conversation "> <i class="fas fa-comments"></i></button>';
+                    return '<button value="' + data + '" class="btn btn-primary btn-block update_element" data-toggle="tooltip" data-placement="right" title="Edit " style="width: 300px"> <i class="fas fa-edit"></i></button>' +
+                        '<button value="' + data + '" class="btn btn-danger btn-block delete_element" data-toggle="tooltip" data-placement="right" title="Delete " style="width: 300px"> <i class="fas fa-trash"></i></button>' +
+                        '<button value="' + data + '" class="btn btn-success btn-block Conversations" data-toggle="tooltip" data-placement="right" title="Conversation " style="width: 300px"> <i class="fas fa-comments"></i></button>';
+                        '<button value="' + data + '" class="btn btn-success btn-block Conversations" data-toggle="tooltip" data-placement="right" title="Conversation " style="width: 300px"> <i class="fas fa-comments"></i></button>';
 
 
                 }
@@ -157,6 +161,7 @@ $(document).ready(function () {
         $('#in_token').val('');
         $('#in_webhook').val('');
         $('#in_collection').val('');
+        $('#in_facebook_recipent').val('');
         UPDATE = ''
     });
 
@@ -242,6 +247,7 @@ $(document).ready(function () {
         body.telegram_token = $('#in_token').val();
         body.webhook = $('#in_webhook').val();
         body.name_collection_products = $('#in_collection').val();
+        body.facebook_recipient = $('#in_facebook_recipent').val();
 
 
         if (body.name === '') {
@@ -314,6 +320,7 @@ $(document).ready(function () {
             $('#in_token').val(data.data.telegram_token);
             $('#in_webhook').val(data.data.webhook);
             $('#in_collection').val(data.data.name_collection_products);
+            $('#in_facebook_recipent').val(data.data.facebook_recipient);
 
 
             name = $("#in_name").val()
@@ -614,7 +621,7 @@ $(document).ready(function () {
                         if (data.isRich) {
                             switch (data.rich_kind) {
                                 case 'sticker':
-                                    allmesagge = { data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>  <br>' , owner :true};
+                                    allmesagge = { data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid"  style="height: 100px" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div>  <br>' , owner :true};
                                     break;
                                 case 'animation':
                                     allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><video width="150px" autoplay loop  controls> <source src="' + data.url + '" type="video/mp4"></video></div></div>', owner :true};
@@ -626,7 +633,7 @@ $(document).ready(function () {
                                     allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><audio controls> <source src="' + data.url + '" type="audio/ogg"></audio></div></div>', owner :true};
                                     break;
                                 case 'photo':
-                                    allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id,id:data.message_id,  html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" style="height: 350px" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div> <br>' + (data.text ? data.text : ''), owner :true};
+                                    allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id,id:data.message_id,  html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" style="height: 350px" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div> <br>', owner :true};
                                     break;
                             }
                         } else {
@@ -806,7 +813,7 @@ $(document).ready(function () {
                                     allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id, id:data.message_id, html: '<div class="incoming_msg"><div class="received_withd_msg"><audio controls> <source src="' + data.url + '" type="audio/ogg"></audio></div></div>', owner :true};
                                     break;
                                 case 'photo':
-                                    allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id,id:data.message_id,  html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" style="height: 350px" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div> <br>' + (data.text ? data.text : ''), owner :true};
+                                    allmesagge = {data: moment().calendar(data.dt_reg),id_chat: data.chat_id,id:data.message_id,  html: '<div class="incoming_msg"><div class="received_withd_msg"><img class="img img-fluid" style="height: 350px" src="' + data.url + '"><span class="time_date">'+moment().to(data.dt_reg)+'</span></div></div> <br>', owner :true};
                                     break;
                             }
                         } else {
