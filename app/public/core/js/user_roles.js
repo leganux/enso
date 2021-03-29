@@ -88,7 +88,7 @@ $(document).ready(function () {
     $(document.body).on('change', '.actived_element', function () {
         UPDATE = $(this).val();
         var isChecked = $(this).prop('checked');
-        save_data_api(root_path + 'app/api/user_roles/' + _app_id_ + '/', {active: isChecked}, UPDATE, function () {
+        save_data_api(root_path + 'app/api/user_roles/' + _app_id_, {active: isChecked}, UPDATE, function () {
             draw_datatable_rs(DT);
             UPDATE = '';
             $('#modal_new_edit').modal('hide');

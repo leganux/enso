@@ -266,7 +266,7 @@ $(document).ready(function () {
         if (Route_list.length > 0) {
             Route_list.map(function (item, i) {
                 HoldOn.open()
-                $.post(root_path + 'app/api/permission/role/updateOrCreate', {
+                $.post(root_path + 'app/api/permission/role/' + _app_id_ + '/updateOrCreate', {
                     where: {
                         role: rol,
                         route: item._id

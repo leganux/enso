@@ -51,7 +51,7 @@ api_functions. create = function (router, model, middleware) {
             res.status(200).json(ret);
             return 0;
         } catch (e) {
-            console.error('*** Error en CREATE' + model.collection.collectionName, e);
+            console.error('*** Error en CREATE ' + model.collection.collectionName, e);
             res.status(500).json(response_codes.code_500);
             return 0;
         }
@@ -365,7 +365,7 @@ api_functions.read = function (router, model, middleware, populate) {
 
     router.get('/:app_id/', middleware ? middleware : no_middleware, async function (req, res) {
 
-        
+
         let body = req.query.data;
         let where = req.query.where;
         let or = req.query.or;
@@ -374,7 +374,7 @@ api_functions.read = function (router, model, middleware, populate) {
         let paginate = req.query.paginate;
         let sort = req.query.sort;
         var find = {};
-       
+
 
         //verify app
         if (!get_app_id(req)) {
@@ -651,7 +651,7 @@ api_functions.updateOrCreate = function (router, model, middleware) {
 api_functions.delete = function (router, model, middleware) {
     router.delete('/:app_id/:id', middleware ? middleware : no_middleware, async function (req, res) {
         var id = req.params.id;
-        
+
         //verify app
         if (!get_app_id(req)) {
             res.status(533).json(response_codes.code_533)
@@ -753,14 +753,18 @@ api_functions.datatable = function (router, model, middleware, populate, search_
 };
 
 api_functions.all = function (router, model, middelware, populate, search_fields) {
+    api_functions.updateOrCreate(router, model, middelware);
+
     api_functions.create(router, model, middelware);
+
+
     api_functions.update(router, model, middelware);
     api_functions.updateWhere(router, model, middelware);
     api_functions.readOne(router, model, middelware, populate);
     api_functions.readById(router, model, middelware, populate);
     api_functions.read(router, model, middelware, populate);
     api_functions.delete(router, model, middelware);
-    api_functions.updateOrCreate(router, model, middelware);
+
     api_functions.datatable(router, model, middelware, populate, search_fields);
 };
 

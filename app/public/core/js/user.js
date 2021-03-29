@@ -29,7 +29,7 @@ $(document).ready(function () {
             {
                 "data": "role",
                 render: function (data, v, row) {
-                    if (data._id) {
+                    if (data && data._id) {
                         return data.name
                     }
                     return data;

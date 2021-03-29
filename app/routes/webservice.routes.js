@@ -158,15 +158,19 @@ router.delete('/:app_id/:id', async (req, res) => {
 
 router.post("/recive/:app_id/", async (req, res) => {
 
-    body = req.body
+    let {body} = req;
     console.log(body)
+    let response = {}
+    try {
+        response = await axios({
+            method: 'get',
+            url: 'https://reqres.in/api/users/2'
+        });
+        console.log(response.data)
+    } catch (e) {
 
-    axios({
-        method: 'get',
-        url: 'https://reqres.in/api/users/2'
-    })
-        .then(res => console.log(res))
-        .catch(err => console.error(err))
+    }
+
 
 })
 
