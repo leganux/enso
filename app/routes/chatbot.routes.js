@@ -30,7 +30,20 @@ var populate = [{
 }]
 
 
-api_crud.all(router, chatbot, access_middleware, populate, 'name');
+
+api_crud.updateOrCreate(router, chatbot, access_middleware);
+
+api_crud.create(router, chatbot, access_middleware);
+
+
+api_crud.update(router, chatbot, access_middleware);
+api_crud.updateWhere(router, chatbot, access_middleware);
+api_crud.readOne(router, chatbot, access_middleware, populate);
+api_crud.readById(router, chatbot, false, populate);
+api_crud.read(router, chatbot, access_middleware, populate);
+api_crud.delete(router, chatbot, access_middleware);
+
+api_crud.datatable(router, chatbot, access_middleware, populate, 'name');
 
 
 module.exports = router;

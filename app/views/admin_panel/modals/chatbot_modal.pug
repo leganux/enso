@@ -21,20 +21,24 @@
                     option(value="") Select an option...
                 label !{i18n.chatbots} !{i18n.origin} !{i18n.description}
                 input(type='text' disabled).form-control#in_des_origin
-                label !{i18n.google_auth}
-                input(type='text').form-control#in_google
-                label !{i18n.google_password}
-                input(type='text').form-control#in_google_pass
-                label !{i18n.private_key}
-                input(type='text').form-control#in_private
-                label !{i18n.public_key}
-                input(type='text').form-control#in_public
+                label.color Primary color
+                input(type='color' style="display:none").form-control.form-control-color.color#in_color
+                label.color Secundary color
+                input(type='color' style="display:none").form-control.form-control-color.color#in_color_secundary
+                label.both !{i18n.google_auth}
+                input.both(type='text').form-control#in_google
+                label.both !{i18n.google_password}
+                input.both(type='text').form-control#in_google_pass
+                label.both !{i18n.private_key}
+                input.both(type='text').form-control#in_private
+                label.both !{i18n.public_key}
+                input.both(type='text').form-control#in_public
                 label !{i18n.url}
                 input(type='text').form-control#url
                 label !{i18n.token}
                 input(type='text').form-control#in_token
-                label !{i18n.facebook_recipient}
-                input(type='text').form-control#in_facebook_recipent
+                label.both !{i18n.facebook_recipient}
+                input.both(type='text').form-control#in_facebook_recipent
                 label !{i18n.webhook}
                 input(type='text').form-control#in_webhook
                 label !{i18n.collection_of_products}

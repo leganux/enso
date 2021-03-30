@@ -34,6 +34,14 @@ const chatbot = new Schema({
         type: String,
         required: false,
     },
+    primary_color:{
+        type: String,
+        require: false,
+    },
+    secundary_color:{
+        type: String,
+        require: false,
+    },
     google_auth: {
         type: String,
         required: false,

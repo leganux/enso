@@ -112,6 +112,8 @@ $(document).ready(function () {
             type: "POST"
         },
     });
+
+
     draw_datatable_rs(DT);
     $("#in_chatboot_type").select2()
     $("#in_origin_chatboot").select2()
@@ -195,7 +197,14 @@ $(document).ready(function () {
         }
         var URLactual = window.location.host;
 
+        if(num==3){
+            $('.color').slideDown()
+            $('.both').slideUp()
 
+        }else{
+            $('.color').slideUp()
+            $('.both').slideDown()
+        }
         let url = "https://" + URLactual + "/enso/api/webhook/" + origin + "/" + name + "/"
         $('#in_webhook').val(url)
 
@@ -223,12 +232,22 @@ $(document).ready(function () {
                 origin = "telegram"
                 break;
         }
+
+        if(num==3){
+            $('.color').slideDown()
+            $('.both').slideUp()
+
+        }else{
+            $('.color').slideUp()
+            $('.both').slideDown()
+        }
         var URLactual = window.location.host;
 
         $('#in_name').change()
 
         let url = window.location.protocol + "//" + URLactual + root_path + "app/api/webhook/" + origin + "/" + _app_id_ + "/" + name + "/"
         $('#in_webhook').val(url)
+
     })
 
 
@@ -248,6 +267,8 @@ $(document).ready(function () {
         body.webhook = $('#in_webhook').val();
         body.name_collection_products = $('#in_collection').val();
         body.facebook_recipient = $('#in_facebook_recipent').val();
+        body.primary_color = $('#in_color').val()
+        body.secundary_color = $('#in_color_secundary').val()
 
 
         if (body.name === '') {
@@ -321,6 +342,8 @@ $(document).ready(function () {
             $('#in_webhook').val(data.data.webhook);
             $('#in_collection').val(data.data.name_collection_products);
             $('#in_facebook_recipent').val(data.data.facebook_recipient);
+            $('#in_color').val(data.data.primary_color)
+           $('#in_color_secundary').val(data.data.secundary_color)
 
 
             name = $("#in_name").val()
