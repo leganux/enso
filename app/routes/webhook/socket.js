@@ -27,7 +27,7 @@ if (env.active_socket) {
         return result;
     }
     ensoSocket = io
-        .of(env.root_path + '/ensoSocket')
+        .of(env.root_path + 'ensoSocket')
         .on('connection', function (socket) {
             console.log("COnnectd socket")
 
@@ -120,11 +120,8 @@ if (env.active_socket) {
                     }
 
                 }else if(listaDeChats.origin_chatbot == "6058bc38dd3a3c2e46dbe2a2"){
-                    let obj = new modelChatConversation(mensaje_nuevo);
-                    let rest = await obj.save();
-
-
-                    socket.emit('DF_chatWeb:' + chatllistaDeChatsist.endpoint_id + ':' + mensaje_nuevo.chat_id, JSON.stringify(rest));
+                    console.log("emit", 'enso_chatWeb:' + listaDeChats.endpoint_id + ':' + listaDeChats.chat_id)
+                    socket.emit('enso_chatWeb:' + listaDeChats.endpoint_id + ':' + listaDeChats.chat_id, JSON.stringify(messaje_save));
                 }
 
 
@@ -215,6 +212,7 @@ if (env.active_socket) {
             socket.on('DF_chatWeb:Send', async function (message) {
 
                 message = JSON.parse(message);
+                console.log(message)
 
 
                 let endpoint = await modelEndpoint.findById(message.endpoint_id);
@@ -224,10 +222,11 @@ if (env.active_socket) {
                     return false;
                 }
 
+
                 let chatlist = await modelChatList.findOne({
                     endpoint_id: endpoint._id,
                     chat_id: message.chat_id,
-                    platform: 'WEB'
+                    origin_chatbot: "6058bc38dd3a3c2e46dbe2a2"
                 });
 
 
@@ -238,7 +237,8 @@ if (env.active_socket) {
                         chat_id: message.chat_id,
                         active_conv: false,
                         dt_reg: moment().format(),
-                        platform: 'WEB'
+                        origin_chatbot: "6058bc38dd3a3c2e46dbe2a2",
+                        app: message.app
                     });
                     chatlist = await chatlist_nuevo.save();
                 }
@@ -247,15 +247,17 @@ if (env.active_socket) {
                 chatlist.last_time = moment().format();
                 await chatlist.save();
 
+                console.log(chatlist)
 
-                var conv = new modelChatConversation({
+               var conv = new modelChatConversation({
                     chatlist_id: chatlist._id,
                     chat_id: message.chat_id,
                     text: message.text,
                     full_json: JSON.stringify(message),
                     who_says: 'external',
-                    platform: 'WEB',
+                    origin_chatbot: "6058bc38dd3a3c2e46dbe2a2",
                     dt_reg: moment().format(),
+                   app: message.app
                 });
 
                 let conversation = await conv.save();
@@ -266,9 +268,9 @@ if (env.active_socket) {
                     return false;
                 }
 
-                dashFlowSocket.emit('chat_talk_one:' + chatlist._id, JSON.stringify(conversation));
+                socket.emit('chat_talk_one:' + chatlist._id, JSON.stringify(conversation));
 
-                if (!chatlist.active_conv) {
+                /*if (!chatlist.active_conv) {
 
                     console.log('SESSIONID', message.chat_id + '_' + endpoint._id)
 
@@ -328,7 +330,7 @@ if (env.active_socket) {
 
                 } else {
                     // usuario interactua
-                }
+                }*/
 
             });
         })

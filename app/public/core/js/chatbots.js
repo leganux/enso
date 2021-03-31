@@ -1,4 +1,4 @@
-var socket = io.connect(root_path + '/ensoSocket', {
+var socket = io.connect(root_path + 'ensoSocket', {
     reconnection: true,
     reconnectionDelay: 10000,
     reconnectionDelayMax: 50000,
@@ -6,7 +6,7 @@ var socket = io.connect(root_path + '/ensoSocket', {
     path: '/enso/websocket/connector',
     transport: ['websocket']
 });
-
+console.log(root_path + 'ensoSocket')
 socket.on('connect', function () {
     console.log("connected socket front")
 });
