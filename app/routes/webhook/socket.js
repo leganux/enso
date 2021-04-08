@@ -13,6 +13,7 @@ const modelorigin = require('../../models/core/origin_chatbot')
 
 console.log("******", env.root_path)
 
+
 var ensoSocket = {};
 if (env.active_socket) {
     console.log(env.root_path)
@@ -42,11 +43,14 @@ if (env.active_socket) {
             });
 
             socket.on('chat_talk:send',async function (nuevo) {
-                console.log("llego",nuevo)
+                console.log("nuevo ",nuevo)
+
                 let mensaje = JSON.parse(nuevo)
-                console.log("llego",mensaje)
+
                 let listaDeChats = await modelChatList.findById(mensaje.chat)
                 let chatbot = await modelEndpoint.findById(listaDeChats.endpoint_id)
+                let origin = await modelorigin.findById(listaDeChats.origin_chatbot)
+
 
 
                 var mensaje_nuevo = new modelChatConversation({
@@ -61,9 +65,16 @@ if (env.active_socket) {
                     app: mensaje.app
 
                 })
-                mensaje_nuevo.full_json = JSON.stringify(mensaje_nuevo),
-                console.log(mensaje_nuevo)
+                mensaje_nuevo.full_json = JSON.stringify(mensaje_nuevo)
+
+
+                listaDeChats.last_message = mensaje.text;
+                listaDeChats.last_time = moment().format();
+                await listaDeChats.save();
+
+
                 let messaje_save = await mensaje_nuevo.save()
+
 
                 if (!messaje_save) {
                     return res.status(503).json({
@@ -71,7 +82,7 @@ if (env.active_socket) {
                         message: 'Can not save message'
                     });
                 }
-                if(listaDeChats.origin_chatbot == "6058bbb9dd3a3c2e46dbe2a1"){
+                if(origin.name == "Origin Telegram"){
                     let url = 'https://api.telegram.org/bot' + chatbot.telegram_token + '/sendMessage';
 
                     try {
@@ -87,7 +98,7 @@ if (env.active_socket) {
                     }
 
 
-                }else if(listaDeChats.origin_chatbot == "6058bb97dd3a3c2e46dbe2a0"){
+                }else if(origin.name == "Origin Facebook"){
 
                     let request_body = {
                         "messaging_type":"RESPONSE",
@@ -119,9 +130,25 @@ if (env.active_socket) {
                         console.log("sucedio un error",e)
                     }
 
-                }else if(listaDeChats.origin_chatbot == "6058bc38dd3a3c2e46dbe2a2"){
-                    console.log("emit", 'enso_chatWeb:' + listaDeChats.endpoint_id + ':' + listaDeChats.chat_id)
-                    socket.emit('enso_chatWeb:' + listaDeChats.endpoint_id + ':' + listaDeChats.chat_id, JSON.stringify(messaje_save));
+                }else if(origin.name == "Origin Web"){
+
+                    try{
+                        /* TODO
+                        *   terminar sockets para web */
+                        let url = 'https://11c79550c24a.ngrok.io/enso/app/api/webhook/web/5ed553401c73b503b759fba9/pruebas_web/'
+                        let response = await  axios.post(url,{
+                            endpoint:listaDeChats.endpoint_id,
+                            chat_id:listaDeChats.chat_id,
+                            message: JSON.stringify(messaje_save)
+                        })
+
+                        console.log(response.data)
+                        console.log(messaje_save)
+                        socket.emit('enso_chatWeb:' + listaDeChats.endpoint_id + ':' + listaDeChats.chat_id, JSON.stringify(messaje_save));
+                    }catch (e) {
+                        console.log(e)
+                    }
+
                 }
 
 
@@ -209,7 +236,7 @@ if (env.active_socket) {
 
 
             });
-            socket.on('DF_chatWeb:Send', async function (message) {
+            socket.on('enso_chatWeb:Send', async function (message) {
 
                 message = JSON.parse(message);
                 console.log(message)
@@ -218,7 +245,6 @@ if (env.active_socket) {
                 let endpoint = await modelEndpoint.findById(message.endpoint_id);
 
                 if (!endpoint) {
-
                     return false;
                 }
 
@@ -264,78 +290,16 @@ if (env.active_socket) {
 
 
                 if (!conversation) {
-
                     return false;
                 }
-
+                console.log(chatlist._id)
                 socket.emit('chat_talk_one:' + chatlist._id, JSON.stringify(conversation));
-
-                /*if (!chatlist.active_conv) {
-
-                    console.log('SESSIONID', message.chat_id + '_' + endpoint._id)
-
-                    let promise = dfFunctions.send(endpoint.df_json_project_id, message.text, message.chat_id + '_' + endpoint._id, JSON.parse(endpoint.df_json_private_key).data, endpoint.df_json_client_email, endpoint.df_config_lang)
-                    promise.then(async (ret) => {
-                        ret = ret[0];
-
-
-                        let arrayResponses = ret.queryResult.fulfillmentMessages;
-                        let StringArrayResponses = JSON.stringify(arrayResponses);
-
-                        if (StringArrayResponses.includes('TELEGRAM')) {
-
-                            var message_new = new modelChatConversation({
-                                chatlist_id: chatlist._id,
-                                chat_id: message.chat_id,
-                                text: ret.queryResult.fulfillmentText,
-                                full_json: JSON.stringify(arrayResponses),
-                                isRich: true,
-                                rich_kind: 'DF_CODE_RESPONSE',
-                                url: '',
-                                who_says: 'me',
-                                platform: 'WEB',
-                                dt_reg: moment().format(),
-                            });
-
-                        } else {
-                            var message_new = new modelChatConversation({
-                                chatlist_id: chatlist._id,
-                                chat_id: message.chat_id,
-                                text: ret.queryResult.fulfillmentText,
-                                full_json: JSON.stringify(ret),
-                                isRich: false,
-                                rich_kind: 'unknown',
-                                url: '',
-                                who_says: 'me',
-                                platform: 'WEB',
-                                dt_reg: moment().format(),
-                            });
-                        }
-
-
-                        let conversation_ = await message_new.save();
-
-                        if (!conversation_) {
-                            return false;
-                        }
-
-                        dashFlowSocket.emit('chat_talk_one:' + chatlist._id, JSON.stringify(conversation_));
-                        dashFlowSocket.emit('DF_chatWeb:' + message.endpoint_id + ':' + message.chat_id, JSON.stringify(conversation_));
-
-
-                    }).catch((error) => {
-                        console.error(error)
-                        return false;
-                    });
-
-                } else {
-                    // usuario interactua
-                }*/
 
             });
         })
 
 }
+
 
 module.exports = {
     ensoSocket : ensoSocket

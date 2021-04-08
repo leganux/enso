@@ -108,10 +108,7 @@ $(document).ready(function () {
             $('.select2-selection').css("height", "40px")
             $("#in_type_key").change()
             HoldOn.close();
-        }
-
-
-        catch (err) {
+        } catch (err) {
             HoldOn.close();
             notify_error(err.responseJSON.message);
             console.error(err);
@@ -165,15 +162,13 @@ $(document).ready(function () {
             $('.select2-selection').css("height", "40px")
             $("#in_type_key_edit").change()
             HoldOn.close();
-        }
-
-
-        catch (err) {
+        } catch (err) {
             HoldOn.close();
             notify_error(err.responseJSON.message);
             console.error(err);
         }
     }
+
     async function getypefull_edit(id) {
         typeid = Number(id)
         $("#in_type_name_edit").val("")
@@ -258,7 +253,8 @@ $(document).ready(function () {
             notify_error(err.responseJSON.message);
             console.error(err);
 
-        });;
+        });
+        ;
 
 
     })
@@ -338,7 +334,6 @@ $(document).ready(function () {
 
 
     })
-
 
 
     $(document.body).on('click', '.delete_element', function () {
@@ -423,6 +418,7 @@ $(document).ready(function () {
 
     });
 
+
     $(document.body).on('click', '.btn_delete_param', function () {
         let DELETE = $(this).val();
         let paramdelete
@@ -478,7 +474,6 @@ $(document).ready(function () {
         $("#in_url_exe").html("")
     })
 
-    $("#in_url_exe").select2()
 
     async function searchExecute(id) {
         serch_id = id
@@ -529,7 +524,6 @@ $(document).ready(function () {
             $("#in_url_exe").append(optionthree)
 
 
-
         } catch (err) {
             HoldOn.close();
             notify_error(err.responseJSON.message);
@@ -554,6 +548,9 @@ $(document).ready(function () {
             },
             {
                 "data": "name",
+                render: function (data,v,row) {
+                    return '<p id="name_'+row._id+'">'+data+'</p>'
+                }
             },
             {
                 "data": "description"
@@ -562,7 +559,7 @@ $(document).ready(function () {
                 "data": "format",
                 render: function (data, v, row) {
                     typeFormat = data
-                    return '<p>' + data + '</p>'
+                    return '<p id="type_'+row._id+'" name="'+data+'">' + data + '</p>'
                 }
             },
             {
@@ -570,16 +567,16 @@ $(document).ready(function () {
                 render: function (data, v, row) {
                     switch (typeFormat) {
                         case "Object":
-                            defaultoption = '<textarea ip="default_exe_' + data + '" type="text" class="form control">' + data + '</textarea>'
+                            defaultoption = '<textarea ip="default_exe_' + data + '" type="text" class="form control"  id="default_' + row._id + '">' + data + '</textarea>'
                             break;
                         case "Array":
-                            defaultoption = '<textarea ip="default_exe_' + data + '" type="text" class="form control">' + data + '</textarea>'
+                            defaultoption = '<textarea ip="default_exe_' + data + '" type="text" class="form control"  id="default_' + row._id + '">' + data + '</textarea>'
                             break;
                         case "String":
-                            defaultoption = '<input ip="default_exe_' + data + '" value="' + data + '" type="text" class="form control">'
+                            defaultoption = '<input ip="default_exe_' + data + '" value="'+row.name +'='+data + '" type="text" class="form control"  id="default_' + row._id + '">'
                             break;
                         case "Number":
-                            defaultoption = '<input ip="default_exe_' + data + '" value="' + data + '" type="number" class="form control">'
+                            defaultoption = '<input ip="default_exe_' + data + '" value="' + data + '" type="number" class="form control" id="default_' + row._id + '">'
                             break;
                         default:
                             defaultoption = ""
@@ -592,7 +589,7 @@ $(document).ready(function () {
             {
                 "data": "active",
                 render: function (data, v, row) {
-                    return ' <input type="checkbox" style="margin-left:25px" class="form-check-input" id="in_active">'
+                    return ' <input type="checkbox" style="margin-left:25px" class="form-check-input in_active" pseudo="' + row._id + '" id="in_active_' + row._id + '">'
                 }
             },
             {
@@ -632,6 +629,61 @@ $(document).ready(function () {
         }
     }
 
+    $(document).on("change", "#in_url_exe", function () {
+        let params = document.getElementsByClassName("in_active")
+
+        console.log(params)
+        for (let item of params) {
+            console.log(item)
+            if ($("#" + item.id).prop('checked')) {
+                $("#" + item.id).click()
+            }
+        }
+    })
+    $(document).on("change", ".in_active", function () {
+
+        let url = $("#in_url_exe option:selected").text()
+        let id = $(this).attr("pseudo")
+        let text = $("#default_" + id).val()
+        let option = $("#in_url_exe option:selected")
+        let type = $("#type_" + id).attr("name")
+        console.log(type)
+        if(type == "String"){
+            if ($(this).prop('checked')) {
+                if (url && !url.includes("?")) {
+                    option.val(url + "?" + $("#default_" + id).val())
+                    option.text(url + "?" + $("#default_" + id).val())
+                } else {
+                    option.val(url + "&" + $("#default_" + id).val())
+                    option.text(url + "&" + $("#default_" + id).val())
+                }
+            } else {
+                if ((url.includes(text) && url.includes("?")) && !url.includes("&")) {
+
+                    option.val(option.val().replace("?" + text, "").trim())
+                    option.text(option.val().replace("?" + text, "").trim())
+
+                } else if (url.includes(text) && url.includes("?") && url.includes("&" + text)) {
+
+                    option.val(option.val().replace("&" + text, "").trim())
+                    option.text(option.val().replace("&" + text, "").trim())
+
+                } else if (url.includes(text) && url.includes("?" + text) && url.includes(text + "&")) {
+
+                    option.val(option.val().replace(text + "&", "").trim())
+                    option.text(option.val().replace(text + "&", "").trim())
+
+                } else if (url.includes(text) && url.includes("?") && url.includes("&")) {
+
+                    option.val(option.val().replace("?" + text, "").trim())
+                    option.text(option.val().replace("?" + text, "").trim())
+
+                }
+            }
+        }
+
+    })
+
     $("#btn_execute").click(async function () {
 
 
@@ -643,7 +695,7 @@ $(document).ready(function () {
 
        console.log(data.data.params)*/
 
-       let body = {}
+        let body = {}
 
         body.search = serch_id
 
@@ -657,13 +709,7 @@ $(document).ready(function () {
         })
 
 
-
     })
-
-
-
-
-
 
 
 })

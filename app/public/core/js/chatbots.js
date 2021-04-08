@@ -815,7 +815,7 @@ $(document).ready(function () {
         socket.emit('chat_speak:conversation', Id_conv_single);
         if (convExist.length<1) {
             contConversations.push(Id_conv_single)
-
+            console.log(Id_conv_single)
             socket.on('chat_talk_one:' + Id_conv_single, function (msg) {
 
                 let data = JSON.parse(msg)
@@ -853,7 +853,7 @@ $(document).ready(function () {
                     let y = elmnt.scrollHeight
 
                     $('#history').scrollTop(y);
-                    console.log(contConversations)
+
                 }
 
             })

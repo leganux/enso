@@ -35,6 +35,7 @@ $(document.head).append(` <style> body{
 }
 .text-space,.chatbottonera,.typespace{
     display: none;
+    scroll-behavior: smooth;
 }
 .chatbottonera{
     height:27px;
@@ -57,6 +58,7 @@ $(document.head).append(` <style> body{
     padding:10px;
     position:fixed;
     bottom:25px;
+   
 }
 .myinput{
     width: 230px;
@@ -75,7 +77,7 @@ $(document.head).append(` <style> body{
     margin-left:10px;
     padding-left:10px
 }
-.input-message::after{
+/*.input-message::after{
     content: "";
     position: relative;
     width: 0;
@@ -86,7 +88,7 @@ $(document.head).append(` <style> body{
     top:-18px;
     border-right-color: white;
     left: -30px;
-}
+}*/
 .output-message{
     --color-sended : attr(colordata);
     background: #1b1e21;
@@ -96,10 +98,7 @@ $(document.head).append(` <style> body{
     align-content: flex-end;
     margin-right: 13px;
 }
-:root{
- 
-}
-.output-message::after{
+/*.output-message::after{
    
     content: "";
     position: relative;
@@ -111,7 +110,7 @@ $(document.head).append(` <style> body{
     top: 0px;
     border-left-color: var(--color-sended);
     right: -114px;
-}
+}*/
 .container-output{
     padding:10px;
     display:flex;
@@ -194,24 +193,27 @@ let EnsoBot = function (chatID, BasePathensoChatBot_site) {
     let elem = this
     this.baseURL = BasePathensoChatBot_site
     this.chatID = chatID
-    $.getJSON(baseURLenso + 'app/api/chatbot/' + space + "/" + chatid, {}, function (response) {
-        console.log(response)
-        if (response.success) {
-            $('.chatballon').css("background", response.data.primary_color)
-            $('.output-message').css("background", response.data.primary_color)
-            $('.output-message:after').css("background", response.data.primary_color)
-            $('.close').css("color", response.data.secundary_color)
-            $('.chatbottonera').css("background", response.data.primary_color)
-            $('.chatballon i').css("color", response.data.secundary_color)
-            let container = document.querySelectorAll('.output-message')
+    let reviewSettings = function () {
+        $.getJSON(baseURLenso + 'app/api/chatbot/' + space + "/" + chatid, {}, function (response) {
+            console.log(response)
+            if (response.success) {
+                $('.chatballon').css("background", response.data.primary_color)
+                $('.output-message').css("background", response.data.primary_color)
+                $('.output-message:after').css("background", response.data.primary_color)
+                $('.close').css("color", response.data.secundary_color)
+                $('.chatbottonera').css("background", response.data.primary_color)
+                $('.chatballon i').css("color", response.data.secundary_color)
+                let container = document.querySelectorAll('.output-message')
 
 
-            for (let item of container) {
-                item.style.setProperty('--color-sended', response.data.primary_color)
+                for (let item of container) {
+                    item.style.setProperty('--color-sended', response.data.primary_color)
+                }
+
             }
-
-        }
-    });
+        });
+    }
+    reviewSettings()
     this.genIDSession = function (length) {
         if (!length) {
             length = 5
@@ -230,16 +232,42 @@ let EnsoBot = function (chatID, BasePathensoChatBot_site) {
         this.sessionID = this.genIDSession(7) + '_En_' + this.genIDSession(21);
         window.localStorage.setItem('Session_chatFlow_' + chatID, this.sessionID);
     }
-    this.sendmessage = function (text) {
+    this.sendmessage = async function (text) {
         let el = this;
-        $('#ChatRich_' + el.chatID).html('')
-        el.socket.emit('DF_chatWeb:Send', JSON.stringify({
-            text: text,
-            chat_id: el.sessionID,
-            endpoint_id: el.chatID,
-            app: space
-        }));
+
+        try{
+            await el.socket.emit('enso_chatWeb:Send', JSON.stringify({
+                text: text,
+                chat_id: el.sessionID,
+                endpoint_id: el.chatID,
+                app: space
+            }));
+
+            $('.text-space').append('' +
+                '<div class="container-output text-right">' +
+                '   <div class="avatar">' +
+                '       <img src="'+BasePathensoChatBot_site+'content/files/icons-enso/neutral.ico" alt="img">' +
+                '   </div>' +
+                '   <div class="output-message align-content-end">' +
+                '       <p>'+text+'</p>' +
+                '   </div>' +
+                '</div>')
+
+            reviewSettings()
+
+            $('#ChatRich_' + el.chatID).html('')
+
+            var elmnt = document.getElementsByClassName("text-space");
+            let y = elmnt.scrollHeight
+
+            $('.text-space').scrollTop(y);
+        }catch (e) {
+            console.log(e)
+        }
+
     }
+
+
     this.inicialize = function () {
         let el = this
 
@@ -275,16 +303,23 @@ let EnsoBot = function (chatID, BasePathensoChatBot_site) {
                 transport: ['websocket']
             });
 
-
             el.socket.on('connect', function () {
                 console.log('coneected enso chat');
+                /* TODO
+                *   terminar sockets para web */
+                if(!el.ConnectedSocket){
+                    console.log('enso_chatWeb:' + el.chatID + ':' + el.sessionID)
+                    el.socket.on('enso_chatWeb:' + el.chatID + ':' + el.sessionID, function (msg) {
+                        let data = JSON.parse(msg);
+                        console.log('ladata******', data)
 
-                console.log('enso_chatWeb:' + el.chatID + ':' + el.sessionID)
-                el.socket.on('enso_chatWeb:' + el.chatID + ':' + el.sessionID, function (msg) {
-                    let data = JSON.parse(msg);
-                    console.log('ladata******', data)
+                    })
 
-                })
+
+
+                  el.ConnectedSocket = true
+                }
+
 
 
             })
