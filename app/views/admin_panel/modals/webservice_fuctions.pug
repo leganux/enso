@@ -56,6 +56,8 @@
                 select(type='text').form-control#in_type_key
                 label !{i18n.param} !{i18n.default} 
                 input(type='text').form-control#in_param_default
+                textarea(type='text',style="display:none").form-control#in_param_default_area
+                input(type='number',style="display:none").form-control#in_param_default_number
                 label !{i18n.type} !{i18n.name} 
                 input(type='text').form-control#in_type_name
                 label !{i18n.type} !{i18n.description} 
@@ -91,6 +93,8 @@
                 select(type='text').form-control#in_type_key_edit
                 label !{i18n.param} !{i18n.default} 
                 input(type='text').form-control#in_param_default_edit
+                textarea(type='text',style="display:none").form-control#in_param_default_edit_area
+                input(type='number',style="display:none").form-control#in_param_default_edit_number
                 label !{i18n.type} !{i18n.name} 
                 input(type='text').form-control#in_type_name_edit
                 label !{i18n.type} !{i18n.description} 

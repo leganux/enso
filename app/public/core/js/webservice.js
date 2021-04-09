@@ -215,6 +215,7 @@ $(document).ready(function () {
         $('#in_param_name').val('');
         $('#in_param_description').val('');
         $('#in_param_default').val('');
+        $('#in_param_default_area').val('');
         await getypes()
 
         $('#in_format').val("non")
@@ -258,42 +259,62 @@ $(document).ready(function () {
 
 
     })
+
     $("#save_changes_params").click(async function () {
         let body = {};
         let params = {};
-
+        let format = $('#in_format').select2('data')[0].id
 
         body.id = $('#in_webservice').val();
 
         params.name = $('#in_param_name').val();
         params.description = $('#in_param_description').val();
         params.format = $('#in_format').select2('data')[0].id
-        params.default = $('#in_param_default').val();
+
+        console.log(format)
+        if (format == "String") {
+            params.default = $('#in_param_default').val();
+        } else if (format == "Object" || format == "Array") {
+            params.default = $('#in_param_default_area').val();
+        } else if (format == "Number") {
+            params.default = $('#in_param_default_number').val();
+        }
 
         params.paramtype = $('#in_type_key').select2('data')[0].title
 
 
         body.params = params
+        let key = $('#in_type_key').select2('data')[0].text
 
         if (params.name === '') {
             notify_warning(i18n.fill_all_fields)
             return false;
         }
 
-        save_data_api(root_path + 'app/api/webservice/params/' + _app_id_, body, UPDATE, function (data) {
-            draw_datatable_rs(DT);
-            UPDATE = '';
-            $('#modal_new_param').modal('hide');
-            $('#btn_build_function').click()
-            HoldOn.close();
-            console.log("webservice guardado")
-            notify_success(data.message);
-        }).fail(function (err) {
-            HoldOn.close();
-            notify_error(err.responseJSON.message);
-            console.error(err);
+        console.log(body)
+        console.log(key)
+        if((params.format == "Object" && key == "URL")||(params.format == "Array" && key == "URL")||(params.format == "Array" && key == "Query")){
+            Swal.fire(
+                'Oops...',
+                "You can't select that param format and type key combination",
+                'error')
+        }else{
+            save_data_api(root_path + 'app/api/webservice/params/' + _app_id_, body, UPDATE, function (data) {
+                draw_datatable_rs(DT);
+                UPDATE = '';
+                $('#modal_new_param').modal('hide');
+                $('#btn_build_function').click()
+                HoldOn.close();
+                console.log("webservice guardado")
+                notify_success(data.message);
+            }).fail(function (err) {
+                HoldOn.close();
+                notify_error(err.responseJSON.message);
+                console.error(err);
 
-        });
+            });
+        }
+
 
 
     })
@@ -301,12 +322,19 @@ $(document).ready(function () {
     $("#save_params").click(async function () {
         let body = {};
         let type = {};
-
+        let format = $('#in_format_edit').select2('data')[0].id
 
         body.name = $('#in_param_name_edit').val();
         body.description = $('#in_param_description_edit').val();
         body.format = $('#in_format_edit').select2('data')[0].id
-        body.default = $('#in_param_default_edit').val();
+        if (format == "String") {
+            body.default = $('#in_param_default_edit').val();
+        } else if (format == "Object"|| format == "Array") {
+            body.default = $('#in_param_default_edit_area').val();
+        } else if (format == "Number") {
+            body.default = $('#in_param_default_edit_number').val();
+        }
+
 
         body.paramtype = $('#in_type_key_edit').select2('data')[0].title
 
@@ -316,21 +344,24 @@ $(document).ready(function () {
             notify_warning(i18n.fill_all_fields)
             return false;
         }
+        let key = $('#in_type_key_edit').select2('data')[0].text
 
-        save_data_api(root_path + 'app/api/webservice_params/' + _app_id_, body, UPDATE, function (data) {
-            draw_datatable_rs(DT);
-            UPDATE = '';
-            $('#modal_edit_param').modal('hide');
-            $('#btn_build_function').click()
-            HoldOn.close();
-            console.log("param guardado")
-            notify_success(data.message);
-        }).fail(function (err) {
-            HoldOn.close();
-            notify_error(err.responseJSON.message);
-            console.error(err);
-
-        });
+        if((body.format == "Object" && key == "URL")||(body.format == "Array" && key == "URL")||(body.format == "Array" && key == "Query")){
+            Swal.fire(
+                'Oops...',
+                "You can't select that param format and type key combination",
+                'error')
+        } else {
+            save_data_api(root_path + 'app/api/webservice_params/' + _app_id_, body, UPDATE, function (data) {
+                draw_datatable_rs(DT);
+                UPDATE = '';
+                $('#modal_edit_param').modal('hide');
+                $('#btn_build_function').click()
+                HoldOn.close();
+                console.log("param guardado")
+                notify_success(data.message);
+            })
+        }
 
 
     })
@@ -402,6 +433,8 @@ $(document).ready(function () {
             $('#in_param_name_edit').val(data.data.name);
             $('#in_param_description_edit').val(data.data.description);
             $('#in_param_default_edit').val(data.data.default);
+            $('#in_param_default_edit_area').val(data.data.default);
+            $('#in_param_default_edit_number').val(data.data.default);
 
             $('#in_type_key_edit').val(data.data.paramtype.key);
             $('#in_type_key_edit').trigger("change")
@@ -457,6 +490,49 @@ $(document).ready(function () {
         });
 
     });
+
+    $(document.body).on("change", "#in_format_edit", function () {
+        console.log("change")
+        let format = $(this).select2('data')[0]
+        console.log(format)
+        if (format.text == "Object "|| format.text == "Array ") {
+            $("#in_param_default_edit_area").show()
+            $("#in_param_default_edit").hide()
+            $("#in_param_default_edit_number").hide()
+        }
+        if (format.text == "String ") {
+            $("#in_param_default_edit_area").hide()
+            $("#in_param_default_edit").show()
+            $("#in_param_default_edit_number").hide()
+        }
+        if (format.text == "Number") {
+            $("#in_param_default_edit_area").hide()
+            $("#in_param_default_edit").hide()
+            $("#in_param_default_edit_number").show()
+
+        }
+    })
+    $(document.body).on("change", "#in_format", function () {
+        console.log("change")
+        let format = $(this).select2('data')[0]
+        console.log(format)
+        if (format.text == "Object " || format.text == "Array ") {
+            $("#in_param_default_area").show()
+            $("#in_param_default").hide()
+            $("#in_param_default_number").hide()
+        }
+        if (format.text == "String ") {
+            $("#in_param_default_area").hide()
+            $("#in_param_default").show()
+            $("#in_param_default_number").hide()
+        }
+        if (format.text == "Number") {
+            $("#in_param_default_area").hide()
+            $("#in_param_default").hide()
+            $("#in_param_default_number").show()
+
+        }
+    })
 
     ////////////Execute//////////////
 
@@ -548,8 +624,8 @@ $(document).ready(function () {
             },
             {
                 "data": "name",
-                render: function (data,v,row) {
-                    return '<p id="name_'+row._id+'">'+data+'</p>'
+                render: function (data, v, row) {
+                    return '<p id="name_' + row._id + '" value="' + data + '">' + data + '</p>'
                 }
             },
             {
@@ -559,7 +635,7 @@ $(document).ready(function () {
                 "data": "format",
                 render: function (data, v, row) {
                     typeFormat = data
-                    return '<p id="type_'+row._id+'" name="'+data+'">' + data + '</p>'
+                    return '<p id="type_' + row._id + '" name="' + data + '">' + data + '</p>'
                 }
             },
             {
@@ -573,7 +649,7 @@ $(document).ready(function () {
                             defaultoption = '<textarea ip="default_exe_' + data + '" type="text" class="form control"  id="default_' + row._id + '">' + data + '</textarea>'
                             break;
                         case "String":
-                            defaultoption = '<input ip="default_exe_' + data + '" value="'+row.name +'='+data + '" type="text" class="form control"  id="default_' + row._id + '">'
+                            defaultoption = '<input ip="default_exe_' + data + '" value="' + data + '" type="text" class="form control updatable" pseudo="' + row._id + '" id="default_' + row._id + '">'
                             break;
                         case "Number":
                             defaultoption = '<input ip="default_exe_' + data + '" value="' + data + '" type="number" class="form control" id="default_' + row._id + '">'
@@ -589,7 +665,7 @@ $(document).ready(function () {
             {
                 "data": "active",
                 render: function (data, v, row) {
-                    return ' <input type="checkbox" style="margin-left:25px" class="form-check-input in_active" pseudo="' + row._id + '" id="in_active_' + row._id + '">'
+                    return ' <input type="checkbox" style="margin-left:25px" class="form-check-input in_active" typefor="' + row.paramtype.name + '" pseudo="' + row._id + '" id="in_active_' + row._id + '">'
                 }
             },
             {
@@ -628,56 +704,187 @@ $(document).ready(function () {
             console.error(err);
         }
     }
-
+    let body = {}
+    let headers = {}
     $(document).on("change", "#in_url_exe", function () {
         let params = document.getElementsByClassName("in_active")
 
-        console.log(params)
         for (let item of params) {
-            console.log(item)
+
             if ($("#" + item.id).prop('checked')) {
                 $("#" + item.id).click()
             }
         }
+        body = {}
+        headers = {}
     })
-    $(document).on("change", ".in_active", function () {
+    $('#tab_catalog').click(function () {
+        body = {}
+        headers = {}
+    })
 
+    $(document).on("change", ".in_active", function () {
+        let me = $(this)
         let url = $("#in_url_exe option:selected").text()
         let id = $(this).attr("pseudo")
         let text = $("#default_" + id).val()
         let option = $("#in_url_exe option:selected")
         let type = $("#type_" + id).attr("name")
-        console.log(type)
-        if(type == "String"){
+        let name = $('#name_' + id).attr("value")
+        let typefor = $(this).attr("typefor")
+        console.log(typefor)
+
+
+        if ((type == "String" || type == "Number" || type == "Object") && typefor != "Header" && typefor != "Body" && typefor != "URL") {
+            let fullname
+            if (type == "Object" && typefor == "Query") {
+                text = encodeURI(text)
+                fullname = text
+            }
+            fullname = name + "=" + text
+
+
             if ($(this).prop('checked')) {
+                $("#default_" + id).attr("disabled", "disabled")
                 if (url && !url.includes("?")) {
-                    option.val(url + "?" + $("#default_" + id).val())
-                    option.text(url + "?" + $("#default_" + id).val())
+                    option.val(url + "?" + fullname)
+                    option.text(url + "?" + fullname)
                 } else {
-                    option.val(url + "&" + $("#default_" + id).val())
-                    option.text(url + "&" + $("#default_" + id).val())
+                    option.val(url + "&" + fullname)
+                    option.text(url + "&" + fullname)
                 }
             } else {
-                if ((url.includes(text) && url.includes("?")) && !url.includes("&")) {
+                $("#default_" + id).removeAttr("disabled")
+                if ((url.includes(fullname) && url.includes("?")) && !url.includes("&")) {
 
-                    option.val(option.val().replace("?" + text, "").trim())
-                    option.text(option.val().replace("?" + text, "").trim())
+                    option.val(option.val().replace("?" + fullname, "").trim())
+                    option.text(option.val().replace("?" + fullname, "").trim())
 
-                } else if (url.includes(text) && url.includes("?") && url.includes("&" + text)) {
+                } else if (url.includes(fullname) && url.includes("?") && url.includes("&" + fullname)) {
 
-                    option.val(option.val().replace("&" + text, "").trim())
-                    option.text(option.val().replace("&" + text, "").trim())
+                    option.val(option.val().replace("&" + fullname, "").trim())
+                    option.text(option.val().replace("&" + fullname, "").trim())
 
-                } else if (url.includes(text) && url.includes("?" + text) && url.includes(text + "&")) {
+                } else if (url.includes(fullname) && url.includes("?" + fullname) && url.includes(fullname + "&")) {
 
-                    option.val(option.val().replace(text + "&", "").trim())
-                    option.text(option.val().replace(text + "&", "").trim())
+                    option.val(option.val().replace(fullname + "&", "").trim())
+                    option.text(option.val().replace(fullname + "&", "").trim())
 
-                } else if (url.includes(text) && url.includes("?") && url.includes("&")) {
+                } else if (url.includes(fullname) && url.includes("?") && url.includes("&")) {
 
-                    option.val(option.val().replace("?" + text, "").trim())
-                    option.text(option.val().replace("?" + text, "").trim())
+                    option.val(option.val().replace("?" + fullname, "").trim())
+                    option.text(option.val().replace("?" + fullname, "").trim())
 
+                }
+            }
+        } else if ((type == "String" || type == "Number" || type == "Object") && typefor == "URL") {
+            let fullname
+            if (type == "Object") {
+                text = encodeURI(text)
+            }
+
+            if ($(this).prop('checked')) {
+
+                if (url && url.includes(":" + name)) {
+                    $("#default_" + id).attr("disabled", "disabled")
+                    console.log("lo incluye")
+                    option.val(option.val().replace(":" + name, text).trim())
+                    option.text(option.val().replace(":" + name, text).trim())
+                } else {
+                    console.log("no incluido")
+                    setTimeout(function () {
+                        me.click()
+                        console.log(me)
+                        Swal.fire(
+                            'Oops...',
+                            "The field doesn't exist or is already used",
+                            'error')
+                    }, 300)
+                }
+            } else {
+                $("#default_" + id).removeAttr("disabled")
+                if (url && url.includes(text)) {
+                    console.log("lo incluye")
+                    option.val(option.val().replace(text, ":" + name).trim())
+                    option.text(option.val().replace(text, ":" + name).trim())
+                }
+            }
+        } else if (type == "Object" && typefor == "Body") {
+            if ($(this).prop('checked')) {
+                $("#default_" + id).attr("disabled", "disabled")
+                text = JSON.parse(text)
+
+                for (var [key, value] of Object.entries(text)) {
+                    body[key] = value
+                }
+                console.log(body)
+            } else {
+                $("#default_" + id).removeAttr("disabled")
+                text = JSON.parse(text)
+                let helper = {}
+                for (var [key, value] of Object.entries(text)) {
+                    delete body[key]
+                }
+                console.log(body)
+            }
+
+        } else if ((type == "String" || type == "Number") && typefor == "Body") {
+            if ($(this).prop('checked')) {
+                $("#default_" + id).attr("disabled", "disabled")
+                body[name] = text
+            } else {
+                $("#default_" + id).removeAttr("disabled")
+                delete body[name]
+            }
+            console.log(body)
+        } else if ((type == "String" || type == "Number") && typefor == "Header") {
+            if ($(this).prop('checked')) {
+                $("#default_" + id).attr("disabled", "disabled")
+                headers[name] = text
+            } else {
+                $("#default_" + id).removeAttr("disabled")
+                delete headers[name]
+            }
+            console.log(headers)
+        } else if (type == "Object" && typefor == "Header") {
+            if ($(this).prop('checked')) {
+                $("#default_" + id).attr("disabled", "disabled")
+                text = JSON.parse(text)
+
+                for (var [key, value] of Object.entries(text)) {
+                    headers[key] = value
+                }
+                console.log(headers)
+            } else {
+                $("#default_" + id).removeAttr("disabled")
+                text = JSON.parse(text)
+
+                for (var [key, value] of Object.entries(text)) {
+                    delete headers[key]
+                }
+                console.log(headers)
+            }
+        }else if(type=="Array" && (typefor=="Body" || typefor=="Header")){
+            text = JSON.parse(text)
+            if ($(this).prop('checked')) {
+                $("#default_" + id).attr("disabled", "disabled")
+
+                console.log(text);
+                if(typefor=="Header"){
+                    headers[name] = text
+                    console.log(headers)
+                }else{
+                    body[name] = text
+                    console.log(body)
+                }
+            }else{
+                $("#default_" + id).removeAttr("disabled")
+                if(typefor=="Header"){
+                    delete headers[name]
+                    console.log(headers)
+                }else{
+                    delete body[name]
+                    console.log(body)
                 }
             }
         }
