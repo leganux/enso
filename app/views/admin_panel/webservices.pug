@@ -79,7 +79,14 @@ html
                                                 .col-12.col-md-8
                                                     p.card-text#description_webservice
                                                 .col-12.col-md-4
-                                                    button.bg-gray.btn.btn-block#btn_execute !{i18n.execute} 
+                                                    button.bg-gray.btn.btn-block#btn_execute !{i18n.execute}
+                                                    select(type='text').mt-2.form-control#in_request_type
+                                                        option(value="axios",selected="selected") Axios
+                                                        option(value="got") Got
+                                                    button.bg-gray.btn.btn-block.mt-2#formatCode(style="display:none") Fix
+
+                                                .col-12.mt-3
+                                                    textarea#in_content
 
                                             br
                                             .h4 !{i18n.param} 

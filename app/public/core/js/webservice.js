@@ -307,12 +307,7 @@ $(document).ready(function () {
                 HoldOn.close();
                 console.log("webservice guardado")
                 notify_success(data.message);
-            }).fail(function (err) {
-                HoldOn.close();
-                notify_error(err.responseJSON.message);
-                console.error(err);
-
-            });
+            })
         }
 
 
@@ -581,6 +576,7 @@ $(document).ready(function () {
                     console.log("no existe")
                     break
             }
+            $("#btn_execute").attr("pseudo",id)
             $("#description_webservice").text(data.data.description)
             $("#name_webservice").text(data.data.name)
 
@@ -643,16 +639,16 @@ $(document).ready(function () {
                 render: function (data, v, row) {
                     switch (typeFormat) {
                         case "Object":
-                            defaultoption = '<textarea ip="default_exe_' + data + '" type="text" class="form control"  id="default_' + row._id + '">' + data + '</textarea>'
+                            defaultoption = '<textarea ip="default_exe_' + data + '" type="text" class="form-control"  id="default_' + row._id + '">' + data + '</textarea>'
                             break;
                         case "Array":
-                            defaultoption = '<textarea ip="default_exe_' + data + '" type="text" class="form control"  id="default_' + row._id + '">' + data + '</textarea>'
+                            defaultoption = '<textarea ip="default_exe_' + data + '" type="text" class="form-control"  id="default_' + row._id + '">' + data + '</textarea>'
                             break;
                         case "String":
-                            defaultoption = '<input ip="default_exe_' + data + '" value="' + data + '" type="text" class="form control updatable" pseudo="' + row._id + '" id="default_' + row._id + '">'
+                            defaultoption = '<input ip="default_exe_' + data + '" value="' + data + '" type="text" class="form-control updatable" pseudo="' + row._id + '" id="default_' + row._id + '">'
                             break;
                         case "Number":
-                            defaultoption = '<input ip="default_exe_' + data + '" value="' + data + '" type="number" class="form control" id="default_' + row._id + '">'
+                            defaultoption = '<input ip="default_exe_' + data + '" value="' + data + '" type="number" class="form-control" id="default_' + row._id + '">'
                             break;
                         default:
                             defaultoption = ""
@@ -891,24 +887,82 @@ $(document).ready(function () {
 
     })
 
+
+    function getSelectedRange(editor_) {
+        return {from: editor_.getCursor(true), to: editor_.getCursor(false)};
+    }
+
+    var editor = CodeMirror.fromTextArea(document.getElementById("in_content"), {
+        lineNumbers: true,
+        styleActiveLine: true,
+        matchBrackets: true,
+        mode: "javascript",
+        gutters: ["CodeMirror-lint-markers"],
+        lint: true,
+        json:true,
+        smartIndent: true
+    });
+    editor.setOption("theme", 'dracula');
+
+
+    $('#formatCode').click(function () {
+        console.log("fix")
+        var range = getSelectedRange(editor);
+        console.log(range)
+        editor.autoIndentRange(range.from, range.to);
+        editor.autoFormatRange(range.from, range.to);
+    });
+
     $("#btn_execute").click(async function () {
 
+        let url = $("#in_url_exe option:selected").text()
+        let method = $("#in_method_exe").val()
+        let typeRequest = $("#in_request_type").val()
 
-        /*let response = await fetch(root_path + 'app/api/webservice/' + _app_id_ + '/' + serch_id, {})
-        let data = await response.json()
-        let body = {}
-
-       body = data.data
-
-       console.log(data.data.params)*/
-
-        let body = {}
-
-        body.search = serch_id
-
-        $.post(root_path + 'app/api/webservice/recive/' + _app_id_, body, function (data) {
+        console.log(typeRequest)
+        let fullbody = {
+            bodyrequest: Object.keys(body).length >0?body:"",
+            headerrequest: Object.keys(headers).length >0?headers:"",
+            urlrequest: url,
+            methodrequest: method,
+            typeRequest: typeRequest
+        }
+        console.log(fullbody)
+        $.post(root_path + 'app/api/webservice/recive/' + _app_id_,fullbody, function (data) {
             HoldOn.close();
             notify_success(data.message);
+            console.log(data)
+
+            $('#formatCode').show()
+
+            data = JSON.stringify(data)
+            data= data.replace(/,/g,",\n")
+            let corch = "\\["
+            let corchExit = "\\]"
+            let key = "\\{"
+            let keyExit = "\\}"
+            if(data.includes("[")){
+                data= data.replace(new RegExp(corch,"g"),"[\n")
+            }
+            if(data.includes("]")){
+                data= data.replace(new RegExp(corchExit,"g"),"]\n")
+            }
+            if(data.includes("{")){
+                data= data.replace(new RegExp(key,"g"),"{\n")
+            }
+            if(data.includes("}")){
+                data= data.replace(new RegExp(keyExit,"g"),"\n}\n")
+            }
+
+            editor.setValue(data)
+            var totalLines = editor.lineCount();
+            editor.setSelection({line:0, ch:0}, {line:totalLines})
+            $('#formatCode').click()
+
+
+
+
+
         }).fail(function (err) {
             HoldOn.close();
             notify_error(err.responseJSON.message);
