@@ -27,10 +27,12 @@ module.exports = {
 app.use(env.root_path + 'auth', auth);
 app.use(env.root_path + 'api', api_routes);
 app.use(env.root_path + 'app/api', app_routes);
+app.use(env.root_path + 'api_docs', require('./helpers/swagger_doc.helper'));
 app.use(env.root_path, view_engine);
 app.use(env.root_path + 'content/', express.static(path.join(__dirname, 'public')));
 app.set("views", path.join(__dirname, "views"));
 app.locals.pretty = true;
+
 
 const mongoose = require('./system/db/db_core_conection')
 app.get(env.root_path + 'logout', function (req, res) {
@@ -60,6 +62,7 @@ app.use(function (req, res) {
         }
     );
 });
+
 
 
 

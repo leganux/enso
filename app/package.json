@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "enso_dev": "nodemon index.js --ignore 'public/*' ",
+    "enso_dev": "nodemon index.js --ignore 'public/*' --ignore 'helpers/swagger.json'",
     "start": "node index.js",
     "enso": "node index.js"
   },
@@ -52,7 +52,6 @@
     "mongoose": "^5.6.9",
     "mongoose-auto-increment": "^5.0.1",
     "mongoose-datatables": "^3.2.0",
-    "mongoose-to-swagger": "0.0.4",
     "morgan": "^1.9.1",
     "mysql2": "^1.6.5",
     "node-cron": "^2.0.3",

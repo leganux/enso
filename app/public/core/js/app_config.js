@@ -32,6 +32,9 @@ $(document).ready(function () {
         body.default_role = $('#default_role').val()
         body.default_role_new = $('#default_role_register').val()
 
+        appBody.username = body.token
+        appBody.password = $('#app_password').val()
+
         save_data_api(root_path + 'api/core/app', body, _app_id_, function (data) {
             console.log(data);
         })
@@ -48,11 +51,18 @@ $(document).ready(function () {
         save_data();
     });
     $('#btn_deploy_app').click(function () {
+        let body = {}
+        body.username = $("#app_token").val()
+        body.password = $('#app_password').val()
+
         HoldOn.open();
         $.post(root_path + 'api/core/app/deploy/' + _app_id_, {}, function (data) {
             HoldOn.close();
             notify_success(data.message);
             HoldOn.open();
+            $.post(root_path+'api/core/admin/updateOrCreate',{},function (data) {
+                console.log(data)
+            })
             $.post(root_path + 'app/api/cloud_functions/rebuild/' + _app_id_, function (data) {
                 HoldOn.close();
                 notify_success(data.message);

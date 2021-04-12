@@ -180,6 +180,12 @@ var environment = {
      *  => String : The name of core collection
      * */
     mongo_collection_name: process.env.MONGO_COLLECTION_NAME,
+
+    /******
+     * Authtoken security
+     *  => String : The name of core collection
+     * */
+    JWT_Secret: process.env.JWT_SECRET,
 }
 
 

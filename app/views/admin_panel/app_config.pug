@@ -78,7 +78,11 @@ html
                                         .col-12.col-md-6
                                             label !{i18n.token}
                                             input.form-control#app_token(readonly=true value=app.token)
-                                            button.btn.btn-block.btn-outline-dark#gen_new_token !{i18n.generate_token}
+                                            button.btn.btn-block.btn-outline-dark.mt-2#gen_new_token !{i18n.generate_token}
+                                            br
+                                            label !{i18n.password}
+                                            input.form-control#app_password(readonly=true value=app.token)
+                                            button.btn.btn-block.btn-outline-dark.mt-2#gen_new_password !{i18n.save_password}
                                             br
                                             label !{i18n.admin} !{i18n.owner}
                                             input.form-control(value=app.owner.username disabled=true)#app_owner

@@ -188,20 +188,60 @@ router.post("/recive/:app_id/", async (req, res) => {
 
         } else {
             try {
+                if(fullbody.methodrequest == "POST"){
+                    const {body}= await got.post(fullbody.urlrequest,{
+                        json: fullbody.bodyrequest,
+                        headers: fullbody.headerrequest,
+                        responseType: 'json'
+                    })
+                    if (body) {
+                        console.log(body)
+                        res.status(200).json(body);
+                        return 0;
+                    }
+                }else if(fullbody.methodrequest == "GET"){
+                    let response = await got(fullbody.urlrequest, {
+                        hooks:{
+                            beforeRequest:[
+                                options => {
+                                    options.method = fullbody.methodrequest
+                                }
+                            ]
+                        },
+                        json: fullbody.bodyrequest,
+                        headers: fullbody.headerrequest,
+                        responseType: 'json'
+                    })
 
-                let response = await got(fullbody.urlrequest, {
-                    method: fullbody.methodrequest,
-                    json: fullbody.bodyrequest,
-                    headers: fullbody.headerrequest,
+                    if (response) {
+                        console.log(JSON.parse(response.body))
+                        response = JSON.parse(response.body)
+                        res.status(200).json(response);
+                    }
 
-                })
-                if (response) {
-                    console.log(JSON.parse(response.body))
-                    response = JSON.parse(response.body)
-                    res.status(200).json(response);
-                    return 0;
+                }else if(fullbody.methodrequest == "PUT"){
+                    const {body}= await got.put(fullbody.urlrequest,{
+                        json: fullbody.bodyrequest,
+                        headers: fullbody.headerrequest,
+                        responseType: 'json'
+                    })
+                    if (body) {
+                        console.log(body)
+                        res.status(200).json(body);
+                        return 0;
+                    }
+                }else if(fullbody.methodrequest == "DELETE"){
+                    const {body}= await got.delete(fullbody.urlrequest,{
+                        json: fullbody.bodyrequest,
+                        headers: fullbody.headerrequest,
+                        responseType: 'json'
+                    })
+                    if (body) {
+                        console.log(body)
+                        res.status(200).json(body);
+                        return 0;
+                    }
                 }
-
 
             } catch (e) {
                 console.log(e)

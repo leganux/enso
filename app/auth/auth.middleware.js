@@ -1,6 +1,9 @@
 const admin_allowed_routes = require('./../helpers/allowed_routes.helper').admin_allowed_routes;
 const user_allowed_routes = require('./../helpers/allowed_routes.helper').user_allowed_routes;
 const response_code = require('./../helpers/response_codes.helper').codes;
+const jwt = require('jsonwebtoken')
+const env = require('./../config/environment.config').environment;
+const response_codes = require("../helpers/response_codes.helper").codes;
 
 function stripTrailingSlash(str) {
     if (str.substr(-1) === '/') {
@@ -20,8 +23,38 @@ let auth = async function (req, res, next) {
     }
 
     if (!req || !req.user || !req.user.role || !req.user.user) {
-        res.status(403).json(response_code.code_403);
-        return undefined;
+        if(req.headers.authorization){
+            let token = req.headers.authorization
+            if(token.includes('Bearer ','')){
+                token = token.replace('Bearer ','')
+            }
+            try{
+                let auth = await jwt.verify(token,env.JWT_Secret)
+                console.log("AUTH",auth)
+                if(!auth){
+                    res.status(403).json(response_code.code_403);
+                    return undefined;
+                }
+                req.user = auth
+                console.log("req",req.user)
+
+                if(!req || !req.user || !req.user.role || !req.user.user){
+                    res.status(403).json(response_code.code_403);
+                    return undefined;
+                }
+            }catch (e) {
+                var ret = response_codes.code_403;
+                ret.error = e;
+                res.status(403).json(ret);
+                return undefined;
+            }
+
+
+        }else{
+            res.status(403).json(response_code.code_403);
+            return undefined;
+        }
+
     }
     if (req.user.kind === 'admin') {
         routes = await admin_allowed_routes(req);
@@ -38,7 +71,6 @@ let auth = async function (req, res, next) {
     }
 
     url = stripTrailingSlash(url);
-
 
     for (let i = 0; i < routes.rules.length; i++) {
         let item = routes.rules[i];
