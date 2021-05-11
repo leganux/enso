@@ -45,6 +45,7 @@ router.get('/app/login/:app_id', async function (req, res) {
         seo: seo,
         resources: resources.login,
         root_path: env.root_path,
+        Domain: env.Domain,
         img_folder: site_files_path + 'img/',
         base_admin_path,
         core_files_path,
@@ -53,6 +54,7 @@ router.get('/app/login/:app_id', async function (req, res) {
         _app_id_: _app_id_,
         params: param_converter({
             root_path: env.root_path,
+            Domain: env.Domain,
             img_folder: site_files_path + 'img/',
             site_files_path,
             base_admin_path,

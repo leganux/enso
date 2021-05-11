@@ -42,11 +42,13 @@ let get_app_basic_config = async function (req, res, params) {
     config.seo = seo;
     config.resources = resources.dashboard;
     config.root_path = env.root_path;
+    config.Domain = env.Domain;
     config.img_folder = site_files_path + 'img/';
     config.base_admin_path = base_admin_path;
     config.core_files_path = core_files_path;
 
     config_params.root_path = env.root_path;
+    config_params.Domain = env.Domain;
     config_params.site_files_path = site_files_path;
     config_params.img_folder = site_files_path + 'img/';
     config_params.base_admin_path = base_admin_path;
@@ -91,6 +93,7 @@ router.get('/', async function (req, res) {
         seo: seo,
         resources: resources.login,
         root_path: env.root_path,
+        Domain: env.Domain,
         img_folder: site_files_path + 'img/',
         base_admin_path,
         core_files_path,
@@ -99,6 +102,7 @@ router.get('/', async function (req, res) {
 
         params: param_converter({
             root_path: env.root_path,
+            Domain: env.Domain,
             img_folder: site_files_path + 'img/',
             site_files_path,
             base_admin_path,
@@ -617,6 +621,7 @@ router.get('/app/:id/sms_gateway', access_middleware, async function (req, res) 
         let config = await get_app_basic_config(req, res, {
             app: model_to_json(app)
         })
+
         res.status(200).render('admin_panel/sms_gateway', config);
     } catch (e) {
         let err = response_codes.code_500;

@@ -23,6 +23,7 @@ var get_app_id = function (req) {
 }
 
 router.delete('/:app_id/:id', async (req,res)=>{
+    console.log("llego")
     try{
         var groupSelect = req.params.id;
         if(!get_app_id(req)){

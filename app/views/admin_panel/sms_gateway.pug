@@ -25,6 +25,18 @@ html
                 section.content
                     br
                     .row
+                        .col-12
+                            .card
+                                .card-header.bg-dark
+                                    h3.card-title !{i18n.url_sms_app}
+                                .card-body
+                                    .container-fluid
+                                        .row
+                                            .col-10
+                                                input.form-control(type="text")#urlsms
+                                            .col-2.text-center
+                                                #QRmessaeg
+
                         .col-12.col-md-4
                             .card
                                 .card-header.bg-dark
@@ -71,7 +83,8 @@ html
                                                 |  !{i18n.contacts}.  
                                             br
                                             input(type="text",placeholder=i18n.name).mb-2.ml-1.form-control#contacts_name
-                                            input(type="mail",placeholder=i18n.email).mb-2.ml-1.form-control#contacts_mail
+                                            input(type="text",placeholder=i18n.lada).mb-2.ml-1.form-control#lada
+                                            input(type="number",placeholder=i18n.number).mb-2.ml-1.form-control#number
                                             select.custom-select.form-control.text-muted#contacts_group.mb-2.ml-1
                                                 option(value=-1) Choose one..
 

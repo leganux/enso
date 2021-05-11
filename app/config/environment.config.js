@@ -186,6 +186,7 @@ var environment = {
      *  => String : The name of core collection
      * */
     JWT_Secret: process.env.JWT_SECRET,
+    Domain:process.env.DOMAIN,
 }
 
 

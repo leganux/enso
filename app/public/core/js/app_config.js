@@ -11,7 +11,7 @@ $(document).ready(function () {
 
     var save_data = function () {
         let body = {};
-
+        let appBody = {}
         body.description = $("#app_description").val()
         body.token = $("#app_token").val()
         body.deployed = false
@@ -23,6 +23,8 @@ $(document).ready(function () {
         body.db_user = $('#app_db_username').val()
         body.db_name = $('#app_db_name').val()
         body.db_password = $('#app_db_password').val()
+        body.gateway_user = $('#gateway_user').val()
+        body.gateway_password = $('#gateway_pass').val()
         body.mail_service = $('#email_serice').val()
         body.mail_host = $('#app_mail_host').val()
         body.mail_port = $('#app_mail_port').val()
@@ -50,6 +52,9 @@ $(document).ready(function () {
     $('#btn_save_db').click(function () {
         save_data();
     });
+    $('#btn_save_gateway').click(function () {
+        save_data();
+    });
     $('#btn_deploy_app').click(function () {
         let body = {}
         body.username = $("#app_token").val()
@@ -60,7 +65,7 @@ $(document).ready(function () {
             HoldOn.close();
             notify_success(data.message);
             HoldOn.open();
-            $.post(root_path+'api/core/admin/updateOrCreate',{},function (data) {
+            $.post(root_path+'api/core/admin/updateOrCreate',{body},function (data) {
                 console.log(data)
             })
             $.post(root_path + 'app/api/cloud_functions/rebuild/' + _app_id_, function (data) {

@@ -41,6 +41,8 @@ html
                                     a.nav-link(data-toggle='tab', href='#email') !{i18n.email}
                                 li.nav-item
                                     a.nav-link(data-toggle='tab', href='#database') !{i18n.database}
+                                li.nav-item
+                                    a.nav-link(data-toggle='tab', href='#gateway') !{i18n.gateway_config} Gateway config
 
                             #myTabContent.tab-content
                                 #general.tab-pane.fade.show.active
@@ -81,7 +83,7 @@ html
                                             button.btn.btn-block.btn-outline-dark.mt-2#gen_new_token !{i18n.generate_token}
                                             br
                                             label !{i18n.password}
-                                            input.form-control#app_password(readonly=true value=app.token)
+                                            input.form-control#app_password(value=app.token type="password")
                                             button.btn.btn-block.btn-outline-dark.mt-2#gen_new_password !{i18n.save_password}
                                             br
                                             label !{i18n.admin} !{i18n.owner}
@@ -134,6 +136,23 @@ html
                                             input.form-control(type='password' value=app.db_password)#app_db_password
                                             br
                                             button.btn.btn-block.btn-dark#btn_save_db !{i18n.save}
+
+                                #gateway.tab-pane.fade
+                                    br
+                                    .row
+                                        .col-12
+                                            label !{i18n.mongoose_database_configuration}
+                                    .row
+                                        .col-12.col-md-6
+                                            label !{i18n.username}
+                                            input.form-control(type='text' value=app.gateway_user)#gateway_user
+
+                                        .col-12.col-md-6
+                                            label !{i18n.password}
+                                            input.form-control(type='password' value=app.gateway_password)#gateway_pass
+
+                                            br
+                                            button.btn.btn-block.btn-dark#btn_save_gateway !{i18n.save}
 
                         .card-footer
                             | !{i18n.create_modify_delete}

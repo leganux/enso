@@ -64,6 +64,14 @@ const app = new Schema({
         type: String,
         required: false,
     },
+    gateway_user: {
+        type: String,
+        required: false,
+    },
+    gateway_password: {
+        type: String,
+        required: false,
+    },
     mail_service: {
         type: String,
         required: true,

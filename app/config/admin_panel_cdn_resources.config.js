@@ -55,6 +55,7 @@ let cdn = {
                 rp + 'codemirror/addon/selection/active-line.js',
                 rp + 'codemirror/addon/edit/matchbrackets.js',
                 rp + 'codemirror/lib/util/formatting.js',
+                rp + 'QRgenerator/jquery-qrcode.js',
 
             ]
         },

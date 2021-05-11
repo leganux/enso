@@ -55,7 +55,7 @@ api_crud.datatable(router, contacts, access_middleware, populate, 'id');
 
 
 router.post('/:app_id/direction', async (req, res) => {
-    const body = req.body;
+    let body = req.body;
 
     if (!get_app_id(req)) {
         res.status(533).json(response_codes.code_533)
@@ -91,7 +91,7 @@ router.post('/:app_id/direction', async (req, res) => {
 
 router.delete("/:app_id/:id", async (req, res) => {
     var id = req.params.id;
-    console.log(id)
+    console.log("id",id)
     //verify app
     if (!get_app_id(req)) {
         res.status(533).json(response_codes.code_533)
@@ -103,10 +103,7 @@ router.delete("/:app_id/:id", async (req, res) => {
 
 
         var deleteDirection = await dir.findByIdAndRemove(deleteDirectionId)
-        if (!deleteDirection) {
-            res.status(404).json(response_codes.code_404);
-            return 0;
-        }
+
 
         response = await contacts.findByIdAndRemove(id);
         if (!response) {
@@ -195,7 +192,7 @@ router.put('/:app_id/:id', async function (req, res) {
     try {
        
         var response = await contacts.findById(id)
-        
+        console.log("direction",direction)
         console.log(response)
         let dirid = response.direction
         console.log(dirid)
@@ -208,6 +205,11 @@ router.put('/:app_id/:id', async function (req, res) {
         }
 
         let responsedir = await dir.findByIdAndUpdate(dirid, {$set: direction})
+        if(!responsedir){
+            responsedir = await new dir(direction)
+            responsedir.app = response.app
+            responsedir = await responsedir.save()
+        }
         body.direction = responsedir._id
 
         response = await contacts.findByIdAndUpdate(id, {$set: body});
@@ -224,6 +226,45 @@ router.put('/:app_id/:id', async function (req, res) {
 
     } catch (e) {
         console.error('*** Error en UPDATE ' + contacts.collection.collectionName, e);
+        res.status(500).json(response_codes.code_500);
+        return 0;
+    }
+});
+
+router.post('/phone/:app_id/',  async (req, res) => {
+    const body = req.body;
+    //verify app
+    if (!get_app_id(req)) {
+        res.status(533).json(response_codes.code_533)
+        return 0;
+    }
+
+    if (body.password) {
+        body.password = await bcrypt.hash(body.password, saltRounds);
+    }
+
+    if (req.user && req.user.user) {
+        body.owner = req.user.user;
+    }
+
+    body.app = get_app_id(req);
+
+
+    try {
+
+        let responsetwo = await new contacts(body).save()
+        if (!responsetwo) {
+            res.status(433).json(response_codes.code_433);
+            return 0;
+        }
+        let rettwo = response_codes.code_200;
+        rettwo.data = responsetwo;
+        res.status(200).json(rettwo);
+
+
+        return 0;
+    } catch (e) {
+        console.error('*** Error en CREATE' + contacts.collection.collectionName, e);
         res.status(500).json(response_codes.code_500);
         return 0;
     }
