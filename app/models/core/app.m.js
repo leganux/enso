@@ -3,9 +3,7 @@ const {Schema} = mongoose;
 const moment = require('moment');
 const dataTables = require('mongoose-datatables');
 const admin = require('./admin.m')
-const randomGenerator = require('../../helpers/random_generator.helper');
-const { randomGenerator_number } = require('../../helpers/random_generator.helper');
-
+const {randomGenerator} = require('../../helpers/random_generator.helper');
 
 
 const app = new Schema({
@@ -59,7 +57,7 @@ const app = new Schema({
     db_name: {
         type: String,
         required: true,
-        default: randomGenerator.randomGenerator_number
+        default: randomGenerator
     },
     db_password: {
         type: String,

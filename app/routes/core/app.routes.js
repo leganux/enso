@@ -271,7 +271,7 @@ router.post('/deploy/:id', access_middleware, async (req, res) => {
             return 0;
         }
 
-        if (my_app.owner != req.user.user && req.user.kind == 'admin') {
+        if (my_app.owner == req.user.user && req.user.kind == 'admin') {
 
             res.status(403).json(response_codes.code_403)
             return 0;

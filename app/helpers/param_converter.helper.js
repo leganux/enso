@@ -12,7 +12,7 @@ const param_converter = function (obj) {
     for (var clave in obj) {
         if (obj.hasOwnProperty(clave)) {
             let value = obj[clave];
-            let kind = 'object';
+            let kind = '';
             if (typeof value !== 'function' && typeof value !== null && typeof value !== 'undefined') {
                 if (typeof value === 'object' && value.constructor === Object) {
                     value = JSON.stringify(value)
@@ -26,6 +26,8 @@ const param_converter = function (obj) {
                     kind = 'string';
                 } else if (typeof value === 'boolean') {
                     kind = 'boolean';
+                } else {
+                    kind = 'string';
                 }
                 r_obj.push({
                     name: clave,

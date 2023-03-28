@@ -180,7 +180,7 @@ router.get('/g_file_manager/', access_middleware, async function (req, res) {
     res.status(200).render('admin_panel/g_file_manager', config);
 });
 
-router.get('/app/:id/config', access_middleware, async function (req, res) {
+router.get('/app/:id/config', async function (req, res) {
 
     var id = req.params.id;
 
@@ -190,8 +190,11 @@ router.get('/app/:id/config', access_middleware, async function (req, res) {
             res.status(404).json(response_codes.code_404)
             return 0;
         }
-        if (req.user.kind === 'admin' && app.owner._id != req.user.user) {
+
+
+        if (req.user.kind === 'admin' && app.owner._id === req.user.user) {
             res.status(403).json(response_codes.code_403)
+
             return 0;
         }
 
