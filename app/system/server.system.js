@@ -8,19 +8,18 @@ const https = require('https');
 const http = require('http');
 const passport = require('passport');
 
-const RedisStore = require("connect-redis")
-const session = require("express-session")
-const {createClient} = require("redis")
+const session = require('express-session');
+const MongoDBStore = require('express-mongodb-session')(session);
 
-// Initialize client.
-let redisClient = createClient()
-redisClient.connect().catch(console.error)
+const store = new MongoDBStore({
+    uri: env.mongo_uri,
+    collection: 'session'
+});
 
+store.on('error', function (error) {
+    console.log(error);
+});
 
-let redisStore = new RedisStore({
-    client: redisClient,
-    prefix: "app:",
-})
 
 var Server_ = {};
 const app = express();
@@ -46,9 +45,10 @@ app.use(bodyParser.urlencoded(
  * configure session mode
  *
  * */
+
 if (env.session_server == 'redis') {
     app.use(session({
-        store: redisStore,
+        store: store,
         secret: env.cookie_secret,
         name: env.cookie_name,
         resave: true,

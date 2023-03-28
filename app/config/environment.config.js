@@ -172,8 +172,7 @@ var environment = {
      *  Host  MongoDB
      *  => String : Where is located mongDBServer
      * */
-    mongo_host: process.env.MONGO_HOST,
-
+    mongo_uri: process.env.MONGO_URI,
     /******
      *  Mongo collection  name
      *  => String : The name of core collection

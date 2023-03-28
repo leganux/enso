@@ -31535,3 +31535,110 @@
 {"0":"Http server start at 8088/enso/"}
 {"0":"(node:6756) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
 {"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:30656) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:31245) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:31416) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:31428) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"(node:31724) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"DB is connected"}
+{"0":"Error: Login sessions require session support. Did you forget to use `express-session` middleware?\n    at SessionStrategy.authenticate (/Users/leganux/Documents/GitHub/enso/app/node_modules/passport/lib/strategies/session.js:46:41)\n    at attempt (/Users/leganux/Documents/GitHub/enso/app/node_modules/passport/lib/middleware/authenticate.js:369:16)\n    at authenticate (/Users/leganux/Documents/GitHub/enso/app/node_modules/passport/lib/middleware/authenticate.js:370:7)\n    at Layer.handle [as handle_request] (/Users/leganux/Documents/GitHub/enso/app/node_modules/express/lib/router/layer.js:95:5)\n    at trim_prefix (/Users/leganux/Documents/GitHub/enso/app/node_modules/express/lib/router/index.js:328:13)\n    at /Users/leganux/Documents/GitHub/enso/app/node_modules/express/lib/router/index.js:286:9\n    at Function.process_params (/Users/leganux/Documents/GitHub/enso/app/node_modules/express/lib/router/index.js:346:12)\n    at next (/Users/leganux/Documents/GitHub/enso/app/node_modules/express/lib/router/index.js:280:10)\n    at initialize (/Users/leganux/Documents/GitHub/enso/app/node_modules/passport/lib/middleware/initialize.js:98:5)\n    at Layer.handle [as handle_request] (/Users/leganux/Documents/GitHub/enso/app/node_modules/express/lib/router/layer.js:95:5)"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:32240) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"(node:32311) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"connected"}
+{"0":"DB is connected"}
+{"0":0}
+{"0":[]}
+{"0":"(node:32401) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"connected"}
+{"0":"DB is connected"}
+{"0":"(node:32536) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"connected"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:33284) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"connected"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:33423) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"connected"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:33735) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"connected"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:33814) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"connected"}
+{"0":"DB is connected"}
+{"0":"(node:33851) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"connected"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:33922) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"connected"}
+{"0":"DB is connected"}
+{"0":"(node:34926) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"connected"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:35135) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:35139) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+2023-03-28 01:58:57  GET  /enso/app/login/5ed553401c73b503b759fba9  404  10.232  ms
+2023-03-28 01:58:57  GET  /favicon.ico  404  1.670  ms
+2023-03-28 01:59:02  GET  /enso/  200  1.039  ms
+2023-03-28 01:59:04  GET  /enso/  304  1.050  ms
+{"0":"Http server start at 8088/enso/"}
+{"0":"(node:35244) Warning: Accessing non-existent property 'public_folder_root' of module exports inside circular dependency\n(Use `node --trace-warnings ...` to show where the warning was created)"}
+{"0":"DB is connected"}
+2023-03-28 01:59:35  GET  /enso/  304  4.116  ms
+2023-03-28 02:00:02  GET  /enso/  304  1.472  ms
+2023-03-28 02:00:04  GET  /enso  200  0.716  ms
+2023-03-28 02:00:04  GET  /enso  304  1.172  ms
+2023-03-28 02:00:16  GET  /enso/app  404  1.665  ms
+2023-03-28 02:00:20  GET  /enso/login  404  1.137  ms
+2023-03-28 02:02:02  GET  /enso  304  1.003  ms
+2023-03-28 02:02:33  GET  /enso/admin  200  217.821  ms
+2023-03-28 02:02:34  GET  /enso/content/cdn/fontawesome-free/css/all.min.css  200  6.255  ms
+2023-03-28 02:02:34  GET  /enso/content/cdn/icheck-bootstrap/icheck-bootstrap.min.css  200  12.483  ms
+2023-03-28 02:02:34  GET  /enso/content/cdn/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css  200  14.936  ms
+2023-03-28 02:02:34  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js  200  2.788  ms
+2023-03-28 02:02:34  GET  /enso/content/cdn/animate/animate.css  200  4.006  ms
+2023-03-28 02:02:34  GET  /enso/content/cdn/fontawesome-free/webfonts/fa-solid-900.woff2  200  5.911  ms
+2023-03-28 02:02:34  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js  200  7.999  ms
+2023-03-28 02:02:34  GET  /enso/content/core/js/common.js  200  9.626  ms
+2023-03-28 02:02:34  GET  /enso/content/files/site/img/logo.png  200  8.143  ms
+2023-03-28 02:02:34  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css  200  2.611  ms
+2023-03-28 02:02:34  GET  /enso/content/cdn/jquery/jquery.min.js  200  7.820  ms
+2023-03-28 02:02:34  GET  /enso/content/cdn/sweetalert2/sweetalert2.min.js  200  1.169  ms
+2023-03-28 02:02:37  GET  /enso/admin  200  63.793  ms
+2023-03-28 02:02:37  GET  /enso/content/cdn/fontawesome-free/css/all.min.css  304  3.166  ms
+2023-03-28 02:02:37  GET  /enso/content/cdn/icheck-bootstrap/icheck-bootstrap.min.css  304  2.651  ms
+2023-03-28 02:02:37  GET  /enso/content/cdn/adminlte3/css/adminlte.min.css  304  2.550  ms
+2023-03-28 02:02:37  GET  /enso/content/cdn/animate/animate.css  304  2.499  ms
+2023-03-28 02:02:37  GET  /enso/content/cdn/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css  304  6.903  ms
+2023-03-28 02:02:37  GET  /enso/content/cdn/bootstrap/js/bootstrap.bundle.min.js  304  2.830  ms
+2023-03-28 02:02:37  GET  /enso/content/cdn/jquery/jquery.min.js  304  3.343  ms
+2023-03-28 02:02:37  GET  /enso/content/cdn/sweetalert2/sweetalert2.min.js  304  3.197  ms
+2023-03-28 02:02:37  GET  /enso/content/files/site/img/logo.png  304  3.474  ms
+2023-03-28 02:02:37  GET  /enso/content/cdn/adminlte3/js/adminlte.min.js  304  3.280  ms
+2023-03-28 02:02:37  GET  /enso/content/core/js/common.js  304  2.966  ms
+2023-03-28 02:02:37  GET  /enso/content/cdn/fontawesome-free/webfonts/fa-solid-900.woff2  304  1.138  ms

@@ -39,7 +39,7 @@ app.get(env.root_path + 'logout', function (req, res) {
     res.redirect(env.root_path);
 });
 app.use(function (req, res) {
-    res.status('404').json(
+    res.status(404).json(
         {
             success: false,
             message: '404 not found'
