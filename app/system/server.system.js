@@ -3,11 +3,24 @@ const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
-var session = require('express-session');
+
 const https = require('https');
 const http = require('http');
 const passport = require('passport');
-var RedisStore = require('connect-redis')(session);
+
+const RedisStore = require("connect-redis")
+const session = require("express-session")
+const {createClient} = require("redis")
+
+// Initialize client.
+let redisClient = createClient()
+redisClient.connect().catch(console.error)
+
+
+let redisStore = new RedisStore({
+    client: redisClient,
+    prefix: "app:",
+})
 
 var Server_ = {};
 const app = express();
@@ -35,11 +48,7 @@ app.use(bodyParser.urlencoded(
  * */
 if (env.session_server == 'redis') {
     app.use(session({
-        store: new RedisStore({
-            host: env.redis_host,
-            port: env.redis_port,
-            db: env.redis_no_db
-        }),
+        store: redisStore,
         secret: env.cookie_secret,
         name: env.cookie_name,
         resave: true,
